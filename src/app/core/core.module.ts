@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
     MatMenuModule,
     MatIconModule,
     MatToolbarModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [ NavComponent ],
   declarations: [
