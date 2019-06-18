@@ -5,14 +5,16 @@ import {
   createSelector,
   MetaReducer
 } from '@ngrx/store';
+
 import { environment } from '../../environments/environment';
+import { postsReducer } from '../posts/state/posts.reducer';
 
 export interface State {
-
+  posts: any[];
 }
 
 export const reducers: ActionReducerMap<State> = {
-
+  posts: postsReducer
 };
 
 
