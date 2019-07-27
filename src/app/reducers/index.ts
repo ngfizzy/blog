@@ -7,14 +7,11 @@ import {
 } from '@ngrx/store';
 
 import { environment } from '../../environments/environment';
-import { postsReducer } from '../posts/state/posts.reducer';
+import * as fromCore from '../core/state';
 
-export interface State {
-  posts: any[];
-}
+type State = fromCore.CoreState;
 
 export const reducers: ActionReducerMap<State> = {
-  posts: postsReducer
 };
 
 

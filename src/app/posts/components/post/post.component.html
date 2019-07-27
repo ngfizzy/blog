@@ -1,0 +1,26 @@
+<div class="card-container"
+  (mouseenter)="toggleElevation()"
+  (mouseleave)="toggleElevation()"
+  (click)="toggleExpandedView()"
+  [ngClass]="{
+    opened: isExpandedView,
+    closed: !isExpandedView && isTouched
+  }"
+>
+  <mat-card
+    class="card"
+    [class.mat-elevation-z1]="!isActive && !isExpandedView"
+    [class.mat-elevation-z6]="isActive"
+    [class.mat-elevation-z8]="isExpandedView"
+  >
+    <mat-card-title>{{post.title}}</mat-card-title>
+    <mat-card-content class="card-body" [innerHtml]="postBody">
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <span>
+        <button>Like</button>
+        900+
+      </span>
+    </mat-card-actions>
+  </mat-card>
+</div>

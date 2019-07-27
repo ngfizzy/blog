@@ -14,7 +14,8 @@ import { RouterModule } from '@angular/router';
     MatToolbarModule,
     RouterModule,
   ],
-  exports: [ NavComponent ],
+  exports: [
+    NavComponent ],
   declarations: [
     NavComponent,
   ],

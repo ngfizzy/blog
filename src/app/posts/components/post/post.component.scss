@@ -1,0 +1,30 @@
+.card-container {
+  cursor: pointer;
+  margin-bottom: 1rem;
+  width: 50%;
+  height: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 2rem;
+
+  .card-body {
+    height: auto;
+    max-height: 10rem;
+    transition: max-height 1s ease-in;
+  }
+}
+
+.card-container.opened {
+  .card-body {
+    max-height: 2000rem;
+  }
+}
+
+.card-container.closed {
+  .card-body {
+    transition: max-height .7s ease-out;
+    max-height: 10rem;
+    overflow: hidden;
+    text-overflow: hidden;
+  }
+}
