@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { catchError, mergeMap, map } from 'rxjs/operators';
 
-import * as postsActions from './posts.actions';
+import * as onePostActions from './one-post.actions';
 import { PostsService } from '../../core/posts.service';
 
 
@@ -17,11 +17,14 @@ export class PostsEffects {
     private postsService: PostsService) {}
 
   @Effect()
-  getAllPosts$: Observable<Action>  = this.actions$.pipe(
-    ofType(postsActions.PostsActionTypes.GetAllPosts),
-    mergeMap(() => this.postsService.getAll().pipe(
-        map(posts => new postsActions.GetAllPostsSuccess(posts)),
-        catchError(error => of(new postsActions.GetAllPostsFailure(error.message)))
-    )),
+  getOnePost$: Observable<Action> = this.actions$.pipe(
+    ofType(onePostActions.OnePostActionTypes.GetOnePost),
+    mergeMap((postId) => this.postsService.getOne(postId)
+      .pipe(
+        map((post) => new onePostActions.GetOnePostSuccess(post)),
+        catchError((error) => of(new onePostActions.GetOnePostFailure(error.message)))
+      )
+
+    )
   );
 }

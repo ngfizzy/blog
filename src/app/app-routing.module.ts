@@ -10,7 +10,12 @@ const routes: Routes = [
   {
     path: 'posts',
     loadChildren:  () => import('./posts/posts.module').then(mod => mod.PostsModule)
-  }
+  },
+  {
+    path: 'posts/:postId',
+    loadChildren: () => import('./one-post/one-post.module')
+      .then(mod => mod.OnePostModule),
+  },
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
-import { Post } from './models/post.interface';
+import { Post } from '../shared/models/post.interface';
 
   // tslint:disable:max-line-length
 
@@ -16,7 +16,7 @@ const posts: Post = {
 `
 };
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class PostsService {
 
   getAll(): Observable<Post[]> {
@@ -32,7 +32,7 @@ export class PostsService {
   }
 
   getOne(postId: number) {
-    const post = posts[1];
+    const post = posts;
 
     return of(
       {

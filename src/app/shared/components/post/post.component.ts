@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PostComponentConfig } from '../../models/post-component-config.interface';
 
 enum AnimationState {
   Small = 'small',
@@ -11,6 +13,7 @@ enum AnimationState {
   styleUrls: ['./post.component.scss'],
 })
 export class PostComponent implements OnInit {
+  @Input() config: PostComponentConfig;
   @Input() post;
   state = AnimationState.Small;
   truncatedPostLength = 560;
@@ -19,9 +22,20 @@ export class PostComponent implements OnInit {
   isExpandedView = false;
   postBody: string;
   isTouched: boolean;
+  canToggle: boolean;
 
+  constructor(private router: ActivatedRoute) {}
   ngOnInit(): void {
+    this.configureComponent();
+
     this.postBody = this.getPostBody();
+  }
+
+  private configureComponent() {
+    this.isActive = this.config.isActive;
+    this.isExpandedView = this.config.isExpandedView;
+    this.isTouched = this.config.isTouched;
+    this.canToggle = this.config.canToggle;
   }
 
   toggleElevation() {
@@ -29,10 +43,11 @@ export class PostComponent implements OnInit {
   }
 
   toggleExpandedView() {
-    this.isTouched = true;
-    this.isExpandedView = !this.isExpandedView;
-
-    this.postBody = this.getPostBody();
+    if (this.canToggle) {
+      this.isTouched = true;
+      this.isExpandedView = !this.isExpandedView;
+      this.postBody = this.getPostBody();
+    }
   }
 
   getPostBody() {

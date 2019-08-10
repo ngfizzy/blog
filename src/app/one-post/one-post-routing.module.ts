@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PostsComponent } from './posts.component';
+import { OnePostComponent } from './one-post.component';
 
 import { PostComponent } from '../shared/components/post/post.component';
 
 const routes: Routes =  [
   {
     path: '',
-    component: PostsComponent,
+    component: OnePostComponent,
   },
 ];
 
@@ -17,8 +17,8 @@ const routes: Routes =  [
     RouterModule.forChild(routes),
   ],
 })
-export class PostsRoutingModule {
+export class OnePostRoutingModule {
   static readonly routeComponents = [
-    PostsComponent,
+    OnePostComponent,
   ];
 }
