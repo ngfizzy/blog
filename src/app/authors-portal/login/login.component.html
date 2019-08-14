@@ -1,0 +1,14 @@
+<h1>Please Login</h1>
+
+<form (ngSubmit)="login()">
+  <div>
+    <input type="text" name="username" placeholder="Username" [(ngModel)]="username"/>
+  </div>
+
+  <div>
+    <input type="password" name="password" placeholder="password" [(ngModel)]="password"/>
+  </div>
+  <div>
+    <button type="submit">Login</button>
+  </div>
+</form>

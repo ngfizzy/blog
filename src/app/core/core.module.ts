@@ -5,6 +5,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavComponent } from './nav/nav.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -13,9 +14,13 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     MatToolbarModule,
     RouterModule,
+    FormsModule,
   ],
   exports: [
-    NavComponent ],
+    FormsModule,
+    NavComponent,
+    CommonModule,
+  ],
   declarations: [
     NavComponent,
   ],

@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./one-post/one-post.module')
       .then(mod => mod.OnePostModule),
   },
+  {
+    path: 'authors',
+    loadChildren: () => import('./authors-portal/authors-portal.module').then(mod => mod.AuthorsPortal),
+  }
 ];
 
 @NgModule({
