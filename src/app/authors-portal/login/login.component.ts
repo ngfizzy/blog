@@ -12,6 +12,8 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
+  isActive: boolean;
+
   ngOnInit(): void { }
 
   login() {
@@ -20,5 +22,9 @@ export class LoginComponent implements OnInit {
     if (isLoggedIn) {
       this.router.navigate(['authors', 'dashboard']);
     }
+  }
+
+  toggleActiveState() {
+    this.isActive = !this.isActive;
   }
 }
