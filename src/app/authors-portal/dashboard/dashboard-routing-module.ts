@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { CreatePostComponent } from './create-post/create-post.component';
+import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'dashboard' },
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'home'
+    path: 'dashboard',
+    component: DashboardComponent,
   },
   {
-    path: 'home',
-    component: HomeComponent,
-  }
+    path: 'create-post',
+    component: CreatePostComponent,
+  },
 ];
 
 @NgModule({
@@ -23,6 +24,7 @@ const routes: Routes = [
 })
 export class DashboardRoutingModule {
   static readonly moduleComponents = [
-    HomeComponent,
+    DashboardComponent,
+    CreatePostComponent,
   ];
 }
