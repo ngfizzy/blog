@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing-module';
 import { SharedModule } from 'src/app/shared/shared.module';
-// import { AuthorsToolbarComponent } from './authors-toolbar/authors-toolbar.component';
 import { RouterModule } from '@angular/router';
+import { LMarkdownEditorModule } from 'ngx-markdown-editor';
 
 @NgModule({
   declarations: [
-    // AuthorsToolbarComponent,
     ...DashboardRoutingModule.moduleComponents,
   ],
   imports: [
@@ -15,6 +14,7 @@ import { RouterModule } from '@angular/router';
     SharedModule,
     RouterModule,
     DashboardRoutingModule,
+    LMarkdownEditorModule,
   ],
   exports: [],
   providers: [
