@@ -10,7 +10,6 @@ export interface PostsState  extends fromCoreState.CoreState {
 const getOnePostFeatureState = createFeatureSelector<fromPosts.PostState>(
   'post',
 );
-
 export const getOnePost = createSelector(
   getOnePostFeatureState,
   (state) => state.post,
