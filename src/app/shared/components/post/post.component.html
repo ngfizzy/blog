@@ -4,7 +4,9 @@
   (click)="toggleExpandedView()"
   [ngClass]="{
     opened: isExpandedView,
-    closed: !isExpandedView && isTouched
+    closed: !isExpandedView && isTouched,
+    mini: isMini,
+    full: isFull
   }"
 >
   <mat-card
@@ -13,10 +15,10 @@
     [class.mat-elevation-z6]="isActive"
     [class.mat-elevation-z8]="isExpandedView"
   >
-    <mat-card-title>{{post.title}}</mat-card-title>
-    <mat-card-content class="card-body" [innerHtml]="postBody">
+    <mat-card-title class="title">{{post.title}}</mat-card-title>
+    <mat-card-content *ngIf="!isMini" class="card-body" [innerHtml]="postBody">
     </mat-card-content>
-    <mat-card-actions align="end">
+    <mat-card-actions *ngIf="!isMini" align="end">
       <span>
         <button>Like</button>
         900+

@@ -37,11 +37,11 @@ export class PostsService {
   getOne(postId: number) {
     const post = posts;
 
-    return of(
-      {
+    return of({
         title: post.title,
         body: post.body + '/n/n' + post.body,
-      },
-    );
+        createdAt: new Date().toString(),
+        updatedAt:  new Date().toString(),
+      });
   }
 }

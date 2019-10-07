@@ -23,6 +23,8 @@ export class PostComponent implements OnInit {
   postBody: string;
   isTouched: boolean;
   canToggle: boolean;
+  isMini: boolean;
+  isFull: boolean;
 
   constructor(private router: ActivatedRoute) {}
   ngOnInit(): void {
@@ -36,6 +38,8 @@ export class PostComponent implements OnInit {
     this.isExpandedView = this.config.isExpandedView;
     this.isTouched = this.config.isTouched;
     this.canToggle = this.config.canToggle;
+    this.isMini = this.config.isMini;
+    this.isFull = this.config.isFull;
   }
 
   toggleElevation() {

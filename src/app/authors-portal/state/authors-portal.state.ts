@@ -1,10 +1,6 @@
-import { Post } from 'src/app/shared/models/post.interface';
+import { CoreState } from 'src/app/core/state';
 
-export interface AuthorsPortalState {
-  posts: {
-    isLoading: boolean,
-    posts: Post[];
-  };
-
+export interface AuthorsPortalState extends CoreState {
+  dashboard: any;
   isLoading: boolean;
 }

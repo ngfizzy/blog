@@ -3,48 +3,23 @@ import { AuthorsPortalActionTypes, AuthorsPortalActions } from './authors-portal
 
 
 const defaultState: AuthorsPortalState = {
-  posts: {
-    isLoading: false,
-    posts: []
-  },
+  dashboard: null,
   isLoading: true,
 };
 
 export function authorsPortalReducer(state: AuthorsPortalState = defaultState, action: AuthorsPortalActions ) {
   switch (action.type) {
-    case AuthorsPortalActionTypes.GetPosts:
+    case AuthorsPortalActionTypes.GetDashboard:
+      return { ...state, isLoading: true };
+    case AuthorsPortalActionTypes.GetDashboardSuccess:
       return {
         ...state,
-        posts: { ...state.posts, isLoading: true}
-      };
-    case AuthorsPortalActionTypes.GetPostsSuccess:
-      return {
-        ...state,
-        posts: {
-          posts: [ ...action.payload ],
-          isLoading: false,
-        }
-      };
-    case AuthorsPortalActionTypes.CreatePost:
-      return {
-        ...state,
-        posts: {
-          ...state.posts,
-          isLoading: true,
-        },
-      };
-    case AuthorsPortalActionTypes.CreatePostSuccess:
-      return {
-        ...state,
-        posts: {
-          posts: [
-            ...state.posts.posts,
-            { ...action.payload }
-          ],
-          isLoading: false,
-        },
+        dashboard: { ...action.payload },
+        isLoading: false,
       };
     default:
       return state;
   }
 }
+
+import { Post } from 'src/app/shared/models/post.interface';

@@ -1,22 +1,16 @@
-import * as fromCoreState from '../../core/state';
-import * as fromAuthorsPortalState from './authors-portal.state';
-import { createSelector, createFeatureSelector } from '@ngrx/store';
 
-export interface DashboardState extends fromCoreState.CoreState {
-  authorsPortal: fromAuthorsPortalState.AuthorsPortalState;
-}
+export { AuthorsPortalState } from './authors-portal.state';
 
+// const getDashboardState = createFeatureSelector<fromAuthorsPortalState.AuthorsPortalState>(
+//   'authorsPortal'
+// );
 
-const getDashboardState = createFeatureSelector<fromAuthorsPortalState.AuthorsPortalState>(
-  'authorsPortal'
-);
+// export const getPosts = createSelector(
+//   getDashboardState,
+//   state => state.posts.posts,
+// );
 
-export const getPosts = createSelector(
-  getDashboardState,
-  state => state.posts.posts,
-);
-
-export const getPostsLoadingState = createSelector(
-  getDashboardState,
-  state => state.posts.isLoading,
-);
+// export const getPostsLoadingState = createSelector(
+//   getDashboardState,
+//   state => state.posts.isLoading,
+// );

@@ -3,7 +3,7 @@ import { PostsService } from 'src/app/core/posts.service';
 import { Post } from 'src/app/shared/models/post.interface';
 import { of, Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthorsPostsService {
   posts: Post[];
 
@@ -27,7 +27,7 @@ export class AuthorsPostsService {
     return this.postsService.getAll();
   }
 
-  getOnePost() {
-    return this.postsService.getOne(1);
+  getOnePost(postId = 1) {
+    return this.postsService.getOne(postId);
   }
 }

@@ -12,6 +12,22 @@
     max-height: 10rem;
     transition: max-height 1s ease-in;
   }
+
+  &.mini {
+    height: 1.5em;
+    margin-right: auto;
+    width: 100%;
+    margin-bottom: 1.5rem;
+
+    .title {
+      height: 80%;
+      font-size: 80%
+    }
+  }
+
+  &.full {
+    width: 98%;
+  }
 }
 
 .card-container.opened {
@@ -28,3 +44,5 @@
     text-overflow: hidden;
   }
 }
+
+
