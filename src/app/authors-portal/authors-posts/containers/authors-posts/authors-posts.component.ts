@@ -19,6 +19,7 @@ export class AuthorsPostsComponent implements OnInit {
     canToggle: false,
     isMini: true,
     isFull: false,
+    shouldHideShadows: true,
   };
 
   posts$: Observable<Post[]>;

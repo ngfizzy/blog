@@ -22,6 +22,8 @@ export class AuthorsPostComponent implements OnInit {
     isTouched: false,
     canToggle: false,
     isFull: true,
+    shouldHideShadows: true,
+    shouldShowActions: false,
   };
 
   postId = 0;

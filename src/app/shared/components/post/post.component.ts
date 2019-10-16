@@ -25,8 +25,11 @@ export class PostComponent implements OnInit {
   canToggle: boolean;
   isMini: boolean;
   isFull: boolean;
+  shouldHideShadows: boolean;
+  shouldShowActions: boolean;
 
   constructor(private router: ActivatedRoute) {}
+
   ngOnInit(): void {
     this.configureComponent();
 
@@ -40,6 +43,8 @@ export class PostComponent implements OnInit {
     this.canToggle = this.config.canToggle;
     this.isMini = this.config.isMini;
     this.isFull = this.config.isFull;
+    this.shouldHideShadows = this.config.shouldHideShadows;
+    this.shouldShowActions = this.config.shouldShowActions;
   }
 
   toggleElevation() {

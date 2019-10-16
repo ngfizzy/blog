@@ -12,13 +12,14 @@
   <mat-card
     class="card"
     [class.mat-elevation-z1]="!isActive && !isExpandedView"
-    [class.mat-elevation-z6]="isActive"
-    [class.mat-elevation-z8]="isExpandedView"
+    [class.mat-elevation-z6]="isActive && !shouldHideShadows"
+    [class.mat-elevation-z8]="isExpandedView && !shouldHideShadows"
+    [class.mat-elevation-z0]="shouldHideShadows"
   >
     <mat-card-title class="title">{{post.title}}</mat-card-title>
     <mat-card-content *ngIf="!isMini" class="card-body" [innerHtml]="postBody">
     </mat-card-content>
-    <mat-card-actions *ngIf="!isMini" align="end">
+    <mat-card-actions *ngIf="!isMini && !shouldShowActions" align="end">
       <span>
         <button>Like</button>
         900+

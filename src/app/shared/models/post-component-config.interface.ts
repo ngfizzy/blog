@@ -6,4 +6,6 @@ export interface PostComponentConfig {
   canToggle?: boolean;
   isMini?: boolean;
   align?: 'left' | 'right';
+  shouldHideShadows?: boolean;
+  shouldShowActions?: boolean;
 }
