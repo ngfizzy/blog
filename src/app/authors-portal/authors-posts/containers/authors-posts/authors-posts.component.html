@@ -1,6 +1,7 @@
 <mat-drawer-container class="posts-drawer-container">
   <mat-drawer mode="side" opened class="posts-drawer">
-    <app-authors-post-list-toolbar></app-authors-post-list-toolbar>
+    <app-authors-post-list-toolbar>
+    </app-authors-post-list-toolbar>
     <a
       *ngFor="let post of posts$ | async; let i = index"
       [routerLink]="[i]"
@@ -12,6 +13,7 @@
       </app-post>
     </a>
   </mat-drawer>
+
   <mat-drawer-content>
   <app-authors-toolbar></app-authors-toolbar>
     <router-outlet ></router-outlet>
