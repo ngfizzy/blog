@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { LMarkdownEditorModule } from 'ngx-markdown-editor';
 
 import { AuthorsPostsEffects } from './state/authors-posts.effects';
 import { AuthorsPostsRoutingModule } from './authors-posts-routing.module';
@@ -12,6 +13,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   imports: [
     SharedModule,
+    LMarkdownEditorModule,
     AuthorsPostsRoutingModule,
     StoreModule.forFeature('posts', authorsPostsReducers),
     EffectsModule.forFeature([ AuthorsPostsEffects ])

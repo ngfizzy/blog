@@ -1,8 +1,9 @@
-import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { LoginComponent } from './login/login.component';
-import { AuthorsPortalComponent } from './authors-portal.component';
+import { RouterModule, Routes } from '@angular/router';
+
 import { AuthGuard } from './auth.guard';
+import { AuthorsPortalComponent } from './authors-portal.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,7 @@ const routes: Routes = [
 })
 export class AuthorsPortalRoutingModule {
   static readonly moduleComponents = [
-    LoginComponent,
     AuthorsPortalComponent,
+    LoginComponent,
   ];
 }

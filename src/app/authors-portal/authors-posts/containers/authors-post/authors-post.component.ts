@@ -37,7 +37,7 @@ export class AuthorsPostComponent implements OnInit {
 
   ngOnInit() {
      this.route.params.pipe(
-      tap(param => this.postId = +param.id),
+      // tap(param => this.postId = +param.id),
       map((params) => this.store.dispatch(
         new fromAuthorsPostsActions.ViewPost(params.id)
       )),

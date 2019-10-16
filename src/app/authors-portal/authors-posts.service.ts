@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { of, Observable } from 'rxjs';
+
 import { PostsService } from 'src/app/core/posts.service';
 import { Post } from 'src/app/shared/models/post.interface';
-import { of, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthorsPostsService {
