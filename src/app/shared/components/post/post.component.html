@@ -19,7 +19,7 @@
     <mat-card-title class="title">{{post.title}}</mat-card-title>
     <mat-card-content *ngIf="!isMini" class="card-body" [innerHtml]="postBody">
     </mat-card-content>
-    <mat-card-actions *ngIf="!isMini && !shouldShowActions" align="end">
+    <mat-card-actions *ngIf="!isMini && shouldShowActions" align="end">
       <span>
         <button>Like</button>
         900+

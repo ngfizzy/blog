@@ -10,7 +10,6 @@ import { AuthorsPortalRoutingModule } from './authors-portal-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { authorsPortalReducer } from './state/authors-portal.reducer';
 
-import { AuthorsToolbarComponent } from './authors-toolbar/authors-toolbar.component';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 
