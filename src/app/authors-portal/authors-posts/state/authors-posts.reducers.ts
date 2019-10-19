@@ -5,7 +5,7 @@ import { AuthorsPostsActionTypes, AuthorsPostsActions } from './authors-posts.ac
 const defaultState: AuthorsPostsState = {
   isLoading: false,
   posts: [],
-  selectedPost: { isLoading: false, post: null },
+  selectedPost: { isLoading: false, post: { title: '', body: ''} },
 };
 
 export function authorsPostsReducers(state: AuthorsPostsState = defaultState, action: AuthorsPostsActions ) {
