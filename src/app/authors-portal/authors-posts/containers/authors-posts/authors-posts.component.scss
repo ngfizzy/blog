@@ -1,11 +1,12 @@
 .posts-drawer-container {
   width: 90%;
-  min-height: 90%;
-  margin-top: 5%;
+  height: 85%;
+  margin-top: 3%;
   margin-left: auto;
-  margin-right: 5em;
+  margin-right: auto;
 
   .posts-drawer {
     width: 20%;
+    border: 1px solid #fafa;
   }
 }
