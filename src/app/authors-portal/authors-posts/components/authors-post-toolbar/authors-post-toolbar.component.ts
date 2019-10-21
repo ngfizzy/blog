@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['../shared-styles/authors-toolbar.scss']
 })
 export class AuthorsPostToolbarComponent implements OnInit {
-  @Input() selectedPostTitle = '';
+  @Input() selectedPostTitle: string;
 
   ngOnInit() {}
 }

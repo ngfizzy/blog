@@ -5,6 +5,7 @@
     <a
       *ngFor="let post of posts$ | async; let i = index"
       [routerLink]="[i]"
+      (click)="showFullPost(i, false)"
     >
       <app-post
         [config]="postListItemConfig"
@@ -15,7 +16,9 @@
   </mat-drawer>
 
   <mat-drawer-content>
-  <app-authors-posts-toolbar [selectedPostTitle]="selectedPostTitle$ | async"></app-authors-posts-toolbar>
+  <app-authors-posts-toolbar [selectedPostTitle]="(selectedPost$ | async).title">
+
+  </app-authors-posts-toolbar>
     <router-outlet ></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

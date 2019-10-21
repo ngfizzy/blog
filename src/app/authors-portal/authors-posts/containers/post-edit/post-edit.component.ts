@@ -27,11 +27,6 @@ export class PostEditComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit(): void {
-    this.route.params.pipe(map(param => param.id))
-      .subscribe((postId: number) => this.store.dispatch(
-        new fromAuthorsPostsActions.ViewPost(postId)
-      )
-    );
 
     this.setPostState();
    }

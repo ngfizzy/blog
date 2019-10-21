@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import * as fromAuthorsPostsState from '../../state';
-import * as fromAuthorsPostsActions from '../../state/authors-posts.actions';
 import { ActivatedRoute } from '@angular/router';
-import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Post } from 'src/app/shared/models/post.interface';
 import { PostComponentConfig } from 'src/app/shared/models/post-component-config.interface';
@@ -36,13 +34,6 @@ export class AuthorsPostComponent implements OnInit {
     >) { }
 
   ngOnInit() {
-     this.route.params.pipe(
-      // tap(param => this.postId = +param.id),
-      map((params) => this.store.dispatch(
-        new fromAuthorsPostsActions.ViewPost(params.id)
-      )),
-    ).subscribe();
-
      this.post$ = this.store.pipe(select(fromAuthorsPostsState.viewPost));
      this.isLoading$ = this.store.pipe(
        select(fromAuthorsPostsState.isPostLoading)
