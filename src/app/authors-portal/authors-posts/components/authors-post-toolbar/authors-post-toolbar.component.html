@@ -1,5 +1,8 @@
 <mat-toolbar class="authors-toolbar mat-elevation-z2">
-  <div class="ml-auto mr-auto text-center">
+  <div class="mr-auto mw-50">
+    <span>{{ selectedPostTitle }}</span>
+  </div>
+  <div class="controls ml-auto mw-25 text-center">
     <span title="edit">
         <a [routerLink]="['edit', 0]">
           <i class="fa fa-edit"></i>

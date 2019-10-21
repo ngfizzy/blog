@@ -13,27 +13,44 @@ import * as fromAuthorsPostsActions from '../../state/authors-posts.actions';
   styleUrls: ['./authors-posts.component.scss']
 })
 export class AuthorsPostsComponent implements OnInit {
-  postListItemConfig: PostComponentConfig = {
-    isActive: false,
-    isExpandedView: false,
-    isTouched: false,
-    canToggle: false,
-    isMini: true,
-    isFull: false,
-    shouldHideShadows: true,
-  };
-
+  selectedPostTitle$: Observable<string>;
   posts$: Observable<Post[]>;
+  postListItemConfig: PostComponentConfig;
+
   constructor(
     private store: Store<fromAuthorsPosts.AuthorsPostsState>
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new fromAuthorsPostsActions.GetPosts());
-    this.setAllPosts();
+    this.initialize();
   }
 
-  setAllPosts() {
-    this.posts$ = this.store.pipe(select(fromAuthorsPosts.getPosts));
+  initialize() {
+    this.postListItemConfig = this.getPostsConfig();
+
+    this.store.dispatch(new fromAuthorsPostsActions.GetPosts());
+
+    this.posts$ = this.getAllPosts();
+    this.selectedPostTitle$ = this.getSelectedPostTitle();
+  }
+
+  getAllPosts() {
+    return this.store.pipe(select(fromAuthorsPosts.getPosts));
+  }
+
+  getSelectedPostTitle() {
+    return this.store.pipe(select(fromAuthorsPosts.getPostTitle));
+  }
+
+  getPostsConfig() {
+    return  {
+      isActive: false,
+      isExpandedView: false,
+      isTouched: false,
+      canToggle: false,
+      isMini: true,
+      isFull: false,
+      shouldHideShadows: true,
+    };
   }
 }

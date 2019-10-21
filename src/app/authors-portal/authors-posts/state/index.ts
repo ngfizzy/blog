@@ -31,6 +31,11 @@ export const isPostLoading = createSelector(
   state => state.isLoading
 );
 
+export const getPostTitle = createSelector(
+  viewPost,
+  post => post.title
+);
+
 export const getPostsLoadingState = createSelector(
   getPostsState,
   state => state.isLoading

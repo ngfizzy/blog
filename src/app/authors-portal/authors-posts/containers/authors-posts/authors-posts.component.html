@@ -15,7 +15,7 @@
   </mat-drawer>
 
   <mat-drawer-content>
-  <app-authors-toolbar></app-authors-toolbar>
+  <app-authors-posts-toolbar [selectedPostTitle]="selectedPostTitle$ | async"></app-authors-posts-toolbar>
     <router-outlet ></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

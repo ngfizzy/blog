@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AuthorsPostsComponent } from './containers/authors-posts/authors-posts.component';
 import { AuthorsPostComponent } from './containers/authors-post/authors-post.component';
 import { PostEditComponent } from './containers/post-edit/post-edit.component';
