@@ -1,7 +1,37 @@
 <mat-toolbar class="authors-toolbar mat-elevation-z2">
-  <div class="mr-auto mw-50">
-    <span>{{ selectedPostTitle }}</span>
-  </div>
+  <form class="
+    d-flex
+    justify-content-center
+    mr-auto
+    border
+    border-light
+    text-center
+    mw-50"
+    #postTitleForm
+  >
+    <span *ngIf="!isEditingTitle">{{ selectedPostTitle }}</span>
+    <input
+      name="postTitle"
+      class="mb-auto mt-auto d-inline-flex"
+      type="text"
+      *ngIf="isEditingTitle"
+      [ngModel]="selectedPostTitle"
+    >
+    <button
+      *ngIf="!isEditingTitle"
+      title="edit title" class="btn"
+      (click)="toggleEditingTitleMode()"
+    >
+      <i class="fa fa-edit"></i>
+    </button>
+    <button
+      *ngIf="isEditingTitle"
+      title="save" class="btn"
+      (click)="onSaveTitle(postTitleForm.postTitle.value)"
+    >
+      <i class="fa fa-check"></i>
+    </button>
+  </form>
   <div class="controls ml-auto mw-25 text-center">
     <span title="edit">
         <a [routerLink]="['edit', 0]">

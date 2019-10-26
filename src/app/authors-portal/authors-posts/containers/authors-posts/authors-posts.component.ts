@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { Post } from 'src/app/shared/models/post.interface';
 import { PostComponentConfig } from 'src/app/shared/models/post-component-config.interface';
 import * as fromAuthorsPosts from '../../state';
 import * as fromAuthorsPostsActions from '../../state/authors-posts.actions';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-authors-posts',
@@ -14,7 +14,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./authors-posts.component.scss']
 })
 export class AuthorsPostsComponent implements OnInit {
-  defaultPostId = 0;
+  selectedPostId = 0;
+  isEditingTitle: false;
   selectedPost$: Observable<Post>;
   posts$: Observable<Post[]>;
   postListItemConfig: PostComponentConfig;
@@ -34,7 +35,7 @@ export class AuthorsPostsComponent implements OnInit {
 
     this.store.dispatch(new fromAuthorsPostsActions.GetPosts());
     this.store.dispatch(
-      new fromAuthorsPostsActions.ViewPost(this.defaultPostId)
+      new fromAuthorsPostsActions.ViewPost(this.selectedPostId)
     );
 
     this.posts$ = this.store.pipe(select(fromAuthorsPosts.getPosts));
@@ -42,12 +43,14 @@ export class AuthorsPostsComponent implements OnInit {
   }
 
   showFullPost(postId?: number, navigate: boolean = true) {
+    this.selectedPostId = postId ? postId : this.selectedPostId;
+
     this.store.dispatch(
-      new fromAuthorsPostsActions.ViewPost(postId || this.defaultPostId)
+      new fromAuthorsPostsActions.ViewPost(this.selectedPostId)
     );
 
     if (navigate) {
-      this.router.navigate(['authors/posts', postId || this.defaultPostId]);
+      this.router.navigate(['authors/posts', this.selectedPostId]);
     }
   }
 
@@ -61,5 +64,13 @@ export class AuthorsPostsComponent implements OnInit {
       isFull: false,
       shouldHideShadows: true,
     };
+  }
+
+  saveTitle(title: string) {
+    this.store.dispatch(
+      new fromAuthorsPostsActions.EditPostTitle({
+        title, postId: this.selectedPostId
+      }),
+    );
   }
 }

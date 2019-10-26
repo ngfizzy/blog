@@ -8,6 +8,7 @@ import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { SharedModule } from '../shared/shared.module';
 import { authorsPortalReducer } from './state/authors-portal.reducer';
+import { AuthorsPostsService } from './authors-posts.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { authorsPortalReducer } from './state/authors-portal.reducer';
   providers: [
     AuthGuard,
     AuthService,
+    AuthorsPostsService,
   ],
   declarations: [
     ...AuthorsPortalRoutingModule.moduleComponents

@@ -1,12 +1,30 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+
 
 @Component({
   selector: 'app-authors-posts-toolbar',
   templateUrl: './authors-post-toolbar.component.html',
-  styleUrls: ['../shared-styles/authors-toolbar.scss']
+  styleUrls: ['../shared-styles/authors-toolbar.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthorsPostToolbarComponent implements OnInit {
   @Input() selectedPostTitle: string;
+  @Input() isEditingTitle: boolean;
+
+  @Output() editTitle = new EventEmitter<boolean>();
+  @Output() saveTitle = new EventEmitter<string>();
 
   ngOnInit() {}
+
+  toggleEditingTitleMode() {
+    const isEditing = !this.isEditingTitle;
+
+    this.editTitle.emit(isEditing);
+  }
+
+  onSaveTitle(title: string) {
+    this.saveTitle.emit(title);
+
+    this.toggleEditingTitleMode();
+  }
 }

@@ -1,7 +1,6 @@
 <mat-drawer-container class="posts-drawer-container">
   <mat-drawer mode="side" opened class="posts-drawer">
-    <app-authors-post-list-toolbar>
-    </app-authors-post-list-toolbar>
+    <app-authors-post-list-toolbar></app-authors-post-list-toolbar>
     <a
       *ngFor="let post of posts$ | async; let i = index"
       [routerLink]="[i]"
@@ -16,9 +15,14 @@
   </mat-drawer>
 
   <mat-drawer-content>
-  <app-authors-posts-toolbar [selectedPostTitle]="(selectedPost$ | async).title">
-
-  </app-authors-posts-toolbar>
+    <app-authors-posts-toolbar
+      *ngIf="selectedPost$ | async; let selectedPost"
+      [selectedPostTitle]="selectedPost.title"
+      [isEditingTitle]="isEditingTitle"
+      (editTitle)="isEditingTitle = $event"
+      (saveTitle)="saveTitle($event)"
+    >
+    </app-authors-posts-toolbar>
     <router-outlet ></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

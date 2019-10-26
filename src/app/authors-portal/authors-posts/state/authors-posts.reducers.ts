@@ -45,6 +45,19 @@ export function authorsPostsReducers(state: AuthorsPostsState = defaultState, ac
           isLoading: false,
         }
       };
+    case AuthorsPostsActionTypes.EditPostTitle:
+      return {
+        ...state,
+        selectedPost: { ...state.selectedPost, isLoading: true},
+      };
+    case AuthorsPostsActionTypes.EditPostTitleSuccess:
+      return {
+        ...state,
+        posts: [ ...action.payload.posts ],
+        selectedPost: {
+          post: { ...action.payload.selectedPost, isLoading: false},
+        }
+      };
     default:
       return state;
   }

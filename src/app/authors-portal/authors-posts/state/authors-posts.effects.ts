@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
-import { mergeMap, map } from 'rxjs/operators';
+import { mergeMap, map, tap } from 'rxjs/operators';
 
 import { AuthorsPostsService } from '../../authors-posts.service';
 import * as authorsPostsActions from './authors-posts.actions';
@@ -38,6 +38,17 @@ export class AuthorsPostsEffects {
     mergeMap(postId => this.postsService.getOnePost(postId)
       .pipe(
         map(post => new authorsPostsActions.ViewPostSuccess(post)),
+      )
+    )
+  );
+
+  @Effect()
+  editPostTitle$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsPostsActions.AuthorsPostsActionTypes.EditPostTitle),
+    map(action => (action as authorsPostsActions.EditPostTitle).payload),
+    mergeMap(({ title, postId}) => this.postsService
+      .editPostTitle(title, postId).pipe(
+        map((editingResult) => new authorsPostsActions.EditPostTitleSuccess(editingResult))
       )
     )
   );
