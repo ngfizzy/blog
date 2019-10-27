@@ -25,9 +25,12 @@ export class AuthorsPostsEffects {
 
   @Effect()
   createPosts$: Observable<Action> = this.actions$.pipe(
-    ofType(authorsPostsActions.AuthorsPostsActionTypes.CreatePostSuccess),
+    ofType(authorsPostsActions.AuthorsPostsActionTypes.CreatePost),
+    map(action => (action as authorsPostsActions.CreatePost).payload),
     mergeMap((post) => this.postsService.createPost(post).pipe(
-      map(createdPost => new  authorsPostsActions.CreatePostSuccess(createdPost))
+      map(createdPost =>
+        new  authorsPostsActions.CreatePostSuccess(createdPost),
+      )
     )),
   );
 
@@ -38,8 +41,8 @@ export class AuthorsPostsEffects {
     mergeMap(postId => this.postsService.getOnePost(postId)
       .pipe(
         map(post => new authorsPostsActions.ViewPostSuccess(post)),
-      )
-    )
+      ),
+    ),
   );
 
   @Effect()

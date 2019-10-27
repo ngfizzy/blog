@@ -54,6 +54,14 @@ export class AuthorsPostsService {
   }
 
   getOnePost(postId = 1) {
-    return this.postsService.getOne(postId);
+    return this.store.pipe(
+      select(fromAuthorsPostsState.getPosts),
+      take(1),
+      mergeMap((posts) => {
+        const post = posts[postId];
+
+        return of(post);
+      })
+    );
   }
 }

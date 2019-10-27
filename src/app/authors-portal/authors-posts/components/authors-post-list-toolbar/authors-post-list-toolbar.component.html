@@ -1,8 +1,9 @@
 <mat-toolbar class="authors-toolbar mat-elevation-z2">
   <div class="ml-auto mr-auto text-center">
     <span title="new">
-        <a [routerLink]="['create']">
-          <i class="fa fa-plus"></i>
+        <a href (click)="$event.preventDefault(); toggleCreateForm.emit();">
+          <i class="fa fa-plus" *ngIf="!isCreating"></i>
+          <i class="fa fa-times" *ngIf="isCreating"></i>
         </a>
     </span>
   </div>

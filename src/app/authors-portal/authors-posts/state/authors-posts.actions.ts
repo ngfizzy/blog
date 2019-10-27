@@ -40,7 +40,7 @@ export class ViewPostSuccess implements Action {
 export class CreatePost implements Action {
   readonly type = AuthorsPostsActionTypes.CreatePost;
 
-  constructor(public payload: Post) {}
+  constructor(public payload: Partial<Post>) {}
 }
 
 export class CreatePostSuccess implements Action {

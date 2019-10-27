@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, SimpleChanges, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostComponentConfig } from '../../models/post-component-config.interface';
+import { Post } from '../../models/post.interface';
 
 enum AnimationState {
   Small = 'small',
@@ -12,9 +13,10 @@ enum AnimationState {
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
 })
-export class PostComponent implements OnInit {
+export class PostComponent implements OnInit, OnChanges {
   @Input() config: PostComponentConfig;
-  @Input() post;
+  @Input() post: Post;
+
   state = AnimationState.Small;
   truncatedPostLength = 560;
 
@@ -32,10 +34,15 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     this.configureComponent();
-
     this.postBody = this.getPostBody();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!changes.firstChange) {
+      this.postBody = this.getPostBody();
+    }
+
+  }
   private configureComponent() {
     this.isActive = this.config.isActive;
     this.isExpandedView = this.config.isExpandedView;
@@ -63,7 +70,7 @@ export class PostComponent implements OnInit {
     const { body } = this.post;
 
     if (this.isExpandedView || this.isTouched) {
-      return this.post.body;
+      return body;
     }
 
     return this.truncate(this.truncatedPostLength);

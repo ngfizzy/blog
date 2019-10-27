@@ -26,7 +26,8 @@ export function authorsPostsReducers(state: AuthorsPostsState = defaultState, ac
     case AuthorsPostsActionTypes.CreatePostSuccess:
       return {
         ...state,
-        posts: [ action.payload, ...state.posts ],
+        posts: [ { ...action.payload }, ...state.posts ],
+        selectedPost: { post: { ...action.payload }, isLoading: false },
         isLoading: false,
       };
     case AuthorsPostsActionTypes.ViewPost:

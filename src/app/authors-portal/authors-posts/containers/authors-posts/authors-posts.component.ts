@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Post } from 'src/app/shared/models/post.interface';
 import { PostComponentConfig } from 'src/app/shared/models/post-component-config.interface';
@@ -14,13 +14,15 @@ import * as fromAuthorsPostsActions from '../../state/authors-posts.actions';
   styleUrls: ['./authors-posts.component.scss']
 })
 export class AuthorsPostsComponent implements OnInit {
-  selectedPostId = 0;
-  isEditingTitle: false;
   selectedPost$: Observable<Post>;
   posts$: Observable<Post[]>;
+  selectedPostId = 0;
+  isEditingTitle: boolean;
+  isCreating: boolean;
   postListItemConfig: PostComponentConfig;
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private store: Store<fromAuthorsPosts.AuthorsPostsState>
   ) { }
@@ -38,13 +40,24 @@ export class AuthorsPostsComponent implements OnInit {
       new fromAuthorsPostsActions.ViewPost(this.selectedPostId)
     );
 
-    this.posts$ = this.store.pipe(select(fromAuthorsPosts.getPosts));
-    this.selectedPost$ = this.store.pipe(select(fromAuthorsPosts.viewPost));
+    this.posts$ = this.store.pipe(
+      select(fromAuthorsPosts.getPosts)
+    );
+    this.selectedPost$ = this.store.pipe(
+      select(fromAuthorsPosts.viewPost)
+    );
+  }
+
+  createPost(title: string) {
+    this.store.dispatch(
+      new fromAuthorsPostsActions.CreatePost({ title, body: 'New Post'}),
+    );
+
+    this.isCreating = false;
   }
 
   showFullPost(postId?: number, navigate: boolean = true) {
     this.selectedPostId = postId ? postId : this.selectedPostId;
-
     this.store.dispatch(
       new fromAuthorsPostsActions.ViewPost(this.selectedPostId)
     );

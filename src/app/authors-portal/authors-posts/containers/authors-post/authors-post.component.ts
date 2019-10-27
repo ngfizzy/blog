@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-
-import * as fromAuthorsPostsState from '../../state';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+
+import * as fromAuthorsPostsState from '../../state';
+import * as authorsPostsActions from '../../state/authors-posts.actions';
 import { Post } from 'src/app/shared/models/post.interface';
 import { PostComponentConfig } from 'src/app/shared/models/post-component-config.interface';
 
@@ -34,8 +35,8 @@ export class AuthorsPostComponent implements OnInit {
     >) { }
 
   ngOnInit() {
-     this.post$ = this.store.pipe(select(fromAuthorsPostsState.viewPost));
-     this.isLoading$ = this.store.pipe(
+    this.post$ = this.store.pipe(select(fromAuthorsPostsState.viewPost));
+    this.isLoading$ = this.store.pipe(
        select(fromAuthorsPostsState.isPostLoading)
      );
   }
