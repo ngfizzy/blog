@@ -8,6 +8,7 @@
     text-center
     mw-50"
     #postTitleForm
+    (ngSubmit)="onSaveTitle(postTitleForm.postTitle.value)"
   >
     <span *ngIf="!isEditingTitle">{{ selectedPostTitle }}</span>
     <input
@@ -27,7 +28,7 @@
     <button
       *ngIf="isEditingTitle"
       title="save" class="btn"
-      (click)="onSaveTitle(postTitleForm.postTitle.value)"
+      type="submit"
     >
       <i class="fa fa-check"></i>
     </button>

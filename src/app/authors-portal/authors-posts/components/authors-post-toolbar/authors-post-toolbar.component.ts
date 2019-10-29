@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
-
 @Component({
   selector: 'app-authors-posts-toolbar',
   templateUrl: './authors-post-toolbar.component.html',
