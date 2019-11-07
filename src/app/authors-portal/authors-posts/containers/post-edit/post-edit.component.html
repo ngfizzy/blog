@@ -2,7 +2,9 @@
   <md-editor
     [height]="'50rem'"
     [options]="options"
-    [(ngModel)]="post.body"
+    [(ngModel)]="postBody"
+    (ngModelChange)="isSaved = false"
+    #editor
   >
   </md-editor>
 </div>

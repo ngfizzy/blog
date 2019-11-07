@@ -30,23 +30,40 @@ export class AuthorsPostsService {
     return of(createdPost);
   }
 
+  editPost(post: Partial<Post>, postId: number):
+    Observable<{ posts: Post[]; selectedPost: Post }> {
+     return this.getPostsFromStore(postId).pipe(
+        map((posts) => {
+          const plucked = this.pluckPost(postId, posts);
+
+          if (!plucked) {
+            return { posts, selectedPost: post as Post };
+          }
+
+          plucked.title =  post.title ? post.title : plucked.title;
+          plucked.body = post.body ? post.body : plucked.body;
+
+          posts.unshift(plucked);
+
+          return { posts, selectedPost: plucked as Post };
+        }),
+      );
+  }
+
   editPostTitle(title: string, postId: number) {
-    return this.store.pipe(
-      select(fromAuthorsPostsState.getPosts),
-      take(1),
-      mergeMap((posts) => {
-        const postsDup = [ ...posts ];
-        const [ post ] = postsDup.splice(postId, 1);
+      this.getPostsFromStore(postId).pipe(
+        map((posts) => {
+          const post = this.pluckPost(postId, posts);
 
-        if (post) {
-          post.title = title;
-        }
+          if (post) {
+            post.title = title;
+          }
 
-        postsDup.unshift(post);
+          posts.unshift(post);
 
-        return of({ posts: postsDup, selectedPost: post });
-      })
-    );
+          return { posts, selectedPost: post };
+        })
+      );
   }
 
   getAllPosts() {
@@ -54,14 +71,25 @@ export class AuthorsPostsService {
   }
 
   getOnePost(postId = 1) {
-    return this.store.pipe(
-      select(fromAuthorsPostsState.getPosts),
-      take(1),
+    return this.getPostsFromStore(postId).pipe(
       mergeMap((posts) => {
         const post = posts[postId];
 
         return of(post);
       })
+    );
+  }
+
+  private pluckPost(postId: number, posts: Post[]): Post {
+    const [ post ] = posts.splice(postId, 1);
+
+    return post;
+  }
+
+  private getPostsFromStore(postId: number) {
+    return this.store.pipe(
+      select(fromAuthorsPostsState.getPosts),
+      take(1),
     );
   }
 }

@@ -4,16 +4,15 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import * as fromAuthorsPostsState from '../../state';
-import * as authorsPostsActions from '../../state/authors-posts.actions';
 import { Post } from 'src/app/shared/models/post.interface';
 import { PostComponentConfig } from 'src/app/shared/models/post-component-config.interface';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-authors-post',
   templateUrl: './authors-post.component.html',
   styleUrls: [ './authors-post.component.scss']
 })
-
 export class AuthorsPostComponent implements OnInit {
   config: PostComponentConfig = {
     isActive: false,
@@ -35,9 +34,11 @@ export class AuthorsPostComponent implements OnInit {
     >) { }
 
   ngOnInit() {
-    this.post$ = this.store.pipe(select(fromAuthorsPostsState.viewPost));
+    this.post$ = this.store.pipe(
+      select(fromAuthorsPostsState.viewPost),
+    );
     this.isLoading$ = this.store.pipe(
-       select(fromAuthorsPostsState.isPostLoading)
-     );
+      select(fromAuthorsPostsState.isPostLoading)
+    );
   }
 }

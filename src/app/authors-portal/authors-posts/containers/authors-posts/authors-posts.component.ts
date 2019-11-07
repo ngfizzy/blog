@@ -80,9 +80,10 @@ export class AuthorsPostsComponent implements OnInit {
   }
 
   saveTitle(title: string) {
+    const post: Partial<Post> = { title };
     this.store.dispatch(
-      new fromAuthorsPostsActions.EditPostTitle({
-        title, postId: this.selectedPostId
+      new fromAuthorsPostsActions.EditPost({
+        post, postId: this.selectedPostId
       }),
     );
   }

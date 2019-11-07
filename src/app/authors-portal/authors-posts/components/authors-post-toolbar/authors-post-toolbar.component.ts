@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 })
 export class AuthorsPostToolbarComponent implements OnInit {
   @Input() selectedPostTitle: string;
+  @Input() selectedPostId: number;
   @Input() isEditingTitle: boolean;
 
   @Output() editTitle = new EventEmitter<boolean>();

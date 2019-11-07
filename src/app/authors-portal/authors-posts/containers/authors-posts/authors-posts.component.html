@@ -37,6 +37,7 @@
     <app-authors-posts-toolbar
       *ngIf="selectedPost$ | async; let selectedPost"
       [selectedPostTitle]="selectedPost.title"
+      [selectedPostId]="selectedPostId"
       [isEditingTitle]="isEditingTitle"
       (editTitle)="isEditingTitle = $event"
       (saveTitle)="saveTitle($event)"

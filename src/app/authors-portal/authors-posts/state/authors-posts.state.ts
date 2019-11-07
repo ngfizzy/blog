@@ -7,5 +7,6 @@ export interface AuthorsPostsState {
   selectedPost: {
     post: Post;
     isLoading: boolean;
+    isSaved: boolean;
   };
 }

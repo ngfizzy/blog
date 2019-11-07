@@ -5,7 +5,10 @@ import { AuthorsPostsActionTypes, AuthorsPostsActions } from './authors-posts.ac
 const defaultState: AuthorsPostsState = {
   isLoading: false,
   posts: [],
-  selectedPost: { isLoading: false, post: { title: '', body: ''} },
+  selectedPost: {
+    isLoading: false,
+    isSaved: true,
+    post: { title: '', body: ''} },
 };
 
 export function authorsPostsReducers(state: AuthorsPostsState = defaultState, action: AuthorsPostsActions ) {
@@ -46,17 +49,24 @@ export function authorsPostsReducers(state: AuthorsPostsState = defaultState, ac
           isLoading: false,
         }
       };
-    case AuthorsPostsActionTypes.EditPostTitle:
+    case AuthorsPostsActionTypes.EditPost:
       return {
         ...state,
-        selectedPost: { ...state.selectedPost, isLoading: true},
+        selectedPost: {
+          ...state.selectedPost,
+          isLoading: true,
+          isSaved: false
+        },
       };
-    case AuthorsPostsActionTypes.EditPostTitleSuccess:
+    case AuthorsPostsActionTypes.EditPostSuccess:
+      console.log('success.......................................', action.payload);
       return {
         ...state,
         posts: [ ...action.payload.posts ],
         selectedPost: {
-          post: { ...action.payload.selectedPost, isLoading: false},
+          post: { ...action.payload.selectedPost },
+          isLoading: false,
+          isSaved: true,
         }
       };
     default:
