@@ -51,11 +51,9 @@ export class AuthorsPostsEffects {
     map(action => (action as authorsPostsActions.EditPost).payload),
     mergeMap(({ post, postId}) => this.postsService
       .editPost(post, postId).pipe(
-        map((editingResult) => {
-          console.log('..........++++.............editing result', editingResult);
-          return new authorsPostsActions.EditPostSuccess(editingResult);
-        }
-         ),
+        map((editingResult) =>
+          new authorsPostsActions.EditPostSuccess(editingResult)
+        ),
       )
     )
   );

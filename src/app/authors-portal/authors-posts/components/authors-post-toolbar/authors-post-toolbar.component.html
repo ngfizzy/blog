@@ -1,11 +1,34 @@
 <mat-toolbar class="authors-toolbar mat-elevation-z2">
+  <div class="text-primary font-xxs">
+    <ng-container *ngIf="postStatus === 'saving'">
+      <mat-progress-spinner
+          mode="indeterminate"
+          value="50"
+          diameter="15"
+          title="'saving'"
+      >
+      </mat-progress-spinner>
+    </ng-container>
+    <ng-container *ngIf="postStatus === 'saved'">
+      <i class="
+        fa
+        fa-check
+        font-xss"
+        title="saved"
+      >
+      </i>
+    </ng-container>
+    <!-- <i class="fa fa-exclamation-triangle font-xxs text-waring"></i> -->
+  </div>
   <form class="
     d-flex
     justify-content-center
     mr-auto
+    ml-auto
     border
     border-light
     text-center
+    center
     mw-50"
     #postTitleForm
     (ngSubmit)="onSaveTitle(postTitleForm.postTitle.value)"

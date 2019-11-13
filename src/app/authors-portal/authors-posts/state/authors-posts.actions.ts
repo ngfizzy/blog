@@ -4,6 +4,7 @@ import { Post } from 'src/app/shared/models/post.interface';
 export const enum AuthorsPostsActionTypes {
   CreatePost = '[Authors Posts] Create Post',
   CreatePostSuccess = '[Authors Posts] Create Posts Success',
+  ChangePostStatus = '[Authors Posts] Change Post Status',
   EditPost = '[Authors Posts] Edit Post',
   EditPostSuccess = '[Authors Posts] Edit Post Success',
   GetPosts = '[Authors Posts] Get Posts',
@@ -48,6 +49,12 @@ export class CreatePostSuccess implements Action {
   constructor(public payload: Post) {}
 }
 
+export class ChangePostStatus {
+  readonly type = AuthorsPostsActionTypes.ChangePostStatus;
+  constructor(public readonly payload: 'saving' | 'saved' | 'erred') {}
+}
+
+
 export class EditPost implements Action {
   readonly type = AuthorsPostsActionTypes.EditPost;
   constructor(public payload: { post: Partial<Post>, postId: number }) {}
@@ -63,6 +70,7 @@ export type AuthorsPostsActions = GetPosts
 | GetPostsSuccess
 | CreatePost
 | CreatePostSuccess
+| ChangePostStatus
 | EditPost
 | EditPostSuccess
 | ViewPost

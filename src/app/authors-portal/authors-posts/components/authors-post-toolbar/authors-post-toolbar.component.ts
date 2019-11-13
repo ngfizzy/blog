@@ -10,6 +10,7 @@ export class AuthorsPostToolbarComponent implements OnInit {
   @Input() selectedPostTitle: string;
   @Input() selectedPostId: number;
   @Input() isEditingTitle: boolean;
+  @Input() postStatus: 'saved' | 'saving' | 'erred' = 'saved';
 
   @Output() editTitle = new EventEmitter<boolean>();
   @Output() saveTitle = new EventEmitter<string>();

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
 import { MatInputModule, MatInput } from '@angular/material/input';
 import { MatFormFieldModule, MatFormField, MatLabel } from '@angular/material/form-field';
 import { SpinnerComponent } from './components/spinner/spinner.component';
@@ -44,6 +44,7 @@ import {
     MatDrawerContainer,
     MatDrawerContent,
     MatSidenavContainer,
+    MatProgressSpinnerModule,
     MatSidenavContent,
     MatButton,
     MatToolbar,

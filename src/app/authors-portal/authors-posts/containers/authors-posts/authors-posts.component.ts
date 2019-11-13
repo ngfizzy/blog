@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Post } from 'src/app/shared/models/post.interface';
@@ -20,6 +20,7 @@ export class AuthorsPostsComponent implements OnInit {
   isEditingTitle: boolean;
   isCreating: boolean;
   postListItemConfig: PostComponentConfig;
+  postStatus$: Observable<'saved' | 'erred' | 'saving'>;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,6 +47,9 @@ export class AuthorsPostsComponent implements OnInit {
     this.selectedPost$ = this.store.pipe(
       select(fromAuthorsPosts.viewPost)
     );
+    this.postStatus$ = this.store.pipe(
+      select(fromAuthorsPosts.selectPostStatus),
+    );
   }
 
   createPost(title: string) {
@@ -58,6 +62,7 @@ export class AuthorsPostsComponent implements OnInit {
 
   showFullPost(postId?: number, navigate: boolean = true) {
     this.selectedPostId = postId ? postId : this.selectedPostId;
+
     this.store.dispatch(
       new fromAuthorsPostsActions.ViewPost(this.selectedPostId)
     );
@@ -66,6 +71,7 @@ export class AuthorsPostsComponent implements OnInit {
       this.router.navigate(['authors/posts', this.selectedPostId]);
     }
   }
+
 
   getPostsConfig() {
     return  {

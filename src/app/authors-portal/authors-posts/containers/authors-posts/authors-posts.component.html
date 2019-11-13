@@ -39,6 +39,7 @@
       [selectedPostTitle]="selectedPost.title"
       [selectedPostId]="selectedPostId"
       [isEditingTitle]="isEditingTitle"
+      [postStatus]="postStatus$ | async"
       (editTitle)="isEditingTitle = $event"
       (saveTitle)="saveTitle($event)"
     >

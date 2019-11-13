@@ -40,3 +40,8 @@ export const getPostsLoadingState = createSelector(
   getPostsState,
   state => state.isLoading
 );
+
+export const selectPostStatus = createSelector(
+  viewPostState,
+  state => state.status
+);

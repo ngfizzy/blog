@@ -21,5 +21,3 @@ export function authorsPortalReducer(state: AuthorsPortalState = defaultState, a
       return state;
   }
 }
-
-import { Post } from 'src/app/shared/models/post.interface';
