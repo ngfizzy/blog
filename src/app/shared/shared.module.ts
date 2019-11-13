@@ -20,6 +20,7 @@ import {
   MatDrawerContainer,
   MatDrawer,
   MatDrawerContent } from '@angular/material/sidenav';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import {
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
+    RouterModule,
     MarkdownModule.forChild(),
   ],
   exports: [

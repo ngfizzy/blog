@@ -54,7 +54,6 @@ export class ChangePostStatus {
   constructor(public readonly payload: 'saving' | 'saved' | 'erred') {}
 }
 
-
 export class EditPost implements Action {
   readonly type = AuthorsPostsActionTypes.EditPost;
   constructor(public payload: { post: Partial<Post>, postId: number }) {}

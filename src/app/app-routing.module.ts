@@ -18,7 +18,8 @@ const routes: Routes = [
   },
   {
     path: 'authors',
-    loadChildren: () => import('./authors-portal/authors-portal.module').then(mod => mod.AuthorsPortal),
+    loadChildren: () => import('./authors-portal/authors-portal.module')
+      .then(mod => mod.AuthorsPortal),
   }
 ];
 

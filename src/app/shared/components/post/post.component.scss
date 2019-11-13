@@ -7,10 +7,17 @@
   margin-right: auto;
   padding-bottom: 2rem;
 
+  .title {
+      a {
+        color: #000;
+      }
+  }
+
   .card-body {
     height: auto;
     max-height: 10rem;
     transition: max-height 1s ease-in;
+    overflow: hidden;
   }
 
   &.mini {
@@ -20,10 +27,12 @@
     margin-bottom: 1.24rem;
     margin-top: 0;
 
-
     .title {
       height: 80%;
-      font-size: 80%
+      font-size: 80%;
+        a {
+          color: #000;
+        }
     }
   }
 
