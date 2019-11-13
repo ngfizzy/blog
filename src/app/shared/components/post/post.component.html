@@ -17,7 +17,7 @@
     [class.mat-elevation-z0]="shouldHideShadows"
   >
     <mat-card-title class="title">{{post.title}}</mat-card-title>
-    <mat-card-content *ngIf="!isMini" class="card-body" [innerHtml]="postBody">
+    <mat-card-content *ngIf="!isMini" class="card-body" [innerHtml]="postBody" markdown>
     </mat-card-content>
     <mat-card-actions *ngIf="!isMini && shouldShowActions" align="end">
       <span>

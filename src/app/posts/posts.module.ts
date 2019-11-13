@@ -8,6 +8,7 @@ import { postsReducer } from './state/posts.reducer';
 import { SharedModule } from '../shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
 import { PostsEffects } from './state/posts.effects';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   imports: [

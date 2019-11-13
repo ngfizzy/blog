@@ -9,7 +9,9 @@ import { MatButtonModule, MatButton } from '@angular/material/button';
 import { PostComponent } from './components/post/post.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
+import { MarkdownModule } from 'ngx-markdown';
 import { MatToolbarModule, MatToolbar } from '@angular/material/toolbar';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {
   MatSidenavModule,
   MatSidenavContainer,
@@ -30,6 +32,7 @@ import {
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
+    MarkdownModule.forChild(),
   ],
   exports: [
     SpinnerComponent,
@@ -50,6 +53,7 @@ import {
     MatToolbar,
     CommonModule,
     FormsModule,
+    HttpClientModule
   ],
   declarations: [ SpinnerComponent, PostComponent ],
   providers: []
