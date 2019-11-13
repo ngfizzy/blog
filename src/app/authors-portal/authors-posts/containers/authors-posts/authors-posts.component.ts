@@ -19,6 +19,7 @@ export class AuthorsPostsComponent implements OnInit {
   selectedPostId = 0;
   isEditingTitle: boolean;
   isCreating: boolean;
+  isSearching: boolean;
   postListItemConfig: PostComponentConfig;
   postStatus$: Observable<'saved' | 'erred' | 'saving'>;
 
@@ -71,6 +72,8 @@ export class AuthorsPostsComponent implements OnInit {
       this.router.navigate(['authors/posts', this.selectedPostId]);
     }
   }
+
+  search() {}
 
 
   getPostsConfig() {

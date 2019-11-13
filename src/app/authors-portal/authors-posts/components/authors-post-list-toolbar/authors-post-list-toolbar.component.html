@@ -1,10 +1,16 @@
 <mat-toolbar class="authors-toolbar mat-elevation-z2">
-  <div class="ml-auto mr-auto text-center">
+  <div class="mr-auto">
     <span title="new">
         <a href (click)="$event.preventDefault(); toggleCreateForm.emit();">
           <i class="fa fa-plus" *ngIf="!isCreating"></i>
           <i class="fa fa-times" *ngIf="isCreating"></i>
         </a>
+    </span>
+    <span title="search">
+      <a href (click)="$event.preventDefault(); toggleSearchForm.emit()">
+        <i class="fa fa-search" *ngIf="!isSearching"></i>
+        <i class="fa fa-times" *ngIf="isSearching"></i>
+      </a>
     </span>
   </div>
 </mat-toolbar>

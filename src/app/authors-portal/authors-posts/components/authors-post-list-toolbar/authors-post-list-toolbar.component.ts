@@ -7,7 +7,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class AuthorsPostListToolbarComponent implements OnInit {
   @Input() isCreating: boolean;
+  @Input() isSearching: boolean;
+
   @Output() toggleCreateForm = new EventEmitter<null>();
+  @Output() toggleSearchForm = new EventEmitter<null>();
 
   constructor() { }
 
