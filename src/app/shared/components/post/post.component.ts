@@ -29,11 +29,13 @@ export class PostComponent implements OnInit, OnChanges {
   isFull: boolean;
   shouldHideShadows: boolean;
   shouldShowActions: boolean;
+  postUrl: string;
 
   constructor(private router: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.configureComponent();
+
     this.postBody = this.getPostBody();
   }
 
@@ -52,6 +54,13 @@ export class PostComponent implements OnInit, OnChanges {
     this.isFull = this.config.isFull;
     this.shouldHideShadows = this.config.shouldHideShadows;
     this.shouldShowActions = this.config.shouldShowActions;
+  }
+
+  copyArticleLink(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    this.postUrl = `${window.location.origin}/posts/${1}`;
   }
 
   toggleElevation() {

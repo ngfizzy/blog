@@ -18,7 +18,12 @@
   >
     <mat-card-title class="title  text-center">
       <a [routerLink]="[1]">{{post.title}}</a>
-      <span class="pl-3 " title="copy sharable link">
+      <span
+        ngxClipboard
+        [cbContent]="postUrl"
+        class="pl-3 " title="copy sharable link"
+        (click)="copyArticleLink($event)"
+      >
         <i class="fa fa-copy text-primary"></i>
       </span>
     </mat-card-title>

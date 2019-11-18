@@ -10,8 +10,9 @@ import { PostComponent } from './components/post/post.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { MarkdownModule } from 'ngx-markdown';
+import { ClipboardModule } from 'ngx-clipboard';
 import { MatToolbarModule, MatToolbar } from '@angular/material/toolbar';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import {
   MatSidenavModule,
   MatSidenavContainer,
@@ -25,6 +26,7 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   imports: [
     CommonModule,
+    ClipboardModule,
     MatSidenavModule,
     MatProgressSpinnerModule,
     MatCardModule,
@@ -55,7 +57,8 @@ import { RouterModule } from '@angular/router';
     MatToolbar,
     CommonModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ClipboardModule,
   ],
   declarations: [ SpinnerComponent, PostComponent ],
   providers: []
