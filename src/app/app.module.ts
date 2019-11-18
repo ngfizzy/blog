@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MarkdownModule } from 'ngx-markdown';
+import { ToastrModule } from 'ngx-toastr';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -21,14 +22,19 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ToastrModule,
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      preventDuplicates: true,
+    }),
     EffectsModule.forRoot([AppEffects]),
     HttpClientModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
-     HttpClientModule,
+    HttpClientModule,
     MarkdownModule.forRoot({ loader: HttpClient })
   ],
   providers: [],

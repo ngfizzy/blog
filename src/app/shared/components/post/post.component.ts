@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, SimpleChanges, OnChanges, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostComponentConfig } from '../../models/post-component-config.interface';
 import { Post } from '../../models/post.interface';
@@ -17,6 +17,7 @@ export class PostComponent implements OnInit, OnChanges {
   @Input() config: PostComponentConfig;
   @Input() post: Post;
 
+  @Output() notify = new EventEmitter<string>();
   state = AnimationState.Small;
   truncatedPostLength = 560;
 
@@ -35,7 +36,6 @@ export class PostComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.configureComponent();
-
     this.postBody = this.getPostBody();
   }
 
@@ -43,8 +43,8 @@ export class PostComponent implements OnInit, OnChanges {
     if (!changes.firstChange) {
       this.postBody = this.getPostBody();
     }
-
   }
+
   private configureComponent() {
     this.isActive = this.config.isActive;
     this.isExpandedView = this.config.isExpandedView;
@@ -61,6 +61,8 @@ export class PostComponent implements OnInit, OnChanges {
     event.stopPropagation();
 
     this.postUrl = `${window.location.origin}/posts/${1}`;
+
+    this.notify.emit('URL successfuly copied to clipboard');
   }
 
   toggleElevation() {

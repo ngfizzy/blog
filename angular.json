@@ -32,7 +32,8 @@
               "node_modules/prismjs/themes/prism-okaidia.css",
               "node_modules/ngx-markdown-editor/assets/highlight.js/agate.min.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "node_modules/ngx-markdown-editor/assets/highlight.js/highlight.min.js",

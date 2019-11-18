@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
 import { MatInputModule, MatInput } from '@angular/material/input';
 import { MatFormFieldModule, MatFormField, MatLabel } from '@angular/material/form-field';
@@ -9,10 +10,8 @@ import { MatButtonModule, MatButton } from '@angular/material/button';
 import { PostComponent } from './components/post/post.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
-import { MarkdownModule } from 'ngx-markdown';
-import { ClipboardModule } from 'ngx-clipboard';
 import { MatToolbarModule, MatToolbar } from '@angular/material/toolbar';
-import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import {
   MatSidenavModule,
   MatSidenavContainer,
@@ -21,7 +20,10 @@ import {
   MatDrawerContainer,
   MatDrawer,
   MatDrawerContent } from '@angular/material/sidenav';
-import { RouterModule } from '@angular/router';
+import { MarkdownModule } from 'ngx-markdown';
+import { ClipboardModule } from 'ngx-clipboard';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+
 
 @NgModule({
   imports: [
@@ -39,8 +41,10 @@ import { RouterModule } from '@angular/router';
     MarkdownModule.forChild(),
   ],
   exports: [
-    SpinnerComponent,
-    PostComponent,
+    ClipboardModule,
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
     MatCardModule,
     MatFormField,
     MatLabel,
@@ -55,12 +59,10 @@ import { RouterModule } from '@angular/router';
     MatSidenavContent,
     MatButton,
     MatToolbar,
-    CommonModule,
-    FormsModule,
-    HttpClientModule,
-    ClipboardModule,
+    PostComponent,
+    SpinnerComponent,
   ],
   declarations: [ SpinnerComponent, PostComponent ],
-  providers: []
+  providers: [ ]
 })
 export class SharedModule {}

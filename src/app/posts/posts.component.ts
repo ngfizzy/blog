@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -7,6 +7,7 @@ import * as fromPostsActions from './state/posts.actions';
 import { PostsState } from './state/posts.state';
 import { Post } from '../shared/models/post.interface';
 import { PostComponentConfig } from '../shared/models/post-component-config.interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   templateUrl: './posts.component.html',
@@ -22,7 +23,10 @@ postConfig: PostComponentConfig = {
 };
 
 
-constructor(private store: Store<PostsState>) {}
+constructor(
+  private store: Store<PostsState>,
+  private toastr: ToastrService,
+) {}
 
   ngOnInit() {
     this.posts$ = this.getPosts();
@@ -32,5 +36,9 @@ constructor(private store: Store<PostsState>) {}
     this.store.dispatch(new fromPostsActions.GetAllPosts());
 
     return this.store.pipe(select(fromPosts.getAllPosts));
+  }
+
+  showNotification(message: string) {
+    this.toastr.info(message);
   }
 }
