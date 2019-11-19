@@ -18,6 +18,7 @@ export class OnePostComponent implements OnInit, OnDestroy {
     isActive: true,
     isTouched: true,
     isExpandedView: true,
+    isFull: true,
   };
   destroy$: Subject<null> = new Subject();
   post$: Observable<Post>;

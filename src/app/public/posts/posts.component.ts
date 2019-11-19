@@ -19,7 +19,8 @@ postConfig: PostComponentConfig = {
   isActive: false,
   isExpandedView: false,
   isTouched: false,
-  canToggle: true
+  canToggle: true,
+  isFull: true,
 };
 
 
