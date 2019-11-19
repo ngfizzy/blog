@@ -61,6 +61,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     MatToolbar,
     PostComponent,
     SpinnerComponent,
+    RouterModule
   ],
   declarations: [ SpinnerComponent, PostComponent ],
   providers: [ ]

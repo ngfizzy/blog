@@ -5,16 +5,11 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'posts'
+    redirectTo: 'public'
   },
   {
-    path: 'posts',
-    loadChildren:  () => import('./posts/posts.module').then(mod => mod.PostsModule)
-  },
-  {
-    path: 'posts/:postId',
-    loadChildren: () => import('./one-post/one-post.module')
-      .then(mod => mod.OnePostModule),
+    path: 'public',
+    loadChildren: () => import('./public/public.module').then(mod => mod.PublicModule)
   },
   {
     path: 'authors',

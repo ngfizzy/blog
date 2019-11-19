@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
-import * as fromPosts from './state';
-import * as fromPostsActions from './state/posts.actions';
-import { PostsState } from './state/posts.state';
-import { Post } from '../shared/models/post.interface';
-import { PostComponentConfig } from '../shared/models/post-component-config.interface';
 import { ToastrService } from 'ngx-toastr';
+
+import * as fromPosts from '../state';
+import * as fromPostsActions from '../state/public.actions';
+import { PublicState } from '../state/public.state';
+import { Post } from '../../shared/models/post.interface';
+import { PostComponentConfig } from '../../shared/models/post-component-config.interface';
 
 @Component({
   templateUrl: './posts.component.html',
@@ -24,7 +24,7 @@ postConfig: PostComponentConfig = {
 
 
 constructor(
-  private store: Store<PostsState>,
+  private store: Store<PublicState>,
   private toastr: ToastrService,
 ) {}
 
