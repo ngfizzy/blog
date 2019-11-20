@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AboutComponent } from './core/components/about/about.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
     path: 'authors',
     loadChildren: () => import('./authors-portal/authors-portal.module')
       .then(mod => mod.AuthorsPortal),
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
   }
 ];
 
@@ -22,4 +27,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+  static readonly routeComponents = [ AboutComponent ];
+}

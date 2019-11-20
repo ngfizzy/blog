@@ -17,7 +17,8 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 
 @NgModule({
   declarations: [
-    AppComponent
+    ...AppRoutingModule.routeComponents,
+    AppComponent,
   ],
   imports: [
     BrowserModule,

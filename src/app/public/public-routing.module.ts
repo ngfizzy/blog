@@ -19,7 +19,7 @@ const routes: Routes = [
           .then(mod => mod.OnePostModule),
       },
     ]
-  }
+  },
 ];
 
 @NgModule({
