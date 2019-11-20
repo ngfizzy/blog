@@ -1,13 +1,13 @@
 <app-nav></app-nav>
 
 <div class="fixed-top w-25 author-info">
-  <mat-card class="mat-elevation-z8">
+  <mat-card class="mat-elevation-z8 author-card">
     <mat-card-title-group>
-      <mat-card-title>{{ aboutAuthor.name }}</mat-card-title>
-      <mat-card-subtitle>{{ aboutAuthor.profession }}</mat-card-subtitle>
+      <mat-card-title class="author-title">{{ aboutAuthor.name }}</mat-card-title>
+      <mat-card-subtitle class="author-subtitle text-muted">{{ aboutAuthor.profession }}</mat-card-subtitle>
       <img src="http://www.ngfizzy.com/images/home-img.jpg" mat-card-md-image>
     </mat-card-title-group>
-    <mat-card-content [innerHtml]="aboutAuthor.description">
+    <mat-card-content class="author-description" [innerHtml]="aboutAuthor.description">
     </mat-card-content>
   </mat-card>
 </div>

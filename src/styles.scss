@@ -1,8 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet');
-
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: 'Open Sans', sans-serif; }
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.5s linear 0s;
+  line-height: 1.5;
+  // background: linear-gradient(#694966,#69496A )
+  background-color: #1e1e2f;
+  color: hsla(0,0%,100%,.8);
+}
 
