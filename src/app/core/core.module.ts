@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NavComponent } from './nav/nav.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -18,11 +17,8 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [
     FormsModule,
-    NavComponent,
     CommonModule,
   ],
-  declarations: [
-    NavComponent,
-  ],
+  declarations: [],
 })
 export class CoreModule {}

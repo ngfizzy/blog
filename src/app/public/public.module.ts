@@ -5,6 +5,7 @@ import { publicReducer } from './state/public.reducer';
 import { PublicEffects } from './state/public.effects';
 import { PublicRoutingModule } from './public-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { NavComponent } from './components/nav/nav.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { SharedModule } from '../shared/shared.module';
     PublicRoutingModule,
   ],
   declarations: [
-    ...PublicRoutingModule.routeComponents
+    ...PublicRoutingModule.routeComponents,
+    NavComponent
   ]
 })
 export class PublicModule {}
