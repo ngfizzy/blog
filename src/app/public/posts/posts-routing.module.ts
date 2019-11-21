@@ -10,7 +10,6 @@ const routes: Routes =  [
     component: PostsComponent,
   },
 ];
-
 @NgModule({
   imports: [
     RouterModule.forChild(routes),

@@ -1,12 +1,18 @@
 .posts-drawer-container {
-  width: 90%;
-  height: 85%;
-  margin-top: 3%;
+  width: 100%;
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
+  background: inherit;
 
   .posts-drawer {
-    width: 20%;
+    background: inherit;
+    width: 25%;
     border: 1px solid #fafa;
+  }
+
+  .sidenav-outlet {
+    width: 100%;
+    height: 100%;
   }
 }

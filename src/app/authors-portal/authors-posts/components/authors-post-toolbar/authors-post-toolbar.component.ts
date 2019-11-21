@@ -3,7 +3,10 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 @Component({
   selector: 'app-authors-posts-toolbar',
   templateUrl: './authors-post-toolbar.component.html',
-  styleUrls: ['../shared-styles/authors-toolbar.scss'],
+  styleUrls: [
+    '../shared-styles/authors-toolbar.scss',
+    './authors-post-toolbar.component.scss',
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthorsPostToolbarComponent implements OnInit {

@@ -25,18 +25,16 @@
     justify-content-center
     mr-auto
     ml-auto
-    border
-    border-light
     text-center
     center
     mw-50"
     #postTitleForm
     (ngSubmit)="onSaveTitle(postTitleForm.postTitle.value)"
   >
-    <span *ngIf="!isEditingTitle">{{ selectedPostTitle }}</span>
+    <span class="post-title" *ngIf="!isEditingTitle">{{ selectedPostTitle }}</span>
     <input
       name="postTitle"
-      class="mb-auto mt-auto d-inline-flex"
+      class="mb-auto mt-auto d-inline-flex title-input"
       type="text"
       *ngIf="isEditingTitle"
       [ngModel]="selectedPostTitle"
@@ -46,26 +44,32 @@
       title="edit title" class="btn"
       (click)="toggleEditingTitleMode()"
     >
-      <i class="fa fa-edit"></i>
+      <i class="fa fa-edit text-primary"></i>
     </button>
     <button
       *ngIf="isEditingTitle"
       title="save" class="btn"
       type="submit"
     >
-      <i class="fa fa-check"></i>
+      <i class="fa fa-check text-primary"></i>
     </button>
   </form>
   <div class="controls ml-auto mw-25 text-center">
     <span title="edit">
-        <a [routerLink]="['edit', selectedPostId]">
-          <i class="fa fa-edit"></i>
-        </a>
-      </span>
-      <span title="delete">
-        <a href="javascript:;">
-          <i class="fa fa-trash"></i>
-        </a>
-      </span>
+      <a [routerLink]="['edit', selectedPostId]">
+        <i class="fa fa-edit"></i>
+      </a>
+    </span>
+    <span title="delete">
+      <a href="javascript:;">
+        <i class="fa fa-trash"></i>
+      </a>
+    </span>
+  </div>
+  <div title="publish">
+    <button class="btn btn-primary btn-sm">
+      Publish
+      <i class="fa fa-arrow-circle-up"></i>
+    </button>
   </div>
 </mat-toolbar>

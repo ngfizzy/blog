@@ -1,5 +1,5 @@
-<mat-drawer-container class="posts-drawer-container">
-  <mat-drawer mode="side" opened class="posts-drawer">
+<mat-sidenav-container class="posts-drawer-container fixed-top">
+  <mat-sidenav mode="side" opened class="posts-drawer fixed-top">
     <app-authors-post-list-toolbar
       (toggleCreateForm)="isCreating = !isCreating"
       (toggleSearchForm)="isSearching = !isSearching"
@@ -51,8 +51,8 @@
       >
       </app-post>
     </a>
-  </mat-drawer>
-  <mat-drawer-content>
+  </mat-sidenav>
+  <mat-sidenav-content>
     <app-authors-posts-toolbar
       *ngIf="selectedPost$ | async; let selectedPost"
       [selectedPostTitle]="selectedPost.title"
@@ -63,6 +63,8 @@
       (saveTitle)="saveTitle($event)"
     >
     </app-authors-posts-toolbar>
-    <router-outlet ></router-outlet>
-  </mat-drawer-content>
-</mat-drawer-container>
+    <div class="sidenav-outlet">
+      <router-outlet ></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
