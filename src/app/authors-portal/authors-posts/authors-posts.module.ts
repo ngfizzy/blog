@@ -9,6 +9,7 @@ import { AuthorsPostToolbarComponent } from './components/authors-post-toolbar/a
 import { AuthorsPostListToolbarComponent } from './components/authors-post-list-toolbar/authors-post-list-toolbar.component';
 import { authorsPostsReducers } from './state/authors-posts.reducers';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AuthorsPostsListComponent } from './components/authors-posts-list/authors-posts-list.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   declarations: [
     AuthorsPostToolbarComponent,
     AuthorsPostListToolbarComponent,
+    AuthorsPostsListComponent,
     ...AuthorsPostsRoutingModule.routeComponents,
   ],
 })

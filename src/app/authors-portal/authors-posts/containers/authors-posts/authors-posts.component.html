@@ -40,17 +40,11 @@
         </form>
         <div class="divider"></div>
       </div>
-    <a
-      *ngFor="let post of posts$ | async; let i = index"
-      [routerLink]="[i]"
-      (click)="showFullPost(i, false)"
+    <app-authors-posts-list
+      [postsList]="posts$ | async"
+      (showFullPost)="showFullPost($event)"
     >
-      <app-post
-        [config]="postListItemConfig"
-        [post]="post"
-      >
-      </app-post>
-    </a>
+    </app-authors-posts-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <app-authors-posts-toolbar

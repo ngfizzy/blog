@@ -61,7 +61,7 @@ export class AuthorsPostsComponent implements OnInit {
     this.isCreating = false;
   }
 
-  showFullPost(postId?: number, navigate: boolean = true) {
+  showFullPost(postId?: number, navigate: boolean = false) {
     this.selectedPostId = postId ? postId : this.selectedPostId;
 
     this.store.dispatch(

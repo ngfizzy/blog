@@ -7,11 +7,11 @@ import { MatFormFieldModule, MatFormField, MatLabel } from '@angular/material/fo
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule, MatButton } from '@angular/material/button';
-import { PostComponent } from './components/post/post.component';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { MatToolbarModule, MatToolbar } from '@angular/material/toolbar';
-import { RouterModule } from '@angular/router';
+import { MatListModule, MatList } from '@angular/material/list';
 import {
   MatSidenavModule,
   MatSidenavContainer,
@@ -22,8 +22,8 @@ import {
   MatDrawerContent } from '@angular/material/sidenav';
 import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
 
+import { PostComponent } from './components/post/post.component';
 
 @NgModule({
   imports: [
@@ -47,6 +47,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     HttpClientModule,
     MatCardModule,
     MatFormField,
+    MatListModule,
     MatLabel,
     MatInput,
     MatIcon,
