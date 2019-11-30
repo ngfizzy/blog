@@ -6,7 +6,7 @@ export class AuthService {
 
   constructor(private router: Router) {}
 
-  private isAuthenticated = true;
+  private isAuthenticated = false;
 
   get authState() {
     return this.isAuthenticated;
