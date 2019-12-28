@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate, CanLoad {
   ): Observable<boolean> | Promise<boolean> | boolean {
 
     if (!this.auth.authState) {
-      this.router.navigate(['authors', 'login'])
+      this.router.navigate(['authors', 'login']);
       return of(false);
     }
 

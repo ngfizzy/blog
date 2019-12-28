@@ -1,5 +1,6 @@
 import { AuthorsPostsState } from './authors-posts.state';
 import { AuthorsPostsActionTypes, AuthorsPostsActions } from './authors-posts.actions';
+import { Post } from 'src/app/shared/models';
 
 
 const defaultState: AuthorsPostsState = {
@@ -8,7 +9,7 @@ const defaultState: AuthorsPostsState = {
   selectedPost: {
     isLoading: false,
     status: 'saved',
-    post: { title: '', body: ''}
+    post: { } as Post,
   },
 };
 

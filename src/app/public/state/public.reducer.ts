@@ -1,12 +1,13 @@
 import { PublicState } from './public.state';
 import { PublicActions, PublicActionTypes } from './public.actions';
+import { Post } from 'src/app/shared/models';
 
 
 const defaultState: PublicState = {
     posts: [],
     selectedPost: {
       isLoading: true,
-      post: { title: '', body: '' },
+      post: { } as Post,
     },
     isLoading: true
 };
