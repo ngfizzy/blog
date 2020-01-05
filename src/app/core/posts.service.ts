@@ -50,6 +50,7 @@ function generatePosts(length: number) {
   const posts = [];
   while (length > 0) {
     posts.push(generatePost());
+    --length;
   }
 
   return posts;
@@ -60,7 +61,6 @@ export class PostsService {
 
   constructor() {
     this.posts = generatePosts(50);
-    console.log('possible ids........................', usedIds);
   }
 
   getAll(): Observable<Post[]> {
