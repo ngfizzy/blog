@@ -50,11 +50,11 @@
     <app-authors-posts-toolbar
       *ngIf="selectedPost$ | async; let selectedPost"
       [selectedPostTitle]="selectedPost.title"
-      [selectedPostId]="selectedPostId"
       [isEditingTitle]="isEditingTitle"
       [postStatus]="postStatus$ | async"
+      [selectedPostId]="selectedPost.id"
       (editTitle)="isEditingTitle = $event"
-      (saveTitle)="saveTitle($event)"
+      (saveTitle)="saveTitle($event, selectedPost.id)"
     >
     </app-authors-posts-toolbar>
     <div class="sidenav-outlet">

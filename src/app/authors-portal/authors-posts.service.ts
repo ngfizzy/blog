@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { switchMap, map, mergeMap, take } from 'rxjs/operators';
+import {  map, mergeMap, take, takeLast, takeUntil, takeWhile, first } from 'rxjs/operators';
 
 import { PostsService } from 'src/app/core/posts.service';
 import { Post } from 'src/app/shared/models/post.interface';
+import { generatePosts } from '../mock-server';
 import * as fromAuthorsPostsState from './authors-posts/state';
 
 @Injectable()
@@ -32,7 +33,7 @@ export class AuthorsPostsService {
 
   editPost(post: Partial<Post>, postId: number):
     Observable<{ posts: Post[]; selectedPost: Post }> {
-     return this.getPostsFromStore(postId).pipe(
+     return this.getPostsFromStore().pipe(
         map((posts) => {
           const plucked = this.pluckPost(postId, posts);
 
@@ -42,16 +43,18 @@ export class AuthorsPostsService {
 
           plucked.title =  post.title ? post.title : plucked.title;
           plucked.body = post.body ? post.body : plucked.body;
+          plucked.updatedAt = new Date().toString();
+
 
           posts.unshift(plucked);
 
-          return { posts, selectedPost: plucked as Post };
+          return { posts, selectedPost: plucked };
         }),
       );
   }
 
   editPostTitle(title: string, postId: number) {
-      this.getPostsFromStore(postId).pipe(
+      this.getPostsFromStore().pipe(
         map((posts) => {
           const post = this.pluckPost(postId, posts);
 
@@ -67,13 +70,13 @@ export class AuthorsPostsService {
   }
 
   getAllPosts() {
-    return this.postsService.getAll();
+    return of(generatePosts(50));
   }
 
-  getOnePost(postId = 1) {
-    return this.getPostsFromStore(postId).pipe(
+  getOnePost(postId: number) {
+    return this.getPostsFromStore().pipe(
       mergeMap((posts) => {
-        const post = posts[postId];
+        const post = posts.find(found => found.id === postId);
 
         return of(post);
       })
@@ -81,15 +84,16 @@ export class AuthorsPostsService {
   }
 
   private pluckPost(postId: number, posts: Post[]): Post {
-    const [ post ] = posts.splice(postId, 1);
+    const postIndex = posts.findIndex(found => found.id === +postId);
+    const [ post ] = posts.splice(postIndex, 1);
 
     return post;
   }
 
-  private getPostsFromStore(postId: number) {
+  private getPostsFromStore() {
     return this.store.pipe(
       select(fromAuthorsPostsState.getPosts),
-      take(1),
+      take(1)
     );
   }
 }

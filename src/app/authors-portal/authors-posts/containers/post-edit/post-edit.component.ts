@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Subscription, fromEvent, Subject } from 'rxjs';
 import { map, debounceTime, switchMap, takeUntil, throttleTime } from 'rxjs/operators';
@@ -44,7 +44,7 @@ export class PostEditComponent implements OnInit, OnDestroy, AfterViewInit {
     fromEvent(this.editor.nativeElement, 'keyup').pipe(
       debounceTime(time),
       switchMap(() => this.route.params.pipe(
-        map((params) => this.postId = params.id || 0)
+        map((params) => this.postId = params.id)
       )),
       takeUntil(this.unsubscribe$)
     ).subscribe((postId) => {

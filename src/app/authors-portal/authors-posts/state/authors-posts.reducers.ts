@@ -9,7 +9,7 @@ const defaultState: AuthorsPostsState = {
   selectedPost: {
     isLoading: false,
     status: 'saved',
-    post: { } as Post,
+    post: { title: '', body: '' } as Post,
   },
 };
 

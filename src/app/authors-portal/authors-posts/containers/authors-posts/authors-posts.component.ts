@@ -16,12 +16,12 @@ import * as fromAuthorsPostsActions from '../../state/authors-posts.actions';
 export class AuthorsPostsComponent implements OnInit {
   selectedPost$: Observable<Post>;
   posts$: Observable<Post[]>;
-  selectedPostId = 0;
   isEditingTitle: boolean;
   isCreating: boolean;
   isSearching: boolean;
   postListItemConfig: PostComponentConfig;
   postStatus$: Observable<'saved' | 'erred' | 'saving'>;
+  selectedPostId: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,16 +31,19 @@ export class AuthorsPostsComponent implements OnInit {
 
   ngOnInit() {
     this.initialize();
-    this.showFullPost();
   }
 
   initialize() {
+    this.route.paramMap.subscribe(
+      (paramMap) => {
+        const id =  paramMap.get('id');
+        this.selectedPostId =  id ? +id : null;
+      },
+    );
+
     this.postListItemConfig = this.getPostsConfig();
 
     this.store.dispatch(new fromAuthorsPostsActions.GetPosts());
-    this.store.dispatch(
-      new fromAuthorsPostsActions.ViewPost(this.selectedPostId)
-    );
 
     this.posts$ = this.store.pipe(
       select(fromAuthorsPosts.getPosts)
@@ -61,16 +64,8 @@ export class AuthorsPostsComponent implements OnInit {
     this.isCreating = false;
   }
 
-  showFullPost(postId?: number, navigate: boolean = false) {
-    this.selectedPostId = postId ? postId : this.selectedPostId;
-
-    this.store.dispatch(
-      new fromAuthorsPostsActions.ViewPost(this.selectedPostId)
-    );
-
-    if (navigate) {
-      this.router.navigate(['authors/posts', this.selectedPostId]);
-    }
+  showFullPost(postId: number) {
+    this.router.navigate(['authors/posts', postId]);
   }
 
   search() {}
@@ -88,12 +83,16 @@ export class AuthorsPostsComponent implements OnInit {
     };
   }
 
-  saveTitle(title: string) {
+  saveTitle(title: string, postId: number) {
     const post: Partial<Post> = { title };
-    this.store.dispatch(
-      new fromAuthorsPostsActions.EditPost({
-        post, postId: this.selectedPostId
-      }),
-    );
+    this.selectedPostId = postId;
+    if (this.selectedPostId) {
+      this.store.dispatch(
+        new fromAuthorsPostsActions.EditPost({
+          post, postId: this.selectedPostId
+        }),
+      );
+    }
+
   }
 }

@@ -1,8 +1,8 @@
 <mat-list class="w-100 posts-list list-group">
   <a
-    *ngFor="let post of postsList; let i = index"
-    [routerLink]="[i]"
-    (click)="$event.preventDefault(); onShowFullPost(i);"
+    *ngFor="let post of postsList"
+    [routerLink]="post.id"
+    (click)="$event.preventDefault(); onShowFullPost(post.id);"
   >
     <mat-list-item class="list-group-item item">{{post.title}}</mat-list-item>
   </a>

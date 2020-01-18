@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-
+import * as fromAuthorsPostsActions from '../../state/authors-posts.actions';
 import * as fromAuthorsPostsState from '../../state';
 import { Post } from 'src/app/shared/models/post.interface';
 import { PostComponentConfig } from 'src/app/shared/models/post-component-config.interface';
@@ -23,7 +23,6 @@ export class AuthorsPostComponent implements OnInit {
     shouldShowActions: false,
   };
 
-  postId = 0;
   post$: Observable<Post>;
   isLoading$: Observable<boolean>;
 
@@ -33,6 +32,13 @@ export class AuthorsPostComponent implements OnInit {
     >) { }
 
   ngOnInit() {
+
+    this.route.paramMap.subscribe((paramMap) => {
+      this.store.dispatch(
+        new fromAuthorsPostsActions.ViewPost(+paramMap.get('id'))
+      );
+    });
+
     this.post$ = this.store.pipe(select(fromAuthorsPostsState.viewPost));
     this.isLoading$ = this.store.pipe(select(fromAuthorsPostsState.isPostLoading));
   }
