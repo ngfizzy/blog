@@ -6,4 +6,8 @@
     #editor
   >
   </md-editor>
+  <app-authors-tags-panel
+    [tags]="postTags"
+    (add)="tagPost($event)"
+    (remove)=untagPost($event)> </app-authors-tags-panel>
 </div>

@@ -1,11 +1,15 @@
-import { Post } from '../shared/models';
+import { Tag, Post } from '../shared/models';
 
 const usedIds = [];
+
+const tags: Tag[] = [];
+const posts: Post[] = [];
+
 function randomId() {
   let randomNumber = Math.floor(Math.random() * 1000);
 
   while (usedIds.indexOf(randomNumber) > -1) {
-    randomNumber = Math.floor(Math.random() * 1000);
+    randomNumber = Math.floor(Math.random() * 10000);
   }
 
   usedIds.push(randomNumber);
@@ -44,13 +48,49 @@ function generatePost() {
   return post;
 }
 
+function createTag(tagName: string): Tag {
+  const createdAt = new Date().toString();
+  return {
+    name: tagName,
+    id: randomId(),
+    createdAt,
+    updatedAt: createdAt,
+  };
+}
 
 export function generatePosts(length: number) {
-  const posts = [];
   while (length > 0) {
     posts.push(generatePost());
     --length;
   }
 
   return posts;
+}
+
+export function tagPost(tagName: string, postId: number): Post {
+  const tag =  tags.find(t => t.name === tagName);
+  const post = posts.find(p => p.id === postId);
+
+  if (tag) {
+    if (post.tags.find( t => t.name === tagName)) {
+      return post;
+    }
+  }
+
+  const created = createTag(tagName);
+
+  tags.push(created);
+  post.tags.push(created);
+
+  return post;
+}
+
+export function untagPost(tagName: string, postId: number): Post {
+  const post = posts.find(p => p.id === postId)
+
+  if (post) {
+    post.tags.filter(tag => tag.name !== tagName);
+  }
+
+  return post;
 }

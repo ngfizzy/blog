@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { Subscription, fromEvent, Subject } from 'rxjs';
+import { fromEvent, Subject } from 'rxjs';
 import { map, debounceTime, switchMap, takeUntil, throttleTime } from 'rxjs/operators';
 
 import * as fromAuthorsPostsState from '../../state';
 import * as fromAuthorsPostsActions from '../../state/authors-posts.actions';
 import { Post } from 'src/app/shared/models/post.interface';
+import { Tag } from 'src/app/shared/models';
 
 @Component({
   templateUrl: './post-edit.component.html',
@@ -22,6 +23,7 @@ export class PostEditComponent implements OnInit, OnDestroy, AfterViewInit {
   options = {
     hideIcons: [ 'FullScreen' ]
   };
+  postTags: Tag[] = [];
   isLoading: boolean;
   postId: number;
 
@@ -31,16 +33,40 @@ export class PostEditComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(
+      paramMap => this.postId = +paramMap.get('id'),
+    );
+
     this.setPostState();
     this.postBody = this.post.body;
   }
 
   ngAfterViewInit(): void {
-    this.saveAfterTime(3000);
-    this.changePostStatutsAfterTime(1000);
+    this.saveAfter(3000);
+    this.changePostStatutsAfter(1000);
   }
 
-  private saveAfterTime(time: number) {
+  tagPost(tag: string) {
+    this.store.dispatch(new fromAuthorsPostsActions.TagPost({
+      tag,
+      postId: this.postId,
+     })
+    );
+  }
+
+  untagPost(tagName: string) {
+    this.store.dispatch(new fromAuthorsPostsActions.UntagPost({
+      tagName,
+      postId: this.postId,
+    }));
+  }
+
+  /**
+   * Wait for x milliseconds before saving
+   *
+   * @param time Time to wait before saving post in milliseconds
+   */
+  private saveAfter(time: number) {
     fromEvent(this.editor.nativeElement, 'keyup').pipe(
       debounceTime(time),
       switchMap(() => this.route.params.pipe(
@@ -55,7 +81,12 @@ export class PostEditComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  private changePostStatutsAfterTime(time: number) {
+  /**
+   * Waits for x number of milliseconds before changing post save status
+   *
+   * @param time Time in ms to wait before changing save status
+   */
+  private changePostStatutsAfter(time: number) {
     fromEvent(this.editor.nativeElement, 'keyup').pipe(
       throttleTime(time),
       takeUntil(this.unsubscribe$),
@@ -73,6 +104,7 @@ export class PostEditComponent implements OnInit, OnDestroy, AfterViewInit {
     ).subscribe((postState) => {
       this.isLoading = postState.isLoading;
       this.post = postState.post;
+      this.postTags = postState.post.tags;
     });
   }
 

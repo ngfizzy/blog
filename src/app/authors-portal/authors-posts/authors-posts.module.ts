@@ -10,6 +10,8 @@ import { AuthorsPostListToolbarComponent } from './components/authors-post-list-
 import { authorsPostsReducers } from './state/authors-posts.reducers';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthorsPostsListComponent } from './components/authors-posts-list/authors-posts-list.component';
+import { AuthorsTagComponent } from './components/authors-tag/authors-tag.component';
+import { AuthorsTagsPanelComponent } from './components/authors-tags-panel/authors-tags-panel.component';
 
 @NgModule({
   imports: [
@@ -23,6 +25,8 @@ import { AuthorsPostsListComponent } from './components/authors-posts-list/autho
     AuthorsPostToolbarComponent,
     AuthorsPostListToolbarComponent,
     AuthorsPostsListComponent,
+    AuthorsTagComponent,
+    AuthorsTagsPanelComponent,
     ...AuthorsPostsRoutingModule.routeComponents,
   ],
 })

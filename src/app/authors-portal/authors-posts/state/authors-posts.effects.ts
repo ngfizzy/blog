@@ -6,6 +6,7 @@ import { mergeMap, map } from 'rxjs/operators';
 
 import { AuthorsPostsService } from '../../authors-posts.service';
 import * as authorsPostsActions from './authors-posts.actions';
+import { Post } from 'src/app/shared/models';
 
 @Injectable()
 export class AuthorsPostsEffects {
@@ -41,6 +42,32 @@ export class AuthorsPostsEffects {
     mergeMap(postId => this.postsService.getOnePost(postId)
       .pipe(
         map(post => new authorsPostsActions.ViewPostSuccess(post)),
+      ),
+    ),
+  );
+
+  @Effect()
+  tagPost$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsPostsActions.AuthorsPostsActionTypes.TagPost),
+    map(action => (action as authorsPostsActions.TagPost).payload),
+    mergeMap(({postId, tag}) => this.postsService
+      .tagPost(tag, postId).pipe(
+        map((postTaggingResult: { posts: Post[], selectedPost: Post }) =>
+          new authorsPostsActions.TagPostSuccess(postTaggingResult)
+        ),
+      ),
+    ),
+  );
+
+  @Effect()
+  untagPost$: Observable<Action>  =  this.actions$.pipe(
+    ofType(authorsPostsActions.AuthorsPostsActionTypes.UntagPost),
+    map(action => (action as authorsPostsActions.UntagPost).payload),
+    mergeMap(({ postId, tagName }) => this.postsService
+      .untagPost(tagName, postId).pipe(
+        map(untaggingResult =>
+          new authorsPostsActions.UntagPostSuccess(untaggingResult)
+        ),
       ),
     ),
   );

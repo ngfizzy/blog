@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { MatToolbarModule, MatToolbar } from '@angular/material/toolbar';
 import { MatListModule, MatList } from '@angular/material/list';
+import { EllipsisModule } from 'ngx-ellipsis';
+
 import {
   MatSidenavModule,
   MatSidenavContainer,
@@ -43,6 +45,7 @@ import { PostComponent } from './components/post/post.component';
   exports: [
     ClipboardModule,
     CommonModule,
+    EllipsisModule,
     FormsModule,
     HttpClientModule,
     MatCardModule,

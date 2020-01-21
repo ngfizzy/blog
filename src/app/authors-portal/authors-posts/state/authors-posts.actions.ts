@@ -11,6 +11,10 @@ export const enum AuthorsPostsActionTypes {
   GetPostsSuccess = '[Authors Posts] Get Posts Success',
   ViewPost = '[Authors Posts] View Post',
   ViewPostSuccess = '[Authors Posts] View Post Success',
+  TagPost = '[Authosr Posts] Tag Post',
+  TagPostSuccess = '[Authors Posts] Tag Post Success',
+  UntagPost = '[Authors Posts] Untag Post',
+  UntagPostSuccess = '[Authors Posts] Untag Post Success',
 }
 
 export class GetPosts implements Action {
@@ -65,6 +69,30 @@ export class EditPostSuccess implements Action {
   constructor(public payload: { posts: Post[], selectedPost: Post }) {}
 }
 
+export class TagPost implements Action {
+  readonly type = AuthorsPostsActionTypes.TagPost;
+
+  constructor(public payload: { tag: string; postId: number}) {}
+}
+
+export class TagPostSuccess implements Action {
+  readonly type = AuthorsPostsActionTypes.TagPostSuccess;
+
+  constructor(public payload: { posts: Post[]; selectedPost: Post; }) {}
+}
+
+export class UntagPost implements Action {
+  readonly type = AuthorsPostsActionTypes.UntagPost;
+
+  constructor(public payload: { tagName: string; postId: number; }) {}
+}
+
+export class UntagPostSuccess implements Action {
+  readonly type  = AuthorsPostsActionTypes.UntagPostSuccess;
+
+  constructor(public payload: { posts: Post[]; selectedPost: Post; }) {}
+}
+
 export type AuthorsPostsActions = GetPosts
 | GetPostsSuccess
 | CreatePost
@@ -73,4 +101,8 @@ export type AuthorsPostsActions = GetPosts
 | EditPost
 | EditPostSuccess
 | ViewPost
-| ViewPostSuccess;
+| ViewPostSuccess
+| TagPost
+| TagPostSuccess
+| UntagPost
+| UntagPostSuccess;

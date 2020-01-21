@@ -87,6 +87,19 @@ export function authorsPostsReducers(
             status: action.payload,
           }
         };
+      case AuthorsPostsActionTypes.TagPost:
+      case AuthorsPostsActionTypes.UntagPost:
+        return state;
+      case AuthorsPostsActionTypes.TagPostSuccess:
+      case AuthorsPostsActionTypes.UntagPostSuccess:
+        return {
+          ...state,
+          posts: [ ...action.payload.posts ],
+          selectedPost: {
+            ...state.selectedPost,
+            post: { ...action.payload.selectedPost }
+          },
+        };
       default:
         return state;
     }
