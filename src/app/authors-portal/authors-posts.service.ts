@@ -71,16 +71,17 @@ export class AuthorsPostsService {
     );
   }
 
-  untagPost(tag: string, postId: number) {
+  untagPost(tagId: number, postId: number) {
+
     return this.pluckPostFromStore(postId).pipe(
       map((pluckResult) => {
         const {posts, plucked} = pluckResult;
 
         if (!plucked) {
-          return { posts, selectedPost: plucked};
+          return { posts, selectedPost: plucked };
         }
 
-        const { tags } = untagPost(tag, postId);
+        const { tags } = untagPost(tagId, postId);
         plucked.tags = tags;
         posts.unshift(plucked);
 
@@ -88,6 +89,7 @@ export class AuthorsPostsService {
       }),
     );
   }
+
   getAllPosts() {
     return of(generatePosts(50));
   }

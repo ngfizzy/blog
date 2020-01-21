@@ -85,11 +85,12 @@ export function tagPost(tagName: string, postId: number): Post {
   return post;
 }
 
-export function untagPost(tagName: string, postId: number): Post {
-  const post = posts.find(p => p.id === postId)
+export function untagPost(tagId: number, postId: number): Post {
+  const post = posts.find(p => p.id === postId);
 
   if (post) {
-    post.tags.filter(tag => tag.name !== tagName);
+    const filtered = post.tags.filter(tag => tag.id !== tagId);
+    post.tags = filtered;
   }
 
   return post;

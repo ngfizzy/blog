@@ -4,7 +4,7 @@
       *ngIf="tags?.length < 1">This article has no tag yet. click on plus button to add</i>
 
     <ng-container *ngFor="let tag of tags">
-      <app-authors-tag [tag]="tag" (removeTag)="removeTag($event)">
+      <app-authors-tag [tag]="tag" (remove)="removeTag($event)">
       </app-authors-tag>
     </ng-container>
   </div>

@@ -84,7 +84,7 @@ export class TagPostSuccess implements Action {
 export class UntagPost implements Action {
   readonly type = AuthorsPostsActionTypes.UntagPost;
 
-  constructor(public payload: { tagName: string; postId: number; }) {}
+  constructor(public payload: { tagId: number; postId: number; }) {}
 }
 
 export class UntagPostSuccess implements Action {

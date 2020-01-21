@@ -15,7 +15,7 @@ export class AuthorsTagComponent implements OnInit {
 
   ngOnInit() { }
 
-  removeTag() {
-    this.remove.emit(this.tag.id);
+  removeTag(tagId: number) {
+    this.remove.emit(tagId);
   }
 }

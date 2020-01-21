@@ -63,8 +63,8 @@ export class AuthorsPostsEffects {
   untagPost$: Observable<Action>  =  this.actions$.pipe(
     ofType(authorsPostsActions.AuthorsPostsActionTypes.UntagPost),
     map(action => (action as authorsPostsActions.UntagPost).payload),
-    mergeMap(({ postId, tagName }) => this.postsService
-      .untagPost(tagName, postId).pipe(
+    mergeMap(({ postId, tagId }) => this.postsService
+      .untagPost(tagId, postId).pipe(
         map(untaggingResult =>
           new authorsPostsActions.UntagPostSuccess(untaggingResult)
         ),

@@ -54,9 +54,9 @@ export class PostEditComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
-  untagPost(tagName: string) {
+  untagPost(tagId: number) {
     this.store.dispatch(new fromAuthorsPostsActions.UntagPost({
-      tagName,
+      tagId,
       postId: this.postId,
     }));
   }
