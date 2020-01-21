@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { MatToolbarModule, MatToolbar } from '@angular/material/toolbar';
-import { MatListModule, MatList } from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { EllipsisModule } from 'ngx-ellipsis';
 
 import {
@@ -26,6 +26,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
 
 import { PostComponent } from './components/post/post.component';
+import { NotFoundComponent } from './components/Not Found/not-found.component';
 
 @NgModule({
   imports: [
@@ -63,11 +64,12 @@ import { PostComponent } from './components/post/post.component';
     MatSidenavContent,
     MatButton,
     MatToolbar,
+    NotFoundComponent,
     PostComponent,
     SpinnerComponent,
     RouterModule
   ],
-  declarations: [ SpinnerComponent, PostComponent ],
+  declarations: [ SpinnerComponent, PostComponent, NotFoundComponent ],
   providers: [ ]
 })
 export class SharedModule {}

@@ -1,7 +1,12 @@
-<div>
-  <app-post
-    [post]="post$ | async"
-    [config]="config"
-  >
-  </app-post>
+<div *ngIf="post$ | async; let post">
+  <ng-container *ngIf="post.title && post.body">
+    <app-post
+      [post]="post"
+      [config]="config"
+    >
+    </app-post>
+  </ng-container>
+  <ng-container *ngIf="!post.title && !post.body">
+    <app-not-found [message]="'Please Select A Post'"></app-not-found>
+  </ng-container>
 </div>
