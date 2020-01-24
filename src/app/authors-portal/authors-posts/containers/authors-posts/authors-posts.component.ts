@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, from } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Post } from 'src/app/shared/models/post.interface';
@@ -84,12 +84,12 @@ export class AuthorsPostsComponent implements OnInit {
   }
 
   saveTitle(title: string, postId: number) {
-    const post: Partial<Post> = { title };
     this.selectedPostId = postId;
+
     if (this.selectedPostId) {
       this.store.dispatch(
-        new fromAuthorsPostsActions.EditPost({
-          post, postId: this.selectedPostId
+        new fromAuthorsPostsActions.EditPostTitle({
+          title, postId: this.selectedPostId
         }),
       );
     }

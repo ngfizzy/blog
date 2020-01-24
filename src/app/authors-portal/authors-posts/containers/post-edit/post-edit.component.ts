@@ -61,6 +61,13 @@ export class PostEditComponent implements OnInit, OnDestroy, AfterViewInit {
     }));
   }
 
+  private addPostToCategory(postId: number, category: string) {
+    this.store.dispatch(new fromAuthorsPostsActions.CategorizePost({
+      postId,
+      category,
+    }));
+  }
+
   /**
    * Wait for x milliseconds before saving
    *
@@ -74,9 +81,8 @@ export class PostEditComponent implements OnInit, OnDestroy, AfterViewInit {
       )),
       takeUntil(this.unsubscribe$)
     ).subscribe((postId) => {
-      const post: Partial<Post> = { body: this.postBody };
       return this.store.dispatch(
-        new fromAuthorsPostsActions.EditPost({ post, postId })
+        new fromAuthorsPostsActions.EditPostBody({ postId, body: this.postBody })
       );
     });
   }

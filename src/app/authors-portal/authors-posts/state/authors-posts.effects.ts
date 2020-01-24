@@ -73,15 +73,54 @@ export class AuthorsPostsEffects {
   );
 
   @Effect()
-  editPost$: Observable<Action> = this.actions$.pipe(
-    ofType(authorsPostsActions.AuthorsPostsActionTypes.EditPost),
-    map(action => (action as authorsPostsActions.EditPost).payload),
-    mergeMap(({ post, postId}) => this.postsService
-      .editPost(post, postId).pipe(
+  editPostTitle$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsPostsActions.AuthorsPostsActionTypes.EditPostTitle),
+    map(action => (action as authorsPostsActions.EditPostTitle).payload),
+    mergeMap(({ title, postId}) => this.postsService
+      .editPostTitle(title, postId).pipe(
         map((editingResult) =>
-          new authorsPostsActions.EditPostSuccess(editingResult)
+          new authorsPostsActions.EditPostTitleSuccess(editingResult)
         ),
       )
     )
+  );
+
+  @Effect()
+  editPostBody$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsPostsActions.AuthorsPostsActionTypes.EditPostBody),
+    map(action => (action as authorsPostsActions.EditPostBody).payload),
+    mergeMap(({ body, postId }) => this.postsService
+      .editPostBody(body, postId).pipe(
+        map((postEdit) => (
+          new authorsPostsActions.EditPostBodySuccess(postEdit)
+        )),
+      ),
+    ),
+  );
+
+  @Effect()
+  categorizePost$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsPostsActions.AuthorsPostsActionTypes.CategorizePost),
+    map(action => (action as authorsPostsActions.CategorizePost).payload),
+    mergeMap(({postId, category}) => this.postsService
+      .categorizePost(postId, category).pipe(
+        map((categorizationResult) =>
+          new authorsPostsActions.CategorizePostSuccess(categorizationResult)
+        )
+      ),
+    ),
+  );
+
+  @Effect()
+  removePostFromCategory$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsPostsActions.AuthorsPostsActionTypes.CategorizePost),
+    map(action => (action as authorsPostsActions.RemovePostFromCategory).payload),
+    mergeMap(({ postId, categoryId }) => this.postsService
+      .removePostFromCategory(postId, categoryId).pipe(
+        map((postEdit) => (
+          new authorsPostsActions.RemovePostFromCategorySuccess(postEdit)
+        )),
+      ),
+    ),
   );
 }

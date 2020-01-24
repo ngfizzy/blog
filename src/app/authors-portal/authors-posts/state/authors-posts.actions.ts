@@ -15,6 +15,14 @@ export const enum AuthorsPostsActionTypes {
   TagPostSuccess = '[Authors Posts] Tag Post Success',
   UntagPost = '[Authors Posts] Untag Post',
   UntagPostSuccess = '[Authors Posts] Untag Post Success',
+  EditPostTitle = '[Authors Posts] Edit Post Title',
+  EditPostTitleSuccess = '[Authors Posts] Edit Post Title Success',
+  EditPostBody = '[Authors Posts] Edit Post Body',
+  EditPostBodySuccess = '[Authors Posts] Edit Post Body Success',
+  CategorizePost = '[Authors Posts] Categorize Post',
+  CategorizePostSuccess = '[Authors Posts] Cateogrize Post Success',
+  RemovePostFromCategory = '[Authors Posts] Remove Post From Category',
+  RemovePostFromCategorySuccess = '[Authors Posts] Remove Post From Category Success',
 }
 
 export class GetPosts implements Action {
@@ -58,17 +66,28 @@ export class ChangePostStatus {
   constructor(public readonly payload: 'saving' | 'saved' | 'erred') {}
 }
 
-export class EditPost implements Action {
-  readonly type = AuthorsPostsActionTypes.EditPost;
-  constructor(public payload: { post: Partial<Post>, postId: number }) {}
+export class EditPostTitle implements Action {
+  readonly type = AuthorsPostsActionTypes.EditPostTitle;
+  constructor(public payload: { title: string, postId: number }) {}
 }
 
-export class EditPostSuccess implements Action {
-  readonly type = AuthorsPostsActionTypes.EditPostSuccess;
+export class EditPostTitleSuccess implements Action {
+  readonly type = AuthorsPostsActionTypes.EditPostTitleSuccess;
 
   constructor(public payload: { posts: Post[], selectedPost: Post }) {}
 }
 
+export class EditPostBody implements Action {
+  readonly type = AuthorsPostsActionTypes.EditPostBody;
+
+  constructor(public payload: { body: string, postId: number }) {}
+}
+
+export class EditPostBodySuccess implements Action {
+  readonly type = AuthorsPostsActionTypes.EditPostBodySuccess;
+
+  constructor(public payload: { posts: Post[], selectedPost: Post }) {}
+}
 export class TagPost implements Action {
   readonly type = AuthorsPostsActionTypes.TagPost;
 
@@ -93,16 +112,48 @@ export class UntagPostSuccess implements Action {
   constructor(public payload: { posts: Post[]; selectedPost: Post; }) {}
 }
 
+export class CategorizePost implements Action {
+  readonly type = AuthorsPostsActionTypes.CategorizePost;
+
+  constructor(public payload: { category: string; postId: number }) {}
+}
+
+export class CategorizePostSuccess implements Action {
+  readonly type = AuthorsPostsActionTypes.CategorizePostSuccess;
+
+  constructor(public payload: { posts: Post[]; selectedPost: Post; }) {}
+}
+
+export class RemovePostFromCategory implements Action {
+  readonly type = AuthorsPostsActionTypes.RemovePostFromCategory;
+
+  constructor(public payload: { categoryId: number; postId: number; }) {}
+}
+
+export class RemovePostFromCategorySuccess implements Action {
+  readonly type = AuthorsPostsActionTypes.RemovePostFromCategorySuccess;
+
+  constructor(public payload: { posts: Post[]; selectedPost: Post }) {}
+}
+
+
+
 export type AuthorsPostsActions = GetPosts
 | GetPostsSuccess
 | CreatePost
 | CreatePostSuccess
 | ChangePostStatus
-| EditPost
-| EditPostSuccess
+| EditPostTitle
+| EditPostTitleSuccess
+| EditPostBody
+| EditPostBodySuccess
 | ViewPost
 | ViewPostSuccess
 | TagPost
 | TagPostSuccess
 | UntagPost
-| UntagPostSuccess;
+| UntagPostSuccess
+| CategorizePost
+| CategorizePostSuccess
+| RemovePostFromCategory
+| RemovePostFromCategorySuccess;

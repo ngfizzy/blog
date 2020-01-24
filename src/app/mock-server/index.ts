@@ -1,9 +1,11 @@
-import { Tag, Post } from '../shared/models';
+import { Tag, Post, Category } from '../shared/models';
 
 const usedIds = [];
 
 const tags: Tag[] = [];
 const posts: Post[] = [];
+const categories: Category[] = [];
+
 
 function randomId() {
   let randomNumber = Math.floor(Math.random() * 1000);
@@ -58,7 +60,24 @@ function createTag(tagName: string): Tag {
   };
 }
 
+function createCategory(name: string): Category {
+  const createdAt = new Date().toString();
+  const category = {
+    name,
+    createdAt,
+    id: randomId(),
+    updatedAt: createdAt,
+  };
+
+  categories.push(category);
+
+  return category;
+}
+
 export function generatePosts(length: number) {
+  if (posts.length) {
+    return posts;
+  }
   while (length > 0) {
     posts.push(generatePost());
     --length;
@@ -85,12 +104,61 @@ export function tagPost(tagName: string, postId: number): Post {
   return post;
 }
 
+export function editPostTitle(postId: number, title: string) {
+  const post = posts.find(p => p.id === postId);
+
+  if (post) {
+    post.title = title;
+  }
+
+  return post;
+}
+
+export function editPostBody(postId: number, body: string): Post {
+  const post = posts.find(p => p.id === postId);
+
+  if (post) {
+    post.body = body;
+  }
+
+  return post;
+}
+
 export function untagPost(tagId: number, postId: number): Post {
   const post = posts.find(p => p.id === postId);
 
   if (post) {
     const filtered = post.tags.filter(tag => tag.id !== tagId);
     post.tags = filtered;
+    post.updatedAt = new Date().toString();
+  }
+
+  return post;
+}
+
+export function categorizePost(postId: number, categoryName: string) {
+  let category = categories.find(c => c.name === categoryName);
+
+  if (!category) {
+    category = createCategory(categoryName);
+  }
+
+  const post = posts.find(p => p.id === postId);
+
+  if (post) {
+    post.categories.push(category);
+  }
+
+  return post;
+}
+
+export function removePostFromCategory(postId: number, categoryId: number) {
+  const post = posts.find(p => p.id === postId);
+
+  if (post) {
+    const filtered = post.categories.filter(c => c.id !== categoryId);
+
+    post.categories = filtered;
   }
 
   return post;

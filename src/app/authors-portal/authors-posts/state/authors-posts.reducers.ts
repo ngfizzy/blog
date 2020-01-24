@@ -60,7 +60,8 @@ export function authorsPostsReducers(
             status: 'saved'
           }
         };
-      case AuthorsPostsActionTypes.EditPost:
+      case AuthorsPostsActionTypes.EditPostTitle:
+      case AuthorsPostsActionTypes.EditPostBody:
         return {
           ...state,
           selectedPost: {
@@ -69,11 +70,23 @@ export function authorsPostsReducers(
             status: 'saving',
           },
         };
-      case AuthorsPostsActionTypes.EditPostSuccess:
+      case AuthorsPostsActionTypes.EditPostTitleSuccess:
         return {
           ...state,
           posts: [ ...action.payload.posts ],
           selectedPost: {
+            ...state.selectedPost,
+            post: { ...action.payload.selectedPost },
+            isLoading: false,
+            status: 'saved',
+          }
+        };
+      case AuthorsPostsActionTypes.EditPostBodySuccess:
+        return {
+          ...state,
+          posts: [ ...action.payload.posts ],
+          selectedPost: {
+            ...state.selectedPost,
             post: { ...action.payload.selectedPost },
             isLoading: false,
             status: 'saved',
@@ -88,6 +101,7 @@ export function authorsPostsReducers(
           }
         };
       case AuthorsPostsActionTypes.TagPost:
+        return state;
       case AuthorsPostsActionTypes.UntagPost:
         return state;
       case AuthorsPostsActionTypes.TagPostSuccess:
@@ -97,7 +111,26 @@ export function authorsPostsReducers(
           posts: [ ...action.payload.posts ],
           selectedPost: {
             ...state.selectedPost,
-            post: { ...action.payload.selectedPost }
+            post: {
+              ...action.payload.selectedPost,
+              tags: [ ...action.payload.selectedPost.tags ]
+            }
+          },
+        };
+      case AuthorsPostsActionTypes.CategorizePost:
+        return state;
+      case AuthorsPostsActionTypes.RemovePostFromCategory:
+        return state;
+      case AuthorsPostsActionTypes.CategorizePostSuccess:
+        return {
+          ...state,
+          posts: [ ...action.payload.posts ],
+          selectedPost: {
+              ...state.selectedPost,
+            post: {
+              ...action.payload.selectedPost,
+              tags: [ ...action.payload.selectedPost.categories ]
+            }
           },
         };
       default:

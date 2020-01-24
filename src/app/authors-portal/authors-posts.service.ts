@@ -5,9 +5,16 @@ import {  map, mergeMap, take } from 'rxjs/operators';
 
 import { PostsService } from 'src/app/core/posts.service';
 import { Post } from 'src/app/shared/models/post.interface';
-import { generatePosts, tagPost, untagPost } from '../mock-server';
+import { generatePosts, tagPost, untagPost, categorizePost, removePostFromCategory, editPostBody, editPostTitle } from '../mock-server';
 import * as fromAuthorsPostsState from './authors-posts/state';
-import { Tag } from '../shared/models';
+import { UnknownObjectPath } from '../shared/Exceptions';
+
+const enum EditablePostPaths {
+  Title = 'title',
+  Body = 'body',
+  Tags = 'tags',
+  Categories = 'categories'
+}
 
 @Injectable()
 export class AuthorsPostsService {
@@ -32,63 +39,70 @@ export class AuthorsPostsService {
     return of(createdPost);
   }
 
-  editPost(post: Partial<Post>, postId: number):
+  editPostTitle(title: string, postId: number):
     Observable<{ posts: Post[]; selectedPost: Post }> {
-     return this.pluckPostFromStore(postId).pipe(
-        map((pluckResult) => {
-          const { posts, plucked } = pluckResult;
+      return this.editPostPath(postId, EditablePostPaths.Title, title);
+  }
 
-          if (!plucked) {
-            return { posts, selectedPost: post as Post };
-          }
-
-          plucked.title =  post.title ? post.title : plucked.title;
-          plucked.body = post.body ? post.body : plucked.body;
-          plucked.updatedAt = new Date().toString();
-
-
-          posts.unshift(plucked);
-
-          return { posts, selectedPost: plucked };
-        }),
-      );
+  editPostBody(body: string, postId: number) {
+   return this.editPostPath(postId, EditablePostPaths.Body, body);
   }
 
   tagPost(tag: string, postId: number) {
-    return this.pluckPostFromStore(postId).pipe(
-      map((pluckResult) => {
-        const {posts, plucked} = pluckResult;
-
-        if (!plucked) {
-          return { posts, selectedPost: plucked};
-        }
-        const { tags } = tagPost(tag, postId);
-        plucked.tags = tags;
-        posts.unshift(plucked);
-
-        return { posts, selectedPost: plucked };
-      })
-    );
+    return this.editPostPath(postId, EditablePostPaths.Tags, tag);
   }
 
   untagPost(tagId: number, postId: number) {
+    return this.editPostPath(postId, EditablePostPaths.Tags, tagId);
+  }
 
+  categorizePost(postId: number, categoryName: string) {
+    return this.editPostPath(postId, EditablePostPaths.Categories, categoryName);
+  }
+
+  removePostFromCategory(postId: number, categoryId: number) {
+    return this.editPostPath(postId, EditablePostPaths.Categories, categoryId);
+  }
+
+  private editPostPath(postId: number, path: EditablePostPaths, newPathValue: any) {
     return this.pluckPostFromStore(postId).pipe(
       map((pluckResult) => {
-        const {posts, plucked} = pluckResult;
+        const { posts , plucked} = pluckResult;
+        let post = plucked;
 
-        if (!plucked) {
+        if (!post) {
           return { posts, selectedPost: plucked };
         }
 
-        const { tags } = untagPost(tagId, postId);
-        plucked.tags = tags;
+        switch (path) {
+          case EditablePostPaths.Body:
+            post = editPostBody(postId, newPathValue);
+            break;
+          case EditablePostPaths.Title:
+            post = editPostTitle(postId, newPathValue);
+            break;
+          case EditablePostPaths.Tags:
+            post = typeof(newPathValue) === 'string' ?
+              tagPost(newPathValue, postId) : untagPost(newPathValue, postId);
+            break;
+          case EditablePostPaths.Categories:
+            post = typeof(newPathValue) === 'string' ?
+              categorizePost(postId, newPathValue) : removePostFromCategory(postId, newPathValue);
+            break;
+          default:
+            const message = `Cannot update property ${path} because it doesnt exist`;
+            throw new UnknownObjectPath(path, message);
+
+        }
+
+
         posts.unshift(plucked);
 
         return { posts, selectedPost: plucked };
       }),
     );
   }
+
 
   getAllPosts() {
     return of(generatePosts(50));
@@ -122,7 +136,6 @@ export class AuthorsPostsService {
     return this.getPostsFromStore().pipe(
       map((posts) => {
         const plucked = this.pluckPost(postId, posts);
-
         return { posts, plucked };
       }),
     );
