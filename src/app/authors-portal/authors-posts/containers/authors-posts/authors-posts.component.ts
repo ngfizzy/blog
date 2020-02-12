@@ -70,7 +70,6 @@ export class AuthorsPostsComponent implements OnInit {
 
   search() {}
 
-
   getPostsConfig() {
     return  {
       isActive: false,
@@ -93,6 +92,9 @@ export class AuthorsPostsComponent implements OnInit {
         }),
       );
     }
+  }
 
+  gotoPublishPage(postId: number) {
+    this.router.navigate(['authors/posts', postId, 'publish']);
   }
 }

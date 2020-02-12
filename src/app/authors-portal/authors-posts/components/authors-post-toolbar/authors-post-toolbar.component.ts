@@ -17,6 +17,7 @@ export class AuthorsPostToolbarComponent implements OnInit {
 
   @Output() editTitle = new EventEmitter<boolean>();
   @Output() saveTitle = new EventEmitter<string>();
+  @Output() gotoPublish = new EventEmitter<number>();
 
   ngOnInit() {}
 
@@ -30,5 +31,9 @@ export class AuthorsPostToolbarComponent implements OnInit {
     this.saveTitle.emit(title);
 
     this.toggleEditingTitleMode();
+  }
+
+  gotoPublishPage(postId: number) {
+    this.gotoPublish.emit(postId);
   }
 }

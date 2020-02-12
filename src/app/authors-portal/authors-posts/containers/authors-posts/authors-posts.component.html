@@ -55,6 +55,7 @@
       [selectedPostId]="selectedPost.id"
       (editTitle)="isEditingTitle = $event"
       (saveTitle)="saveTitle($event, selectedPost.id)"
+      (gotoPublish)="gotoPublishPage($event)"
     >
     </app-authors-posts-toolbar>
     <div class="sidenav-outlet">
