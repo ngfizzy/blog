@@ -6,7 +6,7 @@ import { State, Store, select } from '@ngrx/store';
 import * as fromAuthorsPosts from '../../state';
 import * as fromAuthorsPostsActions from '../../state/authors-posts.actions';
 import { Observable } from 'rxjs';
-import { Post } from 'src/app/shared/models';
+import { Post, Tag } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-authors-publish',
@@ -14,8 +14,9 @@ import { Post } from 'src/app/shared/models';
   styleUrls: [ './authors-publish.component.scss' ],
 })
 export class AuthorsPublishComponent implements OnInit {
-  postId: number;
+  isEditingPostTitle: boolean;
   post$: Observable<Post>;
+
   constructor(
     private route: ActivatedRoute,
     private  store: Store<fromAuthorsPosts.AuthorsPostsState>
@@ -32,4 +33,11 @@ export class AuthorsPublishComponent implements OnInit {
     );
   }
 
+  addTag(tag: string, postId: number) {
+    this.store.dispatch(new fromAuthorsPostsActions.TagPost({ tag, postId}));
+  }
+
+  removeTag(tagId: number, postId: number) {
+    this.store.dispatch(new fromAuthorsPostsActions.UntagPost({tagId, postId}));
+  }
 }

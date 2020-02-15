@@ -1,3 +1,8 @@
-<div>
-  {{post$ | async | json}}
+<div class="w-75 ml-auto mr-auto" *ngIf="post$ | async; let post">
+  <app-authors-tags-panel
+    [tags]="post.tags"
+    (add)="addTag($event, post.id)"
+    (remove)="removeTag($event, post.id)"
+  >
+  </app-authors-tags-panel>
 </div>
