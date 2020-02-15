@@ -12,6 +12,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthorsPostsListComponent } from './components/authors-posts-list/authors-posts-list.component';
 import { AuthorsTagComponent } from './components/authors-tag/authors-tag.component';
 import { AuthorsTagsPanelComponent } from './components/authors-tags-panel/authors-tags-panel.component';
+import { AuthorsPostTitleComponent } from './components/authors-post-title/authors-post-title.component';
 
 @NgModule({
   imports: [
@@ -22,8 +23,10 @@ import { AuthorsTagsPanelComponent } from './components/authors-tags-panel/autho
     EffectsModule.forFeature([ AuthorsPostsEffects ])
   ],
   declarations: [
+    AuthorsPostTitleComponent,
     AuthorsPostToolbarComponent,
     AuthorsPostListToolbarComponent,
+    AuthorsPostTitleComponent,
     AuthorsPostsListComponent,
     AuthorsTagComponent,
     AuthorsTagsPanelComponent,

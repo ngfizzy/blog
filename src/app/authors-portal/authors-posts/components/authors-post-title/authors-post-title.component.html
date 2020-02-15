@@ -1,0 +1,32 @@
+<form class="
+d-flex
+justify-content-center
+text-center
+center
+mw-50"
+#postTitleForm
+(ngSubmit)="saveTitle(postTitleForm.postTitle.value)"
+>
+  <span class="post-title" *ngIf="!isEditing">{{ title }}</span>
+  <input
+    name="postTitle"
+    class="mb-auto mt-auto d-inline-flex title-input"
+    type="text"
+    *ngIf="isEditing"
+    [ngModel]="title"
+  >
+  <button
+    *ngIf="!isEditing"
+    title="edit title" class="btn"
+    (click)="toggleEditingState()"
+  >
+    <i class="fa fa-edit text-primary"></i>
+  </button>
+  <button
+    *ngIf="isEditing"
+    title="save" class="btn"
+    type="submit"
+  >
+  <i class="fa fa-check text-primary"></i>
+</button>
+</form>

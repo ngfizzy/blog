@@ -21,40 +21,14 @@
       </ng-container>
       <!-- <i class="fa fa-exclamation-triangle font-xxs text-waring"></i> -->
     </div>
-    <form class="
-      d-flex
-      justify-content-center
-      mr-auto
-      ml-auto
-      text-center
-      center
-      mw-50"
-      #postTitleForm
-      (ngSubmit)="onSaveTitle(postTitleForm.postTitle.value)"
+    <app-authors-post-title
+      [title]="selectedPostTitle"
+      [isEditing]="isEditingTitle"
+      (edit)="toggleEditingTitleMode()"
+      (save)="onSaveTitle($event)"
+      class="ml-auto mr-auto"
     >
-      <span class="post-title" *ngIf="!isEditingTitle">{{ selectedPostTitle }}</span>
-      <input
-        name="postTitle"
-        class="mb-auto mt-auto d-inline-flex title-input"
-        type="text"
-        *ngIf="isEditingTitle"
-        [ngModel]="selectedPostTitle"
-      >
-      <button
-        *ngIf="!isEditingTitle"
-        title="edit title" class="btn"
-        (click)="toggleEditingTitleMode()"
-      >
-        <i class="fa fa-edit text-primary"></i>
-      </button>
-      <button
-        *ngIf="isEditingTitle"
-        title="save" class="btn"
-        type="submit"
-      >
-        <i class="fa fa-check text-primary"></i>
-      </button>
-    </form>
+    </app-authors-post-title>
     <div class="controls ml-auto mw-25 text-center">
       <span title="edit">
         <a [routerLink]="['edit', selectedPostId]">
