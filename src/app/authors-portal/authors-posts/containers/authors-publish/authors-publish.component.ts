@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, Route, ActivatedRoute } from '@angular/router';
+import { map, tap, switchMap, mergeMap, flatMap } from 'rxjs/operators';
+import { State, Store, select } from '@ngrx/store';
+
+import * as fromAuthorsPosts from '../../state';
+import * as fromAuthorsPostsActions from '../../state/authors-posts.actions';
+import { Observable } from 'rxjs';
+import { Post } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-authors-publish',
@@ -6,7 +14,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: [ './authors-publish.component.scss' ],
 })
 export class AuthorsPublishComponent implements OnInit {
-  constructor() { }
+  postId: number;
+  post$: Observable<Post>;
+  constructor(
+    private route: ActivatedRoute,
+    private  store: Store<fromAuthorsPosts.AuthorsPostsState>
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.post$ = this.route.paramMap.pipe(
+      tap(paramsMap =>
+        this.store.dispatch(
+          new fromAuthorsPostsActions.ViewPost(+paramsMap.get('id'))
+        ),
+      ),
+      flatMap(() => this.store.pipe(select(fromAuthorsPosts.viewPost)))
+    );
+  }
+
 }
