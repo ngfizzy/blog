@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, Route, ActivatedRoute } from '@angular/router';
-import { map, tap, switchMap, mergeMap, flatMap } from 'rxjs/operators';
-import { State, Store, select } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
+import { tap, flatMap } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
 
 import * as fromAuthorsPosts from '../../state';
 import * as fromAuthorsPostsActions from '../../state/authors-posts.actions';
 import { Observable } from 'rxjs';
-import { Post, Tag } from 'src/app/shared/models';
+import { Post } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-authors-publish',
@@ -15,6 +15,7 @@ import { Post, Tag } from 'src/app/shared/models';
 })
 export class AuthorsPublishComponent implements OnInit {
   isEditingPostTitle: boolean;
+  category: string;
   post$: Observable<Post>;
 
   constructor(
@@ -39,5 +40,9 @@ export class AuthorsPublishComponent implements OnInit {
 
   removeTag(tagId: number, postId: number) {
     this.store.dispatch(new fromAuthorsPostsActions.UntagPost({tagId, postId}));
+  }
+
+  addToCategory(category: string, postId: number) {
+    this.store.dispatch(new fromAuthorsPostsActions.CategorizePost({ category, postId}));
   }
 }

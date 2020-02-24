@@ -1,8 +1,20 @@
 <div class="w-75 ml-auto mr-auto" *ngIf="post$ | async; let post">
+  <h3 class="text-center text-light">Tags</h3>
   <app-authors-tags-panel
     [tags]="post.tags"
     (add)="addTag($event, post.id)"
     (remove)="removeTag($event, post.id)"
   >
   </app-authors-tags-panel>
+
+  <h3 class="text-light text-center">Category</h3>
+  <form *ngIf="post.categories.length == 0" (ngSubmit)="addToCategory(category, post.id)">
+    <input type="text" name="category" placeholder="category" [(ngModel)]="category">
+    <button type="submit">Add To Category</button>
+  </form>
+
+  <h5 *ngFor="let categoryName of post.categories">{{ categoryName.name }}</h5>
+
+  <h3 class="text-center text-light">Publish</h3>
+
 </div>

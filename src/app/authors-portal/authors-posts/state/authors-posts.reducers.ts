@@ -129,7 +129,7 @@ export function authorsPostsReducers(
               ...state.selectedPost,
             post: {
               ...action.payload.selectedPost,
-              tags: [ ...action.payload.selectedPost.categories ]
+              categories: [ ...action.payload.selectedPost.categories ]
             }
           },
         };
