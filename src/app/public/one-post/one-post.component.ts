@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap, switchMap } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import * as fromPublic from '../state';
@@ -28,14 +28,15 @@ export class OnePostComponent implements OnInit, OnDestroy {
     private store: Store<fromPublic.PublicState>) {}
 
   ngOnInit() {
-    this.store.dispatch(new fromPublicActions.GetOnePost(1));
-    this.router.params.pipe(
+    this.post$ = this.router.params.pipe(
       takeUntil(this.destroy$),
-    ).subscribe((params) => {
-      this.post$ = this.store.pipe(
-        select(fromPublic.selectPost)
-      );
-    });
+      tap(params => this.store.dispatch(
+        new fromPublicActions.GetOnePost(+params.postId))
+      ),
+      switchMap(() => this.store.pipe(
+        select(fromPublic.selectPost),
+      ))
+    );
   }
 
   ngOnDestroy() {

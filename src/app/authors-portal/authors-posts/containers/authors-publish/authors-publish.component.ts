@@ -45,4 +45,9 @@ export class AuthorsPublishComponent implements OnInit {
   addToCategory(category: string, postId: number) {
     this.store.dispatch(new fromAuthorsPostsActions.CategorizePost({ category, postId}));
   }
+
+  togglePublished(postId: number) {
+
+    this.store.dispatch(new fromAuthorsPostsActions.TogglePublished({ postId}));
+  }
 }

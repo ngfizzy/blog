@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
-import { mergeMap, map } from 'rxjs/operators';
+import { mergeMap, map, switchMap } from 'rxjs/operators';
 
 import { AuthorsPostsService } from '../../authors-posts.service';
 import * as authorsPostsActions from './authors-posts.actions';
@@ -119,6 +119,19 @@ export class AuthorsPostsEffects {
       .removePostFromCategory(postId, categoryId).pipe(
         map((postEdit) => (
           new authorsPostsActions.RemovePostFromCategorySuccess(postEdit)
+        )),
+      ),
+    ),
+  );
+
+  @Effect()
+  publish$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsPostsActions.AuthorsPostsActionTypes.TogglePublished),
+    map(action => (action as authorsPostsActions.TogglePublished).payload),
+    switchMap(({ postId }) => this.postsService
+      .togglePostPublishedState(postId).pipe(
+        map((postEdit) => (
+          new authorsPostsActions.TogglePublishedSuccess(postEdit)
         )),
       ),
     ),

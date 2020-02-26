@@ -23,6 +23,8 @@ export const enum AuthorsPostsActionTypes {
   CategorizePostSuccess = '[Authors Posts] Cateogrize Post Success',
   RemovePostFromCategory = '[Authors Posts] Remove Post From Category',
   RemovePostFromCategorySuccess = '[Authors Posts] Remove Post From Category Success',
+  TogglePublished = '[Authors Posts] Toggle Published',
+  TogglePublishedSuccess = '[Authors Posts] Toggle Published Success',
 }
 
 export class GetPosts implements Action {
@@ -136,7 +138,17 @@ export class RemovePostFromCategorySuccess implements Action {
   constructor(public payload: { posts: Post[]; selectedPost: Post }) {}
 }
 
+export class TogglePublished implements Action {
+  readonly type = AuthorsPostsActionTypes.TogglePublished;
 
+  constructor(public payload: { postId: number }) {}
+}
+
+export class TogglePublishedSuccess implements Action {
+  readonly type = AuthorsPostsActionTypes.TogglePublishedSuccess;
+
+  constructor(public payload: { posts: Post[]; selectedPost: Post }) {}
+}
 
 export type AuthorsPostsActions = GetPosts
 | GetPostsSuccess
@@ -156,4 +168,6 @@ export type AuthorsPostsActions = GetPosts
 | CategorizePost
 | CategorizePostSuccess
 | RemovePostFromCategory
-| RemovePostFromCategorySuccess;
+| RemovePostFromCategorySuccess
+| TogglePublished
+| TogglePublishedSuccess;

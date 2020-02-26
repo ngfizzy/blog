@@ -6,6 +6,7 @@ import { OnePostComponent } from './one-post.component';
 const routes: Routes =  [
   {
     path: '',
+    pathMatch: 'full',
     component: OnePostComponent,
   },
 ];

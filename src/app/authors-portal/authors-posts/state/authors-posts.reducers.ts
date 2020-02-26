@@ -133,7 +133,19 @@ export function authorsPostsReducers(
             }
           },
         };
+      case AuthorsPostsActionTypes.TogglePublished:
+        return state;
+      case AuthorsPostsActionTypes.TogglePublishedSuccess:
+        return {
+          ...state,
+          posts: [ ...action.payload.posts ],
+          selectedPost: {
+            ...state.selectedPost,
+            post: { ...action.payload.selectedPost },
+          },
+        };
       default:
+
         return state;
     }
 }

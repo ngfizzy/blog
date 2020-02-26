@@ -28,12 +28,12 @@ export class PublicEffects {
   @Effect()
   getOnePost$: Observable<Action> = this.actions$.pipe(
     ofType(publicActions.PublicActionTypes.GetOnePost),
+    map(action => (action as publicActions.GetOnePost).payload),
     mergeMap((postId) => this.postsService.getOne(postId)
       .pipe(
         map((post) => new publicActions.GetOnePostSuccess(post)),
         catchError((error) => of(new publicActions.GetOnePostFailure(error.message)))
-      )
-
-    )
+      ),
+    ),
   );
 }

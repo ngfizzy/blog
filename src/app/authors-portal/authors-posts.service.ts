@@ -5,7 +5,14 @@ import {  map, mergeMap, take } from 'rxjs/operators';
 
 import { PostsService } from 'src/app/core/posts.service';
 import { Post } from 'src/app/shared/models/post.interface';
-import { generatePosts, tagPost, untagPost, categorizePost, removePostFromCategory, editPostBody, editPostTitle } from '../mock-server';
+import {
+  generatePosts,
+  tagPost,
+  untagPost,
+  categorizePost,
+  removePostFromCategory, editPostBody, editPostTitle,
+  togglePostPublishedState
+ } from '../mock-server';
 import * as fromAuthorsPostsState from './authors-posts/state';
 import { UnknownObjectPath } from '../shared/Exceptions';
 
@@ -13,7 +20,8 @@ const enum EditablePostPaths {
   Title = 'title',
   Body = 'body',
   Tags = 'tags',
-  Categories = 'categories'
+  Categories = 'categories',
+  Published = 'published'
 }
 
 @Injectable()
@@ -64,6 +72,10 @@ export class AuthorsPostsService {
     return this.editPostPath(postId, EditablePostPaths.Categories, categoryId);
   }
 
+  togglePostPublishedState(postId: number) {
+    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+    return this.editPostPath(postId, EditablePostPaths.Published, null);
+  }
   private editPostPath(postId: number, path: EditablePostPaths, newPathValue: any) {
     return this.pluckPostFromStore(postId).pipe(
       map((pluckResult) => {
@@ -89,6 +101,9 @@ export class AuthorsPostsService {
             post = typeof(newPathValue) === 'string' ?
               categorizePost(postId, newPathValue) : removePostFromCategory(postId, newPathValue);
             break;
+          case EditablePostPaths.Published:
+              post = togglePostPublishedState(postId);
+              break;
           default:
             const message = `Cannot update property ${path} because it doesnt exist`;
             throw new UnknownObjectPath(path, message);
@@ -140,4 +155,5 @@ export class AuthorsPostsService {
       }),
     );
   }
+
 }

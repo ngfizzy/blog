@@ -163,3 +163,17 @@ export function removePostFromCategory(postId: number, categoryId: number) {
 
   return post;
 }
+
+export function togglePostPublishedState(postId: number) {
+  const post = posts.find(p => p.id === postId);
+
+  if (post) {
+    post.published = !post.published;
+  }
+
+  return post;
+}
+
+export function getAllPosts() {
+  return posts;
+}

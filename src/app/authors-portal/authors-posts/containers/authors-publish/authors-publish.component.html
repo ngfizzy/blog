@@ -1,20 +1,42 @@
-<div class="w-75 ml-auto mr-auto" *ngIf="post$ | async; let post">
-  <h3 class="text-center text-light">Tags</h3>
-  <app-authors-tags-panel
-    [tags]="post.tags"
-    (add)="addTag($event, post.id)"
-    (remove)="removeTag($event, post.id)"
-  >
-  </app-authors-tags-panel>
+<ng-container *ngIf="post$ | async; let post">
+  <div class="w-100 ml-auto mt-2 mr-auto mat-elevation-z2 p-2" *ngIf="!post.published; else published">
+    <div class="row p-2">
+      <h3 class="text-light col-2 pt-1 ">Tags:</h3>
+      <span class="col-10">
+        <app-authors-tags-panel
+        [tags]="post.tags"
+        (add)="addTag($event, post.id)"
+        (remove)="removeTag($event, post.id)"
+        ></app-authors-tags-panel>
+      </span>
+   </div>
 
-  <h3 class="text-light text-center">Category</h3>
-  <form *ngIf="post.categories.length == 0" (ngSubmit)="addToCategory(category, post.id)">
-    <input type="text" name="category" placeholder="category" [(ngModel)]="category">
-    <button type="submit">Add To Category</button>
-  </form>
+   <div class="row p-2">
+    <h4 class="text-light col-1">Category</h4>
+    <div class="col-10 ml-auto w-75">
+      <form *ngIf="post.categories.length == 0" (ngSubmit)="addToCategory(category, post.id)" >
+        <input type="text" name="category" placeholder="category" [(ngModel)]="category">
+        <button type="submit">Add To Category</button>
+      </form>
 
-  <h5 *ngFor="let categoryName of post.categories">{{ categoryName.name }}</h5>
+      <h5 *ngFor="let categoryName of post.categories" class="text-light text-center">{{ categoryName.name }}</h5>
+    </div>
+  </div>
 
-  <h3 class="text-center text-light">Publish</h3>
-
+  <div title="publish text-center col-10 border border-primary">
+    <button class="btn btn-primary btn-sm text-center w-50 ml-auto d-block mr-auto w-25" (click)="togglePublished(post.id)">
+      Publish
+      <i class="fa fa-arrow-circle-up"></i>
+    </button>
+  </div>
 </div>
+
+<ng-template #published>
+  <div class="w-75 ml-auto mr-auto text-center text-light">
+    <h2>Article Published Successfully</h2>
+    <a [routerLink]="['/public/posts', post.id ]" class="btn btn-primary">View Post</a>
+    <a [routerLink]="['/authors/posts', post.id]" class="btn btn-link">Go to Posts List</a>
+  </div>
+</ng-template>
+
+</ng-container>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { Post } from '../shared/models/post.interface';
-import { generatePosts } from '../mock-server';
+import { generatePosts,  getAllPosts } from '../mock-server';
 
   // tslint:disable:max-line-length
 
@@ -10,7 +10,10 @@ export class PostsService {
   posts: Post[];
 
   constructor() {
-    this.posts = generatePosts(50);
+    this.posts = getAllPosts();
+    if (!this.posts.length) {
+      this.posts = generatePosts(50);
+    }
   }
 
   getAll(): Observable<Post[]> {
