@@ -73,7 +73,6 @@ export class AuthorsPostsService {
   }
 
   togglePostPublishedState(postId: number) {
-    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
     return this.editPostPath(postId, EditablePostPaths.Published, null);
   }
   private editPostPath(postId: number, path: EditablePostPaths, newPathValue: any) {
