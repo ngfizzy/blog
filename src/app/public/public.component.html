@@ -1,16 +1,25 @@
-<app-nav></app-nav>
-
-<div class="fixed-top w-25 author-info">
-  <mat-card class="mat-elevation-z8 author-card">
-    <mat-card-title-group>
-      <mat-card-title class="author-title">{{ aboutAuthor.name }}</mat-card-title>
-      <mat-card-subtitle class="author-subtitle text-muted">{{ aboutAuthor.profession }}</mat-card-subtitle>
-      <img src="http://www.ngfizzy.com/images/home-img.jpg" mat-card-md-image>
-    </mat-card-title-group>
-    <mat-card-content class="author-description" [innerHtml]="aboutAuthor.description">
-    </mat-card-content>
-  </mat-card>
-</div>
-<div class="public">
-  <router-outlet></router-outlet>
-</div>
+<mat-sidenav-container class="bg-sidenav-container">
+  <mat-sidenav class="bg-sidenav mat-elevation-z5 w-25 position-fixed" mode="side" opened>
+    <a href="/">
+      <div class="border-bottom">
+        <img src="assets/avatar.jpg" alt="author avatar" width="232">
+      </div>
+    </a>
+    <nav>
+      <mat-nav-list  class="color-main">
+        <a routerLink="../../about">
+        </a>
+        <mat-list-item class="border-bottom">All</mat-list-item>
+        <mat-list-item class="border-bottom">Tech</mat-list-item>
+        <mat-list-item class="border-bottom">Poetry</mat-list-item>
+        <mat-list-item class="border-bottom">Self Help</mat-list-item>
+        <mat-list-item class="border-bottom">About</mat-list-item>
+      </mat-nav-list>
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="sidenav-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
