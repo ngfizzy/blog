@@ -77,7 +77,7 @@ export class ArticleEditComponent implements OnInit, OnDestroy, AfterViewInit {
     fromEvent(this.editor.nativeElement, 'keyup').pipe(
       debounceTime(time),
       switchMap(() => this.route.params.pipe(
-        map((params) => this.articleId = params.id)
+        map((params) => this.articleId = +params.id)
       )),
       takeUntil(this.unsubscribe$)
     ).subscribe((articleId) => {

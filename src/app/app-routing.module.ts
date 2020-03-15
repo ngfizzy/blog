@@ -14,6 +14,10 @@ const routes: Routes = [
     loadChildren: () => import('./articles/articles.module').then(mod => mod.ArticlesModule)
   },
   {
+    path: 'poetry',
+    loadChildren: () => import('./poetry/poetry.module').then(mod => mod.PoetryModule)
+  },
+  {
     path: 'authors',
     loadChildren: () => import('./authors-portal/authors-portal.module')
       .then(mod => mod.AuthorsPortal),
@@ -26,7 +30,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {
   static readonly routeComponents = [ AboutComponent ];

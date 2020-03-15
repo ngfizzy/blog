@@ -53,7 +53,7 @@ export class AuthorsArticlesService {
   }
 
   editArticleBody(body: string, articleId: number) {
-   return this.editArticlePath(articleId, EditableArticlePaths.Body, body);
+    return this.editArticlePath(articleId, EditableArticlePaths.Body, body);
   }
 
   tagArticle(tag: string, articleId: number) {

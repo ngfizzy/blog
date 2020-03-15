@@ -1,0 +1,27 @@
+<div class="collapsed-nav bg-sidenav" *ngIf="!isOpen">
+  <button class="btn btn-sm" title="Expand Navbar" (click)="toggleMe()">
+    <i class="fa fa-arrow-right text-white"></i>
+  </button>
+</div>
+<mat-sidenav-container class="bg-sidenav-container" >
+  <mat-sidenav (closedStart)="toggleMe()" class="bg-sidenav mat-elevation-z5 w-25 position-fixed" ngClass="{ collapsed: !isOpen }" #sidenav [mode]="mode" [opened]="isOpen">
+    <a href="/">
+      <div class="border-bottom">
+        <img [src]="nav.iconUrl" alt="author avatar" width="232">
+      </div>
+    </a>
+    <nav>
+      <mat-nav-list  class="color-main">
+        <ng-container *ngFor="let item of nav.items">
+          <a [routerLink]="item.path"></a>
+          <mat-list-item class="border-bottom">{{ item.name }}</mat-list-item>
+        </ng-container>
+      </mat-nav-list>
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="sidenav-content">
+     <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

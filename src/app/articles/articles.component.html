@@ -1,25 +1,2 @@
-<mat-sidenav-container class="bg-sidenav-container">
-  <mat-sidenav class="bg-sidenav mat-elevation-z5 w-25 position-fixed" mode="side" opened>
-    <a href="/">
-      <div class="border-bottom">
-        <img src="assets/avatar.jpg" alt="author avatar" width="232">
-      </div>
-    </a>
-    <nav>
-      <mat-nav-list  class="color-main">
-        <a routerLink="../../about">
-        </a>
-        <mat-list-item class="border-bottom">All</mat-list-item>
-        <mat-list-item class="border-bottom">Tech</mat-list-item>
-        <mat-list-item class="border-bottom">Poetry</mat-list-item>
-        <mat-list-item class="border-bottom">Self Help</mat-list-item>
-        <mat-list-item class="border-bottom">About</mat-list-item>
-      </mat-nav-list>
-    </nav>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div class="sidenav-content">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+
+<app-side-nav [isOpen]="'true'" [nav]="nav" [mode]="sideNavMode"></app-side-nav>

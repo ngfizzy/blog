@@ -27,6 +27,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 
 import { ArticleComponent } from './components/article/article.component';
 import { NotFoundComponent } from './components/Not Found/not-found.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 @NgModule({
   imports: [
@@ -41,6 +42,8 @@ import { NotFoundComponent } from './components/Not Found/not-found.component';
     MatButtonModule,
     MatToolbarModule,
     RouterModule,
+    MatSidenavModule,
+    MatListModule,
     MarkdownModule.forChild(),
   ],
   exports: [
@@ -64,12 +67,18 @@ import { NotFoundComponent } from './components/Not Found/not-found.component';
     MatSidenavContent,
     MatButton,
     MatToolbar,
+    SideNavComponent,
     NotFoundComponent,
     ArticleComponent,
     SpinnerComponent,
     RouterModule
   ],
-  declarations: [ SpinnerComponent, ArticleComponent, NotFoundComponent ],
+  declarations: [
+    SpinnerComponent,
+    ArticleComponent,
+    NotFoundComponent,
+    SideNavComponent,
+  ],
   providers: [ ]
 })
 export class SharedModule {}

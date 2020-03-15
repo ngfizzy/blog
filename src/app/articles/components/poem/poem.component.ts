@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Article } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-poem',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class PoemComponent implements OnInit {
+  @Input() poem: Article;
+
   constructor() { }
 
   ngOnInit() { }
