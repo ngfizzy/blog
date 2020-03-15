@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import { Nav, SideNavMode } from 'src/app/authors-portal/models';
+import { Nav, SideNavMode, SideNavContentSizing } from 'src/app/authors-portal/models';
 
 @Component({
   selector: 'app-side-nav',
@@ -11,6 +11,7 @@ export class SideNavComponent  {
   @Input() nav: Nav;
   @Input() isOpen: boolean;
   @Input() mode: SideNavMode;
+  @Input() contentSizing: SideNavContentSizing;
 
   @Output() private toggle = new EventEmitter<boolean>();
 

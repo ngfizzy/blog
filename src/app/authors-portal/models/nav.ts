@@ -15,3 +15,8 @@ export const enum SideNavMode  {
   Over = 'over',
   Side = 'side',
 }
+
+export const enum SideNavContentSizing {
+  Fill = 'Fill',
+  ThreeFourths = 'ThreeFourths'
+}

@@ -20,7 +20,7 @@
     </nav>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="sidenav-content">
+    <div class="sidenav-content" [ngClass]="{ 'sidenav-content-full': contentSizing === 'Fill' }">
      <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
