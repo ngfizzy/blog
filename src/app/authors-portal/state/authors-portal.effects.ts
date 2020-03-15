@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { mergeMap, map } from 'rxjs/operators';
 
-// import { AuthorsPostsService } from '../authors-posts.service';
+// import { AuthorsArticlesService } from '../authors-articles.service';
 // import * as authorsPortalActions from './authors-portal.actions';
 
 
@@ -13,22 +13,22 @@ import { mergeMap, map } from 'rxjs/operators';
 
 //   constructor(
 //     private actions$: Actions,
-//     private postsService: AuthorsPostsService
+//     private articlesService: AuthorsArticlesService
 //   ) {}
 
 //   @Effect()
-//   getPosts$: Observable<Action> = this.actions$.pipe(
-//     ofType(authorsPortalActions.AuthorsPortalActionTypes.GetPosts),
-//     mergeMap(() => this.postsService.getAllPosts().pipe(
-//       map(posts => new authorsPortalActions.GetPostsSuccess(posts))
+//   getArticles$: Observable<Action> = this.actions$.pipe(
+//     ofType(authorsPortalActions.AuthorsPortalActionTypes.GetArticles),
+//     mergeMap(() => this.articlesService.getAllArticles().pipe(
+//       map(articles => new authorsPortalActions.GetArticlesSuccess(articles))
 //     ))
 //   );
 
 //   @Effect()
-//   createPosts$: Observable<Action> = this.actions$.pipe(
-//     ofType(authorsPortalActions.AuthorsPortalActionTypes.CreatePostSuccess),
-//     mergeMap((post) => this.postsService.createPost(post).pipe(
-//       map(createdPost => new  authorsPortalActions.CreatePostSuccess(createdPost))
+//   createArticles$: Observable<Action> = this.actions$.pipe(
+//     ofType(authorsPortalActions.AuthorsPortalActionTypes.CreateArticleSuccess),
+//     mergeMap((article) => this.articlesService.createArticle(article).pipe(
+//       map(createdArticle => new  authorsPortalActions.CreateArticleSuccess(createdArticle))
 //     )),
 //   );
 // }

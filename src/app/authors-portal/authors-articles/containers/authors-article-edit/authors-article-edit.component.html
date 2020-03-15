@@ -1,0 +1,13 @@
+<div class="container">
+  <md-editor
+    [height]="'50rem'"
+    [options]="options"
+    [(ngModel)]="articleBody"
+    #editor
+  >
+  </md-editor>
+  <app-authors-tags-panel
+    [tags]="articleTags"
+    (add)="tagArticle($event)"
+    (remove)=untagArticle($event)> </app-authors-tags-panel>
+</div>

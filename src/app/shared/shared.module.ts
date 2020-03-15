@@ -25,7 +25,7 @@ import {
 import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
 
-import { PostComponent } from './components/post/post.component';
+import { ArticleComponent } from './components/article/article.component';
 import { NotFoundComponent } from './components/Not Found/not-found.component';
 
 @NgModule({
@@ -65,11 +65,11 @@ import { NotFoundComponent } from './components/Not Found/not-found.component';
     MatButton,
     MatToolbar,
     NotFoundComponent,
-    PostComponent,
+    ArticleComponent,
     SpinnerComponent,
     RouterModule
   ],
-  declarations: [ SpinnerComponent, PostComponent, NotFoundComponent ],
+  declarations: [ SpinnerComponent, ArticleComponent, NotFoundComponent ],
   providers: [ ]
 })
 export class SharedModule {}

@@ -7,11 +7,11 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'public'
+    redirectTo: 'articles'
   },
   {
-    path: 'public',
-    loadChildren: () => import('./public/public.module').then(mod => mod.PublicModule)
+    path: 'articles',
+    loadChildren: () => import('./articles/articles.module').then(mod => mod.ArticlesModule)
   },
   {
     path: 'authors',

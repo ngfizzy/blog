@@ -9,14 +9,14 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'posts'
+    redirectTo: 'articles'
   },
   {
-    path: 'posts',
+    path: 'articles',
     canLoad: [ AuthGuard ],
     canActivate: [ AuthGuard ],
-    loadChildren: () => import('./authors-posts/authors-posts.module')
-      .then(mod => mod.AuthorsPostsModule),
+    loadChildren: () => import('./authors-articles/authors-articles.module')
+      .then(mod => mod.AuthorsArticlesModule),
   },
   {
     path: 'login',

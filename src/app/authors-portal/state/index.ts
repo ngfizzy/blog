@@ -5,12 +5,12 @@ export { AuthorsPortalState } from './authors-portal.state';
 //   'authorsPortal'
 // );
 
-// export const getPosts = createSelector(
+// export const getArticles = createSelector(
 //   getDashboardState,
-//   state => state.posts.posts,
+//   state => state.articles.articles,
 // );
 
-// export const getPostsLoadingState = createSelector(
+// export const getArticlesLoadingState = createSelector(
 //   getDashboardState,
-//   state => state.posts.isLoading,
+//   state => state.articles.isLoading,
 // );

@@ -1,0 +1,42 @@
+<ng-container *ngIf="article$ | async; let article">
+  <div class="w-100 ml-auto mt-2 mr-auto mat-elevation-z2 p-2" *ngIf="!article.published; else published">
+    <div class="row p-2">
+      <h3 class="text-light col-2 pt-1 ">Tags:</h3>
+      <span class="col-10">
+        <app-authors-tags-panel
+        [tags]="article.tags"
+        (add)="addTag($event, article.id)"
+        (remove)="removeTag($event, article.id)"
+        ></app-authors-tags-panel>
+      </span>
+   </div>
+
+   <div class="row p-2">
+    <h4 class="text-light col-1">Category</h4>
+    <div class="col-10 ml-auto w-75">
+      <form *ngIf="article.categories.length == 0" (ngSubmit)="addToCategory(category, article.id)" >
+        <input type="text" name="category" placeholder="category" [(ngModel)]="category">
+        <button type="submit">Add To Category</button>
+      </form>
+
+      <h5 *ngFor="let categoryName of article.categories" class="text-light text-center">{{ categoryName.name }}</h5>
+    </div>
+  </div>
+
+  <div title="publish text-center col-10 border border-primary">
+    <button class="btn btn-primary btn-sm text-center w-50 ml-auto d-block mr-auto w-25" (click)="togglePublished(article.id)">
+      Publish
+      <i class="fa fa-arrow-circle-up"></i>
+    </button>
+  </div>
+</div>
+
+<ng-template #published>
+  <div class="w-75 ml-auto mr-auto text-center text-light">
+    <h2>Article Published Successfully</h2>
+    <a [routerLink]="['/articles/articles', article.id ]" class="btn btn-primary">View Article</a>
+    <a [routerLink]="['/authors/articles', article.id]" class="btn btn-link">Go to Articles List</a>
+  </div>
+</ng-template>
+
+</ng-container>

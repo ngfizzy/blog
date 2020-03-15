@@ -1,0 +1,7 @@
+<app-article
+  [config]="articleConfig"
+  *ngFor="let article of articles$ | async"
+  [article]="article"
+  (notify)="showNotification($event)"
+>
+</app-article>

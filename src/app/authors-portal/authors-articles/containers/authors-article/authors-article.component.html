@@ -1,0 +1,12 @@
+<div *ngIf="article$ | async; let article">
+  <ng-container *ngIf="article?.title && article?.body">
+    <app-article
+      [article]="article"
+      [config]="config"
+    >
+    </app-article>
+  </ng-container>
+  <ng-container *ngIf="!article?.title && !article?.body">
+    <app-not-found [message]="'Please Select A Article'"></app-not-found>
+  </ng-container>
+</div>

@@ -1,0 +1,39 @@
+<div class="card-container"
+  (mouseenter)="toggleElevation()"
+  (mouseleave)="toggleElevation()"
+  (click)="toggleExpandedView()"
+  [ngClass]="{
+    opened: isExpandedView,
+    closed: !isExpandedView && isTouched,
+    mini: isMini,
+    full: isFull
+  }"
+>
+  <mat-card
+    class="card"
+    [class.mat-elevation-z1]="!isActive && !isExpandedView"
+    [class.mat-elevation-z6]="isActive && !shouldHideShadows"
+    [class.mat-elevation-z8]="isExpandedView && !shouldHideShadows"
+    [class.mat-elevation-z0]="shouldHideShadows"
+  >
+    <mat-card-title class="title  text-center">
+      <a [routerLink]="[1]">{{article.title}}</a>
+      <span
+        ngxClipboard
+        [cbContent]="particleUrl"
+        class="pl-3 " title="copy sharable link"
+        (click)="copyArticleLink($event)"
+      >
+        <i class="fa fa-copy text-primary"></i>
+      </span>
+    </mat-card-title>
+    <mat-card-content *ngIf="!isMini" class="card-body" [innerHtml]="articleBody" markdown>
+    </mat-card-content>
+    <mat-card-actions *ngIf="!isMini && shouldShowActions" align="end">
+      <span>
+        <button>Like</button>
+        900+
+      </span>
+    </mat-card-actions>
+  </mat-card>
+</div>

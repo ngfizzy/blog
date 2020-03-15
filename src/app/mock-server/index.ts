@@ -1,9 +1,9 @@
-import { Tag, Post, Category } from '../shared/models';
+import { Tag, Article, Category } from '../shared/models';
 
 const usedIds = [];
 
 const tags: Tag[] = [];
-const posts: Post[] = [];
+const articles: Article[] = [];
 const categories: Category[] = [];
 
 
@@ -26,9 +26,9 @@ function randomPublishStatus() {
 }
     // tslint:disable:max-line-length
 
-function generatePost() {
+function generateArticle() {
   const id = randomId();
-  const post: Post = {
+  const article: Article = {
     id,
     authorId: 1,
     published: randomPublishStatus(),
@@ -47,7 +47,7 @@ function generatePost() {
     categories: []
   };
 
-  return post;
+  return article;
 }
 
 function createTag(tagName: string): Tag {
@@ -74,106 +74,106 @@ function createCategory(name: string): Category {
   return category;
 }
 
-export function generatePosts(length: number) {
-  if (posts.length) {
-    return posts;
+export function generateArticles(length: number) {
+  if (articles.length) {
+    return articles;
   }
   while (length > 0) {
-    posts.push(generatePost());
+    articles.push(generateArticle());
     --length;
   }
 
-  return posts;
+  return articles;
 }
 
-export function tagPost(tagName: string, postId: number): Post {
+export function tagArticle(tagName: string, articleId: number): Article {
   const tag =  tags.find(t => t.name === tagName);
-  const post = posts.find(p => p.id === postId);
+  const article = articles.find(p => p.id === articleId);
 
   if (tag) {
-    if (post.tags.find( t => t.name === tagName)) {
-      return post;
+    if (article.tags.find( t => t.name === tagName)) {
+      return article;
     }
   }
 
   const created = createTag(tagName);
 
   tags.push(created);
-  post.tags.push(created);
+  article.tags.push(created);
 
-  return post;
+  return article;
 }
 
-export function editPostTitle(postId: number, title: string) {
-  const post = posts.find(p => p.id === postId);
+export function editArticleTitle(articleId: number, title: string) {
+  const article = articles.find(p => p.id === articleId);
 
-  if (post) {
-    post.title = title;
+  if (article) {
+    article.title = title;
   }
 
-  return post;
+  return article;
 }
 
-export function editPostBody(postId: number, body: string): Post {
-  const post = posts.find(p => p.id === postId);
+export function editArticleBody(articleId: number, body: string): Article {
+  const article = articles.find(p => p.id === articleId);
 
-  if (post) {
-    post.body = body;
+  if (article) {
+    article.body = body;
   }
 
-  return post;
+  return article;
 }
 
-export function untagPost(tagId: number, postId: number): Post {
-  const post = posts.find(p => p.id === postId);
+export function untagArticle(tagId: number, articleId: number): Article {
+  const article = articles.find(p => p.id === articleId);
 
-  if (post) {
-    const filtered = post.tags.filter(tag => tag.id !== tagId);
-    post.tags = filtered;
-    post.updatedAt = new Date().toString();
+  if (article) {
+    const filtered = article.tags.filter(tag => tag.id !== tagId);
+    article.tags = filtered;
+    article.updatedAt = new Date().toString();
   }
 
-  return post;
+  return article;
 }
 
-export function categorizePost(postId: number, categoryName: string) {
+export function categorizeArticle(articleId: number, categoryName: string) {
   let category = categories.find(c => c.name === categoryName);
 
   if (!category) {
     category = createCategory(categoryName);
   }
 
-  const post = posts.find(p => p.id === postId);
+  const article = articles.find(p => p.id === articleId);
 
-  if (post) {
-    post.categories.push(category);
+  if (article) {
+    article.categories.push(category);
   }
 
-  return post;
+  return article;
 }
 
-export function removePostFromCategory(postId: number, categoryId: number) {
-  const post = posts.find(p => p.id === postId);
+export function removeArticleFromCategory(articleId: number, categoryId: number) {
+  const article = articles.find(p => p.id === articleId);
 
-  if (post) {
-    const filtered = post.categories.filter(c => c.id !== categoryId);
+  if (article) {
+    const filtered = article.categories.filter(c => c.id !== categoryId);
 
-    post.categories = filtered;
+    article.categories = filtered;
   }
 
-  return post;
+  return article;
 }
 
-export function togglePostPublishedState(postId: number) {
-  const post = posts.find(p => p.id === postId);
+export function toggleArticlePublishedState(articleId: number) {
+  const article = articles.find(p => p.id === articleId);
 
-  if (post) {
-    post.published = !post.published;
+  if (article) {
+    article.published = !article.published;
   }
 
-  return post;
+  return article;
 }
 
-export function getAllPosts() {
-  return posts;
+export function getAllArticles() {
+  return articles;
 }
