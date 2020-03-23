@@ -5,7 +5,7 @@
   }
 
   .poem  {
-    background-color: rgba($color: (#A37B73), $alpha: 0.5%);
+    background-color: rgba($color: (#A37B73), $alpha: 0.6);
     padding: 1rem;
     position: relative;
     top: 25vh;
@@ -16,7 +16,7 @@
 
 
     &:hover {
-      background-color: rgba($color: #1E1E24, $alpha: 0.8);
+      background-color: rgba($color: #1E1E24, $alpha: 0.88);
       height: 100%;
       top: 0;
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Article } from 'src/app/shared/models';
 
 @Component({
@@ -19,6 +19,8 @@ export class PoemComponent implements OnInit {
     published: true,
   };
 
+  @Output() viewPoem  = new EventEmitter<number>();
+
   backgroundPlaceholders = [
     'assets/poetry.jpeg',
     'assets/poetry1.jpg',
@@ -27,6 +29,7 @@ export class PoemComponent implements OnInit {
     'assets/poetry4.jpeg',
     'assets/poetry5.jpeg'
   ];
+
   backgroundPlaceholder: string;
   backgroundStyle: any;
 
@@ -40,5 +43,9 @@ export class PoemComponent implements OnInit {
       'background-image': this.backgroundPlaceholder,
       'background-size': 'contain',
     };
+  }
+
+  showPoemDialog(poemId: number) {
+    this.viewPoem.emit(poemId);
   }
 }
