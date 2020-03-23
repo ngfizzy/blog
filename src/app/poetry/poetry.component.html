@@ -1,2 +1,9 @@
 
-<app-side-nav [contentSizing]="sideNavContentSizing" [isOpen]="isSideNavOpen" [nav]="nav" [mode]="'over'" (toggle)="toggleSideNav($event)"></app-side-nav>
+<app-side-nav
+  [contentUISizing]="sideNavContentSizing"
+  [isOpen]="isSideNavOpen"
+  [nav]="nav"
+  [mode]="'over'"
+  [removeTopMargin]="true"
+  (toggle)="toggleSideNav($event)"
+></app-side-nav>

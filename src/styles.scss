@@ -1,3 +1,8 @@
+
+
+
+
+
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 
@@ -8,5 +13,13 @@ body {
   transition: all 0.5s linear 0s;
   line-height: 1.5;
   background-color:  rgba(30, 30, 50, 0.887);
-  color: hsla(0,0%,100%,.8);
+  color: #ECE8EF;
+}
+
+body, p {
+  color: #ECE8EF;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #FCD581;
 }

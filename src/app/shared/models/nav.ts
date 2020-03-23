@@ -1,8 +1,8 @@
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkWithHref } from '@angular/router';
 
 export interface NavItem {
   name: string;
-  path: RouterLink;
+  path: string[];
 }
 
 export interface Nav {
@@ -16,7 +16,7 @@ export const enum SideNavMode  {
   Side = 'side',
 }
 
-export const enum SideNavContentSizing {
+export enum SideNavContentSizing {
   Fill = 'Fill',
   ThreeFourths = 'ThreeFourths'
 }

@@ -3,7 +3,7 @@
     <i class="fa fa-arrow-right text-white"></i>
   </button>
 </div>
-<mat-sidenav-container class="bg-sidenav-container" >
+<mat-sidenav-container class="bg-sidenav-container">
   <mat-sidenav (closedStart)="toggleMe()" class="bg-sidenav mat-elevation-z5 w-25 position-fixed" ngClass="{ collapsed: !isOpen }" #sidenav [mode]="mode" [opened]="isOpen">
     <a href="/">
       <div class="border-bottom">
@@ -13,14 +13,22 @@
     <nav>
       <mat-nav-list  class="color-main">
         <ng-container *ngFor="let item of nav.items">
-          <a [routerLink]="item.path"></a>
-          <mat-list-item class="border-bottom">{{ item.name }}</mat-list-item>
+          <a [routerLink]="item.path">
+            <mat-list-item class="border-bottom">{{ item.name }}</mat-list-item>
+          </a>
         </ng-container>
       </mat-nav-list>
     </nav>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <div class="sidenav-content" [ngClass]="{ 'sidenav-content-full': contentSizing === 'Fill' }">
+  <!-- This is  a quick hack to make few pages stick to the top-->
+  <mat-sidenav-content [ngClass]="{
+    'no-margin-top': removeTopMargin
+  }">
+      <div class="sidenav-content"
+      [ngClass]="{
+        'sidenav-content-full': contentUISizing == contentSizingValues.Fill
+      }"
+    >
      <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>

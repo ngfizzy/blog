@@ -1,13 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PoetryComponent } from './poetry.component';
+import { PoemsComponent } from './containers/poems/poems.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: PoetryComponent,
+    redirectTo: 'poems',
   },
+  {
+    path: 'poems',
+    component: PoetryComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: PoemsComponent,
+      }
+    ]
+  }
 ];
 
 @NgModule({
@@ -16,5 +28,5 @@ const routes: Routes = [
   ],
 })
 export class PoetryRoutingModule {
-  static readonly routeComponents = [ PoetryComponent ];
+  static readonly routeComponents = [ PoetryComponent, PoemsComponent ];
 }

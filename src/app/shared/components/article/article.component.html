@@ -17,10 +17,10 @@
     [class.mat-elevation-z0]="shouldHideShadows"
   >
     <mat-card-title class="title  text-center">
-      <a [routerLink]="[1]">{{article.title}}</a>
+      <h3 class="d-inline-block"><a [routerLink]="[1]">{{article.title}}</a></h3>
       <span
         ngxClipboard
-        [cbContent]="particleUrl"
+        [cbContent]="articleUrl"
         class="pl-3 " title="copy sharable link"
         (click)="copyArticleLink($event)"
       >

@@ -6,7 +6,6 @@ import { ArticleEffects } from './state/articles.effects';
 import { ArticleRoutingModule } from './articles-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { NavComponent } from './components/nav/nav.component';
-import { PoemComponent } from './components/poem/poem.component';
 
 @NgModule({
   imports: [
@@ -18,7 +17,6 @@ import { PoemComponent } from './components/poem/poem.component';
   declarations: [
     ...ArticleRoutingModule.routeComponents,
     NavComponent,
-    PoemComponent,
   ]
 })
 export class ArticlesModule {}

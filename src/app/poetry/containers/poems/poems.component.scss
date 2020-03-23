@@ -1,0 +1,24 @@
+.gallery {
+
+  margin-left: auto;
+  width: 96%;
+  height: fit-content;
+  overflow-y: visible;
+  left: 3.5%;
+
+  .poem-container {
+    height: 50vh;
+    padding: 0;
+  }
+
+  animation: transitionIn 1s;
+  @keyframes transitionIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}

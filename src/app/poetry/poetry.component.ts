@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Nav, SideNavContentSizing } from '../authors-portal/models';
+import { Nav, SideNavContentSizing } from '../shared/models';
 
 @Component({
   templateUrl: './poetry.component.html'

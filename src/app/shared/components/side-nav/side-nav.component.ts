@@ -1,5 +1,15 @@
-import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import { Nav, SideNavMode, SideNavContentSizing } from 'src/app/authors-portal/models';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  EventEmitter,
+  Output,
+} from '@angular/core';
+import {
+  Nav,
+  SideNavMode,
+  SideNavContentSizing,
+} from 'src/app/shared/models';
 
 @Component({
   selector: 'app-side-nav',
@@ -11,9 +21,14 @@ export class SideNavComponent  {
   @Input() nav: Nav;
   @Input() isOpen: boolean;
   @Input() mode: SideNavMode;
-  @Input() contentSizing: SideNavContentSizing;
+  @Input() contentUISizing: SideNavContentSizing;
+  // hack to make few routes stick to the top
+  @Input() removeTopMargin = false;
 
   @Output() private toggle = new EventEmitter<boolean>();
+
+
+  readonly contentSizingValues = SideNavContentSizing;
 
   toggleMe() {
     return this.toggle.emit(!this.isOpen);

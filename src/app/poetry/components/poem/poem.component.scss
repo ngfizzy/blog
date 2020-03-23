@@ -1,0 +1,35 @@
+.poem-container {
+  &:hover {
+    cursor: pointer;
+    background-color: rgba($color: #1E1E24, $alpha: 0.8);
+  }
+
+  .poem  {
+    background-color: rgba($color: (#A37B73), $alpha: 0.5%);
+    padding: 1rem;
+    position: relative;
+    top: 25vh;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+    height: 50%;
+    transition: all .5s ease-in-out;
+
+
+    &:hover {
+      background-color: rgba($color: #1E1E24, $alpha: 0.8);
+      height: 100%;
+      top: 0;
+    }
+
+    .title {
+
+    }
+
+    .body {
+      font-size: 80%;
+    }
+  }
+  * {
+
+  }
+}

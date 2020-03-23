@@ -4,6 +4,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 6%;
+  margin-bottom: 10px;
 }
 
 .bg-sidenav-container {
@@ -33,4 +34,9 @@
 
 .sidenav-content-full {
   width: 100%;
+  overflow-x: hidden;
+}
+
+.no-margin-top {
+  margin-top: -5%;
 }

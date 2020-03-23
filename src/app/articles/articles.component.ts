@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Nav, SideNavMode } from '../authors-portal/models';
+import { Nav, SideNavMode } from '../shared/models';
 
 @Component({
   templateUrl: './articles.component.html',
@@ -13,7 +13,7 @@ export class ArticlesComponent implements OnInit {
     items: [
       { name: 'All', path: null },
       { name: 'Tech', path: null },
-      { name: 'Poetry', path: null },
+      { name: 'Poetry', path: ['', 'poetry'] },
       { name: 'Self Help', path: null },
       { name: 'About', path: null },
     ],
