@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-poems',
@@ -7,8 +8,12 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class PoemsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+  }
+
+  showPoemDialog(poemId: number) {
+    this.router.navigate(['./', poemId ], { relativeTo: this.route});
   }
 }

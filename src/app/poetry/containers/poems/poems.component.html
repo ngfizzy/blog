@@ -1,6 +1,7 @@
+<router-outlet></router-outlet>
 <div class="row gallery #gallery">
   <div class="col-4 poem-container">
-    <app-poem>
+    <app-poem (viewPoem)="showPoemDialog($event)">
 
     </app-poem>
   </div>
@@ -15,7 +16,7 @@
     </app-poem>
   </div>
   <div class="col-4 poem-container">
-    <app-poem>
+    <app-poem (viewPoem)="showPoemDialog($event)">
 
     </app-poem>
   </div>
