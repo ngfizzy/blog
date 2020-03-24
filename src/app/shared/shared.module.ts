@@ -22,12 +22,15 @@ import {
   MatDrawerContainer,
   MatDrawer,
   MatDrawerContent } from '@angular/material/sidenav';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MarkdownModule } from 'ngx-markdown';
+
 import { ClipboardModule } from 'ngx-clipboard';
 
 import { ArticleComponent } from './components/article/article.component';
 import { NotFoundComponent } from './components/Not Found/not-found.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { CopyToClipboardComponent } from './components/copy-to-clipboard/copy-to-clipboard.component';
 
 @NgModule({
   imports: [
@@ -71,13 +74,16 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
     NotFoundComponent,
     ArticleComponent,
     SpinnerComponent,
-    RouterModule
+    CopyToClipboardComponent,
+    RouterModule,
+    MatDialogModule,
   ],
   declarations: [
     SpinnerComponent,
     ArticleComponent,
     NotFoundComponent,
     SideNavComponent,
+    CopyToClipboardComponent,
   ],
   providers: [ ]
 })

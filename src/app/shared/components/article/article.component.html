@@ -18,14 +18,12 @@
   >
     <mat-card-title class="title  text-center">
       <h3 class="d-inline-block"><a [routerLink]="[1]">{{article.title}}</a></h3>
-      <span
-        ngxClipboard
-        [cbContent]="articleUrl"
-        class="pl-3 " title="copy sharable link"
-        (click)="copyArticleLink($event)"
+      <app-copy-to-clipboard
+        [description]="'Copy Sharable Link'"
+        [contentToCopy]="articleUrl"
+        (copied)="copyArticleLink()"
       >
-        <i class="fa fa-copy text-primary"></i>
-      </span>
+      </app-copy-to-clipboard>
     </mat-card-title>
     <mat-card-content *ngIf="!isMini" class="card-body" [innerHtml]="articleBody" markdown>
     </mat-card-content>

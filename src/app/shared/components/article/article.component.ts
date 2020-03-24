@@ -56,13 +56,10 @@ export class ArticleComponent implements OnInit, OnChanges {
     this.shouldShowActions = this.config.shouldShowActions;
   }
 
-  copyArticleLink(event: MouseEvent) {
-    event.preventDefault();
-    event.stopPropagation();
-
+  copyArticleLink() {
     this.articleUrl = `${window.location.origin}/articles/${1}`;
 
-    this.notify.emit('URL successfuly copied to clipboard');
+    this.notify.emit('URL successfully copied to clipboard');
   }
 
   toggleElevation() {

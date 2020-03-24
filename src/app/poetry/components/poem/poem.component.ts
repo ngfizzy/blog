@@ -41,7 +41,9 @@ export class PoemComponent implements OnInit {
 
     this.backgroundStyle = {
       'background-image': this.backgroundPlaceholder,
-      'background-size': 'contain',
+      'background-size': 'cover',
+      'background-position': 'center',
+      'background-repeat': 'no-repeat',
     };
   }
 

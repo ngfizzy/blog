@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PoetryComponent } from './poetry.component';
 import { PoemsComponent } from './containers/poems/poems.component';
-import { PoemDialogComponent } from './containers/poem-dialog/poem-dialog.component';
+import { PoemDialogViewComponent } from './containers/poem-dialog-view/poem-dialog-view.component';
 
 const routes: Routes = [
   {
@@ -17,7 +17,7 @@ const routes: Routes = [
         children: [
           {
             path: ':id',
-            component: PoemDialogComponent,
+            component: PoemDialogViewComponent,
           },
         ]
       }
@@ -34,6 +34,6 @@ export class PoetryRoutingModule {
   static readonly routeComponents = [
     PoetryComponent,
     PoemsComponent,
-    PoemDialogComponent,
+    PoemDialogViewComponent,
   ];
 }
