@@ -4,8 +4,27 @@ const usedIds = [];
 
 const tags: Tag[] = [];
 const articles: Article[] = [];
-const categories: Category[] = [];
 
+const categories: Category[] = [
+  {
+    id: 1,
+    name: 'poetry',
+    updatedAt: new Date().toString(),
+    createdAt: new Date().toString(),
+  },
+  {
+    id: 2,
+    name: 'tech',
+    updatedAt: new Date().toString(),
+    createdAt: new Date().toString(),
+  },
+  {
+    id: 2,
+    name: 'self help',
+    updatedAt: new Date().toString(),
+    createdAt: new Date().toString(),
+  },
+];
 
 function randomId() {
   let randomNumber = Math.floor(Math.random() * 1000);
@@ -44,10 +63,16 @@ function generateArticle() {
     createdAt: new Date().toString(),
     updatedAt: new Date().toString(),
     tags: [],
-    categories: []
+    categories: [ getRandomCategory() ]
   };
 
   return article;
+}
+
+function getRandomCategory() {
+  const length = categories.length;
+
+  return categories[Math.floor(Math.random() * length)];
 }
 
 function createTag(tagName: string): Tag {

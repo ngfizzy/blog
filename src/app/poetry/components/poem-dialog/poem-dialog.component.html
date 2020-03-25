@@ -1,23 +1,17 @@
-<div class="poem-container">
-  <h1 mat-dialog-title class="text-center poem-title">{{ poem.title }}
-    <!-- <span
-    ngxClipboard
-    [cbContent]="articleUrl"
-    class="pl-3 " title="copy sharable link"
-    (click)="copyArticleLink($event)"
-    >
-      <i class="fa fa-copy"></i></span>
-    </h1> -->
-    <app-copy-to-clipboard
-      [description]="'Copy Sharable Link'"
-      [contentToCopy]="currentLocation"
-      (copied)="linkCopied()"
-    ></app-copy-to-clipboard>
-  </h1>
-  <div mat-dialog-content class="poem-body">
-    <p>{{poem.body}}</p>
+<ng-container *ngIf="(poem$ | async) as poem">
+  <div class="poem-container">
+    <h1 mat-dialog-title class="text-center poem-title">{{ poem.title }}
+      <app-copy-to-clipboard
+        [description]="'Copy Sharable Link'"
+        [contentToCopy]="currentLocation"
+        (copied)="linkCopied()"
+      ></app-copy-to-clipboard>
+    </h1>
+    <div mat-dialog-content class="poem-body">
+      <p [innerHtml]="poem.body"></p>
+    </div>
+    <div mat-dialog-actions>
+      <app-slide-control [controlsColor]="'#fff'"></app-slide-control>
+    </div>
   </div>
-  <div mat-dialog-actions>
-    <app-slide-control [controlsColor]="'#fff'"></app-slide-control>
-  </div>
-</div>
+</ng-container>

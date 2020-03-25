@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Poem } from 'src/app/shared/models';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './poem-dialog.component.html',
@@ -12,8 +13,10 @@ export class PoemDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<PoemDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public poem: Poem,
-    private toastr: ToastrService) {}
+    @Inject(MAT_DIALOG_DATA) public poem$: Observable<Poem>,
+    private toastr: ToastrService,
+  ) {}
+
   ngOnInit() { }
 
   linkCopied() {

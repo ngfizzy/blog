@@ -1,48 +1,8 @@
 <router-outlet></router-outlet>
 <div class="row gallery #gallery">
-  <div class="col-4 poem-container">
-    <app-poem (viewPoem)="showPoemDialog($event)">
-
-    </app-poem>
-  </div>
-  <div class="col-4 poem-container">
-    <app-poem>
-
-    </app-poem>
-  </div>
-  <div class="col-4 poem-container">
-    <app-poem>
-
-    </app-poem>
-  </div>
-  <div class="col-4 poem-container">
-    <app-poem (viewPoem)="showPoemDialog($event)">
-
-    </app-poem>
-  </div>
-  <div class="col-4 poem-container">
-    <app-poem>
-
-    </app-poem>
-  </div>
-  <div class="col-4 poem-container">
-    <app-poem>
-
-    </app-poem>
-  </div>
-  <div class="col-4 poem-container">
-    <app-poem>
-
-    </app-poem>
-  </div>
-  <div class="col-4 poem-container">
-    <app-poem>
-
-    </app-poem>
-  </div>
-  <div class="col-4 poem-container">
-    <app-poem>
-
-    </app-poem>
-  </div>
+  <ng-container *ngIf="(poems$ | async) as poems">
+    <div class="col-4 poem-container" *ngFor="let poem of poems">
+      <app-poem [poem]="poem" (viewPoem)="showPoemDialog($event)"></app-poem>
+    </div>
+  </ng-container>
 </div>

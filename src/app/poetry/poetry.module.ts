@@ -5,6 +5,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { PoemComponent } from './components/poem/poem.component';
 import { PoemDialogComponent } from './components/poem-dialog/poem-dialog.component';
 import { SlideControlComponent } from './components/slide-control/slide-control.component';
+import { PoetryService } from './poetry.service';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { SlideControlComponent } from './components/slide-control/slide-control.
     PoemDialogComponent,
     SlideControlComponent,
   ],
-  providers: [],
+  providers: [ PoetryService ],
   entryComponents: [ PoemDialogComponent ]
 })
 export class PoetryModule {}
