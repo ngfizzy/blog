@@ -6,11 +6,17 @@ import { PoemComponent } from './components/poem/poem.component';
 import { PoemDialogComponent } from './components/poem-dialog/poem-dialog.component';
 import { SlideControlComponent } from './components/slide-control/slide-control.component';
 import { PoetryService } from './poetry.service';
+import { StoreModule } from '@ngrx/store';
+import { poetryReducers } from './state/poetry.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { PoetryEffects } from './state/poetry.effects';
 
 @NgModule({
   imports: [
     SharedModule,
     PoetryRoutingModule,
+    StoreModule.forFeature('poetry', poetryReducers),
+    EffectsModule.forFeature([ PoetryEffects ]),
   ],
   exports: [],
   declarations: [
@@ -20,6 +26,6 @@ import { PoetryService } from './poetry.service';
     SlideControlComponent,
   ],
   providers: [ PoetryService ],
-  entryComponents: [ PoemDialogComponent ]
+  entryComponents: [ PoemDialogComponent ],
 })
 export class PoetryModule {}

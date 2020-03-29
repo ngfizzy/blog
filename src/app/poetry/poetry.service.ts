@@ -12,10 +12,10 @@ export class PoetryService {
    return this.articlesService.getAll().pipe(
       map(articles => {
         return articles
-            .filter(article =>
-              article.categories
-                .find(category => category.name === 'poetry'),
-            );
+          .filter(article =>
+            article.categories
+              .find(category => category.name === 'poetry'),
+          );
       }),
     );
   }

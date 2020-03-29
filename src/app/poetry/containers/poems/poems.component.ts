@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PoetryService } from '../../poetry.service';
 import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+
 import { Poem } from 'src/app/shared/models';
+import * as fromPoetry from '../../state';
+import * as poetryActions from '../../state/poetry.actions';
 
 @Component({
   selector: 'app-poems',
@@ -15,11 +18,12 @@ export class PoemsComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private poetryService: PoetryService,
+    private store: Store<fromPoetry.PoetryState>
   ) { }
 
   ngOnInit() {
-    this.poems$ = this.poetryService.getAllPoems();
+    this.store.dispatch(new poetryActions.GetAllPoems());
+    this.poems$ = this.store.pipe(select(fromPoetry.getAllPoems));
   }
 
   showPoemDialog(poemId: number) {
