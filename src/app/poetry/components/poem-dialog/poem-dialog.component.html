@@ -11,7 +11,12 @@
       <p [innerHtml]="poem.body"></p>
     </div>
     <div mat-dialog-actions>
-      <app-slide-control [controlsColor]="'#fff'"></app-slide-control>
+      <app-slide-control
+        (previous)="goToPrevious(poem.id)"
+        (next)="goToNext(poem.id)"
+        (play)="startSlideShow(poem.id)"
+        (pause)="pauseSlideShow(poem.id)"
+        [controlsColor]="'#fff'"></app-slide-control>
     </div>
   </div>
 </ng-container>
