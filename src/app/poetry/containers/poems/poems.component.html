@@ -1,9 +1,9 @@
   <router-outlet></router-outlet>
 
 
-<div class="row gallery #gallery">
+<div class="row gallery">
   <ng-container *ngIf="(poems$ | async) as poems">
-    <div class="col-4 poem-container" *ngFor="let poem of poems">
+    <div class="col-4 poem-container mat-elevation-z2" *ngFor="let poem of poems">
       <app-poem [poem]="poem" (viewPoem)="showPoemDialog($event)"></app-poem>
     </div>
   </ng-container>
