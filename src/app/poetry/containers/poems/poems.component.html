@@ -1,4 +1,6 @@
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+
+
 <div class="row gallery #gallery">
   <ng-container *ngIf="(poems$ | async) as poems">
     <div class="col-4 poem-container" *ngFor="let poem of poems">

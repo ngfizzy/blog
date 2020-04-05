@@ -25,7 +25,9 @@ import { PoetryEffects } from './state/poetry.effects';
     PoemDialogComponent,
     SlideControlComponent,
   ],
-  providers: [ PoetryService ],
+  providers: [
+    PoetryService,
+  ],
   entryComponents: [ PoemDialogComponent ],
 })
 export class PoetryModule {}

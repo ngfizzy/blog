@@ -1,0 +1,15 @@
+
+<div class="backdrop" (click)="backdropClicked()">
+  <ng-container *ngIf="(poem$ | async) as poem">
+    <ng-container *ngIf="(poems$ | async) as poems">
+      <app-poem-dialog
+        [poem]="poem"
+        (previous)="goToPreviousSlide($event, poems)"
+        (next)="goToNextSlide($event, poems)"
+        (play)="startSlideshow($event, poems)"
+        (pause)="pauseSlideshow(poems)"
+       >
+      </app-poem-dialog>
+    </ng-container>
+  </ng-container>
+</div>

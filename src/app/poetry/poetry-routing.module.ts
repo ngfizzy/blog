@@ -16,6 +16,14 @@ const routes: Routes = [
         component: PoemsComponent,
         children: [
           {
+            path: ':id/paused',
+            component: PoemDialogViewComponent,
+          },
+          {
+            path: ':id/play',
+            component: PoemDialogViewComponent,
+          },
+          {
             path: ':id',
             component: PoemDialogViewComponent,
           },
