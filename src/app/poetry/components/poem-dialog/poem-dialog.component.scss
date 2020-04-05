@@ -11,13 +11,14 @@
   margin: 0;
   padding: 0;
   border-radius: .5rem;
-
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 
   animation: transitionIn 1s;
-
 }
 
-.poem-body, .title-wrapper, .actions {
+
+.poem-body, .title-wrapper {
   padding: 0 1.5rem;
   margin-left: auto;
   margin-right: auto;
@@ -29,19 +30,6 @@
   margin-bottom: 10vh;
   width: 100%;
   height: 90%;
-  animation: transitionIn 1s;
-
-}
-
-.actions {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: 10vh;
-  width: 58%;
-  background-color: rgba($color: #1E1E24, $alpha: 1);
 }
 
 .title-wrapper {
@@ -49,21 +37,16 @@
   flex-direction: column;
   justify-content: center;
   position: absolute;
-  top: 10vh;
   width: 58%;
   height: 10%;
-  animation: transitionIn 1s;
-
-  .title {
-    animation: transitionIn 1s;
-  }
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
 }
 
 @keyframes transitionIn {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }

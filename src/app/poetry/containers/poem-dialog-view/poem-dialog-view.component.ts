@@ -67,8 +67,8 @@ export class PoemDialogViewComponent implements OnInit, OnDestroy {
     this.slideTimerRefresher$.next();
   }
 
-  startSlideshow(dialogOutput: PoemDialogOutput, poems: Poem[]) {
-    this.initializeCurrentPoemIndex(dialogOutput.poemId, poems);
+  startSlideshow(poemId: number, poems: Poem[]) {
+    this.initializeCurrentPoemIndex(poemId, poems);
 
     this.slideShowTimer$
       .pipe(
@@ -80,15 +80,15 @@ export class PoemDialogViewComponent implements OnInit, OnDestroy {
         repeatWhen(() => this.slideTimerRefresher$),
         takeUntil(this.pauseSlideShow$),
         takeUntil(this.destroy$)
-      ).subscribe(() => this.goToNextSlide(dialogOutput, poems));
+      ).subscribe(() => this.goToNextSlide(poemId, poems));
   }
 
   /**
    * Goes to next slide. If slideshow is completes,
    * the slide is reset to the first slide and then stops.
    */
-  goToNextSlide(dialogOutput: PoemDialogOutput, poems: Poem[]) {
-    this.initializeCurrentPoemIndex(dialogOutput.poemId, poems);
+  goToNextSlide(poemId: number, poems: Poem[]) {
+    this.initializeCurrentPoemIndex(poemId, poems);
 
     const lstIndex = poems.length - 1;
     this.poemIndex++;
@@ -100,8 +100,8 @@ export class PoemDialogViewComponent implements OnInit, OnDestroy {
 
   }
 
-  goToPreviousSlide(dialogOutput: PoemDialogOutput, poems: Poem[]) {
-    this.initializeCurrentPoemIndex(dialogOutput.poemId, poems);
+  goToPreviousSlide(poemId: number, poems: Poem[]) {
+    this.initializeCurrentPoemIndex(poemId, poems);
 
     const lastIndex = poems.length - 1;
     this.poemIndex--;

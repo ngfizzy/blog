@@ -1,15 +1,19 @@
 
 <div class="backdrop" (click)="backdropClicked()">
+
   <ng-container *ngIf="(poem$ | async) as poem">
     <ng-container *ngIf="(poems$ | async) as poems">
-      <app-poem-dialog
-        [poem]="poem"
-        (previous)="goToPreviousSlide($event, poems)"
-        (next)="goToNextSlide($event, poems)"
-        (play)="startSlideshow($event, poems)"
-        (pause)="pauseSlideshow(poems)"
-       >
-      </app-poem-dialog>
+      <div class="poem-wrapper">
+        <app-poem-dialog [poem]="poem"></app-poem-dialog>
+        <div class="actions mat-elevation-z4 p-2" (click)="$event.stopPropagation()">
+          <app-slide-control
+            (previous)="goToPreviousSlide(poem.id, poems)"
+            (next)="goToNextSlide(poem.id, poems)"
+            (play)="startSlideshow(poem.id, poems)"
+            (pause)="pauseSlideshow()"
+            [controlsColor]="'#fff'"></app-slide-control>
+          </div>
+      </div>
     </ng-container>
   </ng-container>
 </div>
