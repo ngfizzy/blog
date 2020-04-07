@@ -36,7 +36,6 @@ export class PoemDialogViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.router.onSameUrlNavigation = 'reload';
-    document.body.style.overflow = 'hidden';
 
     this.route.paramMap.pipe(
       tap(paramMap => this.dispatchGetPoemAction(+paramMap.get('id'))),
@@ -96,7 +95,7 @@ export class PoemDialogViewComponent implements OnInit, OnDestroy {
     this.poemIndex = nextPoemIndex === 0 ? nextPoemIndex : this.poemIndex;
     const nextPoemId = poems[nextPoemIndex].id;
 
-    this.router.navigate(['/poetry/poems/', nextPoemId]);
+    this.router.navigate(['/poetry/poems/grid', nextPoemId ]);
 
   }
 
@@ -109,7 +108,7 @@ export class PoemDialogViewComponent implements OnInit, OnDestroy {
     this.poemIndex = prevPoemIndex >= lastIndex ? lastIndex : this.poemIndex;
     const prevPoemId = poems[prevPoemIndex].id;
 
-    this.router.navigate(['/poetry/poems', prevPoemId]);
+    this.router.navigate(['/poetry/poems/grid', prevPoemId ]);
   }
 
 
@@ -118,8 +117,6 @@ export class PoemDialogViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    document.body.style.overflowY = 'auto';
-
     this.destroy$.next();
     this.destroy$.complete();
     this.slideTimerRefresher$.complete();

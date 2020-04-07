@@ -10,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { poetryReducers } from './state/poetry.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { PoetryEffects } from './state/poetry.effects';
+import { PoetryChildrenWrapperComponent } from './components/poetry-children-container/poetry-children-wrapper.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { PoetryEffects } from './state/poetry.effects';
     PoemComponent,
     PoemDialogComponent,
     SlideControlComponent,
+    PoetryChildrenWrapperComponent,
   ],
   providers: [
     PoetryService,

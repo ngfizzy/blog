@@ -1,0 +1,26 @@
+
+
+<app-poetry-children-wrapper>
+  <div class="border view-wrapper">
+    <!-- <router-outlet></router-outlet> -->
+    <div> Placeholder </div>
+    <ng-container *ngIf="(groupedPoems$ | async) as groupedPoems">
+      <ng-container *ngFor="let group of groupedPoems; index as groupNumber">
+        <div class="poems-list-wrapper" *ngIf="groupNumber === currentGroup">
+          <div class="previous-button">
+            <i class="fa fa-caret-left caret-icon"></i>
+          </div>
+          <div class="row poems-list">
+            <div class="col-2 poem" *ngFor="let poem of group">
+              <app-poem [poem]="poem"></app-poem>
+            </div>
+          </div>
+          <div class="next-button">
+            <i class="fa fa-caret-right caret-icon"></i>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+
+</app-poetry-children-wrapper>

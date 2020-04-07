@@ -37,7 +37,7 @@ export class PoemComponent implements OnInit {
     };
   }
 
-  showPoemDialog(poemId: number) {
+  view(poemId: number) {
     this.viewPoem.emit(poemId);
   }
 }

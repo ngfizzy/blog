@@ -1,0 +1,13 @@
+.gallery {
+  box-sizing: content-box;
+  position: absolute;
+  margin-left: auto;
+  width: 94vw;
+  height: fit-content;
+  left: 2.1rem;
+
+  ::ng-deep &>.row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

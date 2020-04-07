@@ -1,9 +1,9 @@
 <div class="w-100 h-100 poem-container"
   [ngStyle]="backgroundStyle"
-  (click)="showPoemDialog(poem.id)"
+  (click)="view(poem.id)"
 >
   <div class="w-100 poem">
-    <h5 class="text-capitalize title">{{poem?.title}}</h5>
+    <h6 class="text-capitalize title">{{poem?.title}}</h6>
     <p class="body">{{poem?.body}}</p>
   </div>
 </div>
