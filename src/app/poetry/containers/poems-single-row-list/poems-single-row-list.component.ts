@@ -5,19 +5,17 @@ import * as fromPoetry from '../../state';
 import * as fromPoetryActions from '../../state/poetry.actions';
 import { Poem } from 'src/app/shared/models';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-
-interface GroupInfo {
-  groupStartIndex: number; groupSize: number;
-}
+import { map, tap, first } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'poems-single-row-list.component.html',
   styleUrls: [ './poems-single-row-list.component.scss' ]
 })
 export class PoemsSingleRowListComponent implements OnInit {
-  private poems$: Observable<Poem[]>;
-  groupedPoems$: Observable<Poem[][]>;
+  poems$: Observable<Poem[]>;
+  selectedPoemId$: Observable<number>;
+
+  groupSize = 6;
   currentGroup = 0;
 
   constructor(
@@ -27,49 +25,20 @@ export class PoemsSingleRowListComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new fromPoetryActions.GetAllPoems());
     this.poems$ = this.store.pipe(select(fromPoetry.getAllPoems));
-
-    this.groupPoems(6);
+    this.preselectPoem();
   }
 
-  private groupPoems(groupSize: number) {
-    this.groupedPoems$ = this.poems$.pipe(
-      map(poems => this.getGroupList(poems, groupSize)),
+  getSelectedPoem(poemId: number) {
+      // to be implemented
+  }
+
+  private preselectPoem() {
+    this.selectedPoemId$ = this.poems$.pipe(
+      map((poems) => {
+        if (poems.length) {
+          return  poems[0].id;
+        }
+      })
     );
-  }
-
-  private getGroupList(poems: Poem[], groupSize: number) {
-    if (groupSize >= poems.length) {
-      return [ poems ];
-    }
-
-    const groupList: Poem[][] = [];
-
-    const noOfCompleteGroups = Math.floor(poems.length / groupSize);
-    const lengthOfIncompleteGroup =  poems.length - (noOfCompleteGroups * groupSize);
-    const completeGroupLastIndex = (poems.length - lengthOfIncompleteGroup);
-
-    for (let groupNumber = 0; groupNumber < noOfCompleteGroups; groupNumber++) {
-      const groupStartIndex =  groupNumber * groupSize;
-
-      this.addGroup(groupList, poems, { groupStartIndex, groupSize });
-    }
-
-    if (completeGroupLastIndex <= poems.length - 1) {
-      const lastGroupSize =  (poems.length) - completeGroupLastIndex;
-
-      this.addGroup(groupList, poems, {
-        groupStartIndex: completeGroupLastIndex,
-        groupSize: lastGroupSize,
-      });
-    }
-
-    return groupList;
-  }
-
-  private addGroup(groupList: Poem[][], poems: Poem[], groupInfo: GroupInfo) {
-    const { groupSize, groupStartIndex} = groupInfo;
-    const group = poems.slice(groupStartIndex, groupSize + groupStartIndex);
-
-    groupList.push(group);
   }
 }

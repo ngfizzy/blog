@@ -11,6 +11,7 @@ import { poetryReducers } from './state/poetry.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { PoetryEffects } from './state/poetry.effects';
 import { PoetryChildrenWrapperComponent } from './components/poetry-children-container/poetry-children-wrapper.component';
+import { PoemsCarouselComponent } from './components/poems-carousel/poems-carousel.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { PoetryChildrenWrapperComponent } from './components/poetry-children-con
     ...PoetryRoutingModule.routeComponents,
     PoemComponent,
     PoemDialogComponent,
+    PoemsCarouselComponent,
     SlideControlComponent,
     PoetryChildrenWrapperComponent,
   ],

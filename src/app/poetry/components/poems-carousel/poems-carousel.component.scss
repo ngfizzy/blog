@@ -1,0 +1,56 @@
+:host {
+  width: 100%;
+  height: 10rem;
+
+  .poems-list-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #000000, $alpha: 0.2);
+
+
+    .poems-list {
+      display: inline-flex;
+      height: 100%;
+      width: 100%;
+      &.row {
+        margin-left: 0;
+        margin-right: 0;
+      }
+      .poem {
+
+        height: 100%;
+        padding: 0;
+        padding-left: .1rem;
+        padding-right: .1rem;;
+      }
+    }
+
+    .previous-button, .next-button {
+      display: inline-block;
+      position: absolute;
+      width: 6%;
+      height: 10rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 4rem;
+      cursor: pointer;
+      z-index: 2000;
+      transition: background-color .4s ease-in;
+      &:hover {
+        background: rgba($color: #000000, $alpha: 0.6)
+      }
+
+      .caret-icon {
+        color: rgba($color: #F1F1F1, $alpha: 0.89);
+      }
+    }
+
+    .next-button {
+      right: 0%;
+      top: 0;
+    }
+  }
+}
