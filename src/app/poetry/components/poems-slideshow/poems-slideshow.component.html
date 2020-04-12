@@ -1,0 +1,22 @@
+
+<div *ngIf="(poems$ | async) as poems" class="slideshow">
+  <ng-container *ngIf="(selectedPoem$ | async) as poem">
+    <app-poem-dialog
+      [poem]="poem"
+      [maxHeight]="'65vh'"
+    >
+    </app-poem-dialog>
+    <div
+      class="actions mat-elevation-z4 p-2"
+      (click)="$event.stopPropagation()"
+    >
+      <app-slide-control
+        (previous)="goToPreviousSlide(poem.id, poems)"
+        (next)="goToNextSlide(poem.id, poems)"
+        (play)="startSlideshow(poem.id, poems)"
+        (pause)="pauseSlideshow()"
+        [controlsColor]="'#fff'">
+      </app-slide-control>
+    </div>
+  </ng-container>
+</div>

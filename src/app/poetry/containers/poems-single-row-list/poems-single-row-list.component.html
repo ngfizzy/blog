@@ -1,9 +1,10 @@
 
 
 <app-poetry-children-wrapper>
-  <div class="border view-wrapper">
-    <!-- <router-outlet></router-outlet> -->
-    <div> Placeholder </div>
+  <div class="view-wrapper">
+    <div class="full-poem">
+      <router-outlet></router-outlet>
+    </div>
     <ng-container *ngIf="(poems$ | async) as poems">
       <app-poems-carousel
         [poems]="poems"

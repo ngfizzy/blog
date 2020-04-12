@@ -1,12 +1,19 @@
 
 
 <ng-container *ngFor="let group of poemsGroupList; index as groupNumber">
-  <div class="poems-list-wrapper" *ngIf="groupNumber === currentGroup">
+  <div
+    class="poems-list-wrapper"
+    *ngIf="groupNumber === currentGroup"
+  >
     <div *ngIf="showPreviousButton" class="previous-button">
       <i class="fa fa-caret-left caret-icon"></i>
     </div>
     <div class="row poems-list">
-      <div class="col-2 poem" *ngFor="let poem of group">
+      <div
+        class="col-2 poem"
+        *ngFor="let poem of group"
+        [class.active]="selectedPoemId === poem.id"
+      >
         <app-poem [poem]="poem"></app-poem>
       </div>
     </div>

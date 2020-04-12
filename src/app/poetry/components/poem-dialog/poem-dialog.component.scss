@@ -1,4 +1,3 @@
-
 .poem-container {
   display:  flex;
   flex-direction: column;
@@ -16,6 +15,7 @@
 
   animation: transitionIn 1s;
 }
+
 
 
 .poem-body, .title-wrapper {
@@ -37,11 +37,14 @@
   flex-direction: column;
   justify-content: center;
   position: absolute;
-  width: 58%;
+  min-width: 97%;
+  max-width: 100%;
   height: 10%;
   border-top-left-radius: .5rem;
   border-top-right-radius: .5rem;
+  top: 0;
 }
+
 
 @keyframes transitionIn {
   from {

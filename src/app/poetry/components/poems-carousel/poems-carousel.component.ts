@@ -5,6 +5,11 @@ interface GroupInfo {
   groupStartIndex: number; groupSize: number;
 }
 
+interface PoemsMetadata {
+  noOfCompleteGroups: number;
+  lengthOfIncompleteGroup: number;
+  completeGroupLastIndex: number;
+}
 @Component({
   selector: 'app-poems-carousel',
   templateUrl: './poems-carousel.component.html',
@@ -36,10 +41,7 @@ export class PoemsCarouselComponent implements OnInit {
     }
 
     const groupList: Poem[][] = [];
-
-    const noOfCompleteGroups = Math.floor(this.poems.length / this.groupSize);
-    const lengthOfIncompleteGroup =  this.poems.length - (noOfCompleteGroups * this.groupSize);
-    const completeGroupLastIndex = (this.poems.length - lengthOfIncompleteGroup);
+    const { completeGroupLastIndex, noOfCompleteGroups } = this.getPoemsMetadata();
 
     for (let groupNumber = 0; groupNumber < noOfCompleteGroups; groupNumber++) {
       const groupStartIndex =  groupNumber * this.groupSize;
@@ -62,6 +64,16 @@ export class PoemsCarouselComponent implements OnInit {
     return groupList;
   }
 
+  private getPoemsMetadata(): PoemsMetadata {
+    const noOfCompleteGroups = Math.floor(this.poems.length / this.groupSize);
+    const lengthOfIncompleteGroup = this.poems.length - (noOfCompleteGroups * this.groupSize);
+    return {
+      noOfCompleteGroups,
+      lengthOfIncompleteGroup,
+      completeGroupLastIndex: (this.poems.length - lengthOfIncompleteGroup),
+    };
+  }
+
   private shouldShowPreviousButton(): boolean {
     return this.currentGroup > 0 && this.poemsGroupList.length > 1;
   }
@@ -80,3 +92,4 @@ export class PoemsCarouselComponent implements OnInit {
     groupList.push(group);
   }
 }
+

@@ -5,7 +5,8 @@ import * as fromPoetry from '../../state';
 import * as fromPoetryActions from '../../state/poetry.actions';
 import { Poem } from 'src/app/shared/models';
 import { Observable } from 'rxjs';
-import { map, tap, first } from 'rxjs/operators';
+import { map, tap, first, switchMap } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: 'poems-single-row-list.component.html',
@@ -19,7 +20,9 @@ export class PoemsSingleRowListComponent implements OnInit {
   currentGroup = 0;
 
   constructor(
-    private store: Store<fromPoetry.PoetryState>
+    private store: Store<fromPoetry.PoetryState>,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -29,16 +32,21 @@ export class PoemsSingleRowListComponent implements OnInit {
   }
 
   getSelectedPoem(poemId: number) {
-      // to be implemented
+      this.router.navigate([ poemId ],  { relativeTo: this.route });
   }
 
+  /**
+   * Selects the first poem on the page if there i
+   */
   private preselectPoem() {
     this.selectedPoemId$ = this.poems$.pipe(
-      map((poems) => {
-        if (poems.length) {
-          return  poems[0].id;
-        }
-      })
+      switchMap((poems) =>
+        this.route.paramMap.pipe(
+          map(params => +params.get('id')),
+          map(poemId => poemId || poems[0].id),
+        ),
+      ),
+      tap((poemId) => this.getSelectedPoem(poemId))
     );
   }
 }

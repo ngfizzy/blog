@@ -3,8 +3,6 @@ import { of, Observable } from 'rxjs';
 import { Article } from '../shared/models/article.interface';
 import { generateArticles,  getAllArticles } from '../mock-server';
 
-  // tslint:disable:max-line-length
-
 @Injectable({providedIn: 'root'})
 export class ArticlesService {
   articles: Article[];

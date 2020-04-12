@@ -15,19 +15,22 @@ import { takeWhile, repeatWhen, map, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-poem-dialog',
   templateUrl: './poem-dialog.component.html',
-  styleUrls: [ './poem-dialog.component.scss' ],
+  styleUrls: [
+    './poem-dialog.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PoemDialogComponent implements OnChanges {
   @ViewChild('poemContainer', { static: false }) poemContainer: ElementRef;
   @ViewChild('poemTitleWrapper', { static: false }) poemTitleWrapper: ElementRef;
   @ViewChild('poemTitle', { static: false }) poemTitle: ElementRef;
+
   @Input() poem: Poem;
+  @Input() maxHeight: string;
 
 
   currentLocation = window.location.href;
-  animation$: Observable<{ opacity: number}>;
   repeatAnimation$ = new Subject();
+  opacityAnimation$: Observable<number>;
 
   constructor(private toastr: ToastrService) {}
 
@@ -38,7 +41,7 @@ export class PoemDialogComponent implements OnChanges {
   }
 
   private animatePoem() {
-    this.animation$ =  timer(0, 1).pipe(
+    this.opacityAnimation$ =  timer(0, 1).pipe(
       takeWhile((counter) => (counter <= 400)),
       map(counter => counter / 400),
       tap((opacity) => {
@@ -47,7 +50,6 @@ export class PoemDialogComponent implements OnChanges {
         }
       }),
       repeatWhen(() => this.repeatAnimation$),
-      map(opacity => ({ opacity }))
     );
   }
 
