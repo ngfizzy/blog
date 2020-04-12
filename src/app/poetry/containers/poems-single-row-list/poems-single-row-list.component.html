@@ -2,7 +2,7 @@
 
 <app-poetry-children-wrapper>
   <div class="view-wrapper">
-    <div class="full-poem">
+    <div class="mb-3">
       <router-outlet></router-outlet>
     </div>
     <ng-container *ngIf="(poems$ | async) as poems">
@@ -13,7 +13,6 @@
         (poemSelected)="getSelectedPoem($event)"
       >
       </app-poems-carousel>
-
     </ng-container>
   </div>
 
