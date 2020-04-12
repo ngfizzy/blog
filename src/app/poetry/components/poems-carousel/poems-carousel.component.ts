@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Poem, Poems } from 'src/app/shared/models';
+import { Poem, Poems, Slides } from 'src/app/shared/models';
 
 interface GroupInfo {
   groupStartIndex: number; groupSize: number;
@@ -15,7 +15,7 @@ interface PoemsMetadata {
   templateUrl: './poems-carousel.component.html',
   styleUrls: [ './poems-carousel.component.scss' ]
 })
-export class PoemsCarouselComponent implements OnInit {
+export class PoemsCarouselComponent implements OnInit, Slides {
   @Input() poems: Poem[];
   @Input() groupSize = 6;
   @Input() selectedPoemId: number;
@@ -42,12 +42,26 @@ export class PoemsCarouselComponent implements OnInit {
     this.poemSelected.emit(this.selectedPoemId);
   }
 
+
+  goToPreviousSlide() {
+    this.currentGroup -=  1;
+    this.showNextButton = true;
+    this.showPreviousButton = this.shouldShowNextButton();
+  }
+
+  goToNextSlide() {
+    this.currentGroup += 1;
+    this.showPreviousButton = true;
+    this.showNextButton = this.shouldShowNextButton();
+  }
+
+
   private groupPoems() {
     if (this.groupSize >= this.poems.length) {
       return [ this.poems ];
     }
 
-    const groupList: Poem[][] = [];
+    const groupList: Poems[] = [];
     const { completeGroupLastIndex, noOfCompleteGroups } = this.getPoemsMetadata();
 
     for (let groupNumber = 0; groupNumber < noOfCompleteGroups; groupNumber++) {
@@ -99,4 +113,3 @@ export class PoemsCarouselComponent implements OnInit {
     groupList.push(group);
   }
 }
-

@@ -5,7 +5,11 @@
     class="poems-list-wrapper"
     *ngIf="groupNumber === currentGroup"
   >
-    <div *ngIf="showPreviousButton" class="previous-button">
+    <div
+      *ngIf="showPreviousButton"
+      class="previous-button"
+      (click)="goToPreviousSlide()"
+    >
       <i class="fa fa-caret-left caret-icon"></i>
     </div>
     <div class="row poems-list">
@@ -20,7 +24,11 @@
       </div>
       </ng-container>
     </div>
-    <div *ngIf="showNextButton" class="next-button">
+    <div
+      *ngIf="showNextButton"
+      class="next-button"
+      (click)="goToNextSlide(groupNumber)"
+    >
       <i class="fa fa-caret-right caret-icon"></i>
     </div>
   </div>
