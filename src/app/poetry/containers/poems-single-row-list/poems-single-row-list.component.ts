@@ -32,7 +32,7 @@ export class PoemsSingleRowListComponent implements OnInit {
   }
 
   getSelectedPoem(poemId: number) {
-      this.router.navigate([ poemId ],  { relativeTo: this.route });
+    this.router.navigate([ poemId ],  { relativeTo: this.route });
   }
 
   /**

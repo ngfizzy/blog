@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Poem } from 'src/app/shared/models';
+import { Poem, Poems } from 'src/app/shared/models';
 
 interface GroupInfo {
   groupStartIndex: number; groupSize: number;
@@ -24,7 +24,7 @@ export class PoemsCarouselComponent implements OnInit {
 
   showPreviousButton: boolean;
   showNextButton: boolean;
-  poemsGroupList: Poem[][];
+  poemsGroupList: Poems[];
   currentGroup = 0;
 
   constructor() { }
@@ -35,7 +35,14 @@ export class PoemsCarouselComponent implements OnInit {
     this.showNextButton = this.shouldShowNextButton();
   }
 
-  groupPoems() {
+  selectPoem(selectedPoem: Poem, groupIndex: number) {
+    this.selectedPoemId = selectedPoem.id;
+    this.currentGroup = groupIndex;
+
+    this.poemSelected.emit(this.selectedPoemId);
+  }
+
+  private groupPoems() {
     if (this.groupSize >= this.poems.length) {
       return [ this.poems ];
     }
