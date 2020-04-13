@@ -12,7 +12,10 @@
     >
       <i class="fa fa-caret-left caret-icon"></i>
     </div>
-    <div class="row poems-list">
+    <div
+      [@slide]="animationParams"
+      class="row poems-list"
+    >
       <ng-container *ngFor="let poem of group"
       >
         <div

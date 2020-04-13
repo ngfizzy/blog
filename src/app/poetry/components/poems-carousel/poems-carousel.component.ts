@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Poem, Poems, Slides } from 'src/app/shared/models';
+import { trigger, state, style, transition, animate, group, query } from '@angular/animations';
 
 interface GroupInfo {
   groupStartIndex: number; groupSize: number;
@@ -10,10 +11,27 @@ interface PoemsMetadata {
   lengthOfIncompleteGroup: number;
   completeGroupLastIndex: number;
 }
+
 @Component({
   selector: 'app-poems-carousel',
   templateUrl: './poems-carousel.component.html',
-  styleUrls: [ './poems-carousel.component.scss' ]
+  styleUrls: [ './poems-carousel.component.scss' ],
+  animations: [
+    trigger('slide', [
+     transition('*<=>*', [
+       group([
+         query(':enter', [
+           style({ transform: 'translateX({{offsetEntry}})%' }),
+           animate('400ms ease-in-out', style({ transform: 'translateX(0)' }))
+         ], { optional: true}),
+         query(':leave', [
+           style({ transform: 'translateX(0)' }),
+           animate('400ms ease-in-out', style({ transform: 'translateX({{offsetLeave}}%)' })),
+         ], { optional: true }),
+       ]),
+     ]),
+    ]),
+  ]
 })
 export class PoemsCarouselComponent implements OnInit, Slides {
   @Input() poems: Poem[];
@@ -26,6 +44,9 @@ export class PoemsCarouselComponent implements OnInit, Slides {
   showNextButton: boolean;
   poemsGroupList: Poems[];
   currentGroup = 0;
+  nextButtonClicked = false;
+  prevButtonClicked = false;
+  animationParams = this.generateAnimationParams();
 
   constructor() { }
 
@@ -44,17 +65,32 @@ export class PoemsCarouselComponent implements OnInit, Slides {
 
 
   goToPreviousSlide() {
-    this.currentGroup -=  1;
     this.showNextButton = true;
-    this.showPreviousButton = this.shouldShowNextButton();
+    this.prevButtonClicked = true;
+    this.nextButtonClicked = false;
+
+    this.currentGroup -=  1;
+    this.animationParams = this.generateAnimationParams()
+    this.showPreviousButton = this.shouldShowPreviousButton();
   }
 
   goToNextSlide() {
-    this.currentGroup += 1;
     this.showPreviousButton = true;
+    this.prevButtonClicked = false;
+    this.nextButtonClicked = true;
+    this.currentGroup += 1;
+    this.animationParams = this.generateAnimationParams();
     this.showNextButton = this.shouldShowNextButton();
   }
 
+  private generateAnimationParams() {
+    return {
+      params: {
+        offsetEntry: this.nextButtonClicked ? 100 : -100,
+        offsetLeave: this.prevButtonClicked ? -100 : 100,
+      },
+    };
+  }
 
   private groupPoems() {
     if (this.groupSize >= this.poems.length) {

@@ -3,7 +3,6 @@ import { Poem, Poems, Slides } from 'src/app/shared/models';
 import { Store, select } from '@ngrx/store';
 import { PoetryState, getAllPoems, getPoem } from '../../state';
 import { Observable, timer, Subject } from 'rxjs';
-import { GetAllPoems } from '../../state/poetry.ctions';
 import { Router, ActivatedRoute } from '@angular/router';
 import { takeUntil, repeatWhen, tap } from 'rxjs/operators';
 
