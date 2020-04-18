@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { PoetryRoutingModule } from './poetry-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PoemComponent } from './components/poem/poem.component';
-import { PoemDialogComponent } from './components/poem-dialog/poem-dialog.component';
+import { PoemFullCardComponent } from './components/poem-full-card/poem-full-card.component';
 import { SlideControlComponent } from './components/slide-control/slide-control.component';
 import { PoetryService } from './poetry.service';
 import { StoreModule } from '@ngrx/store';
@@ -25,7 +25,7 @@ import { PoemsSlideshowComponent } from './components/poems-slideshow/poems-slid
   declarations: [
     ...PoetryRoutingModule.routeComponents,
     PoemComponent,
-    PoemDialogComponent,
+    PoemFullCardComponent,
     PoemsCarouselComponent,
     PoemsSlideshowComponent,
     SlideControlComponent,
@@ -34,6 +34,5 @@ import { PoemsSlideshowComponent } from './components/poems-slideshow/poems-slid
   providers: [
     PoetryService,
   ],
-  entryComponents: [ PoemDialogComponent ],
 })
 export class PoetryModule {}

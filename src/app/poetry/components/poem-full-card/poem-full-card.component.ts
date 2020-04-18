@@ -13,13 +13,12 @@ import { timer, Subject, Observable } from 'rxjs';
 import { takeWhile, repeatWhen, map, tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-poem-dialog',
-  templateUrl: './poem-dialog.component.html',
-  styleUrls: [
-    './poem-dialog.component.scss' ],
+  selector: 'app-poem-full-card',
+  templateUrl: './poem-full-card.component.html',
+  styleUrls: [ './poem-full-card.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PoemDialogComponent implements OnChanges {
+export class PoemFullCardComponent implements OnChanges {
   @ViewChild('poemContainer', { static: false }) poemContainer: ElementRef;
   @ViewChild('poemTitleWrapper', { static: false }) poemTitleWrapper: ElementRef;
   @ViewChild('poemTitle', { static: false }) poemTitle: ElementRef;

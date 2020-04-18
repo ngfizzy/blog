@@ -1,11 +1,11 @@
 
 <div *ngIf="(poems$ | async) as poems" class="slideshow">
   <ng-container *ngIf="(selectedPoem$ | async) as poem">
-    <app-poem-dialog
+    <app-poem-full-card
       [poem]="poem"
       [maxHeight]="'65vh'"
     >
-    </app-poem-dialog>
+    </app-poem-full-card>
     <div
       class="mat-elevation-z4 p-2 actions"
       (click)="$event.stopPropagation()"
