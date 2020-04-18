@@ -4,16 +4,15 @@
 
 .actions {
   display: flex;
-  justify-self: start;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  max-width: 95vw;
   width: inherit;
   padding: 0 1.5rem;
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  height: 3.2rem;
   background-color: rgba($color: #1E1E24, $alpha: 1);
   animation: transitionIn 1s;
 }
