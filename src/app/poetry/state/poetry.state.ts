@@ -34,3 +34,8 @@ export const getPoemLoadingState = createSelector(
   getPoetryState,
   state => state.selectedPoem.isLoading,
 );
+
+export const selectPoemThemeImage = createSelector(
+  getPoem,
+  poem => poem.themeImage,
+);

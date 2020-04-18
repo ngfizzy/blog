@@ -3,6 +3,7 @@ import { Category } from './category.interface';
 
 export interface Article  {
   id: number;
+  themeImage?: string;
   authorId: number;
   createdAt: string;
   updatedAt: string;
