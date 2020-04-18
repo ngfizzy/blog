@@ -21,7 +21,7 @@ interface PoemsMetadata {
      transition('*<=>*', [
        group([
          query(':enter', [
-           style({ transform: 'translateX({{offsetEntry}})%' }),
+           style({ transform: 'translateX({{offsetEntry}}%)'}),
            animate('400ms ease-in-out', style({ transform: 'translateX(0)' }))
          ], { optional: true}),
          query(':leave', [
@@ -31,7 +31,7 @@ interface PoemsMetadata {
        ]),
      ]),
     ]),
-  ]
+  ],
 })
 export class PoemsCarouselComponent implements OnInit, Slides {
   @Input() poems: Poem[];
@@ -70,7 +70,7 @@ export class PoemsCarouselComponent implements OnInit, Slides {
     this.nextButtonClicked = false;
 
     this.currentGroup -=  1;
-    this.animationParams = this.generateAnimationParams()
+    this.animationParams = this.generateAnimationParams();
     this.showPreviousButton = this.shouldShowPreviousButton();
   }
 
@@ -85,6 +85,7 @@ export class PoemsCarouselComponent implements OnInit, Slides {
 
   private generateAnimationParams() {
     return {
+      value: this.prevButtonClicked || this.nextButtonClicked,
       params: {
         offsetEntry: this.nextButtonClicked ? 100 : -100,
         offsetLeave: this.prevButtonClicked ? -100 : 100,
@@ -144,8 +145,8 @@ export class PoemsCarouselComponent implements OnInit, Slides {
 
   private addGroup(groupList: Poem[][], poems: Poem[], groupInfo: GroupInfo) {
     const { groupSize, groupStartIndex} = groupInfo;
-    const group = poems.slice(groupStartIndex, groupSize + groupStartIndex);
+    const grp = poems.slice(groupStartIndex, groupSize + groupStartIndex);
 
-    groupList.push(group);
+    groupList.push(grp);
   }
 }

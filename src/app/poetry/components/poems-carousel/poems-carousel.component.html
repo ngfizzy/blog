@@ -1,5 +1,3 @@
-
-
 <ng-container *ngFor="let group of poemsGroupList; index as groupNumber">
   <div
     class="poems-list-wrapper"
@@ -16,15 +14,14 @@
       [@slide]="animationParams"
       class="row poems-list"
     >
-      <ng-container *ngFor="let poem of group"
-      >
+      <ng-container *ngFor="let poem of group">
         <div
-        class="col-2 poem"
-        (click)="selectPoem(poem, groupNumber)"
-        [class.active]="selectedPoemId === poem.id"
-      >
-        <app-poem [poem]="poem"></app-poem>
-      </div>
+          class="col-2 poem"
+          (click)="selectPoem(poem, groupNumber)"
+          [class.active]="selectedPoemId === poem.id"
+        >
+          <app-poem [poem]="poem"></app-poem>
+        </div>
       </ng-container>
     </div>
     <div
