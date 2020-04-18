@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 
 import * as fromPoetry from '../../state';
 import * as fromPoetryActions from '../../state/poetry.actions';
-import { Poem } from 'src/app/shared/models';
+import { Poem, Poems } from 'src/app/shared/models';
 import { Observable } from 'rxjs';
 import { map, tap, first, switchMap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -28,7 +28,10 @@ export class PoemsSingleRowListComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new fromPoetryActions.GetAllPoems());
     this.poems$ = this.store.pipe(select(fromPoetry.getAllPoems));
-    this.preselectPoem();
+
+    if (!this.route.firstChild) {
+      this.preselectPoem();
+    }
   }
 
   getSelectedPoem(poemId: number) {
@@ -40,12 +43,7 @@ export class PoemsSingleRowListComponent implements OnInit {
    */
   private preselectPoem() {
     this.selectedPoemId$ = this.poems$.pipe(
-      switchMap((poems) =>
-        this.route.paramMap.pipe(
-          map(params => +params.get('id')),
-          map(poemId => poemId || poems[0].id),
-        ),
-      ),
+      map(poems => poems[0].id),
       tap((poemId) => this.getSelectedPoem(poemId))
     );
   }

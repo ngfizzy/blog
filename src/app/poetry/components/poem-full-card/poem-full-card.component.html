@@ -15,8 +15,8 @@
         ></app-copy-to-clipboard>
       </h3>
     </div>
-    <img [src]="" alt="">
     <div class="poem-body" >
+      <img [src]="poem.themeImage" alt="{{poem.title}} theme image">
 
       <p [innerHtml]="poem.body"></p>
     </div>
