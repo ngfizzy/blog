@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { Poem, Poems, Slides } from 'src/app/shared/models';
 import { trigger, state, style, transition, animate, group, query } from '@angular/animations';
 
@@ -33,8 +33,8 @@ interface PoemsMetadata {
     ]),
   ],
 })
-export class PoemsCarouselComponent implements OnInit, Slides {
-  @Input() poems: Poem[];
+export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
+  @Input() poems: Poems;
   @Input() groupSize = 6;
   @Input() selectedPoemId: number;
 
@@ -54,6 +54,13 @@ export class PoemsCarouselComponent implements OnInit, Slides {
     this.poemsGroupList = this.groupPoems();
     this.showPreviousButton = this.shouldShowPreviousButton();
     this.showNextButton = this.shouldShowNextButton();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { selectedPoemId } = changes;
+    if (!selectedPoemId.isFirstChange()) {
+      this.jumpToGroup(selectedPoemId.previousValue, selectedPoemId.currentValue);
+    }
   }
 
   selectPoem(selectedPoem: Poem, groupIndex: number) {
@@ -81,6 +88,27 @@ export class PoemsCarouselComponent implements OnInit, Slides {
     this.currentGroup += 1;
     this.animationParams = this.generateAnimationParams();
     this.showNextButton = this.shouldShowNextButton();
+  }
+
+  private jumpToGroup(prevPoemId: number, currentPoemId: number) {
+    const curGroup = this.findPoemGroup(currentPoemId);
+    const prevGroup = this.findPoemGroup(prevPoemId);
+
+    this.prevButtonClicked = prevGroup > curGroup;
+    this.nextButtonClicked = prevGroup < curGroup;
+
+    this.currentGroup = curGroup;
+
+    this.animationParams = this.generateAnimationParams();
+    this.showNextButton = this.shouldShowNextButton();
+    this.showPreviousButton = this.shouldShowPreviousButton();
+  }
+
+  private findPoemGroup(poemId: number) {
+    const index = this.poems.findIndex(poem => poem.id === poemId);
+    const foundGroup =  Math.round((index / this.groupSize) / (this.poemsGroupList.length));
+
+    return foundGroup;
   }
 
   private generateAnimationParams() {
