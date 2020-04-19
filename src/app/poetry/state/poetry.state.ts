@@ -10,7 +10,6 @@ export interface PoetryState {
   };
 }
 
-
 const getPoetryState = createFeatureSelector<PoetryState>(
   'poetry'
 );
@@ -37,5 +36,5 @@ export const getPoemLoadingState = createSelector(
 
 export const selectPoemThemeImage = createSelector(
   getPoem,
-  poem => poem.themeImage,
+  poem => poem ? poem.themeImage : '',
 );

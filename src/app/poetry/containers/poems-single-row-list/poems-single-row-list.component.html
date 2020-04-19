@@ -2,6 +2,12 @@
 
 <app-poetry-children-wrapper>
   <div class="view-wrapper">
+    <div
+      class="background"
+      [ngStyle]="{
+        'background-image': 'url(' + (themeImage$ | async) +')'
+       }">
+    </div>
     <div class="mb-3">
       <router-outlet></router-outlet>
     </div>
