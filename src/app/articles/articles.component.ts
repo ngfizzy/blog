@@ -20,7 +20,8 @@ export class ArticlesComponent implements OnInit {
   };
 
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() { }
 }

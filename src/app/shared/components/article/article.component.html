@@ -1,7 +1,7 @@
 <div class="card-container"
   (mouseenter)="toggleElevation()"
   (mouseleave)="toggleElevation()"
-  (click)="toggleExpandedView()"
+  (click)="openArticle()"
   [ngClass]="{
     opened: isExpandedView,
     closed: !isExpandedView && isTouched,
@@ -17,7 +17,7 @@
     [class.mat-elevation-z0]="shouldHideShadows"
   >
     <mat-card-title class="title  text-center">
-      <h3 class="d-inline-block"><a [routerLink]="[1]">{{article.title}}</a></h3>
+      <h3 class="d-inline-block"><a [routerLink]="[article.id]">{{article.title}}</a></h3>
       <app-copy-to-clipboard
         [description]="'Copy Sharable Link'"
         [contentToCopy]="articleUrl"

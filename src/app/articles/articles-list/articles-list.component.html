@@ -3,5 +3,6 @@
   *ngFor="let article of articles$ | async"
   [article]="article"
   (notify)="showNotification($event)"
+  (opened)="updateTitleAndMeta($event)"
 >
 </app-article>

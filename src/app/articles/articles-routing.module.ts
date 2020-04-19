@@ -8,10 +8,10 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'articles'
+    redirectTo: 'feed'
   },
   {
-    path: 'articles',
+    path: 'feed',
     component: ArticlesComponent,
     children: [
       {

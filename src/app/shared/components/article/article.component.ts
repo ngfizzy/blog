@@ -18,6 +18,8 @@ export class ArticleComponent implements OnInit, OnChanges {
   @Input() article: Article;
 
   @Output() notify = new EventEmitter<string>();
+  @Output() opened = new EventEmitter<Article>();
+
   state = AnimationState.Small;
   truncatedArticleLength = 560;
 
@@ -57,7 +59,7 @@ export class ArticleComponent implements OnInit, OnChanges {
   }
 
   copyArticleLink() {
-    this.articleUrl = `${window.location.origin}/articles/${1}`;
+    this.articleUrl = `${window.location.origin}/articles/${this.article.id}`;
 
     this.notify.emit('URL successfully copied to clipboard');
   }
@@ -66,11 +68,12 @@ export class ArticleComponent implements OnInit, OnChanges {
     this.isActive = !this.isActive;
   }
 
-  toggleExpandedView() {
+  openArticle() {
     if (this.canToggle) {
       this.isTouched = true;
       this.isExpandedView = !this.isExpandedView;
       this.articleBody = this.getArticleBody();
+      this.opened.emit(this.article);
     }
   }
 
