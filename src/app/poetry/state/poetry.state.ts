@@ -38,3 +38,8 @@ export const selectPoemThemeImage = createSelector(
   getPoem,
   poem => poem ? poem.themeImage : '',
 );
+
+export const selectPoemId = createSelector(
+  getPoem,
+  poem => poem ? poem.id : null,
+);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Observable, combineLatest } from 'rxjs';
+import { map, tap, switchMap } from 'rxjs/operators';
 
 import { Poem } from 'src/app/shared/models';
 import * as fromPoetry from '../../state';
@@ -31,9 +31,20 @@ export class PoemsSingleRowListComponent implements OnInit {
     this.poems$ = this.store.pipe(select(fromPoetry.getAllPoems));
     this.themeImage$ = this.store.pipe(select(fromPoetry.selectPoemThemeImage));
 
+    const poemId$ = this.store.pipe(select(fromPoetry.selectPoemId));
+
     if (!this.route.firstChild) {
-      this.preselectPoem();
+      this.selectedPoemId$ = combineLatest([
+        this.preselectPoem(),
+        poemId$
+      ]).pipe(
+        map(([ preselected, fromStore ]) => fromStore || preselected)
+      );
+    } else {
+      this.selectedPoemId$ = poemId$;
     }
+
+
   }
 
   getSelectedPoem(poemId: number) {
@@ -44,7 +55,7 @@ export class PoemsSingleRowListComponent implements OnInit {
    * Selects the first poem on the page if there i
    */
   private preselectPoem() {
-    this.selectedPoemId$ = this.poems$.pipe(
+    return this.poems$.pipe(
       map(poems => poems[0].id),
       tap((poemId) => this.getSelectedPoem(poemId))
     );
