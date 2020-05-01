@@ -1,8 +1,22 @@
-<app-article
-  [config]="articleConfig"
-  *ngFor="let article of articles$ | async"
-  [article]="article"
-  (notify)="showNotification($event)"
-  (opened)="updateTitleAndMeta($event)"
->
-</app-article>
+<div class="articles-container" >
+  <header class="header">
+    <h2>Articles and Tutorials</h2>
+  </header>
+  <app-article
+    [config]="articleConfig"
+    *ngFor="let article of articles$ | async"
+    [article]="article"
+    (notify)="showNotification($event)"
+    (opened)="setSelectedArticle($event)"
+  >
+  </app-article>
+
+  <ng-container *ngIf="selectedArticle">
+    <app-article-actions
+      (commentSectionToggled)="toggleScrollBar($event)"
+      [comments]="selectedArticle.comments">
+
+    </app-article-actions>
+  </ng-container>
+
+</div>

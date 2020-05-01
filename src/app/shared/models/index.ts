@@ -6,3 +6,5 @@ export * from './nav';
 export * from './poem.interface';
 export * from './poem-dialog-output';
 export * from './slides.interface';
+export * from './audience-activity.interface';
+export * from './audience.interface';

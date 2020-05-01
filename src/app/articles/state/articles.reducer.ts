@@ -9,6 +9,10 @@ const defaultState: ArticlesState = {
       isLoading: true,
       article: { } as Article,
     },
+    audienceState: {
+      audience: null,
+      isLoading: true,
+    },
     isLoading: true
 };
 

@@ -14,6 +14,7 @@ import { AppEffects } from './app.effects';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { throwIfAlreadyLoaded } from './module-import-guard';
+import { CoreEffects } from './core/state/core.effects';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
       timeOut: 3000,
       preventDuplicates: true,
     }),
-    EffectsModule.forRoot([AppEffects]),
+    EffectsModule.forRoot([ AppEffects, CoreEffects ]),
     HttpClientModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
     HttpClientModule,

@@ -17,6 +17,7 @@ export class ArticleComponent implements OnInit, OnChanges {
   @Input() config: ArticleComponentConfig;
   @Input() article: Article;
 
+
   @Output() notify = new EventEmitter<string>();
   @Output() opened = new EventEmitter<Article>();
 
@@ -68,12 +69,20 @@ export class ArticleComponent implements OnInit, OnChanges {
     this.isActive = !this.isActive;
   }
 
-  openArticle() {
+  openArticle(event: MouseEvent) {
+    const target = event.target as HTMLElement;
     if (this.canToggle) {
       this.isTouched = true;
       this.isExpandedView = !this.isExpandedView;
       this.articleBody = this.getArticleBody();
-      this.opened.emit(this.article);
+
+      const article = this.isExpandedView ? this.article : null;
+
+      if (article) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      this.opened.emit(article);
     }
   }
 

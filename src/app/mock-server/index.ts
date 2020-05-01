@@ -1,10 +1,10 @@
-import { Tag, Article, Category } from '../shared/models';
+import { Tag, Article, Category, Audience } from '../shared/models';
 
 const usedIds = [];
 
 const tags: Tag[] = [];
 const articles: Article[] = [];
-
+const audienceList: Audience[] = [];
 const categories: Category[] = [
   {
     id: 1,
@@ -201,4 +201,26 @@ export function toggleArticlePublishedState(articleId: number) {
 
 export function getAllArticles() {
   return articles;
+}
+
+
+export function findAudience(options: Partial<Audience>) {
+  let audience: Audience = null;
+
+  if (options.id) {
+    audience = audienceList.find(aud => aud.id === options.id);
+  }
+
+  if (!audience && options.email) {
+    audience = audienceList.find(aud => aud.email === options.email);
+  } else if (!audience && options.audienceName) {
+    audience = audienceList.find(aud => (
+        aud.audienceName === options.audienceName &&
+          aud.deviceUUID === aud.deviceUUID)
+      );
+  } else {
+    audience = audienceList.find(aud => aud.deviceUUID === options.deviceUUID);
+  }
+
+  return audience;
 }

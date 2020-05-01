@@ -1,6 +1,4 @@
-import { CoreState } from 'src/app/core/state';
-
-export interface AuthorsPortalState extends CoreState {
+export interface AuthorsPortalState {
   dashboard: any;
   isLoading: boolean;
 }

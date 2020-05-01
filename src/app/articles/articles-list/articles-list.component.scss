@@ -1,0 +1,18 @@
+.articles-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
+  .header {
+    margin-bottom: 2rem;
+    font-weight: bold;
+  }
+}
+
+.scroll-hidden {
+  overflow-y: hidden;
+}
+
+.scroll-auto {
+  overflow-y: auto;
+}

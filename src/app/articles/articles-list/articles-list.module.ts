@@ -6,6 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { ArticlesListRoutingModule } from './articles-list-routing.module';
 import { SharedModule } from '../../shared/shared.module';
+import { ArticleActionsComponent } from 'src/app/shared/components/article-action/article-actions.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { SharedModule } from '../../shared/shared.module';
   ],
   exports: [RouterModule],
   declarations: [
+    ArticleActionsComponent,
     ...ArticlesListRoutingModule.routeComponents,
   ],
   providers: []

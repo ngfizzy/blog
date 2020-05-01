@@ -1,7 +1,7 @@
 <div class="card-container"
   (mouseenter)="toggleElevation()"
   (mouseleave)="toggleElevation()"
-  (click)="openArticle()"
+  (click)="openArticle($event)"
   [ngClass]="{
     opened: isExpandedView,
     closed: !isExpandedView && isTouched,
@@ -12,9 +12,8 @@
   <mat-card
     class="card"
     [class.mat-elevation-z1]="!isActive && !isExpandedView"
-    [class.mat-elevation-z6]="isActive && !shouldHideShadows"
+
     [class.mat-elevation-z8]="isExpandedView && !shouldHideShadows"
-    [class.mat-elevation-z0]="shouldHideShadows"
   >
     <mat-card-title class="title  text-center">
       <h3 class="d-inline-block"><a [routerLink]="[article.id]">{{article.title}}</a></h3>
@@ -27,11 +26,5 @@
     </mat-card-title>
     <mat-card-content *ngIf="!isMini" class="card-body" [innerHtml]="articleBody" markdown>
     </mat-card-content>
-    <mat-card-actions *ngIf="!isMini && shouldShowActions" align="end">
-      <span>
-        <button>Like</button>
-        900+
-      </span>
-    </mat-card-actions>
   </mat-card>
 </div>

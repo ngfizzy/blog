@@ -1,18 +1,20 @@
 .card-container {
+  position: relative;
   cursor: pointer;
   margin-bottom: 1rem;
   width: 50%;
   height: fit-content;
   margin-left: auto;
   margin-right: auto;
-  background: rgba(0, 0, 0, 0.5);
+
+  transition: top 1s ease-in-out;
 
   .card {
-    background-color:  rgba(130, 2, 99, .5);
-    color: hsla(0,0%,100%,.8);
+    background-color: rgba($color: #1E1E24, $alpha: 0.95);    color: hsla(0,0%,100%,.8);
   }
 
   .title {
+    border-bottom: 1px solid #fff;
     a {
       color: inherit;
     }
@@ -21,7 +23,7 @@
   .card-body {
     height: auto;
     max-height: 10rem;
-    font-size: large;
+    font-size: 90%;
     transition: max-height 1s ease-in;
     overflow: hidden;
   }

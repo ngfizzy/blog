@@ -1,0 +1,71 @@
+
+<div
+  class="backdrop"
+  [ngClass]="{ 'hide-form': !isCommentSectionOpen}"
+  (click)="toggleCommentSection()"
+></div>
+
+<div class="wrapper" [ngClass]="{ 'hide-form': !isCommentSectionOpen}">
+  <div class="comments-container" *ngIf="isCommentSectionOpen">
+    <form
+      *ngIf="isCommentSectionOpen"
+      (submit)="submitComment()"
+      class="mat-elevation-z2 comment-form"
+    >
+      <textarea
+        name="comment"
+        placeholder="Please drop a comment"
+        autofocus
+        #commentArea="ngModel"
+        minlength="4"
+        maxlength="300"
+        (focus)="showSubmit=true"
+        (focusout)="showSubmit=false"
+        [(ngModel)]="comment">
+      </textarea>
+      <span class="char-counter">
+        {{ comment.length }} / 300
+      </span>
+      <button
+        *ngIf="showSubmit" type="submit">
+        Comment
+      </button>
+    </form>
+    <div class="comments">
+      <div class="comment">
+        <span class="audience-name">
+          John Says
+        </span>
+        <div class="audience-comment">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi. Praesent vulputate justo vel libero rutrum, et euismod sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. Morbi id porta neque. Vestibulum laoreet volutpat risus non hendrerit. Vestibulum sapien leo, varius quis finibus nec, iaculis eget lorem. In nec ex elit.
+        </div>
+      </div>
+      <div class="comment">
+        <span class="audience-name">
+          John Says
+        </span>
+        <div class="audience-comment">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi. Praesent vulputate justo vel libero rutrum, et euismod sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. Morbi id porta neque. Vestibulum laoreet volutpat risus non hendrerit. Vestibulum sapien leo, varius quis finibus nec, iaculis eget lorem. In nec ex elit.
+        </div>
+      </div>
+      <div class="comment">
+        <span class="audience-name">
+          John Says
+        </span>
+        <div class="audience-comment">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi. Praesent vulputate justo vel libero rutrum, et euismod sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. Morbi id porta neque. Vestibulum laoreet volutpat risus non hendrerit. Vestibulum sapien leo, varius quis finibus nec, iaculis eget lorem. In nec ex elit.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div [@transitionInOut] class="actions-container">
+    <div class="mat-elevation-z8 actions">
+      <span class="icon">
+        <img src="assets/clap.png" alt="Applaud">
+       </span>
+       <span class="icon" (click)="toggleCommentSection()">
+         <i class="fa fa-comment"></i>
+       </span>
+    </div>
+  </div>
+</div>

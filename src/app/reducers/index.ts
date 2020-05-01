@@ -8,10 +8,13 @@ import {
 
 import { environment } from '../../environments/environment';
 import * as fromCore from '../core/state';
+import { coreReducer } from '../core/state/core.reducers';
 
-type State = fromCore.CoreState;
-
+interface State {
+  app: fromCore.CoreState;
+}
 export const reducers: ActionReducerMap<State> = {
+  app: coreReducer,
 };
 
 

@@ -9,7 +9,7 @@ export class ArticlesComponent implements OnInit {
   sideNavMode: SideNavMode = SideNavMode.Side;
 
   nav: Nav = {
-    iconUrl: 'assets/avatar.jpg',
+    iconUrl: 'assets/avatar.png',
     items: [
       { name: 'All', path: null },
       { name: 'Tech', path: null },

@@ -1,0 +1,155 @@
+.backdrop {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    border: 1px solid white;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+
+}
+
+.wrapper {
+  width: 55%;
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  background-color: rgba($color: #000, $alpha: .8);
+  z-index: 4000;
+}
+
+.actions-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 8rem;
+    background-color: rgba($color: #fff, $alpha: .2);
+    width: 2rem;
+    padding: .3rem;
+    margin-top: 10%;
+    box-sizing: content-box;
+
+    .icon {
+      display: inline-flex;
+      margin-bottom: 1rem;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 2rem;
+      font-size: 2rem;
+
+      img {
+        display: inline-block;
+        width: inherit;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+  }
+}
+
+
+.comment-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  top: .5%;
+
+  textarea {
+    display: block;
+    width: 100%;
+    font-size: 90%;
+    background-color: rgba($color: #eeeeef, $alpha: .7);
+    color: #fff;
+    padding: .5rem;
+    padding-top: .8rem;
+    resize: none;
+    margin-bottom: -.35rem;
+    height: 8.5rem;
+
+    transition: height .4s ease-in-out;
+
+    &:focus {
+      height: 6rem;
+    }
+
+  }
+
+  button[type="submit"] {
+    display: block;
+    background-color: rgb(30, 30, 50);
+    color:  rgba($color: #fff, $alpha: .8);
+    width: 100%;
+    padding: .5rem;
+    outline: none;
+    border: none;
+  }
+
+  .char-counter {
+
+    position: absolute;
+    top: 0;
+    font-size: 75%;
+    letter-spacing: 0;
+    font-size: 60%;
+    padding: 2px;
+    padding-left: 5px;
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    right: 0;
+    font-weight: bold;
+  }
+}
+
+.comments {
+  margin-top: 1rem;
+  width: 109%;
+  height: 79vh;
+  position: relative;
+  top: -1%;
+  left: 1%;
+  padding-bottom: 2rem;
+  overflow-y: auto;
+
+
+  .comment {
+    padding: 1rem;
+    display: flex;
+    position: relative;
+    color: white;
+    width: 100%;
+
+    .audience-name {
+      text-decoration: underline;
+      padding-right: 10px;
+      text-align: right;
+      width: 30%;
+    }
+
+    .audience-comment {
+      width: 70%;
+      font-size: 80%
+    }
+
+    margin-bottom: 1rem;
+  }
+
+  transition: all .5s ease-in-out;
+
+}
+
+.hide-form {
+  width: 4rem;
+  background: transparent;
+}
