@@ -27,7 +27,7 @@
         {{ comment.length }} / 300
       </span>
       <button
-        *ngIf="showSubmit" type="submit">
+        *ngIf="showSubmit || commentArea.dirty" type="submit">
         Comment
       </button>
     </form>

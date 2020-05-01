@@ -18,6 +18,7 @@
   padding: 10px;
   background-color: rgba($color: #000, $alpha: .8);
   z-index: 4000;
+  transition: width .5s ease-in-out;
 }
 
 .actions-container {
