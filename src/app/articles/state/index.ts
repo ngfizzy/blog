@@ -31,6 +31,11 @@ export const selectArticle = createSelector(
   state => state.article,
 );
 
+export const getSelectedArticleActivities = createSelector(
+  selectArticle,
+  article => article.audienceActivities,
+);
+
 export const getAllArticles = createSelector(
   getArticleFeatureState,
   state => state.articles,

@@ -2,11 +2,9 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
-    border: 1px solid white;
     z-index: 2000;
     top: 0;
     left: 0;
-
 }
 
 .wrapper {
@@ -19,6 +17,9 @@
   background-color: rgba($color: #000, $alpha: .8);
   z-index: 4000;
   transition: width .5s ease-in-out;
+  .comments-container {
+    width: 152%;
+  }
 }
 
 .actions-container {
@@ -32,10 +33,10 @@
     flex-direction: column;
     justify-content: space-between;
     height: 8rem;
-    background-color: rgba($color: #fff, $alpha: .2);
+    background-color: rgba($color: #fff, $alpha: .5);
     width: 2rem;
     padding: .3rem;
-    margin-top: 10%;
+    margin-top: 95%;
     box-sizing: content-box;
 
     .icon {
@@ -60,7 +61,6 @@
   }
 }
 
-
 .comment-form {
   position: relative;
   display: flex;
@@ -81,7 +81,7 @@
     height: 8.5rem;
     margin-bottom: .1rem;
 
-    &:focus {
+    &.focus {
       height: 6rem;
     }
     transition: all .5s ease-in-out;
@@ -98,7 +98,6 @@
   }
 
   .char-counter {
-
     position: absolute;
     top: 0;
     font-size: 75%;
@@ -113,12 +112,11 @@
   }
 
   transition: all .5s ease-in-out;
-
 }
 
 .comments {
   margin-top: 1rem;
-  width: 109%;
+  width: 110%;
   height: 79vh;
   position: relative;
   top: -1%;
@@ -139,6 +137,7 @@
       padding-right: 10px;
       text-align: right;
       width: 30%;
+      font-size: 80%;
     }
 
     .audience-comment {
@@ -150,7 +149,6 @@
   }
 
   transition: all .5s ease-in-out;
-
 }
 
 .hide-form {

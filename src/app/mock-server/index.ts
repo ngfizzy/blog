@@ -1,4 +1,4 @@
-import { Tag, Article, Category, Audience } from '../shared/models';
+import { Tag, Article, Category, Audience, AudienceActivity } from '../shared/models';
 
 const usedIds = [];
 
@@ -63,7 +63,9 @@ function generateArticle() {
     createdAt: new Date().toString(),
     updatedAt: new Date().toString(),
     tags: [],
-    categories: [ getRandomCategory() ]
+    categories: [ getRandomCategory() ],
+    audienceActivities: generateRandomAudienceActivities(id)
+
   };
 
   return article;
@@ -223,4 +225,45 @@ export function findAudience(options: Partial<Audience>) {
   }
 
   return audience;
+}
+
+function generateRandomAudienceActivities(articleId: number, max = 10): AudienceActivity[] {
+  const noOfComments = Math.round(Math.random() * max);
+
+  const seededAudienceNames: Audience[] = [
+    { id: 0, audienceName: 'Morgan', deviceUUID: 'aowk' },
+    { id: 1, audienceName: 'Jordan', deviceUUID: 'akwox' },
+    { id: 2, audienceName: 'John', deviceUUID: 'adkiklals', },
+    { id: 3, audienceName: 'Aisha', deviceUUID: '12svfas', },
+    { id: 4, audienceName: 'Jen', deviceUUID: 'lliw.zow', },
+    { id: 5, audienceName: 'Yung', deviceUUID: 'alilqla.oiaoso', },
+    { id: 6, audienceName: 'Wanja', deviceUUID: '.aoioqlaoo.aose' },
+  ];
+
+  function fetchRandomAudience(): Audience {
+    const index = Math.floor(Math.random() * seededAudienceNames.length);
+
+    return seededAudienceNames[index];
+  }
+
+  const activities: AudienceActivity[] = [];
+
+  for (let i = 0; i < noOfComments; i++) {
+    const audience = fetchRandomAudience();
+    const  applauds = Math.round(Math.random() * 50);
+
+    activities.push({
+      audience,
+      applauds,
+      articleId,
+      createdAt: new Date().toString(),
+      comments: [{
+        comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi. Praesent vulputate justo vel libero rutrum, et euismod sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. Morbi id porta neque. Vestibulum',
+        createdAt: new Date().toString()
+      },
+    ],
+    });
+  }
+
+  return activities;
 }

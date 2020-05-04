@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
 import * as fromArticles from '../state';
@@ -12,7 +12,8 @@ import { ArticlesState } from '../state/articles.state';
 import { Article } from '../../shared/models/article.interface';
 import { ArticleComponentConfig } from '../../shared/models/article-component-config.interface';
 import { Title, Meta } from '@angular/platform-browser';
-import { Audience } from 'src/app/shared/models';
+import { Audience, AudienceActivity } from 'src/app/shared/models';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   templateUrl: './articles-list.component.html',
@@ -20,6 +21,14 @@ import { Audience } from 'src/app/shared/models';
 })
 export class ArticlesListComponent implements OnInit {
   articles$: Observable<Article[]>;
+
+
+  private applaudsWatcherSubject$ = new Subject();
+  private applaudsWatcher$ = this.applaudsWatcherSubject$.asObservable()
+    .pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+    );
 
   selectedArticle: Article;
   articleConfig: ArticleComponentConfig = {
@@ -30,6 +39,7 @@ export class ArticlesListComponent implements OnInit {
     isFull: true,
   };
   audience$: Observable<Audience>;
+  audienceActivities$: Observable<AudienceActivity[]>;
   hideScrollBar: boolean;
 
 
@@ -46,8 +56,7 @@ constructor(
 
     this.articles$ = this.store.pipe(select(fromArticles.getAllArticles));
     this.audience$ = this.store.pipe(select(fromApp.getAudience));
-
-    this.audience$.subscribe((audience) => console.log('audience>.....>>>>>>>>>>>>', audience));
+    this.audienceActivities$ = this.store.pipe(select(fromArticles.getSelectedArticleActivities));
 
     this.title.setTitle(`NgFizzy Blog - Tech`);
     this.meta.updateTag({
@@ -56,8 +65,14 @@ constructor(
     });
   }
 
+  submitApplauds(applauds) {
+    this.applaudsWatcherSubject$.next(applauds);
+  }
+
   setSelectedArticle(article: Article) {
     this.selectedArticle = article;
+
+    this.store.dispatch(new fromArticlesActions.GetOneArticle(article.id));
 
     this.updateTitleAndMeta(article);
   }
@@ -80,6 +95,5 @@ constructor(
         content: article.title
       });
     }
-    }
-
+  }
 }

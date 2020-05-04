@@ -6,7 +6,12 @@
 ></div>
 
 <div class="wrapper" [ngClass]="{ 'hide-form': !isCommentSectionOpen}">
-  <div class="comments-container" *ngIf="isCommentSectionOpen">
+  <div
+    class="comments-container"
+    *ngIf="isCommentSectionOpen"
+  >
+    <h4 class="text-center text-underline">Comment Section</h4>
+
     <form
       *ngIf="isCommentSectionOpen"
       (submit)="submitComment()"
@@ -19,6 +24,7 @@
         #commentArea="ngModel"
         minlength="4"
         maxlength="300"
+        [ngClass]="{ 'focus': showSubmit || commentArea.dirty }"
         (focus)="showSubmit=true"
         (focusout)="showSubmit=false"
         [(ngModel)]="comment">
@@ -32,35 +38,28 @@
       </button>
     </form>
     <div class="comments">
-      <div class="comment">
+      <ng-container
+        *ngIf="comments"
+      >
+      <div class="comment" *ngFor="let com of comments">
         <span class="audience-name">
-          John Says
+          <span *ngIf="com.audience">
+            {{ com.audience }} Says
+          </span>
+          <span class="audience-name" *ngIf="!com.audience">
+            Anonymous Says
+          </span>
         </span>
         <div class="audience-comment">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi. Praesent vulputate justo vel libero rutrum, et euismod sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. Morbi id porta neque. Vestibulum laoreet volutpat risus non hendrerit. Vestibulum sapien leo, varius quis finibus nec, iaculis eget lorem. In nec ex elit.
+         {{ com.comment}}
         </div>
       </div>
-      <div class="comment">
-        <span class="audience-name">
-          John Says
-        </span>
-        <div class="audience-comment">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi. Praesent vulputate justo vel libero rutrum, et euismod sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. Morbi id porta neque. Vestibulum laoreet volutpat risus non hendrerit. Vestibulum sapien leo, varius quis finibus nec, iaculis eget lorem. In nec ex elit.
-        </div>
-      </div>
-      <div class="comment">
-        <span class="audience-name">
-          John Says
-        </span>
-        <div class="audience-comment">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi. Praesent vulputate justo vel libero rutrum, et euismod sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. Morbi id porta neque. Vestibulum laoreet volutpat risus non hendrerit. Vestibulum sapien leo, varius quis finibus nec, iaculis eget lorem. In nec ex elit.
-        </div>
-      </div>
+      </ng-container>
     </div>
   </div>
   <div [@transitionInOut] class="actions-container">
     <div class="mat-elevation-z8 actions">
-      <span class="icon">
+      <span class="icon" (click)="clap()">
         <img src="assets/clap.png" alt="Applaud">
        </span>
        <span class="icon" (click)="toggleCommentSection()">

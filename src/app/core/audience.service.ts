@@ -19,7 +19,8 @@ export class AudienceService {
    */
   get isAudienceSaved$(): Observable<boolean> {
     return this.audience$ &&
-      this.audience$.pipe(map(aud => aud && !!aud.id));
+      this.audience$.pipe(map(aud => aud && !!aud.id))
+      ;
   }
 
   constructor() {
