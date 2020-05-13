@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { Article } from '../shared/models/article.interface';
-import { generateArticles,  getAllArticles } from '../mock-server';
+import { generateArticles,  getAllArticles, applaud } from '../mock-server';
+import { ApplaudPayload } from '../shared/models';
 
 @Injectable({providedIn: 'root'})
 export class ArticlesService {
@@ -25,5 +26,11 @@ export class ArticlesService {
     );
 
     return of(article);
+  }
+
+  applaud(applaudPayload: ApplaudPayload) {
+    const audienceActivity = applaud(applaudPayload);
+
+    return of(audienceActivity);
   }
 }

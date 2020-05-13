@@ -3,7 +3,7 @@ import * as fromArticle from './';
 import { Store, Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { Actions, ofType, Effect } from '@ngrx/effects';
-import { catchError, mergeMap, map } from 'rxjs/operators';
+import { catchError, mergeMap, map, switchMap } from 'rxjs/operators';
 
 import * as articlesActions from './articles.actions';
 import { ArticlesService } from '../../core/articles.service';
@@ -35,5 +35,15 @@ export class ArticleEffects {
         catchError((error) => of(new articlesActions.GetOneArticleFailure(error.message)))
       ),
     ),
+  );
+
+  @Effect()
+  applaud$: Observable<Action> = this.actions$.pipe(
+    ofType(articlesActions.ArticlesActionTypes.Applaud),
+    map(action => (action as articlesActions.Applaud).payload),
+    switchMap(payload => this.articlesService.applaud(payload)
+      .pipe(
+        map((activities) => new articlesActions.ApplaudSuccess(activities))
+      ))
   );
 }

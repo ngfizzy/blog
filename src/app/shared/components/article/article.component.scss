@@ -10,7 +10,8 @@
   transition: top 1s ease-in-out;
 
   .card {
-    background-color: rgba($color: #1E1E24, $alpha: 0.95);    color: hsla(0,0%,100%,.8);
+    background-color: rgba($color: #1e1e24, $alpha: 0.95);
+    color: hsla(0, 0%, 100%, 0.8);
   }
 
   .title {
@@ -38,9 +39,9 @@
     .title {
       height: 80%;
       font-size: 80%;
-        a {
-          color: #000;
-        }
+      a {
+        color: #000;
+      }
     }
   }
 
@@ -57,11 +58,9 @@
 
 .card-container.closed {
   .card-body {
-    transition: max-height .7s ease-out;
+    transition: max-height 0.7s ease-out;
     max-height: 10rem;
     overflow: hidden;
     text-overflow: hidden;
   }
 }
-
-

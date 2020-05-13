@@ -1,6 +1,7 @@
 import { Audience } from './audience.interface';
 
 export interface AudienceActivity {
+  id: number;
   audience: Audience;
   applauds?: number;
   articleId: number;
@@ -11,4 +12,6 @@ export interface AudienceActivity {
 export interface Comment {
   comment: string;
   createdAt: string;
+  id: number;
+  articleId: number;
 }

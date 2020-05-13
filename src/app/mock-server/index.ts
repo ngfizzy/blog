@@ -1,4 +1,26 @@
-import { Tag, Article, Category, Audience, AudienceActivity } from '../shared/models';
+import {
+  Tag,
+  Article,
+  Category,
+  Audience,
+  AudienceActivity,
+  ApplaudPayload,
+  Comment,
+  AudienceActivityUpdateSuccessPayload
+} from '../shared/models';
+
+
+const audienceActivities: AudienceActivity[] = [];
+const audienceComments: Comment[] = [];
+const audienceRecord: Audience[] = [
+  { id: 0, audienceName: 'Morgan', deviceUUID: 'aowk' },
+  { id: 1, audienceName: 'Jordan', deviceUUID: 'akwox' },
+  { id: 2, audienceName: 'John', deviceUUID: 'adkiklals', },
+  { id: 3, audienceName: 'Aisha', deviceUUID: '12svfas', },
+  { id: 4, audienceName: 'Jen', deviceUUID: 'lliw.zow', },
+  { id: 5, audienceName: 'Yung', deviceUUID: 'alilqla.oiaoso', },
+  { id: 6, audienceName: 'Wanja', deviceUUID: '.aoioqlaoo.aose' },
+];
 
 const usedIds = [];
 
@@ -209,6 +231,17 @@ export function getAllArticles() {
 export function findAudience(options: Partial<Audience>) {
   let audience: Audience = null;
 
+  function fillMissingAudienceDetails(foundAudience: Audience, providedAudienceAudience: Partial<Audience>) {
+    const { email, audienceName } = providedAudienceAudience;
+    if (email) {
+      foundAudience.email = email;
+    }
+
+    if (audienceName) {
+      foundAudience.audienceName = audienceName;
+    }
+  }
+
   if (options.id) {
     audience = audienceList.find(aud => aud.id === options.id);
   }
@@ -224,46 +257,133 @@ export function findAudience(options: Partial<Audience>) {
     audience = audienceList.find(aud => aud.deviceUUID === options.deviceUUID);
   }
 
+  fillMissingAudienceDetails(audience, options);
+
   return audience;
 }
+
+
 
 function generateRandomAudienceActivities(articleId: number, max = 10): AudienceActivity[] {
   const noOfComments = Math.round(Math.random() * max);
 
-  const seededAudienceNames: Audience[] = [
-    { id: 0, audienceName: 'Morgan', deviceUUID: 'aowk' },
-    { id: 1, audienceName: 'Jordan', deviceUUID: 'akwox' },
-    { id: 2, audienceName: 'John', deviceUUID: 'adkiklals', },
-    { id: 3, audienceName: 'Aisha', deviceUUID: '12svfas', },
-    { id: 4, audienceName: 'Jen', deviceUUID: 'lliw.zow', },
-    { id: 5, audienceName: 'Yung', deviceUUID: 'alilqla.oiaoso', },
-    { id: 6, audienceName: 'Wanja', deviceUUID: '.aoioqlaoo.aose' },
-  ];
-
   function fetchRandomAudience(): Audience {
-    const index = Math.floor(Math.random() * seededAudienceNames.length);
+    const index = Math.floor(Math.random() * audienceRecord.length);
 
-    return seededAudienceNames[index];
+    return audienceRecord[index];
   }
 
-  const activities: AudienceActivity[] = [];
+  const articleActivities: AudienceActivity[] = [];
 
   for (let i = 0; i < noOfComments; i++) {
     const audience = fetchRandomAudience();
     const  applauds = Math.round(Math.random() * 50);
 
-    activities.push({
+    const activityId = !audienceActivities.length ?
+      0
+      :
+      audienceActivities[audienceActivities.length - 1].id + 1;
+
+    const activity = {
+      id: activityId,
       audience,
       applauds,
       articleId,
       createdAt: new Date().toString(),
-      comments: [{
-        comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi. Praesent vulputate justo vel libero rutrum, et euismod sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. Morbi id porta neque. Vestibulum',
-        createdAt: new Date().toString()
-      },
-    ],
-    });
+      comments: [ generateComment(articleId) ]
+    };
+
+    audienceActivities.push(activity);
+    articleActivities.push(activity);
   }
 
-  return activities;
+  return articleActivities;
+}
+
+function generateComment(articleId: number) {
+
+  const comment =  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
+    ' Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, ' +
+    'in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida ' +
+    'consectetur, sapien arcu bibendum orci, ac pellentesque lectus ' +
+    'libero in mi. Praesent vulputate justo vel libero rutrum, et euismod ' +
+    'sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. ' +
+    'Morbi id porta neque. Vestibulum';
+
+  return createComment(comment, articleId);
+}
+
+export function createComment(comment: string, articleId): Comment {
+  const commentId = !audienceComments.length ?
+    0
+    :
+    audienceComments[audienceComments.length - 1].id + 1;
+
+  const comm = {
+    articleId,
+    comment,
+    id: commentId,
+    createdAt: new Date().toString(),
+  };
+
+  audienceComments.push(comm);
+
+  return comm;
+}
+export function findOrCreateAudience(criteria: Partial<Audience>): Audience {
+  let audience = findAudience(criteria);
+
+  if (!audience) {
+    audience = createAudience(criteria);
+  }
+
+  return audience;
+}
+
+export function createAudience(audience: Partial<Audience>): Audience {
+  const lastAudienceId = audienceRecord[audienceRecord.length - 1 ].id;
+
+  audience.id = lastAudienceId + 1;
+
+  audienceRecord.push(audience as Audience);
+
+  return audience as Audience;
+}
+
+
+export function applaud(payload: ApplaudPayload): AudienceActivityUpdateSuccessPayload {
+  const { applauds, articleId, audience: currentAudience } = payload;
+
+  const audience = findOrCreateAudience(currentAudience);
+  const article = articles.find(({id}) => id === articleId);
+
+
+  let act = article.audienceActivities.find(activity => {
+    return activity.audience.id === audience.id; });
+
+  if (act) {
+    act.applauds = applauds;
+  } else {
+    act = createAudienceActivity(payload);
+
+    audienceActivities.push(act);
+    article.audienceActivities.push(act);
+  }
+
+  return { articleId, activities: article.audienceActivities };
+}
+
+export function createAudienceActivity(activity: Partial<AudienceActivity>): AudienceActivity {
+  const activityId = !audienceActivities.length ?
+    0
+    :
+    audienceActivities[audienceActivities.length - 1].id + 1;
+
+  activity.id = activityId;
+  activity.createdAt = new Date().toString();
+
+
+  audienceActivities.push(activity as AudienceActivity);
+
+  return activity as AudienceActivity;
 }

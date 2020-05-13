@@ -59,6 +59,8 @@
   </div>
   <div [@transitionInOut] class="actions-container">
     <div class="mat-elevation-z8 actions">
+      <span *ngIf="!isClapping" class="applauds-count">{{ totalApplauds }}</span>
+      <span *ngIf="isClapping" class="applauds-count">{{ currentAudienceApplauds }}</span>
       <span class="icon" (click)="clap()">
         <img src="assets/clap.png" alt="Applaud">
        </span>

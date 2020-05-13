@@ -152,5 +152,8 @@
       }
     }
   },
-  "defaultProject": "blog"
+  "defaultProject": "blog",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

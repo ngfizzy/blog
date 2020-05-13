@@ -39,6 +39,15 @@
     margin-top: 95%;
     box-sizing: content-box;
 
+    .applauds-count {
+      color: #f6f6f6;
+      font-weight: bolder;
+      position: relative;
+      top: 39%;
+      right: -61%;
+      font-size: 74%;
+    }
+
     .icon {
       display: inline-flex;
       margin-bottom: 1rem;
