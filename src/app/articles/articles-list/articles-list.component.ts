@@ -82,7 +82,6 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
   }
 
   submitComment(comment: CommentPayload) {
-    console.log('this is aclled>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
     this.store.dispatch(new fromArticlesActions.AddComment(comment));
   }
 

@@ -43,7 +43,7 @@
         {{ comment.length }} / 300
       </span>
       <button
-        *ngIf="comment.length > 4" 
+        *ngIf="comment.length > 4"
         type="button"
         (click)="isCollectingAudDetails=true">
         Next
@@ -54,7 +54,7 @@
       <ng-container
         *ngIf="comments"
       >
-      <div class="comment" *ngFor="let com of comments">
+      <div class="comment" *ngFor="let com of comments | orderBy: 'com.date' : true">
         <span class="audience-name">
           <span *ngIf="com.audience">
             {{ com.audience }} Says
