@@ -18,8 +18,8 @@
     >
       <ng-container *ngIf="isCollectingAudDetails">
         <span class=text-info>If you do not provide email or name, your comment would appear as anonymous</span>
-        <input type="text" name="name" [ngModel]="name" placeholder="name (optional)"/>
-        <input #emailInput="ngModel" email type="email" name="email" [ngModel]="email" placeholder="email (optional)"/>
+        <input type="text" name="name" [(ngModel)]="name" placeholder="name (optional)"/>
+        <input #emailInput="ngModel" email type="email" name="email" [(ngModel)]="email" placeholder="email (optional)"/>
         <span class="email-error" *ngIf="emailInput.invalid">Wrong email format</span>
         <span class="buttons-wrapper">
           <button class="back" (click)="isCollectingAudDetails=false">Back to comment</button>
@@ -55,11 +55,11 @@
         *ngIf="comments"
       >
       <div class="comment" *ngFor="let com of comments | orderBy: 'com.date' : true">
-        <span class="audience-name">
+        <span class="text-info audience-name">
           <span *ngIf="com.audience">
             {{ com.audience }} Says
           </span>
-          <span class="audience-name" *ngIf="!com.audience">
+          <span class="text-info audience-name" *ngIf="!com.audience">
             Anonymous Says
           </span>
         </span>

@@ -1,3 +1,4 @@
+import { GetCurrentAudience } from './../../../core/state/core.actions';
 import {
   Component,
   OnInit,
@@ -9,7 +10,12 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { Article, Audience, ApplaudPayload, CommentPayload } from '../../models';
+import {
+  Article,
+  Audience,
+  ApplaudPayload,
+  CommentPayload,
+} from '../../models';
 import {
   trigger,
   state,
@@ -60,8 +66,8 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   isCollectingAudDetails = false;
   canContinue = false;
   comment = '';
-  email = '';
-  name = '';
+  email: string;
+  name: string;
 
   isClapping = false;
 
@@ -114,13 +120,21 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.activities && changes.activities.currentValue) {
       this.isClapping = false;
+      this.isCollectingAudDetails = false;
+      this.comment = '';
+    }
+
+    if (changes.currentAudience && !changes.currentAudience.isFirstChange()) {
+      this.email = (this.currentAudience && this.currentAudience.email) || '';
+      this.name =
+        (this.currentAudience && this.currentAudience.audienceName) || '';
     }
   }
 
   submitComment() {
-    const audience = {
+    const audience: Audience = {
       ...this.currentAudience,
-      name: this.name,
+      audienceName: this.name,
       email: this.email,
     };
 

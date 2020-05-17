@@ -237,12 +237,11 @@ export function findAudience(options: Partial<Audience>) {
     providedAudienceAudience: Partial<Audience>
   ) {
     const { email, audienceName } = providedAudienceAudience;
-    if (email) {
-      foundAudience.email = email;
-    }
 
-    if (audienceName) {
+    if (foundAudience) {
+      foundAudience.email = email;
       foundAudience.audienceName = audienceName;
+
     }
   }
 
