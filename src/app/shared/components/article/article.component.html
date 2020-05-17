@@ -24,6 +24,7 @@
       >
       </app-copy-to-clipboard>
     </mat-card-title>
+    <span class="text-info article-date">{{ article.createdAt | date }}</span>
     <mat-card-content *ngIf="!isMini" class="card-body" [innerHtml]="articleBody" markdown>
     </mat-card-content>
   </mat-card>
