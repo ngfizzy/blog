@@ -1,4 +1,12 @@
-import { Component, EventEmitter, OnInit, Input, SimpleChanges, OnChanges, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Input,
+  SimpleChanges,
+  OnChanges,
+  Output,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleComponentConfig } from '../../models/article-component-config.interface';
 import { Article } from '../../models/article.interface';
@@ -17,7 +25,6 @@ export class ArticleComponent implements OnInit, OnChanges {
   @Input() config: ArticleComponentConfig;
   @Input() article: Article;
 
-
   @Output() notify = new EventEmitter<string>();
   @Output() opened = new EventEmitter<Article>();
 
@@ -34,6 +41,10 @@ export class ArticleComponent implements OnInit, OnChanges {
   shouldHideShadows: boolean;
   shouldShowActions: boolean;
   articleUrl: string;
+
+  get themeImage() {
+    return this.article && this.article.themeImage;
+  }
 
   constructor(private router: ActivatedRoute) {}
 
