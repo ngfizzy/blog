@@ -1,9 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
+import {
+  MatProgressSpinnerModule,
+  MatSpinner,
+} from '@angular/material/progress-spinner';
 import { MatInputModule, MatInput } from '@angular/material/input';
-import { MatFormFieldModule, MatFormField, MatLabel } from '@angular/material/form-field';
+import {
+  MatFormFieldModule,
+  MatFormField,
+  MatLabel,
+} from '@angular/material/form-field';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule, MatButton } from '@angular/material/button';
@@ -21,11 +28,13 @@ import {
   MatSidenavContent,
   MatDrawerContainer,
   MatDrawer,
-  MatDrawerContent } from '@angular/material/sidenav';
+  MatDrawerContent,
+} from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { ClipboardModule } from 'ngx-clipboard';
+import { OrderModule } from 'ngx-order-pipe';
 
 import { ArticleComponent } from './components/article/article.component';
 import { NotFoundComponent } from './components/Not Found/not-found.component';
@@ -77,6 +86,7 @@ import { CopyToClipboardComponent } from './components/copy-to-clipboard/copy-to
     CopyToClipboardComponent,
     RouterModule,
     MatDialogModule,
+    OrderModule,
   ],
   declarations: [
     SpinnerComponent,
@@ -85,6 +95,6 @@ import { CopyToClipboardComponent } from './components/copy-to-clipboard/copy-to
     SideNavComponent,
     CopyToClipboardComponent,
   ],
-  providers: [ ]
+  providers: [],
 })
 export class SharedModule {}

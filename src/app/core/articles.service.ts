@@ -1,7 +1,13 @@
+import { CommentPayload } from './../shared/models/audience-activity-payloads.interface';
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { Article } from '../shared/models/article.interface';
-import { generateArticles,  getAllArticles, applaud } from '../mock-server';
+import {
+  generateArticles,
+  getAllArticles,
+  applaud,
+  addComment
+} from '../mock-server';
 import { ApplaudPayload } from '../shared/models';
 
 @Injectable({providedIn: 'root'})
@@ -30,6 +36,12 @@ export class ArticlesService {
 
   applaud(applaudPayload: ApplaudPayload) {
     const audienceActivity = applaud(applaudPayload);
+
+    return of(audienceActivity);
+  }
+
+  addComment(commentPayload: CommentPayload) {
+    const audienceActivity = addComment(commentPayload);
 
     return of(audienceActivity);
   }

@@ -6,6 +6,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { ToastrModule } from 'ngx-toastr';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,10 +18,7 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 import { CoreEffects } from './core/state/core.effects';
 
 @NgModule({
-  declarations: [
-    ...AppRoutingModule.routeComponents,
-    AppComponent,
-  ],
+  declarations: [...AppRoutingModule.routeComponents, AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,18 +27,21 @@ import { CoreEffects } from './core/state/core.effects';
     CoreModule,
     SharedModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+    }),
     ToastrModule.forRoot({
       timeOut: 3000,
       preventDuplicates: true,
     }),
-    EffectsModule.forRoot([ AppEffects, CoreEffects ]),
+    EffectsModule.forRoot([AppEffects, CoreEffects]),
     HttpClientModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
     HttpClientModule,
-    MarkdownModule.forRoot({ loader: HttpClient })
+    MarkdownModule.forRoot({ loader: HttpClient }),
   ],
   providers: [],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

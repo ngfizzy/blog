@@ -14,28 +14,41 @@
 
     <form
       *ngIf="isCommentSectionOpen"
-      (submit)="submitComment()"
       class="mat-elevation-z2 comment-form"
     >
-      <textarea
+      <ng-container *ngIf="isCollectingAudDetails">
+        <span class=text-info>If you do not provide email or name, your comment would appear as anonymous</span>
+        <input type="text" name="name" [ngModel]="name" placeholder="name (optional)"/>
+        <input #emailInput="ngModel" email type="email" name="email" [ngModel]="email" placeholder="email (optional)"/>
+        <span class="email-error" *ngIf="emailInput.invalid">Wrong email format</span>
+        <span class="buttons-wrapper">
+          <button class="back" (click)="isCollectingAudDetails=false">Back to comment</button>
+          <button class="submit" (click)="submitComment()">Submit comment</button>
+        </span>
+      </ng-container>
+      <ng-container *ngIf="!isCollectingAudDetails">
+        <textarea
         name="comment"
         placeholder="Please drop a comment"
         autofocus
         #commentArea="ngModel"
         minlength="4"
         maxlength="300"
-        [ngClass]="{ 'focus': showSubmit || commentArea.dirty }"
-        (focus)="showSubmit=true"
-        (focusout)="showSubmit=false"
+        [ngClass]="{ 'focus': comment.length > 4 }"
+        (focus)="canContinue=true"
+        (focusout)="canContinue=false"
         [(ngModel)]="comment">
       </textarea>
       <span class="char-counter">
         {{ comment.length }} / 300
       </span>
       <button
-        *ngIf="showSubmit || commentArea.dirty" type="submit">
-        Comment
+        *ngIf="comment.length > 4" 
+        type="button"
+        (click)="isCollectingAudDetails=true">
+        Next
       </button>
+      </ng-container>
     </form>
     <div class="comments">
       <ng-container

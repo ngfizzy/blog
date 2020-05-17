@@ -1,7 +1,12 @@
 import { Action } from '@ngrx/store';
 
 import { Article } from '../../shared/models/article.interface';
-import { ApplaudPayload, AudienceActivity, AudienceActivityUpdateSuccessPayload } from 'src/app/shared/models';
+import {
+  ApplaudPayload,
+  AudienceActivity,
+  AudienceActivityUpdateSuccessPayload,
+  CommentPayload,
+} from 'src/app/shared/models';
 
 export const enum ArticlesActionTypes {
   GetAllArticles = '[Articles] Get All Articles',
@@ -10,8 +15,10 @@ export const enum ArticlesActionTypes {
   GetOneArticle = '[Articles] Get One Article',
   GetOneArticleSuccess = '[Articles] Get One Article Success',
   GetOneArticleFailure = '[Articles] Get One Article Failure',
-  Applaud = '[Article] Applaud',
-  ApplaudSuccess = '[Article] Applaud Success'
+  Applaud = '[Articles] Applaud',
+  ApplaudSuccess = '[Articles] Applaud Success',
+  AddComment = '[Articles] Add Comment',
+  AddCommentSuccess = '[Articles] Add Comment Success',
 }
 
 export class GetAllArticles implements Action {
@@ -48,7 +55,6 @@ export class GetOneArticleFailure implements Action {
   constructor(public payload: string) {}
 }
 
-
 export class Applaud implements Action {
   readonly type = ArticlesActionTypes.Applaud;
 
@@ -58,14 +64,29 @@ export class Applaud implements Action {
 export class ApplaudSuccess implements Action {
   readonly type = ArticlesActionTypes.ApplaudSuccess;
 
-  constructor(public payload: AudienceActivityUpdateSuccessPayload ) {}
+  constructor(public payload: AudienceActivityUpdateSuccessPayload) {}
 }
 
-export type ArticlesActions = GetAllArticles
-| GetAllArticlesSuccess
-| GetAllArticlesFailure
-| GetOneArticle
-| GetOneArticleSuccess
-| GetOneArticleFailure
-| Applaud
-| ApplaudSuccess;
+export class AddComment implements Action {
+  readonly type = ArticlesActionTypes.AddComment;
+
+  constructor(public payload: CommentPayload) {}
+}
+
+export class AddCommentSuccess implements Action {
+  readonly type = ArticlesActionTypes.AddCommentSuccess;
+
+  constructor(public payload: AudienceActivityUpdateSuccessPayload) {}
+}
+
+export type ArticlesActions =
+  | GetAllArticles
+  | GetAllArticlesSuccess
+  | GetAllArticlesFailure
+  | GetOneArticle
+  | GetOneArticleSuccess
+  | GetOneArticleFailure
+  | Applaud
+  | ApplaudSuccess
+  | AddComment
+  | AddCommentSuccess;

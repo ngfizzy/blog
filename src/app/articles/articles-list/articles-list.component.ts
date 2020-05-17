@@ -16,6 +16,7 @@ import {
   Audience,
   AudienceActivity,
   ApplaudPayload,
+  CommentPayload,
 } from 'src/app/shared/models';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
@@ -78,6 +79,11 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  submitComment(comment: CommentPayload) {
+    console.log('this is aclled>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+    this.store.dispatch(new fromArticlesActions.AddComment(comment));
   }
 
   submitApplauds(applauds: ApplaudPayload) {

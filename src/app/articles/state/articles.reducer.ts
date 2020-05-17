@@ -67,7 +67,7 @@ export function articlesReducer(
           isLoading: false,
         },
       };
-    case ArticlesActionTypes.ApplaudSuccess:
+    case ArticlesActionTypes.ApplaudSuccess: {
       const { articleId, activities } = action.payload;
       const index = state.articles.findIndex((a) => a.id === articleId);
       const article = state.articles[index];
@@ -92,6 +92,44 @@ export function articlesReducer(
           },
         },
       };
+    }
+    case ArticlesActionTypes.AddComment:
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          article: {
+            ...state.selectedArticle.article,
+            audienceActivities: [
+              ...state.selectedArticle.article.audienceActivities,
+            ],
+          },
+          activitiesState: {
+            ...state.selectedArticle.activitiesState,
+            isLoading: true,
+          },
+        },
+      };
+    case ArticlesActionTypes.AddCommentSuccess: {
+      const articleIndex = state.articles.findIndex(
+        (art) => art.id === action.payload.articleId
+      );
+
+      const article = state.articles[articleIndex];
+
+      article.audienceActivities = [...action.payload.activities];
+      state.articles[articleIndex] = article;
+
+      return {
+        ...state,
+        articles: [...state.articles],
+        selectedArticle: {
+          ...state.selectedArticle,
+          article: { ...article },
+          isLoading: false,
+        },
+      };
+    }
     default:
       return state;
   }

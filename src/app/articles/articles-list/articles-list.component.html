@@ -20,6 +20,7 @@
       [currentAudience]="audience$ | async"
       [currentAudienceApplauds]="currentUserApplauds"
       [activities]="audienceActivities$ | async"
+      (addComment)="submitComment($event)"
     >
 
     </app-article-actions>

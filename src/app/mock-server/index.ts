@@ -1,3 +1,4 @@
+import { CommentPayload } from './../shared/models/audience-activity-payloads.interface';
 import {
   Tag,
   Article,
@@ -6,19 +7,18 @@ import {
   AudienceActivity,
   ApplaudPayload,
   Comment,
-  AudienceActivityUpdateSuccessPayload
+  AudienceActivityUpdateSuccessPayload,
 } from '../shared/models';
-
 
 const audienceActivities: AudienceActivity[] = [];
 const audienceComments: Comment[] = [];
 const audienceRecord: Audience[] = [
   { id: 0, audienceName: 'Morgan', deviceUUID: 'aowk' },
   { id: 1, audienceName: 'Jordan', deviceUUID: 'akwox' },
-  { id: 2, audienceName: 'John', deviceUUID: 'adkiklals', },
-  { id: 3, audienceName: 'Aisha', deviceUUID: '12svfas', },
-  { id: 4, audienceName: 'Jen', deviceUUID: 'lliw.zow', },
-  { id: 5, audienceName: 'Yung', deviceUUID: 'alilqla.oiaoso', },
+  { id: 2, audienceName: 'John', deviceUUID: 'adkiklals' },
+  { id: 3, audienceName: 'Aisha', deviceUUID: '12svfas' },
+  { id: 4, audienceName: 'Jen', deviceUUID: 'lliw.zow' },
+  { id: 5, audienceName: 'Yung', deviceUUID: 'alilqla.oiaoso' },
   { id: 6, audienceName: 'Wanja', deviceUUID: '.aoioqlaoo.aose' },
 ];
 
@@ -65,7 +65,7 @@ function randomPublishStatus() {
 
   return randomNumber % 2 === 0;
 }
-    // tslint:disable:max-line-length
+// tslint:disable:max-line-length
 
 function generateArticle() {
   const id = randomId();
@@ -74,7 +74,7 @@ function generateArticle() {
     authorId: 1,
     published: randomPublishStatus(),
     title: 'Lorem ipsum' + id,
-    body:  `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi. Praesent vulputate justo vel libero rutrum, et euismod sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. Morbi id porta neque. Vestibulum laoreet volutpat risus non hendrerit. Vestibulum sapien leo, varius quis finibus nec, iaculis eget lorem. In nec ex elit. Maecenas at finibus augue, eget feugiat odio. Ut vel ultricies ipsum.
+    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi. Praesent vulputate justo vel libero rutrum, et euismod sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. Morbi id porta neque. Vestibulum laoreet volutpat risus non hendrerit. Vestibulum sapien leo, varius quis finibus nec, iaculis eget lorem. In nec ex elit. Maecenas at finibus augue, eget feugiat odio. Ut vel ultricies ipsum.
     <br/>
     <br/>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi. Praesent vulputate justo vel libero rutrum, et euismod sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. Morbi id porta neque. Vestibulum laoreet volutpat risus non hendrerit. Vestibulum sapien leo, varius quis finibus nec, iaculis eget lorem. In nec ex elit. Maecenas at finibus augue, eget feugiat odio. Ut vel ultricies ipsum.
@@ -85,9 +85,8 @@ function generateArticle() {
     createdAt: new Date().toString(),
     updatedAt: new Date().toString(),
     tags: [],
-    categories: [ getRandomCategory() ],
-    audienceActivities: generateRandomAudienceActivities(id)
-
+    categories: [getRandomCategory()],
+    audienceActivities: generateRandomAudienceActivities(id),
   };
 
   return article;
@@ -136,11 +135,11 @@ export function generateArticles(length: number) {
 }
 
 export function tagArticle(tagName: string, articleId: number): Article {
-  const tag =  tags.find(t => t.name === tagName);
-  const article = articles.find(p => p.id === articleId);
+  const tag = tags.find((t) => t.name === tagName);
+  const article = articles.find((p) => p.id === articleId);
 
   if (tag) {
-    if (article.tags.find( t => t.name === tagName)) {
+    if (article.tags.find((t) => t.name === tagName)) {
       return article;
     }
   }
@@ -154,7 +153,7 @@ export function tagArticle(tagName: string, articleId: number): Article {
 }
 
 export function editArticleTitle(articleId: number, title: string) {
-  const article = articles.find(p => p.id === articleId);
+  const article = articles.find((p) => p.id === articleId);
 
   if (article) {
     article.title = title;
@@ -164,7 +163,7 @@ export function editArticleTitle(articleId: number, title: string) {
 }
 
 export function editArticleBody(articleId: number, body: string): Article {
-  const article = articles.find(p => p.id === articleId);
+  const article = articles.find((p) => p.id === articleId);
 
   if (article) {
     article.body = body;
@@ -174,10 +173,10 @@ export function editArticleBody(articleId: number, body: string): Article {
 }
 
 export function untagArticle(tagId: number, articleId: number): Article {
-  const article = articles.find(p => p.id === articleId);
+  const article = articles.find((p) => p.id === articleId);
 
   if (article) {
-    const filtered = article.tags.filter(tag => tag.id !== tagId);
+    const filtered = article.tags.filter((tag) => tag.id !== tagId);
     article.tags = filtered;
     article.updatedAt = new Date().toString();
   }
@@ -186,13 +185,13 @@ export function untagArticle(tagId: number, articleId: number): Article {
 }
 
 export function categorizeArticle(articleId: number, categoryName: string) {
-  let category = categories.find(c => c.name === categoryName);
+  let category = categories.find((c) => c.name === categoryName);
 
   if (!category) {
     category = createCategory(categoryName);
   }
 
-  const article = articles.find(p => p.id === articleId);
+  const article = articles.find((p) => p.id === articleId);
 
   if (article) {
     article.categories.push(category);
@@ -201,11 +200,14 @@ export function categorizeArticle(articleId: number, categoryName: string) {
   return article;
 }
 
-export function removeArticleFromCategory(articleId: number, categoryId: number) {
-  const article = articles.find(p => p.id === articleId);
+export function removeArticleFromCategory(
+  articleId: number,
+  categoryId: number
+) {
+  const article = articles.find((p) => p.id === articleId);
 
   if (article) {
-    const filtered = article.categories.filter(c => c.id !== categoryId);
+    const filtered = article.categories.filter((c) => c.id !== categoryId);
 
     article.categories = filtered;
   }
@@ -214,7 +216,7 @@ export function removeArticleFromCategory(articleId: number, categoryId: number)
 }
 
 export function toggleArticlePublishedState(articleId: number) {
-  const article = articles.find(p => p.id === articleId);
+  const article = articles.find((p) => p.id === articleId);
 
   if (article) {
     article.published = !article.published;
@@ -227,11 +229,13 @@ export function getAllArticles() {
   return articles;
 }
 
-
 export function findAudience(options: Partial<Audience>) {
   let audience: Audience = null;
 
-  function fillMissingAudienceDetails(foundAudience: Audience, providedAudienceAudience: Partial<Audience>) {
+  function fillMissingAudienceDetails(
+    foundAudience: Audience,
+    providedAudienceAudience: Partial<Audience>
+  ) {
     const { email, audienceName } = providedAudienceAudience;
     if (email) {
       foundAudience.email = email;
@@ -243,18 +247,21 @@ export function findAudience(options: Partial<Audience>) {
   }
 
   if (options.id) {
-    audience = audienceList.find(aud => aud.id === options.id);
+    audience = audienceList.find((aud) => aud.id === options.id);
   }
 
   if (!audience && options.email) {
-    audience = audienceList.find(aud => aud.email === options.email);
+    audience = audienceList.find((aud) => aud.email === options.email);
   } else if (!audience && options.audienceName) {
-    audience = audienceList.find(aud => (
+    audience = audienceList.find(
+      (aud) =>
         aud.audienceName === options.audienceName &&
-          aud.deviceUUID === aud.deviceUUID)
-      );
+        aud.deviceUUID === aud.deviceUUID
+    );
   } else {
-    audience = audienceList.find(aud => aud.deviceUUID === options.deviceUUID);
+    audience = audienceList.find(
+      (aud) => aud.deviceUUID === options.deviceUUID
+    );
   }
 
   fillMissingAudienceDetails(audience, options);
@@ -262,9 +269,10 @@ export function findAudience(options: Partial<Audience>) {
   return audience;
 }
 
-
-
-function generateRandomAudienceActivities(articleId: number, max = 10): AudienceActivity[] {
+function generateRandomAudienceActivities(
+  articleId: number,
+  max = 10
+): AudienceActivity[] {
   const noOfComments = Math.round(Math.random() * max);
 
   function fetchRandomAudience(): Audience {
@@ -277,12 +285,11 @@ function generateRandomAudienceActivities(articleId: number, max = 10): Audience
 
   for (let i = 0; i < noOfComments; i++) {
     const audience = fetchRandomAudience();
-    const  applauds = Math.round(Math.random() * 50);
+    const applauds = Math.round(Math.random() * 50);
 
-    const activityId = !audienceActivities.length ?
-      0
-      :
-      audienceActivities[audienceActivities.length - 1].id + 1;
+    const activityId = !audienceActivities.length
+      ? 0
+      : audienceActivities[audienceActivities.length - 1].id + 1;
 
     const activity = {
       id: activityId,
@@ -290,7 +297,7 @@ function generateRandomAudienceActivities(articleId: number, max = 10): Audience
       applauds,
       articleId,
       createdAt: new Date().toString(),
-      comments: [ generateComment(articleId) ]
+      comments: [generateComment(articleId, audience.id)],
     };
 
     audienceActivities.push(activity);
@@ -300,9 +307,9 @@ function generateRandomAudienceActivities(articleId: number, max = 10): Audience
   return articleActivities;
 }
 
-function generateComment(articleId: number) {
-
-  const comment =  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
+function generateComment(articleId: number, audienceId: number) {
+  const comment =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
     ' Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, ' +
     'in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida ' +
     'consectetur, sapien arcu bibendum orci, ac pellentesque lectus ' +
@@ -310,17 +317,21 @@ function generateComment(articleId: number) {
     'sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. ' +
     'Morbi id porta neque. Vestibulum';
 
-  return createComment(comment, articleId);
+  return createComment(comment, articleId, audienceId);
 }
 
-export function createComment(comment: string, articleId): Comment {
-  const commentId = !audienceComments.length ?
-    0
-    :
-    audienceComments[audienceComments.length - 1].id + 1;
+export function createComment(
+  comment: string,
+  articleId: number,
+  audienceId: number
+): Comment {
+  const commentId = !audienceComments.length
+    ? 0
+    : audienceComments[audienceComments.length - 1].id + 1;
 
   const comm = {
     articleId,
+    audienceId,
     comment,
     id: commentId,
     createdAt: new Date().toString(),
@@ -341,7 +352,7 @@ export function findOrCreateAudience(criteria: Partial<Audience>): Audience {
 }
 
 export function createAudience(audience: Partial<Audience>): Audience {
-  const lastAudienceId = audienceRecord[audienceRecord.length - 1 ].id;
+  const lastAudienceId = audienceRecord[audienceRecord.length - 1].id;
 
   audience.id = lastAudienceId + 1;
 
@@ -350,16 +361,40 @@ export function createAudience(audience: Partial<Audience>): Audience {
   return audience as Audience;
 }
 
+export function addComment(payload: CommentPayload) {
+  const { comment, articleId, audience: currentAudience } = payload;
 
-export function applaud(payload: ApplaudPayload): AudienceActivityUpdateSuccessPayload {
+  const audience = findOrCreateAudience(currentAudience);
+  const article = articles.find(({ id }) => id === articleId);
+
+  let act = article.audienceActivities.find(
+    (activity) => activity.audience.id === audience.id
+  );
+
+  const com = createComment(comment, articleId, audience.id);
+  audienceComments.push(com);
+
+  if (!act) {
+    act = createAudienceActivity(payload);
+    article.audienceActivities.push(act);
+  }
+
+  act.comments.push(com);
+
+  return { articleId, activities: article.audienceActivities };
+}
+
+export function applaud(
+  payload: ApplaudPayload
+): AudienceActivityUpdateSuccessPayload {
   const { applauds, articleId, audience: currentAudience } = payload;
 
   const audience = findOrCreateAudience(currentAudience);
-  const article = articles.find(({id}) => id === articleId);
+  const article = articles.find(({ id }) => id === articleId);
 
-
-  let act = article.audienceActivities.find(activity => {
-    return activity.audience.id === audience.id; });
+  let act = article.audienceActivities.find((activity) => {
+    return activity.audience.id === audience.id;
+  });
 
   if (act) {
     act.applauds = applauds;
@@ -373,15 +408,17 @@ export function applaud(payload: ApplaudPayload): AudienceActivityUpdateSuccessP
   return { articleId, activities: article.audienceActivities };
 }
 
-export function createAudienceActivity(activity: Partial<AudienceActivity>): AudienceActivity {
-  const activityId = !audienceActivities.length ?
-    0
-    :
-    audienceActivities[audienceActivities.length - 1].id + 1;
+export function createAudienceActivity(
+  activity: Partial<AudienceActivity>
+): AudienceActivity {
+  const activityId = !audienceActivities.length
+    ? 0
+    : audienceActivities[audienceActivities.length - 1].id + 1;
 
   activity.id = activityId;
+  activity.comments = [];
+  activity.applauds = 0;
   activity.createdAt = new Date().toString();
-
 
   audienceActivities.push(activity as AudienceActivity);
 

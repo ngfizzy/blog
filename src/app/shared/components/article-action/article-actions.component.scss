@@ -100,6 +100,7 @@
   width: 90%;
   top: 0.5%;
 
+  input,
   textarea {
     display: block;
     width: 100%;
@@ -107,6 +108,11 @@
     background-color: rgba($color: #eeeeef, $alpha: 0.7);
     color: #fff;
     padding: 0.5rem;
+    margin-top: 0.3rem;
+    transition: all 0.5s ease-in-out;
+  }
+
+  textarea {
     padding-top: 0.8rem;
     resize: none;
     margin-bottom: -0.35rem;
@@ -116,10 +122,19 @@
     &.focus {
       height: 6rem;
     }
-    transition: all 0.5s ease-in-out;
+  }
+  input[type='email'].ng-invalid {
+    outline: #aa1b1b solid 1px;
+    border: none;
   }
 
-  button[type='submit'] {
+  .email-error {
+    font-size: 50%;
+    color: #aa1b1b;
+    background-color: white;
+  }
+
+  button {
     display: block;
     background-color: rgb(30, 30, 50);
     color: rgba($color: #fff, $alpha: 0.8);
@@ -127,6 +142,23 @@
     padding: 0.5rem;
     outline: none;
     border: none;
+  }
+
+  button.back {
+    background-color: white;
+    color: rgb(30, 30, 50);
+    width: 49%;
+  }
+
+  button.submit {
+    width: 49%;
+  }
+
+  .buttons-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 0.3rem;
   }
 
   .char-counter {

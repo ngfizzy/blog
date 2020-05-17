@@ -14,4 +14,5 @@ export interface Comment {
   createdAt: string;
   id: number;
   articleId: number;
+  audienceId: number;
 }

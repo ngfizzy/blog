@@ -9,7 +9,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { Article, Audience, ApplaudPayload } from '../../models';
+import { Article, Audience, ApplaudPayload, CommentPayload } from '../../models';
 import {
   trigger,
   state,
@@ -21,7 +21,7 @@ import { AudienceActivity } from '../../models/audience-activity.interface';
 
 @Component({
   selector: 'app-article-actions,app-poem-actions',
-  templateUrl: 'article-actions.component.html',
+  templateUrl: './article-actions.component.html',
   styleUrls: ['./article-actions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 
@@ -53,12 +53,15 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
 
   @Output() applaud = new EventEmitter<ApplaudPayload>();
   @Output() commentSectionToggled = new EventEmitter<boolean>();
-  @Output() addComment = new EventEmitter<AudienceActivity>();
+  @Output() addComment = new EventEmitter<CommentPayload>();
   @Output() updateUserApplaud = new EventEmitter<number>();
 
   isCommentSectionOpen = false;
-  showSubmit = false;
+  isCollectingAudDetails = false;
+  canContinue = false;
   comment = '';
+  email = '';
+  name = '';
 
   isClapping = false;
 
@@ -81,9 +84,10 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   get totalApplauds() {
     return (
       this.activities &&
-      this.activities
-        .map((activity) => activity.applauds)
-        .reduce((prev, curr) => prev + curr)
+      this.activities.reduce(
+        (accumulator, activity) => accumulator + activity.applauds,
+        0
+      )
     );
   }
 
@@ -113,7 +117,19 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  submitComment() {}
+  submitComment() {
+    const audience = {
+      ...this.currentAudience,
+      name: this.name,
+      email: this.email,
+    };
+
+    this.addComment.emit({
+      audience,
+      articleId: this.articleId,
+      comment: this.comment,
+    });
+  }
 
   clap() {
     this.isClapping = true;
