@@ -15,10 +15,7 @@ import { FormsModule } from '@angular/forms';
     RouterModule,
     FormsModule,
   ],
-  exports: [
-    FormsModule,
-    CommonModule,
-  ],
+  exports: [FormsModule, CommonModule],
   declarations: [],
 })
 export class CoreModule {}

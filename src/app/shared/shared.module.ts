@@ -35,6 +35,7 @@ import { MarkdownModule } from 'ngx-markdown';
 
 import { ClipboardModule } from 'ngx-clipboard';
 import { OrderModule } from 'ngx-order-pipe';
+import { TimeagoModule } from 'ngx-timeago';
 
 import { ArticleComponent } from './components/article/article.component';
 import { NotFoundComponent } from './components/Not Found/not-found.component';
@@ -87,6 +88,7 @@ import { CopyToClipboardComponent } from './components/copy-to-clipboard/copy-to
     RouterModule,
     MatDialogModule,
     OrderModule,
+    TimeagoModule
   ],
   declarations: [
     SpinnerComponent,

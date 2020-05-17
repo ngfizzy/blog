@@ -1,3 +1,4 @@
+import { TimeagoModule } from 'ngx-timeago';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
@@ -26,6 +27,7 @@ import { CoreEffects } from './core/state/core.effects';
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
+    TimeagoModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
