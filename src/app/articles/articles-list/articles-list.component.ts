@@ -110,6 +110,10 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     this.hideScrollBar = hide;
   }
 
+  updateAudienceApplauds(applauds: number) {
+    this.currentUserApplauds = applauds;
+  }
+
   private updateTitleAndMeta(article: Article) {
     if (article) {
       this.title.setTitle(`NgFizzy Blog - Tech: ${article.title}`);

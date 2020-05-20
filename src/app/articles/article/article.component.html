@@ -1,5 +1,20 @@
-<app-article
+<ng-container *ngIf="(article$ | async) as article">
+  <app-article
   [config]="articleConfig"
   [article]="article$ | async"
->
-</app-article>
+  >
+  </app-article>
+  <app-article-actions
+  (applaud)="submitApplauds($event)"
+  (updateUserApplaud)="updateAudienceApplauds($event)"
+  (commentSectionToggled)="toggleScrollBar($event)"
+  (addComment)="submitComment($event)"
+  [articleId]="article.id"
+  [currentAudience]="audience$ | async"
+  [currentAudienceApplauds]="currentAudienceApplauds"
+  [activities]="audienceActivities$ | async"
+  >
+</app-article-actions>
+
+</ng-container>
+

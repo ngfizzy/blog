@@ -1,3 +1,4 @@
+import { ArticleActionsComponent } from 'src/app/shared/components/article-action/article-actions.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -44,6 +45,9 @@ import { CopyToClipboardComponent } from './components/copy-to-clipboard/copy-to
 
 @NgModule({
   imports: [
+    FormsModule,
+    OrderModule,
+    TimeagoModule,
     CommonModule,
     ClipboardModule,
     MatSidenavModule,
@@ -88,7 +92,8 @@ import { CopyToClipboardComponent } from './components/copy-to-clipboard/copy-to
     RouterModule,
     MatDialogModule,
     OrderModule,
-    TimeagoModule
+    TimeagoModule,
+    ArticleActionsComponent,
   ],
   declarations: [
     SpinnerComponent,
@@ -96,6 +101,7 @@ import { CopyToClipboardComponent } from './components/copy-to-clipboard/copy-to
     NotFoundComponent,
     SideNavComponent,
     CopyToClipboardComponent,
+    ArticleActionsComponent,
   ],
   providers: [],
 })

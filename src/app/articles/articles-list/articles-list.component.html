@@ -14,13 +14,13 @@
   <ng-container *ngIf="selectedArticle">
     <app-article-actions
       (applaud)="submitApplauds($event)"
-      (updateUserApplaud)="currentUserApplauds=$event"
+      (updateUserApplaud)="updateAudienceApplauds($event)"
       (commentSectionToggled)="toggleScrollBar($event)"
+      (addComment)="submitComment($event)"
       [articleId]="selectedArticle.id"
       [currentAudience]="audience$ | async"
       [currentAudienceApplauds]="currentUserApplauds"
       [activities]="audienceActivities$ | async"
-      (addComment)="submitComment($event)"
     >
 
     </app-article-actions>
