@@ -1,9 +1,26 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
 import { Poem, Poems, Slides } from 'src/app/shared/models';
-import { trigger, state, style, transition, animate, group, query } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+  group,
+  query,
+} from '@angular/animations';
 
 interface GroupInfo {
-  groupStartIndex: number; groupSize: number;
+  groupStartIndex: number;
+  groupSize: number;
 }
 
 interface PoemsMetadata {
@@ -15,21 +32,35 @@ interface PoemsMetadata {
 @Component({
   selector: 'app-poems-carousel',
   templateUrl: './poems-carousel.component.html',
-  styleUrls: [ './poems-carousel.component.scss' ],
+  styleUrls: ['./poems-carousel.component.scss'],
   animations: [
     trigger('slide', [
-     transition('*<=>*', [
-       group([
-         query(':enter', [
-           style({ transform: 'translateX({{offsetEntry}}%)'}),
-           animate('400ms ease-in-out', style({ transform: 'translateX(0)' }))
-         ], { optional: true}),
-         query(':leave', [
-           style({ transform: 'translateX(0)' }),
-           animate('400ms ease-in-out', style({ transform: 'translateX({{offsetLeave}}%)' })),
-         ], { optional: true }),
-       ]),
-     ]),
+      transition('*<=>*', [
+        group([
+          query(
+            ':enter',
+            [
+              style({ transform: 'translateX({{offsetEntry}}%)' }),
+              animate(
+                '400ms ease-in-out',
+                style({ transform: 'translateX(0)' })
+              ),
+            ],
+            { optional: true }
+          ),
+          query(
+            ':leave',
+            [
+              style({ transform: 'translateX(0)' }),
+              animate(
+                '400ms ease-in-out',
+                style({ transform: 'translateX({{offsetLeave}}%)' })
+              ),
+            ],
+            { optional: true }
+          ),
+        ]),
+      ]),
     ]),
   ],
 })
@@ -48,7 +79,7 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
   prevButtonClicked = false;
   animationParams = this.generateAnimationParams();
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.poemsGroupList = this.groupPoems();
@@ -58,8 +89,11 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
 
   ngOnChanges(changes: SimpleChanges): void {
     const { selectedPoemId } = changes;
-    if (!selectedPoemId.isFirstChange()) {
-      this.jumpToGroup(selectedPoemId.previousValue, selectedPoemId.currentValue);
+    if (selectedPoemId && !selectedPoemId.isFirstChange()) {
+      this.jumpToGroup(
+        selectedPoemId.previousValue,
+        selectedPoemId.currentValue
+      );
     }
   }
 
@@ -70,13 +104,12 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
     this.poemSelected.emit(this.selectedPoemId);
   }
 
-
   goToPreviousSlide() {
     this.showNextButton = true;
     this.prevButtonClicked = true;
     this.nextButtonClicked = false;
 
-    this.currentGroup -=  1;
+    this.currentGroup -= 1;
     this.animationParams = this.generateAnimationParams();
     this.showPreviousButton = this.shouldShowPreviousButton();
   }
@@ -105,8 +138,10 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
   }
 
   private findPoemGroup(poemId: number) {
-    const index = this.poems.findIndex(poem => poem.id === poemId);
-    const foundGroup =  Math.round((index / this.groupSize) / (this.poemsGroupList.length));
+    const index = this.poems.findIndex((poem) => poem.id === poemId);
+    const foundGroup = Math.round(
+      index / this.groupSize / this.poemsGroupList.length
+    );
 
     return foundGroup;
   }
@@ -123,23 +158,26 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
 
   private groupPoems() {
     if (this.groupSize >= this.poems.length) {
-      return [ this.poems ];
+      return [this.poems];
     }
 
     const groupList: Poems[] = [];
-    const { completeGroupLastIndex, noOfCompleteGroups } = this.getPoemsMetadata();
+    const {
+      completeGroupLastIndex,
+      noOfCompleteGroups,
+    } = this.getPoemsMetadata();
 
     for (let groupNumber = 0; groupNumber < noOfCompleteGroups; groupNumber++) {
-      const groupStartIndex =  groupNumber * this.groupSize;
+      const groupStartIndex = groupNumber * this.groupSize;
 
-      this.addGroup(
-        groupList,
-        this.poems,
-        { groupStartIndex, groupSize: this.groupSize });
+      this.addGroup(groupList, this.poems, {
+        groupStartIndex,
+        groupSize: this.groupSize,
+      });
     }
 
     if (completeGroupLastIndex <= this.poems.length - 1) {
-      const lastGroupSize =  (this.poems.length) - completeGroupLastIndex;
+      const lastGroupSize = this.poems.length - completeGroupLastIndex;
 
       this.addGroup(groupList, this.poems, {
         groupStartIndex: completeGroupLastIndex,
@@ -152,11 +190,12 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
 
   private getPoemsMetadata(): PoemsMetadata {
     const noOfCompleteGroups = Math.floor(this.poems.length / this.groupSize);
-    const lengthOfIncompleteGroup = this.poems.length - (noOfCompleteGroups * this.groupSize);
+    const lengthOfIncompleteGroup =
+      this.poems.length - noOfCompleteGroups * this.groupSize;
     return {
       noOfCompleteGroups,
       lengthOfIncompleteGroup,
-      completeGroupLastIndex: (this.poems.length - lengthOfIncompleteGroup),
+      completeGroupLastIndex: this.poems.length - lengthOfIncompleteGroup,
     };
   }
 
@@ -165,14 +204,15 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
   }
 
   private shouldShowNextButton(): boolean {
-    const isShowingLastGroup = this.poemsGroupList[this.currentGroup]
-      === this.poemsGroupList[this.poemsGroupList.length - 1];
+    const isShowingLastGroup =
+      this.poemsGroupList[this.currentGroup] ===
+      this.poemsGroupList[this.poemsGroupList.length - 1];
 
     return this.poemsGroupList.length > 1 && isShowingLastGroup === false;
   }
 
   private addGroup(groupList: Poem[][], poems: Poem[], groupInfo: GroupInfo) {
-    const { groupSize, groupStartIndex} = groupInfo;
+    const { groupSize, groupStartIndex } = groupInfo;
     const grp = poems.slice(groupStartIndex, groupSize + groupStartIndex);
 
     groupList.push(grp);

@@ -5,7 +5,7 @@ import {
   ViewChild,
   ChangeDetectionStrategy,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import { Poem } from 'src/app/shared/models';
 import { ToastrService } from 'ngx-toastr';
@@ -15,17 +15,17 @@ import { takeWhile, repeatWhen, map, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-poem-full-card',
   templateUrl: './poem-full-card.component.html',
-  styleUrls: [ './poem-full-card.component.scss' ],
+  styleUrls: ['./poem-full-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PoemFullCardComponent implements OnChanges {
   @ViewChild('poemContainer', { static: false }) poemContainer: ElementRef;
-  @ViewChild('poemTitleWrapper', { static: false }) poemTitleWrapper: ElementRef;
+  @ViewChild('poemTitleWrapper', { static: false })
+  poemTitleWrapper: ElementRef;
   @ViewChild('poemTitle', { static: false }) poemTitle: ElementRef;
 
   @Input() poem: Poem;
   @Input() maxHeight: string;
-
 
   currentLocation = window.location.href;
   repeatAnimation$ = new Subject();
@@ -34,21 +34,24 @@ export class PoemFullCardComponent implements OnChanges {
   constructor(private toastr: ToastrService) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!changes.poem.isFirstChange()) {
+    if (
+      !changes.poem.isFirstChange() &&
+      changes.poem.previousValue.id !== changes.poem.currentValue.id
+    ) {
       this.animatePoem();
     }
   }
 
   private animatePoem() {
-    this.opacityAnimation$ =  timer(0, 1).pipe(
-      takeWhile((counter) => (counter <= 400)),
-      map(counter => counter / 400),
+    this.opacityAnimation$ = timer(0, 1).pipe(
+      takeWhile((counter) => counter <= 400),
+      map((counter) => counter / 400),
       tap((opacity) => {
         if (opacity >= 1) {
           this.repeatAnimation$.next();
         }
       }),
-      repeatWhen(() => this.repeatAnimation$),
+      repeatWhen(() => this.repeatAnimation$)
     );
   }
 
@@ -61,7 +64,7 @@ export class PoemFullCardComponent implements OnChanges {
 
     if (scrollTop > 0) {
       scrollTop = scrollTop > 90 ? 90 : scrollTop;
-      const titleTransparency = ((scrollTop / 90) * 100) / 100 ;
+      const titleTransparency = ((scrollTop / 90) * 100) / 100;
       const backgroundColor = `rgba(20, 20, 26, ${titleTransparency})`;
       this.poemTitleWrapper.nativeElement.style.backgroundColor = backgroundColor;
     }

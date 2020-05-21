@@ -2,7 +2,7 @@
 <div
   class="backdrop"
   [ngClass]="{ 'hide-form': !isCommentSectionOpen}"
-  (click)="toggleCommentSection()"
+  (click)="$event.stopPropagation(); toggleCommentSection()"
 ></div>
 
 <div class="wrapper" [ngClass]="{ 'hide-form': !isCommentSectionOpen}">
@@ -18,16 +18,17 @@
     >
       <ng-container *ngIf="isCollectingAudDetails">
         <span class=text-info>If you do not provide email or name, your comment would appear as anonymous</span>
-        <input type="text" name="name" [(ngModel)]="name" placeholder="name (optional)"/>
-        <input #emailInput="ngModel" email type="email" name="email" [(ngModel)]="email" placeholder="email (optional)"/>
+        <input type="text" name="name" (click)="$event.stopPropagation()" [(ngModel)]="name" placeholder="name (optional)"/>
+        <input #emailInput="ngModel" email type="email" (click)="$event.stopPropagation()" name="email" [(ngModel)]="email" placeholder="email (optional)"/>
         <span class="email-error" *ngIf="emailInput.invalid">Wrong email format</span>
         <span class="buttons-wrapper">
-          <button class="back" (click)="isCollectingAudDetails=false">Back to comment</button>
-          <button class="submit" (click)="submitComment()">Submit comment</button>
+          <button class="back" (click)="$event.stopPropagation(); isCollectingAudDetails=false">Back to comment</button>
+          <button class="submit" (click)="$event.stopPropagation(); submitComment()">Submit comment</button>
         </span>
       </ng-container>
       <ng-container *ngIf="!isCollectingAudDetails">
         <textarea
+        (click)="$event.stopPropagation()"
         name="comment"
         placeholder="Please drop a comment"
         autofocus
@@ -35,7 +36,7 @@
         minlength="4"
         maxlength="300"
         [ngClass]="{ 'focus': comment.length > 4 }"
-        (focus)="canContinue=true"
+        (focus)="$event.stopPropagation(); canContinue=true"
         (focusout)="canContinue=false"
         [(ngModel)]="comment">
       </textarea>
@@ -45,7 +46,7 @@
       <button
         *ngIf="comment.length > 4"
         type="button"
-        (click)="isCollectingAudDetails=true">
+        (click)="$event.stopPropagation(); isCollectingAudDetails=true">
         Next
       </button>
       </ng-container>
@@ -74,12 +75,12 @@
   </div>
   <div [@transitionInOut] class="actions-container">
     <div class="actions">
-      <span class=" mat-elevation-z8 icon" (click)="clap()">
+      <span class=" mat-elevation-z8 icon" (click)="$event.stopPropagation(); clap()">
         <img src="assets/clap.png" alt="Applaud">
         <span *ngIf="!isClapping" class="applauds-count">{{ totalApplauds }}</span>
       <span *ngIf="isClapping" class="applauds-count">{{ currentAudienceApplauds }}</span>
        </span>
-       <span class="mat-elevation-z8 icon" (click)="toggleCommentSection()">
+       <span class="mat-elevation-z8 icon" (click)="$event.stopPropagation(); toggleCommentSection()">
          <i class="fa fa-comment"></i>
         <span class="comments-count">{{comments?.length}}</span>
        </span>

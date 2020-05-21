@@ -23,6 +23,7 @@ export class PoemsComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new poetryActions.GetAllPoems());
+
     this.poems$ = this.store.pipe(select(fromPoetry.getAllPoems));
   }
 

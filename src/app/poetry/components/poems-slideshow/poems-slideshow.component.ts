@@ -1,38 +1,73 @@
+import { getSelectedPoemActivities } from './../../state/poetry.state';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { Poem, Poems, Slides } from 'src/app/shared/models';
 import { Store, select } from '@ngrx/store';
-import { PoetryState, getAllPoems, getPoem } from '../../state';
 import { Observable, timer, Subject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
-import { takeUntil, repeatWhen, tap } from 'rxjs/operators';
-
-
+import {
+  takeUntil,
+  repeatWhen,
+  tap,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+} from 'rxjs/operators';
+import {
+  Poem,
+  Poems,
+  Slides,
+  Audience,
+  AudienceActivity,
+} from 'src/app/shared/models';
+import { PoetryState, getAllPoems, getPoem } from '../../state';
+import { ApplaudSuccess } from './../../../articles/state/articles.actions';
+import {
+  ApplaudPayload,
+  CommentPayload,
+} from './../../../shared/models/audience-activity-payloads.interface';
+import * as fromPoetryActions from '../../state/poetry.actions';
+import { getAudience } from 'src/app/core/state';
 @Component({
   selector: 'app-poems-slideshow',
   templateUrl: './poems-slideshow.component.html',
-  styleUrls: [ './poems-slideshow.component.scss' ],
+  styleUrls: ['./poems-slideshow.component.scss'],
 })
 export class PoemsSlideshowComponent implements OnInit, OnDestroy, Slides {
   poems$: Observable<Poem[]>;
   selectedPoem$: Observable<Poem>;
+  audience$: Observable<Audience>;
+
   private slideShowTimer$ = timer(200, 3000);
   private slideTimerRefresher$ = new Subject();
+  private applaudsWatcherSubject$: Subject<ApplaudPayload> = new Subject();
+  private applaudsWatcher$ = this.applaudsWatcherSubject$
+    .asObservable()
+    .pipe(debounceTime(800), distinctUntilChanged());
+
   private pauseSlideShow$ = new Subject();
   private destroy$ = new Subject();
 
-
   poemIndex: number;
-
+  currentUserApplauds: number;
+  hideScrollBar: boolean;
+  audienceActivities$: Observable<AudienceActivity[]>;
+  hidden: boolean;
 
   constructor(
     private store: Store<PoetryState>,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.poems$ = this.store.pipe(select(getAllPoems));
     this.selectedPoem$ = this.store.pipe(select(getPoem));
+    this.audience$ = this.store.pipe(select(getAudience));
+
+    this.applaudsWatcher$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((applauds) =>
+        this.store.dispatch(new fromPoetryActions.Applaud(applauds))
+      );
   }
 
   goToPreviousSlide(poemId: number, poems: Poems) {
@@ -44,7 +79,10 @@ export class PoemsSlideshowComponent implements OnInit, OnDestroy, Slides {
     this.poemIndex = prevPoemIndex >= lastIndex ? lastIndex : this.poemIndex;
     const prevPoemId = poems[prevPoemIndex].id;
 
-    this.router.navigate([ prevPoemId ], { relativeTo: this.route.parent });
+    this.router.navigate([prevPoemId], { relativeTo: this.route.parent });
+    this.audienceActivities$ = this.store.pipe(
+      select(getSelectedPoemActivities)
+    );
   }
 
   /**
@@ -60,7 +98,7 @@ export class PoemsSlideshowComponent implements OnInit, OnDestroy, Slides {
     this.poemIndex = nextPoemIndex === 0 ? nextPoemIndex : this.poemIndex;
     const nextPoemId = poems[nextPoemIndex].id;
 
-    this.router.navigate([ nextPoemId ], { relativeTo: this.route.parent });
+    this.router.navigate([nextPoemId], { relativeTo: this.route.parent });
   }
 
   startSlideshow(poemId: number, poems: Poems) {
@@ -76,7 +114,8 @@ export class PoemsSlideshowComponent implements OnInit, OnDestroy, Slides {
         repeatWhen(() => this.slideTimerRefresher$),
         takeUntil(this.pauseSlideShow$),
         takeUntil(this.destroy$)
-      ).subscribe(() => this.goToNextSlide(poemId, poems));
+      )
+      .subscribe(() => this.goToNextSlide(poemId, poems));
   }
 
   pauseSlideshow() {
@@ -84,9 +123,25 @@ export class PoemsSlideshowComponent implements OnInit, OnDestroy, Slides {
     this.slideTimerRefresher$.next();
   }
 
+  submitApplauds(applauds: ApplaudPayload) {
+    this.applaudsWatcherSubject$.next(applauds);
+  }
+
+  updateAudienceApplauds(applauds: number) {
+    this.currentUserApplauds = applauds;
+  }
+
+  submitComment(comment: CommentPayload) {
+    this.store.dispatch(new fromPoetryActions.AddComment(comment));
+  }
+
+  hidePoem(hide: boolean) {
+    this.hidden = hide;
+  }
+
   private initializeCurrentPoemIndex(poemId: number, poems: Poem[]) {
     if (!this.poemIndex) {
-      this.poemIndex = poems.findIndex(poem => (poem.id === poemId)) || 0;
+      this.poemIndex = poems.findIndex((poem) => poem.id === poemId) || 0;
     }
   }
 

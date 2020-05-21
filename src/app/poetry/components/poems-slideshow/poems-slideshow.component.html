@@ -20,3 +20,19 @@
     </div>
   </ng-container>
 </div>
+
+
+<ng-container *ngIf="(selectedPoem$ | async) as poem">
+  <app-article-actions
+    (applaud)="submitApplauds($event)"
+    (updateUserApplaud)="updateAudienceApplauds($event)"
+    (commentSectionToggled)="hidePoem($event)"
+    (addComment)="submitComment($event)"
+    [articleId]="poem.id"
+    [currentAudience]="audience$ | async"
+    [currentAudienceApplauds]="currentUserApplauds"
+    [activities]="poem.audienceActivities"
+  >
+
+  </app-article-actions>
+</ng-container>

@@ -1,11 +1,20 @@
+import { CommentPayload } from './../../shared/models/audience-activity-payloads.interface';
 import { Action } from '@ngrx/store';
-import { Poem } from 'src/app/shared/models';
+import {
+  Poem,
+  AudienceActivityUpdateSuccessPayload,
+  ApplaudPayload,
+} from 'src/app/shared/models';
 
 export const enum PoetryActionTypes {
   GetAllPoems = '[Poetry] Get All',
   GetAllPoemsSuccess = '[Poetry] Get All Poems Success',
   GetPoem = '[Poetry] Get Poem',
-  GetPoemSuccess = '[Poetry] Get Poem Success'
+  GetPoemSuccess = '[Poetry] Get Poem Success',
+  Applaud = '[Poetry] Applaud',
+  ApplaudSuccess = '[Poetry] Applaud Success',
+  AddComment = '[Poetry] Add Comment',
+  AddCommentSuccess = '[Poetry] Add Comment Success',
 }
 
 export class GetAllPoems implements Action {
@@ -13,7 +22,7 @@ export class GetAllPoems implements Action {
 }
 
 export class GetAllPoemsSuccess implements Action {
-  readonly type =  PoetryActionTypes.GetAllPoemsSuccess;
+  readonly type = PoetryActionTypes.GetAllPoemsSuccess;
 
   constructor(public payload: Poem[]) {}
 }
@@ -30,7 +39,35 @@ export class GetPoemSuccess implements Action {
   constructor(public payload: Poem) {}
 }
 
-export type PoetryActions =  GetAllPoems
-| GetAllPoemsSuccess
-| GetPoem
-| GetPoemSuccess;
+export class Applaud implements Action {
+  readonly type = PoetryActionTypes.Applaud;
+
+  constructor(public payload: ApplaudPayload) {}
+}
+export class ApplaudSuccess implements Action {
+  readonly type = PoetryActionTypes.ApplaudSuccess;
+
+  constructor(public payload: AudienceActivityUpdateSuccessPayload) {}
+}
+
+export class AddComment implements Action {
+  readonly type = PoetryActionTypes.AddComment;
+
+  constructor(public payload: CommentPayload) {}
+}
+
+export class AddCommentSuccess implements Action {
+  readonly type = PoetryActionTypes.AddCommentSuccess;
+
+  constructor(public payload: AudienceActivityUpdateSuccessPayload) {}
+}
+
+export type PoetryActions =
+  | GetAllPoems
+  | GetAllPoemsSuccess
+  | GetPoem
+  | GetPoemSuccess
+  | Applaud
+  | ApplaudSuccess
+  | AddComment
+  | AddCommentSuccess;

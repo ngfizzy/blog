@@ -88,13 +88,14 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   get totalApplauds() {
-    return (
+    const applauds =
       this.activities &&
       this.activities.reduce(
         (accumulator, activity) => accumulator + activity.applauds,
         0
-      )
-    );
+      );
+
+    return applauds || 0;
   }
 
   get currentAudienceActivities() {
