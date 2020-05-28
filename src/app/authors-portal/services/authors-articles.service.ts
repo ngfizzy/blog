@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import {  map, mergeMap, take } from 'rxjs/operators';
+import { map, mergeMap, take } from 'rxjs/operators';
 
 import { ArticlesService } from 'src/app/core/articles.service';
 import { Article } from 'src/app/shared/models/article.interface';
@@ -10,18 +10,21 @@ import {
   tagArticle,
   untagArticle,
   categorizeArticle,
-  removeArticleFromCategory, editArticleBody, editArticleTitle,
-  toggleArticlePublishedState
- } from '../mock-server';
-import * as fromAuthorsArticlesState from './authors-articles/state';
-import { UnknownObjectPath } from '../shared/Exceptions';
+  removeArticleFromCategory,
+  editArticleBody,
+  editArticleTitle,
+  toggleArticlePublishedState,
+  getAllArticles,
+} from '../../mock-server';
+import * as fromAuthorsArticlesState from '../authors-articles/state';
+import { UnknownObjectPath } from '../../shared/Exceptions';
 
 const enum EditableArticlePaths {
   Title = 'title',
   Body = 'body',
   Tags = 'tags',
   Categories = 'categories',
-  Published = 'published'
+  Published = 'published',
 }
 
 @Injectable()
@@ -32,7 +35,7 @@ export class AuthorsArticlesService {
     private articlesService: ArticlesService,
     private store: Store<fromAuthorsArticlesState.AuthorsArticlesState>,
   ) {
-    this.articlesService.getAll().subscribe((articles) => {
+    this.articlesService.getAll().subscribe(articles => {
       this.articles = articles;
     });
   }
@@ -47,9 +50,11 @@ export class AuthorsArticlesService {
     return of(createdArticle);
   }
 
-  editArticleTitle(title: string, articleId: number):
-    Observable<{ articles: Article[]; selectedArticle: Article }> {
-      return this.editArticlePath(articleId, EditableArticlePaths.Title, title);
+  editArticleTitle(
+    title: string,
+    articleId: number,
+  ): Observable<{ articles: Article[]; selectedArticle: Article }> {
+    return this.editArticlePath(articleId, EditableArticlePaths.Title, title);
   }
 
   editArticleBody(body: string, articleId: number) {
@@ -65,20 +70,36 @@ export class AuthorsArticlesService {
   }
 
   categorizeArticle(articleId: number, categoryName: string) {
-    return this.editArticlePath(articleId, EditableArticlePaths.Categories, categoryName);
+    return this.editArticlePath(
+      articleId,
+      EditableArticlePaths.Categories,
+      categoryName,
+    );
   }
 
   removeArticleFromCategory(articleId: number, categoryId: number) {
-    return this.editArticlePath(articleId, EditableArticlePaths.Categories, categoryId);
+    return this.editArticlePath(
+      articleId,
+      EditableArticlePaths.Categories,
+      categoryId,
+    );
   }
 
   toggleArticlePublishedState(articleId: number) {
-    return this.editArticlePath(articleId, EditableArticlePaths.Published, null);
+    return this.editArticlePath(
+      articleId,
+      EditableArticlePaths.Published,
+      null,
+    );
   }
-  private editArticlePath(articleId: number, path: EditableArticlePaths, newPathValue: any) {
+  private editArticlePath(
+    articleId: number,
+    path: EditableArticlePaths,
+    newPathValue: any,
+  ) {
     return this.pluckArticleFromStore(articleId).pipe(
-      map((pluckResult) => {
-        const { articles , plucked} = pluckResult;
+      map(pluckResult => {
+        const { articles, plucked } = pluckResult;
         let article = plucked;
 
         if (!article) {
@@ -93,22 +114,24 @@ export class AuthorsArticlesService {
             article = editArticleTitle(articleId, newPathValue);
             break;
           case EditableArticlePaths.Tags:
-            article = typeof(newPathValue) === 'string' ?
-              tagArticle(newPathValue, articleId) : untagArticle(newPathValue, articleId);
+            article =
+              typeof newPathValue === 'string'
+                ? tagArticle(newPathValue, articleId)
+                : untagArticle(newPathValue, articleId);
             break;
           case EditableArticlePaths.Categories:
-            article = typeof(newPathValue) === 'string' ?
-              categorizeArticle(articleId, newPathValue) : removeArticleFromCategory(articleId, newPathValue);
+            article =
+              typeof newPathValue === 'string'
+                ? categorizeArticle(articleId, newPathValue)
+                : removeArticleFromCategory(articleId, newPathValue);
             break;
           case EditableArticlePaths.Published:
-              article = toggleArticlePublishedState(articleId);
-              break;
+            article = toggleArticlePublishedState(articleId);
+            break;
           default:
             const message = `Cannot update property ${path} because it doesnt exist`;
             throw new UnknownObjectPath(path, message);
-
         }
-
 
         articles.unshift(plucked);
 
@@ -117,24 +140,23 @@ export class AuthorsArticlesService {
     );
   }
 
-
   getAllArticles() {
-    return of(generateArticles(50));
+    return of(getAllArticles());
   }
 
   getOneArticle(articleId: number) {
     return this.getArticlesFromStore().pipe(
-      mergeMap((articles) => {
+      mergeMap(articles => {
         const article = articles.find(found => found.id === articleId);
 
         return of(article);
-      })
+      }),
     );
   }
 
   private pluckArticle(articleId: number, articles: Article[]): Article {
     const articleIndex = articles.findIndex(found => found.id === +articleId);
-    const [ article ] = articles.splice(articleIndex, 1);
+    const [article] = articles.splice(articleIndex, 1);
 
     return article;
   }
@@ -142,17 +164,16 @@ export class AuthorsArticlesService {
   private getArticlesFromStore() {
     return this.store.pipe(
       select(fromAuthorsArticlesState.getArticles),
-      take(1)
+      take(1),
     );
   }
 
   private pluckArticleFromStore(articleId: number) {
     return this.getArticlesFromStore().pipe(
-      map((articles) => {
+      map(articles => {
         const plucked = this.pluckArticle(articleId, articles);
         return { articles, plucked };
       }),
     );
   }
-
 }

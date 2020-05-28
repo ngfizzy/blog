@@ -1,0 +1,11 @@
+<div class="container-fluid">
+  <ng-container *ngIf="articlesStatistics$ | async as statistics">
+    <div *ngFor="let stat of statistics">
+      <app-authors-number-widget
+      [statistics]="stat"
+    ></app-authors-number-widget>
+
+    </div>
+  </ng-container>
+</div>
+

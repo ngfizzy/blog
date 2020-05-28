@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { mergeMap, map, switchMap } from 'rxjs/operators';
 
-import { AuthorsArticlesService } from '../../authors-articles.service';
+import { AuthorsArticlesService } from '../../services/authors-articles.service';
 import * as authorsArticlesActions from './authors-articles.actions';
 import { Article } from 'src/app/shared/models';
 

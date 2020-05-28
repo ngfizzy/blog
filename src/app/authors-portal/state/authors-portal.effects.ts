@@ -2,33 +2,64 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
-import { mergeMap, map } from 'rxjs/operators';
+import { mergeMap, map, switchMap } from 'rxjs/operators';
 
-// import { AuthorsArticlesService } from '../authors-articles.service';
-// import * as authorsPortalActions from './authors-portal.actions';
+import { DashboardService } from './../services/dashboard.service';
+import * as authorsPortalActions from './authors-portal.actions';
 
+@Injectable()
+export class AuthorsPortalEffects {
+  constructor(
+    private actions$: Actions,
+    private dashboardService: DashboardService,
+  ) {}
 
-// @Injectable()
-// export class AuthorsPortalEffects {
+  // @Effect()
+  // getArticles$: Observable<Action> = this.actions$.pipe(
+  //   ofType(authorsPortalActions.AuthorsPortalActionTypes.GetArticles),
+  //   mergeMap(() =>
+  //     this.articlesService
+  //       .getAllArticles()
+  //       .pipe(
+  //         map(
+  //           (articles) => new authorsPortalActions.GetArticlesSuccess(articles)
+  //         )
+  //       )
+  //   )
+  // );
 
-//   constructor(
-//     private actions$: Actions,
-//     private articlesService: AuthorsArticlesService
-//   ) {}
+  // @Effect()
+  // createArticles$: Observable<Action> = this.actions$.pipe(
+  //   ofType(authorsPortalActions.AuthorsPortalActionTypes.CreateArticleSuccess),
+  //   mergeMap((article) =>
+  //     this.articlesService
+  //       .createArticle(article)
+  //       .pipe(
+  //         map(
+  //           (createdArticle) =>
+  //             new authorsPortalActions.CreateArticleSuccess(createdArticle)
+  //         )
+  //       )
+  //   )
+  // );
 
-//   @Effect()
-//   getArticles$: Observable<Action> = this.actions$.pipe(
-//     ofType(authorsPortalActions.AuthorsPortalActionTypes.GetArticles),
-//     mergeMap(() => this.articlesService.getAllArticles().pipe(
-//       map(articles => new authorsPortalActions.GetArticlesSuccess(articles))
-//     ))
-//   );
-
-//   @Effect()
-//   createArticles$: Observable<Action> = this.actions$.pipe(
-//     ofType(authorsPortalActions.AuthorsPortalActionTypes.CreateArticleSuccess),
-//     mergeMap((article) => this.articlesService.createArticle(article).pipe(
-//       map(createdArticle => new  authorsPortalActions.CreateArticleSuccess(createdArticle))
-//     )),
-//   );
-// }
+  @Effect()
+  getStatistics$: Observable<Action> = this.actions$.pipe(
+    ofType(
+      authorsPortalActions.AuthorsPortalActionTypes
+        .GetAuthorsDashboardArticlesStatistics,
+    ),
+    switchMap(() =>
+      this.dashboardService
+        .getDashboardStatistics()
+        .pipe(
+          map(
+            statistics =>
+              new authorsPortalActions.GetAuthorsDashboardArticlesStatisticsSuccess(
+                statistics,
+              ),
+          ),
+        ),
+    ),
+  );
+}

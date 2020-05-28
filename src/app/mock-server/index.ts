@@ -1,4 +1,3 @@
-import { CommentPayload } from './../shared/models/audience-activity-payloads.interface';
 import {
   Tag,
   Article,
@@ -7,6 +6,7 @@ import {
   AudienceActivity,
   ApplaudPayload,
   Comment,
+  CommentPayload,
   AudienceActivityUpdateSuccessPayload,
 } from '../shared/models';
 
@@ -135,11 +135,11 @@ export function generateArticles(length: number) {
 }
 
 export function tagArticle(tagName: string, articleId: number): Article {
-  const tag = tags.find((t) => t.name === tagName);
-  const article = articles.find((p) => p.id === articleId);
+  const tag = tags.find(t => t.name === tagName);
+  const article = articles.find(p => p.id === articleId);
 
   if (tag) {
-    if (article.tags.find((t) => t.name === tagName)) {
+    if (article.tags.find(t => t.name === tagName)) {
       return article;
     }
   }
@@ -153,7 +153,7 @@ export function tagArticle(tagName: string, articleId: number): Article {
 }
 
 export function editArticleTitle(articleId: number, title: string) {
-  const article = articles.find((p) => p.id === articleId);
+  const article = articles.find(p => p.id === articleId);
 
   if (article) {
     article.title = title;
@@ -163,7 +163,7 @@ export function editArticleTitle(articleId: number, title: string) {
 }
 
 export function editArticleBody(articleId: number, body: string): Article {
-  const article = articles.find((p) => p.id === articleId);
+  const article = articles.find(p => p.id === articleId);
 
   if (article) {
     article.body = body;
@@ -173,10 +173,10 @@ export function editArticleBody(articleId: number, body: string): Article {
 }
 
 export function untagArticle(tagId: number, articleId: number): Article {
-  const article = articles.find((p) => p.id === articleId);
+  const article = articles.find(p => p.id === articleId);
 
   if (article) {
-    const filtered = article.tags.filter((tag) => tag.id !== tagId);
+    const filtered = article.tags.filter(tag => tag.id !== tagId);
     article.tags = filtered;
     article.updatedAt = new Date().toString();
   }
@@ -185,13 +185,13 @@ export function untagArticle(tagId: number, articleId: number): Article {
 }
 
 export function categorizeArticle(articleId: number, categoryName: string) {
-  let category = categories.find((c) => c.name === categoryName);
+  let category = categories.find(c => c.name === categoryName);
 
   if (!category) {
     category = createCategory(categoryName);
   }
 
-  const article = articles.find((p) => p.id === articleId);
+  const article = articles.find(p => p.id === articleId);
 
   if (article) {
     article.categories.push(category);
@@ -202,12 +202,12 @@ export function categorizeArticle(articleId: number, categoryName: string) {
 
 export function removeArticleFromCategory(
   articleId: number,
-  categoryId: number
+  categoryId: number,
 ) {
-  const article = articles.find((p) => p.id === articleId);
+  const article = articles.find(p => p.id === articleId);
 
   if (article) {
-    const filtered = article.categories.filter((c) => c.id !== categoryId);
+    const filtered = article.categories.filter(c => c.id !== categoryId);
 
     article.categories = filtered;
   }
@@ -216,7 +216,7 @@ export function removeArticleFromCategory(
 }
 
 export function toggleArticlePublishedState(articleId: number) {
-  const article = articles.find((p) => p.id === articleId);
+  const article = articles.find(p => p.id === articleId);
 
   if (article) {
     article.published = !article.published;
@@ -234,7 +234,7 @@ export function findAudience(options: Partial<Audience>) {
 
   function fillMissingAudienceDetails(
     foundAudience: Audience,
-    providedAudienceAudience: Partial<Audience>
+    providedAudienceAudience: Partial<Audience>,
   ) {
     const { email, audienceName } = providedAudienceAudience;
 
@@ -245,21 +245,19 @@ export function findAudience(options: Partial<Audience>) {
   }
 
   if (options.id) {
-    audience = audienceList.find((aud) => aud.id === options.id);
+    audience = audienceList.find(aud => aud.id === options.id);
   }
 
   if (!audience && options.email) {
-    audience = audienceList.find((aud) => aud.email === options.email);
+    audience = audienceList.find(aud => aud.email === options.email);
   } else if (!audience && options.audienceName) {
     audience = audienceList.find(
-      (aud) =>
+      aud =>
         aud.audienceName === options.audienceName &&
-        aud.deviceUUID === aud.deviceUUID
+        aud.deviceUUID === aud.deviceUUID,
     );
   } else {
-    audience = audienceList.find(
-      (aud) => aud.deviceUUID === options.deviceUUID
-    );
+    audience = audienceList.find(aud => aud.deviceUUID === options.deviceUUID);
   }
 
   fillMissingAudienceDetails(audience, options);
@@ -269,7 +267,7 @@ export function findAudience(options: Partial<Audience>) {
 
 function generateRandomAudienceActivities(
   articleId: number,
-  max = 10
+  max = 10,
 ): AudienceActivity[] {
   const noOfComments = Math.round(Math.random() * max);
 
@@ -321,7 +319,7 @@ function generateComment(articleId: number, audienceId: number) {
 export function createComment(
   comment: string,
   articleId: number,
-  audienceId: number
+  audienceId: number,
 ): Comment {
   const commentId = !audienceComments.length
     ? 0
@@ -366,7 +364,7 @@ export function addComment(payload: CommentPayload) {
   const article = articles.find(({ id }) => id === articleId);
 
   let act = article.audienceActivities.find(
-    (activity) => activity.audience.id === audience.id
+    activity => activity.audience.id === audience.id,
   );
 
   const com = createComment(comment, articleId, audience.id);
@@ -383,14 +381,14 @@ export function addComment(payload: CommentPayload) {
 }
 
 export function applaud(
-  payload: ApplaudPayload
+  payload: ApplaudPayload,
 ): AudienceActivityUpdateSuccessPayload {
   const { applauds, articleId, audience: currentAudience } = payload;
 
   const audience = findOrCreateAudience(currentAudience);
   const article = articles.find(({ id }) => id === articleId);
 
-  let act = article.audienceActivities.find((activity) => {
+  let act = article.audienceActivities.find(activity => {
     return activity.audience.id === audience.id;
   });
 
@@ -407,7 +405,7 @@ export function applaud(
 }
 
 export function createAudienceActivity(
-  activity: Partial<AudienceActivity>
+  activity: Partial<AudienceActivity>,
 ): AudienceActivity {
   const activityId = !audienceActivities.length
     ? 0
@@ -422,3 +420,35 @@ export function createAudienceActivity(
 
   return activity as AudienceActivity;
 }
+
+export function getTotalArticleApplauds(activities: AudienceActivity[]) {
+  return audienceActivities.reduce(
+    (sum, activity) => sum + activity.applauds,
+    0,
+  );
+}
+
+export function getMostLikedArticle() {
+  let mostLiked: Article;
+  let greatestLikes = 0;
+
+  articles.forEach(article => {
+    const likes = getTotalArticleApplauds(article.audienceActivities);
+
+    if (greatestLikes <= likes) {
+      greatestLikes = likes;
+      mostLiked = article;
+    }
+  });
+
+  console.log('>>>>>>>>>>>>>>>>>..articles');
+
+  return {
+    articleId: mostLiked.id,
+    statisticsTitle: 'Most Liked Article',
+    articleTitle: mostLiked.title,
+    count: greatestLikes,
+  };
+}
+
+generateArticles(200);

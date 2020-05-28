@@ -1,23 +1,25 @@
 import { Action } from '@ngrx/store';
+import { ArticleStatistics } from '../authors-portal-shared/models';
 
 export const enum AuthorsPortalActionTypes {
-  GetDashboard = '[Authors] Get Dashboard',
-  GetDashboardSuccess = '[Authors] Get Dashboard Success',
+  GetAuthorsDashboardArticlesStatistics = '[Authors] Get Dashboard Article Statistics',
+  GetAuthorsDashboardArticlesStatisticsSuccess = '[Authors] Get Dashboard Article Statistics Success',
 }
 
-export class GetDashboard implements Action {
-  readonly type = AuthorsPortalActionTypes.GetDashboard;
+export class GetAuthorsDashboardArticlesStatistics implements Action {
+  readonly type =
+    AuthorsPortalActionTypes.GetAuthorsDashboardArticlesStatistics;
 
   constructor() {}
 }
 
-export class GetDashboardSuccess implements Action {
-  readonly type = AuthorsPortalActionTypes.GetDashboardSuccess;
+export class GetAuthorsDashboardArticlesStatisticsSuccess implements Action {
+  readonly type =
+    AuthorsPortalActionTypes.GetAuthorsDashboardArticlesStatisticsSuccess;
 
-  constructor(public payload: any) {}
+  constructor(public payload: ArticleStatistics[]) {}
 }
 
-
 export type AuthorsPortalActions =
-| GetDashboard
-| GetDashboardSuccess;
+  | GetAuthorsDashboardArticlesStatistics
+  | GetAuthorsDashboardArticlesStatisticsSuccess;

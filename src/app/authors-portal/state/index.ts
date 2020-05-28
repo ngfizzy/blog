@@ -1,9 +1,11 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { AuthorsPortalState } from './authors-portal.state';
 
-export { AuthorsPortalState } from './authors-portal.state';
+export * from './authors-portal.state';
 
-// const getDashboardState = createFeatureSelector<fromAuthorsPortalState.AuthorsPortalState>(
-//   'authorsPortal'
-// );
+const getAuthorsPortalState = createFeatureSelector<AuthorsPortalState>(
+  'authorsPortal',
+);
 
 // export const getArticles = createSelector(
 //   getDashboardState,
@@ -14,3 +16,13 @@ export { AuthorsPortalState } from './authors-portal.state';
 //   getDashboardState,
 //   state => state.articles.isLoading,
 // );
+
+export const getDashboardState = createSelector(
+  getAuthorsPortalState,
+  state => state.dashboardState,
+);
+
+export const getArticleStatistics = createSelector(
+  getDashboardState,
+  dashboard => dashboard.articlesStatistics,
+);

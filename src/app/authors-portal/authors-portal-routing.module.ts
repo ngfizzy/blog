@@ -1,22 +1,24 @@
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './auth.guard';
-import { AuthorsPortalComponent } from './authors-portal.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'articles'
+    component: DashboardComponent,
   },
   {
     path: 'articles',
-    canLoad: [ AuthGuard ],
-    canActivate: [ AuthGuard ],
-    loadChildren: () => import('./authors-articles/authors-articles.module')
-      .then(mod => mod.AuthorsArticlesModule),
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./authors-articles/authors-articles.module').then(
+        (mod) => mod.AuthorsArticlesModule
+      ),
   },
   {
     path: 'login',
@@ -24,11 +26,8 @@ const routes: Routes = [
   },
 ];
 @NgModule({
-  imports: [RouterModule.forChild(routes)]
+  imports: [RouterModule.forChild(routes)],
 })
 export class AuthorsPortalRoutingModule {
-  static readonly moduleComponents = [
-    AuthorsPortalComponent,
-    LoginComponent,
-  ];
+  static readonly moduleComponents = [DashboardComponent, LoginComponent];
 }
