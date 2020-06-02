@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import {
   Tag,
   Article,
@@ -422,10 +423,7 @@ export function createAudienceActivity(
 }
 
 export function getTotalArticleApplauds(activities: AudienceActivity[]) {
-  return audienceActivities.reduce(
-    (sum, activity) => sum + activity.applauds,
-    0,
-  );
+  return activities.reduce((sum, activity) => sum + activity.applauds, 0);
 }
 
 export function getMostLikedArticle() {
@@ -479,28 +477,61 @@ export function getArticleWithMostComments() {
   };
 }
 
-export function getMostPopularArticle() {
+function getTotalLikesAndComments(activities: AudienceActivity[]) {
+  return {
+    commentsCount: getCommentsCount(activities),
+    likes: getTotalArticleApplauds(activities),
+  };
+}
+
+function getPopularity(activities: AudienceActivity[]) {
+  const { commentsCount, likes } = getTotalLikesAndComments(activities);
+
+  return commentsCount + likes;
+}
+export function _getMostPopularArticle(sourceArticlesList: Article[]) {
   let mostPopular: Article;
-  let greatestInterractionAggregate = 0;
+  let greatestPopularity = 0;
 
-  articles.forEach(article => {
-    const commentsCount = getCommentsCount(article.audienceActivities);
-    const likes = getTotalArticleApplauds(article.audienceActivities);
+  sourceArticlesList.forEach(article => {
+    const popularity = getPopularity(article.audienceActivities);
 
-    const interractionAggregate = commentsCount + likes;
-
-    if (greatestInterractionAggregate <= interractionAggregate) {
-      greatestInterractionAggregate = interractionAggregate;
+    if (greatestPopularity <= popularity) {
+      greatestPopularity = popularity;
       mostPopular = article;
     }
   });
+
+  return { mostPopular, popularity: greatestPopularity };
+}
+
+export function getMostPopularArticle() {
+  const { mostPopular, popularity } = _getMostPopularArticle(articles);
 
   return {
     articleId: mostPopular.id,
     statisticsTitle: 'Most Popular Article',
     articleTitle: mostPopular.title,
     countLabel: 'Comments + Likes',
-    count: greatestInterractionAggregate,
+    count: popularity,
   };
 }
+
+export function getTop10Articles() {
+  const sorted = articles.sort((a, b) => {
+    const aPopularity = getPopularity(a.audienceActivities);
+    const bPopularity = getPopularity(b.audienceActivities);
+
+    if (aPopularity > bPopularity) {
+      return -1;
+    } else if (aPopularity < bPopularity) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+
+  return sorted.slice(0, 9);
+}
+
 generateArticles(200);

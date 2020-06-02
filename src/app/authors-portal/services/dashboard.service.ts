@@ -5,8 +5,10 @@ import {
   getMostLikedArticle,
   getArticleWithMostComments,
   getMostPopularArticle,
+  getTop10Articles,
 } from 'src/app/mock-server';
 import { AuthorsArticlesService } from './authors-articles.service';
+import { Article } from 'src/app/shared/models';
 
 @Injectable()
 export class DashboardService {
@@ -15,6 +17,7 @@ export class DashboardService {
   }
 
   getDashboardStatistics(): Observable<ArticleStatistics[]> {
+    this.getTop10Articles();
     return forkJoin([
       this.getMostLikedArticle(),
       this.getArticleWithMostComments(),
@@ -22,6 +25,9 @@ export class DashboardService {
     ]);
   }
 
+  getTop10Articles(): Observable<Article[]> {
+    return of(getTop10Articles());
+  }
   private getMostPopularArticle(): Observable<ArticleStatistics> {
     return of(getMostPopularArticle());
   }

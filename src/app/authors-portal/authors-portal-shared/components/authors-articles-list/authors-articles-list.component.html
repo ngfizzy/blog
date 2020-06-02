@@ -1,7 +1,7 @@
 <mat-list class="w-100 articles-list list-group">
   <a
     *ngFor="let article of articlesList"
-    [routerLink]="article.id"
+    [routerLink]="['/authors/articles', article.id]"
     (click)="$event.preventDefault(); onShowFullArticle(article.id);"
   >
     <mat-list-item class="list-group-item item">{{article.title}}</mat-list-item>

@@ -1,18 +1,24 @@
-<div class="container-fluid">
+<div class="container-fluid border border-light">
 
   <h1 class="mb-4">Dashboard</h1>
 
   <h4 class="text-underline">Quick statistics</h4>
-  <div class="d-flex mt-2">
+  <div class="row mt-2">
     <ng-container *ngIf="articlesStatistics$ | async as statistics">
-      <div *ngFor="let stat of statistics" class="mr-1 mb-1">
+      <div *ngFor="let stat of statistics" class="col-sm-12 col-md-4">
         <app-authors-number-widget
         [statistics]="stat"
       ></app-authors-number-widget>
-  
       </div>
     </ng-container>
   </div>
 
+  <div class="row mt-2">
+    <div class="col-sm-12 col-md-6 list-panel">
+      <app-authors-list-panel [listTitle]="'Top 10 Articles'">
+        <app-authors-articles-list [articlesList]="top10Articles$ | async"></app-authors-articles-list>
+      </app-authors-list-panel>
+    </div>
+  </div>
 </div>
 

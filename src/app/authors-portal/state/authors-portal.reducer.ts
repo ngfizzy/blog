@@ -10,6 +10,10 @@ const defaultState: AuthorsPortalState = {
   dashboardState: {
     isLoading: true,
     articlesStatistics: [],
+    top10ArticlesState: {
+      isLoading: true,
+      articles: [],
+    },
   },
   isLoading: true,
   audienceState: {
@@ -21,12 +25,13 @@ const defaultState: AuthorsPortalState = {
 export function authorsPortalReducer(
   state: AuthorsPortalState = defaultState,
   action: AuthorsPortalActions,
-) {
+): AuthorsPortalState {
   switch (action.type) {
     case AuthorsPortalActionTypes.GetAuthorsDashboardArticlesStatistics:
       return {
         ...state,
         dashboardState: {
+          ...state.dashboardState,
           isLoading: true,
           articlesStatistics: [],
         },
@@ -36,10 +41,56 @@ export function authorsPortalReducer(
       return {
         ...state,
         dashboardState: {
+          ...state.dashboardState,
           isLoading: false,
           articlesStatistics: [...action.payload],
         },
         isLoading: false,
+      };
+    case AuthorsPortalActionTypes.GetTop10Articles:
+      return {
+        ...state,
+        dashboardState: {
+          ...state.dashboardState,
+          top10ArticlesState: {
+            ...state.dashboardState.top10ArticlesState,
+            isLoading: true,
+          },
+        },
+      };
+    case AuthorsPortalActionTypes.GetTop10Articles:
+      return {
+        ...state,
+        dashboardState: {
+          ...state.dashboardState,
+          top10ArticlesState: {
+            ...state.dashboardState.top10ArticlesState,
+            isLoading: true,
+          },
+        },
+      };
+    case AuthorsPortalActionTypes.GetTop10Articles:
+      return {
+        ...state,
+        dashboardState: {
+          ...state.dashboardState,
+          top10ArticlesState: {
+            ...state.dashboardState.top10ArticlesState,
+            isLoading: true,
+          },
+        },
+      };
+    case AuthorsPortalActionTypes.GetTop10ArticlesSuccess:
+      return {
+        ...state,
+        dashboardState: {
+          ...state.dashboardState,
+          top10ArticlesState: {
+            ...state.dashboardState.top10ArticlesState,
+            articles: [...action.payload],
+            isLoading: false,
+          },
+        },
       };
     default:
       return state;

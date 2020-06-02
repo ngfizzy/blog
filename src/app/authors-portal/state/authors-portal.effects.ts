@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
-import { mergeMap, map, switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 import { DashboardService } from './../services/dashboard.service';
 import * as authorsPortalActions from './authors-portal.actions';
@@ -58,6 +58,21 @@ export class AuthorsPortalEffects {
               new authorsPortalActions.GetAuthorsDashboardArticlesStatisticsSuccess(
                 statistics,
               ),
+          ),
+        ),
+    ),
+  );
+
+  @Effect()
+  getTop10Articles$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsPortalActions.AuthorsPortalActionTypes.GetTop10Articles),
+    switchMap(() =>
+      this.dashboardService
+        .getTop10Articles()
+        .pipe(
+          map(
+            authors =>
+              new authorsPortalActions.GetTop10ArticlesSuccess(authors),
           ),
         ),
     ),

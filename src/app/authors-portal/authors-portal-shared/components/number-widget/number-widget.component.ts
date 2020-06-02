@@ -1,10 +1,10 @@
-import { ArticleStatistics } from './models/article-statistics.interface';
+import { ArticleStatistics } from '../../models/article-statistics.interface';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-authors-number-widget',
   template: `
-    <div class="mat-elevation-z2 widget">
+    <div class="mat-elevation-z2 content-background-color widget">
       <h4 class="title">{{ statistics.statisticsTitle }}</h4>
       <h6 class="article-title">
         <a [routerLink]="['.', 'articles', statistics.articleId]">
@@ -26,7 +26,6 @@ import { Component, OnInit, Input } from '@angular/core';
         width: 15rem;
         padding: 0.5rem;
         font-weight: bolder;
-        background-color: rgba(30, 30, 36, 0.5);
       }
       .title {
         font-size: 1rem;

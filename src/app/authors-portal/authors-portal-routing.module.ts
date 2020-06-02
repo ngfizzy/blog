@@ -17,7 +17,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () =>
       import('./authors-articles/authors-articles.module').then(
-        (mod) => mod.AuthorsArticlesModule
+        mod => mod.AuthorsArticlesModule,
       ),
   },
   {

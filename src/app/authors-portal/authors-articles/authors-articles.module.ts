@@ -1,3 +1,4 @@
+import { AuthorsPortalSharedModule } from './../authors-portal-shared/authors-portal-shared.module';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -9,25 +10,23 @@ import { AuthorsArticleToolbarComponent } from './components/authors-article-too
 import { AuthorsArticleListToolbarComponent } from './components/authors-article-list-toolbar/authors-article-list-toolbar.component';
 import { authorsArticlesReducers } from './state/authors-articles.reducers';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { AuthorsArticlesListComponent } from './components/authors-articles-list/authors-articles-list.component';
 import { AuthorsTagComponent } from './components/authors-tag/authors-tag.component';
 import { AuthorsTagsPanelComponent } from './components/authors-tags-panel/authors-tags-panel.component';
 import { AuthorsArticleTitleComponent } from './components/authors-article-title/authors-article-title.component';
 
 @NgModule({
   imports: [
-    SharedModule,
+    AuthorsPortalSharedModule,
     LMarkdownEditorModule,
     AuthorsArticlesRoutingModule,
     StoreModule.forFeature('articles', authorsArticlesReducers),
-    EffectsModule.forFeature([ AuthorsArticlesEffects ])
+    EffectsModule.forFeature([AuthorsArticlesEffects]),
   ],
   declarations: [
     AuthorsArticleTitleComponent,
     AuthorsArticleToolbarComponent,
     AuthorsArticleListToolbarComponent,
     AuthorsArticleTitleComponent,
-    AuthorsArticlesListComponent,
     AuthorsTagComponent,
     AuthorsTagsPanelComponent,
     ...AuthorsArticlesRoutingModule.routeComponents,

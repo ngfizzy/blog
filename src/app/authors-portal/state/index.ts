@@ -26,3 +26,8 @@ export const getArticleStatistics = createSelector(
   getDashboardState,
   dashboard => dashboard.articlesStatistics,
 );
+
+export const getTop10Articles = createSelector(
+  getDashboardState,
+  dashboard => dashboard.top10ArticlesState.articles,
+);
