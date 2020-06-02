@@ -430,25 +430,77 @@ export function getTotalArticleApplauds(activities: AudienceActivity[]) {
 
 export function getMostLikedArticle() {
   let mostLiked: Article;
-  let greatestLikes = 0;
+  let greatestLikesCount = 0;
 
   articles.forEach(article => {
     const likes = getTotalArticleApplauds(article.audienceActivities);
 
-    if (greatestLikes <= likes) {
-      greatestLikes = likes;
+    if (greatestLikesCount <= likes) {
+      greatestLikesCount = likes;
       mostLiked = article;
     }
   });
-
-  console.log('>>>>>>>>>>>>>>>>>..articles');
 
   return {
     articleId: mostLiked.id,
     statisticsTitle: 'Most Liked Article',
     articleTitle: mostLiked.title,
-    count: greatestLikes,
+    countLabel: 'Comments',
+    count: greatestLikesCount,
   };
 }
 
+function getCommentsCount(audience: AudienceActivity[]) {
+  return audienceActivities.reduce(
+    (sum, activity) => sum + activity.comments.length,
+    0,
+  );
+}
+
+export function getArticleWithMostComments() {
+  let articleWithMostComments: Article;
+  let greatestCommentsCounts = 0;
+
+  articles.forEach(article => {
+    const commentsCount = getCommentsCount(article.audienceActivities);
+
+    if (greatestCommentsCounts <= commentsCount) {
+      greatestCommentsCounts = commentsCount;
+      articleWithMostComments = article;
+    }
+  });
+
+  return {
+    articleId: articleWithMostComments.id,
+    statisticsTitle: 'Article With Most Comments',
+    articleTitle: articleWithMostComments.title,
+    countLabel: 'Comments',
+    count: greatestCommentsCounts,
+  };
+}
+
+export function getMostPopularArticle() {
+  let mostPopular: Article;
+  let greatestInterractionAggregate = 0;
+
+  articles.forEach(article => {
+    const commentsCount = getCommentsCount(article.audienceActivities);
+    const likes = getTotalArticleApplauds(article.audienceActivities);
+
+    const interractionAggregate = commentsCount + likes;
+
+    if (greatestInterractionAggregate <= interractionAggregate) {
+      greatestInterractionAggregate = interractionAggregate;
+      mostPopular = article;
+    }
+  });
+
+  return {
+    articleId: mostPopular.id,
+    statisticsTitle: 'Most Popular Article',
+    articleTitle: mostPopular.title,
+    countLabel: 'Comments + Likes',
+    count: greatestInterractionAggregate,
+  };
+}
 generateArticles(200);

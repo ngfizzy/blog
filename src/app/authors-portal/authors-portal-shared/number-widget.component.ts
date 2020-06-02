@@ -1,6 +1,5 @@
 import { ArticleStatistics } from './models/article-statistics.interface';
 import { Component, OnInit, Input } from '@angular/core';
-import { ArticleEngagement } from './models';
 
 @Component({
   selector: 'app-authors-number-widget',
@@ -14,9 +13,9 @@ import { ArticleEngagement } from './models';
       </h6>
 
       <div>
-        <span class="data-description">Likes: </span>{{ statistics.count }}
+        <span class="data-description">{{ statistics.countLabel}}: </span>{{ statistics.count }}
       </div>
-    </div>
+    </div>\
   `,
   styles: [
     `
@@ -26,7 +25,7 @@ import { ArticleEngagement } from './models';
         width: 15rem;
         padding: 0.5rem;
         font-weight: bolder;
-        background-color: rgba(206, 183, 179, 0.2);
+        background-color: rgba(30, 30, 36, 0.5);
       }
       .title {
         font-size: 1.2rem;
