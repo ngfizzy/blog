@@ -13,9 +13,10 @@ import { Component, OnInit, Input } from '@angular/core';
       </h6>
 
       <div>
-        <span class="data-description">{{ statistics.countLabel}}: </span>{{ statistics.count }}
+        <span class="data-description">{{ statistics.countLabel }}: </span
+        >{{ statistics.count }}
       </div>
-    </div>\
+    </div>
   `,
   styles: [
     `
@@ -28,7 +29,7 @@ import { Component, OnInit, Input } from '@angular/core';
         background-color: rgba(30, 30, 36, 0.5);
       }
       .title {
-        font-size: 1.2rem;
+        font-size: 1rem;
         border-bottom: 1px solid;
       }
       .article-title {

@@ -472,7 +472,7 @@ export function getArticleWithMostComments() {
 
   return {
     articleId: articleWithMostComments.id,
-    statisticsTitle: 'Article With Most Comments',
+    statisticsTitle: 'Most Commented On',
     articleTitle: articleWithMostComments.title,
     countLabel: 'Comments',
     count: greatestCommentsCounts,

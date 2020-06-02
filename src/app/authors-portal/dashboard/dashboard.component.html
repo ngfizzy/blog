@@ -1,11 +1,18 @@
 <div class="container-fluid">
-  <ng-container *ngIf="articlesStatistics$ | async as statistics">
-    <div *ngFor="let stat of statistics">
-      <app-authors-number-widget
-      [statistics]="stat"
-    ></app-authors-number-widget>
 
-    </div>
-  </ng-container>
+  <h1 class="mb-4">Dashboard</h1>
+
+  <h4 class="text-underline">Quick statistics</h4>
+  <div class="d-flex mt-2">
+    <ng-container *ngIf="articlesStatistics$ | async as statistics">
+      <div *ngFor="let stat of statistics" class="mr-1 mb-1">
+        <app-authors-number-widget
+        [statistics]="stat"
+      ></app-authors-number-widget>
+  
+      </div>
+    </ng-container>
+  </div>
+
 </div>
 
