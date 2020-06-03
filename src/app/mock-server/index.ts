@@ -573,4 +573,5 @@ export function getLast10DraftArticles() {
 
   return sorted.slice(0, 10);
 }
+
 generateArticles(200);

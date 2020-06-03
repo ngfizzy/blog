@@ -14,35 +14,6 @@ export class AuthorsPortalEffects {
     private dashboardService: DashboardService,
   ) {}
 
-  // @Effect()
-  // getArticles$: Observable<Action> = this.actions$.pipe(
-  //   ofType(authorsPortalActions.AuthorsPortalActionTypes.GetArticles),
-  //   mergeMap(() =>
-  //     this.articlesService
-  //       .getAllArticles()
-  //       .pipe(
-  //         map(
-  //           (articles) => new authorsPortalActions.GetArticlesSuccess(articles)
-  //         )
-  //       )
-  //   )
-  // );
-
-  // @Effect()
-  // createArticles$: Observable<Action> = this.actions$.pipe(
-  //   ofType(authorsPortalActions.AuthorsPortalActionTypes.CreateArticleSuccess),
-  //   mergeMap((article) =>
-  //     this.articlesService
-  //       .createArticle(article)
-  //       .pipe(
-  //         map(
-  //           (createdArticle) =>
-  //             new authorsPortalActions.CreateArticleSuccess(createdArticle)
-  //         )
-  //       )
-  //   )
-  // );
-
   @Effect()
   getStatistics$: Observable<Action> = this.actions$.pipe(
     ofType(

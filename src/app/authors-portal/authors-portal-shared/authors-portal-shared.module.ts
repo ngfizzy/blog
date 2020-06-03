@@ -4,6 +4,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { NgModule } from '@angular/core';
 
 import { NumberWidgetComponent } from './components/number-widget/number-widget.component';
+import { QuickActionButtonComponent } from './components/quick-action-button/quick-action.component';
 
 @NgModule({
   imports: [SharedModule],
@@ -12,11 +13,13 @@ import { NumberWidgetComponent } from './components/number-widget/number-widget.
     NumberWidgetComponent,
     ListPanelComponent,
     AuthorsArticlesListComponent,
+    QuickActionButtonComponent,
   ],
   declarations: [
     NumberWidgetComponent,
     ListPanelComponent,
     AuthorsArticlesListComponent,
+    QuickActionButtonComponent,
   ],
   providers: [],
 })

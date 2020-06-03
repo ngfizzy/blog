@@ -1,8 +1,26 @@
 <div class="container-fluid">
   <h1 class="mb-4">Dashboard</h1>
-
+  <div class="w-100">
+    <h4>
+      Quick Actions
+    </h4>
+    <div class="d-flex p-4">
+      <div class="mr-1">
+      <app-author-quick-action-button
+        [faIconClass]="'fa fa-newspaper-o'"
+        [quickActionTitle]="'Crete New Article'"
+      >
+      </app-author-quick-action-button>
+    </div>
+    <div class="mr-1">
+      <app-author-quick-action-button
+        [faIconClass]="'fa fa-folder-open'"
+        [quickActionTitle]="'Create Category'"
+      >
+      </app-author-quick-action-button>
+    </div>
+  </div>
   <div class="w-100 mt-4">
-
     <h4 class="text-underline">Quick statistics</h4>
     <div class="row mt-2">
       <ng-container *ngIf="articlesStatistics$ | async as statistics">
@@ -30,6 +48,5 @@
       </div>
     </div>
   </div>
-
 </div>
 
