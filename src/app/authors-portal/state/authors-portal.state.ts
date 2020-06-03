@@ -10,6 +10,10 @@ export interface AuthorsPortalState extends CoreState {
       isLoading: boolean;
       articles: Article[];
     };
+    last10DraftsState: {
+      isLoading: boolean;
+      drafts: Article[];
+    };
   };
   isLoading: boolean;
 }

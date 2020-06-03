@@ -7,16 +7,6 @@ const getAuthorsPortalState = createFeatureSelector<AuthorsPortalState>(
   'authorsPortal',
 );
 
-// export const getArticles = createSelector(
-//   getDashboardState,
-//   state => state.articles.articles,
-// );
-
-// export const getArticlesLoadingState = createSelector(
-//   getDashboardState,
-//   state => state.articles.isLoading,
-// );
-
 export const getDashboardState = createSelector(
   getAuthorsPortalState,
   state => state.dashboardState,
@@ -30,4 +20,9 @@ export const getArticleStatistics = createSelector(
 export const getTop10Articles = createSelector(
   getDashboardState,
   dashboard => dashboard.top10ArticlesState.articles,
+);
+
+export const getLast10Drafts = createSelector(
+  getDashboardState,
+  dashboard => dashboard.last10DraftsState.drafts,
 );

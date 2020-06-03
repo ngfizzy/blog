@@ -71,8 +71,23 @@ export class AuthorsPortalEffects {
         .getTop10Articles()
         .pipe(
           map(
-            authors =>
-              new authorsPortalActions.GetTop10ArticlesSuccess(authors),
+            articles =>
+              new authorsPortalActions.GetTop10ArticlesSuccess(articles),
+          ),
+        ),
+    ),
+  );
+
+  @Effect()
+  getTopLast10Drafts$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsPortalActions.AuthorsPortalActionTypes.GetTop10Articles),
+    switchMap(() =>
+      this.dashboardService
+        .getLast10Drafts()
+        .pipe(
+          map(
+            articles =>
+              new authorsPortalActions.GetLast10DraftsSuccess(articles),
           ),
         ),
     ),

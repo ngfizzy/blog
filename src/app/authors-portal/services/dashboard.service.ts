@@ -6,6 +6,7 @@ import {
   getArticleWithMostComments,
   getMostPopularArticle,
   getTop10Articles,
+  getLast10DraftArticles,
 } from 'src/app/mock-server';
 import { AuthorsArticlesService } from './authors-articles.service';
 import { Article } from 'src/app/shared/models';
@@ -17,12 +18,15 @@ export class DashboardService {
   }
 
   getDashboardStatistics(): Observable<ArticleStatistics[]> {
-    this.getTop10Articles();
     return forkJoin([
       this.getMostLikedArticle(),
       this.getArticleWithMostComments(),
       this.getMostPopularArticle(),
     ]);
+  }
+
+  getLast10Drafts() {
+    return of(getLast10DraftArticles());
   }
 
   getTop10Articles(): Observable<Article[]> {

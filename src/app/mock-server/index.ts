@@ -66,28 +66,49 @@ function randomPublishStatus() {
 
   return randomNumber % 2 === 0;
 }
-// tslint:disable:max-line-length
 
 function generateArticle() {
   const id = randomId();
+  const isPublished = randomPublishStatus();
   const article: Article = {
     id,
     authorId: 1,
-    published: randomPublishStatus(),
+    published: isPublished,
     title: 'Lorem ipsum ' + id,
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi. Praesent vulputate justo vel libero rutrum, et euismod sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. Morbi id porta neque. Vestibulum laoreet volutpat risus non hendrerit. Vestibulum sapien leo, varius quis finibus nec, iaculis eget lorem. In nec ex elit. Maecenas at finibus augue, eget feugiat odio. Ut vel ultricies ipsum.
+    body:
+      `Lorem ipsum dolor sit amet,` +
+      `  consectetur adipiscing elit.Duis sit amet vulputate quam.Pellentesque` +
+      `porta sollicitudin dui, in tincidunt metus tempor vitae.Sed pretium,` +
+      `ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque` +
+      `lectus libero in mi.Praesent vulputate justo vel libero rutrum, et euismod` +
+      `sem iaculis.Mauris non erat vitae justo congue faucibus nec et leo.Morbi id` +
+      `porta neque.Vestibulum laoreet volutpat risus non hendrerit.Vestibulum sapien` +
+      `leo, varius quis finibus nec, iaculis eget lorem.In nec ex elit.Maecenas at` +
+      `finibus augue, eget feugiat odio.Ut vel ultricies ipsum.` +
+      `<br/>
     <br/>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate` +
+      `quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium,` +
+      `ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi.` +
+      `  Praesent vulputate justo vel libero rutrum, et euismod sem iaculis.Mauris non erat vitae justo` +
+      `congue faucibus nec et leo.Morbi id porta neque.Vestibulum laoreet volutpat risus non hendrerit.` +
+      `Vestibulum sapien leo, varius quis finibus nec, iaculis eget lorem.In nec ex elit.Maecenas` +
+      `at finibus augue, eget feugiat odio.Ut vel ultricies ipsum.` +
+      `<br/>
     <br/>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi. Praesent vulputate justo vel libero rutrum, et euismod sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. Morbi id porta neque. Vestibulum laoreet volutpat risus non hendrerit. Vestibulum sapien leo, varius quis finibus nec, iaculis eget lorem. In nec ex elit. Maecenas at finibus augue, eget feugiat odio. Ut vel ultricies ipsum.
-    <br/>
-    <br/>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae. Sed pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque lectus libero in mi. Praesent vulputate justo vel libero rutrum, et euismod sem iaculis. Mauris non erat vitae justo congue faucibus nec et leo. Morbi id porta neque. Vestibulum laoreet volutpat risus non hendrerit. Vestibulum sapien leo, varius quis finibus nec, iaculis eget lorem. In nec ex elit. Maecenas at finibus augue, eget feugiat odio. Ut vel ultricies ipsum.
-  `,
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet vulputate` +
+      `quam.Pellentesque porta sollicitudin dui, in tincidunt metus tempor vitae.Sed` +
+      `pretium, ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque` +
+      `lectus libero in mi.Praesent vulputate justo vel libero rutrum, et euismod sem` +
+      `iaculis.Mauris non erat vitae justo congue faucibus nec et leo.Morbi id porta` +
+      `neque.Vestibulum laoreet volutpat risus non hendrerit.Vestibulum sapien leo,` +
+      `varius quis finibus nec, iaculis eget lorem.In nec ex elit.Maecenas at finibus` +
+      `augue, eget feugiat odio.Ut vel ultricies ipsum.`,
     createdAt: new Date().toString(),
     updatedAt: new Date().toString(),
     tags: [],
     categories: [getRandomCategory()],
-    audienceActivities: generateRandomAudienceActivities(id),
+    audienceActivities: isPublished ? generateRandomAudienceActivities(id) : [],
   };
 
   return article;
@@ -338,6 +359,7 @@ export function createComment(
 
   return comm;
 }
+
 export function findOrCreateAudience(criteria: Partial<Audience>): Audience {
   let audience = findAudience(criteria);
 
@@ -531,7 +553,24 @@ export function getTop10Articles() {
     }
   });
 
-  return sorted.slice(0, 9);
+  return sorted.slice(0, 10);
 }
 
+export function getLast10DraftArticles() {
+  const drafts = articles.filter(article => !article.published);
+
+  const sorted = drafts.sort((a, b) => {
+    const aTimestamp = new Date(a.updatedAt).getTime();
+    const bTimestamp = new Date(b.updatedAt).getTime();
+    if (aTimestamp > bTimestamp) {
+      return -1;
+    } else if (aTimestamp < bTimestamp) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+
+  return sorted.slice(0, 10);
+}
 generateArticles(200);

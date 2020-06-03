@@ -14,6 +14,10 @@ const defaultState: AuthorsPortalState = {
       isLoading: true,
       articles: [],
     },
+    last10DraftsState: {
+      drafts: [],
+      isLoading: false,
+    },
   },
   isLoading: true,
   audienceState: {
@@ -88,6 +92,29 @@ export function authorsPortalReducer(
           top10ArticlesState: {
             ...state.dashboardState.top10ArticlesState,
             articles: [...action.payload],
+            isLoading: false,
+          },
+        },
+      };
+    case AuthorsPortalActionTypes.GetLast10Drafts:
+      return {
+        ...state,
+        dashboardState: {
+          ...state.dashboardState,
+          last10DraftsState: {
+            ...state.dashboardState.last10DraftsState,
+            isLoading: false,
+          },
+        },
+      };
+    case AuthorsPortalActionTypes.GetLast10DraftsSuccess:
+      return {
+        ...state,
+        dashboardState: {
+          ...state.dashboardState,
+          last10DraftsState: {
+            ...state.dashboardState.last10DraftsState,
+            drafts: [...action.payload],
             isLoading: false,
           },
         },
