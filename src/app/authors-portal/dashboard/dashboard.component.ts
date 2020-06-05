@@ -14,6 +14,7 @@ import {
 import { ArticleStatistics } from '../authors-portal-shared/models';
 import { Observable } from 'rxjs';
 import { Article } from 'src/app/shared/models';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   templateUrl: './dashboard.component.html',
@@ -24,7 +25,10 @@ export class DashboardComponent implements OnInit {
   top10Articles$: Observable<Article[]>;
   last10Drafts$: Observable<Article[]>;
 
-  constructor(private store: Store<AuthorsPortalState>) {}
+  constructor(
+    private store: Store<AuthorsPortalState>,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.store.dispatch(new GetAuthorsDashboardArticlesStatistics());
@@ -35,5 +39,9 @@ export class DashboardComponent implements OnInit {
 
     this.store.dispatch(new GetLast10Drafts());
     this.last10Drafts$ = this.store.pipe(select(getLast10Drafts));
+  }
+
+  createNewArticle() {
+    return this.router.navigate(['/authors/articles/edit/new']);
   }
 }

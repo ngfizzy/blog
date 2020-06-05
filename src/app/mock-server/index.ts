@@ -451,7 +451,9 @@ export function getMostLikedArticle() {
   let greatestLikesCount = 0;
 
   articles.forEach(article => {
-    const likes = getTotalArticleApplauds(article.audienceActivities);
+    const likes = article.audienceActivities.length
+      ? getTotalArticleApplauds(article.audienceActivities)
+      : 0;
 
     if (greatestLikesCount <= likes) {
       greatestLikesCount = likes;
@@ -459,13 +461,15 @@ export function getMostLikedArticle() {
     }
   });
 
-  return {
-    articleId: mostLiked.id,
-    statisticsTitle: 'Most Liked Article',
-    articleTitle: mostLiked.title,
-    countLabel: 'Comments',
-    count: greatestLikesCount,
-  };
+  return mostLiked
+    ? {
+        articleId: mostLiked.id,
+        statisticsTitle: 'Most Liked Article',
+        articleTitle: mostLiked.title,
+        countLabel: 'Comments',
+        count: greatestLikesCount,
+      }
+    : null;
 }
 
 function getCommentsCount(audience: AudienceActivity[]) {
@@ -574,7 +578,7 @@ export function getLast10DraftArticles() {
 
 export function createArticle({ title, body }) {
   const id = randomId();
-  const article = {
+  const article: Article = {
     id,
     title,
     body,
@@ -583,6 +587,7 @@ export function createArticle({ title, body }) {
     updatedAt: new Date().toString(),
     categories: [],
     tags: [],
+    audienceActivities: [],
     published: false,
   };
 

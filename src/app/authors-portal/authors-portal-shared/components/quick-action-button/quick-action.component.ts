@@ -1,4 +1,3 @@
-import { AboutComponent } from './../../../../about/about.component';
 import {
   Component,
   OnInit,
@@ -29,6 +28,7 @@ import {
   styles: [
     `
       .quick-action {
+        cursor: pointer;
         background-color: rgba(210, 210, 255, 0.1);
         height: 70px;
         width: 200px;
