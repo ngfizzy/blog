@@ -1,45 +1,9 @@
 <mat-sidenav-container class="articles-drawer-container fixed-top">
   <mat-sidenav mode="side" opened class="articles-drawer fixed-top">
     <app-authors-article-list-toolbar
-      (toggleCreateForm)="isCreating = !isCreating"
-      (toggleSearchForm)="isSearching = !isSearching"
-      [isCreating]="isCreating"
-      [isSearching]="isSearching"
+      (createArticle)="createArticle()"
     >
     </app-authors-article-list-toolbar>
-    <div class="mat-elevation-z4 mb-2" *ngIf="isCreating">
-      <form
-        class="d-flex flex-column"
-        (ngSubmit)="createArticle(articleTitle.value)">
-        <input
-          autofocus
-          class="p-1"
-          type="text"
-          name="articleTitle"
-          #articleTitle
-          placeholder="Enter the article's title"
-        >
-        <button type="submit"><i class="fa fa-check"></i></button>
-      </form>
-      <div class="divider"></div>
-    </div>
-    <div class="mat-elevation-z4 mb-2" *ngIf="isSearching">
-        <form
-          class="d-flex flex-column"
-          (ngSubmit)="search(articleTitle.value)"
-        >
-          <input
-            autofocus
-            class="p-1"
-            type="text"
-            name="articleTitle"
-            #articleTitle
-            placeholder="Search by title"
-          >
-          <button type="submit"><i class="fa fa-check"></i></button>
-        </form>
-        <div class="divider"></div>
-      </div>
     <app-authors-articles-list
       [articlesList]="articles$ | async"
       (showFullArticle)="showFullArticle($event)"

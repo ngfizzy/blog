@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import {
   Tag,
   Article,
@@ -186,7 +185,6 @@ export function editArticleTitle(articleId: number, title: string) {
 
 export function editArticleBody(articleId: number, body: string): Article {
   const article = articles.find(p => p.id === articleId);
-
   if (article) {
     article.body = body;
   }
@@ -572,6 +570,25 @@ export function getLast10DraftArticles() {
   });
 
   return sorted.slice(0, 10);
+}
+
+export function createArticle({ title, body }) {
+  const id = randomId();
+  const article = {
+    id,
+    title,
+    body,
+    authorId: 1,
+    createdAt: new Date().toString(),
+    updatedAt: new Date().toString(),
+    categories: [],
+    tags: [],
+    published: false,
+  };
+
+  articles.push(article);
+
+  return article;
 }
 
 generateArticles(200);

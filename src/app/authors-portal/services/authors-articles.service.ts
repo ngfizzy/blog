@@ -6,7 +6,7 @@ import { map, mergeMap, take } from 'rxjs/operators';
 import { ArticlesService } from 'src/app/core/articles.service';
 import { Article } from 'src/app/shared/models/article.interface';
 import {
-  generateArticles,
+  createArticle,
   tagArticle,
   untagArticle,
   categorizeArticle,
@@ -41,13 +41,12 @@ export class AuthorsArticlesService {
   }
 
   createArticle(article: Partial<Article>): Observable<Article> {
-    const createdArticle = {
-      ...article,
-      createdAt: new Date().toDateString(),
-      updatedAt: new Date().toDateString(),
-    } as Article;
-
-    return of(createdArticle);
+    return of(
+      createArticle({
+        body: article.body,
+        title: article.title,
+      }),
+    );
   }
 
   editArticleTitle(
@@ -92,6 +91,7 @@ export class AuthorsArticlesService {
       null,
     );
   }
+
   private editArticlePath(
     articleId: number,
     path: EditableArticlePaths,
@@ -129,13 +129,13 @@ export class AuthorsArticlesService {
             article = toggleArticlePublishedState(articleId);
             break;
           default:
-            const message = `Cannot update property ${path} because it doesnt exist`;
+            const message = `Cannot update property ${path} because it doesn't exist`;
             throw new UnknownObjectPath(path, message);
         }
 
-        articles.unshift(plucked);
+        articles.unshift(article);
 
-        return { articles, selectedArticle: plucked };
+        return { articles, selectedArticle: article };
       }),
     );
   }
