@@ -9,6 +9,7 @@ import {
   CommentPayload,
   AudienceActivityUpdateSuccessPayload,
 } from '../shared/models';
+import { CategorySummary } from '../authors-portal/authors-portal-shared/models';
 
 const audienceActivities: AudienceActivity[] = [];
 const audienceComments: Comment[] = [];
@@ -41,7 +42,7 @@ const categories: Category[] = [
     createdAt: new Date().toString(),
   },
   {
-    id: 2,
+    id: 3,
     name: 'self help',
     updatedAt: new Date().toString(),
     createdAt: new Date().toString(),
@@ -594,6 +595,34 @@ export function createArticle({ title, body }) {
   articles.push(article);
 
   return article;
+}
+
+export function getCategories(): Category[] {
+  return categories;
+}
+
+export function getCategoryArticles(categoryId: number) {
+  return articles.filter(article => {
+    const inCategory = !!article.categories.find(
+      category => category.id === categoryId,
+    );
+
+    return inCategory;
+  });
+}
+
+export function getCategorySummary(categoryId: number): CategorySummary {
+  const categoryArticles = getCategoryArticles(categoryId);
+
+  return {
+    categoryId,
+    articlesCount: categoryArticles.length,
+    categoryName: categories.find(category => category.id === categoryId).name,
+  };
+}
+
+export function getCategoriesSummaries() {
+  return categories.map(category => getCategorySummary(category.id));
 }
 
 generateArticles(200);

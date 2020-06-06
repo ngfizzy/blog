@@ -1,11 +1,8 @@
 <div class="container-fluid">
   <h1 class="mb-4">Dashboard</h1>
-  <div class="w-100">
-    <h4>
-      Quick Actions
-    </h4>
-    <div class="d-flex p-4">
-      <div class="mr-1">
+
+  <app-authors-section [sectionTitle]="'Quick Actions'">
+    <div class="mr-1">
       <app-author-quick-action-button
         [faIconClass]="'fa fa-newspaper-o'"
         [quickActionTitle]="'Crete New Article'"
@@ -13,41 +10,51 @@
       >
       </app-author-quick-action-button>
     </div>
-    <div class="mr-1">
+    <div class="mr-1 ml-1">
       <app-author-quick-action-button
         [faIconClass]="'fa fa-folder-open'"
         [quickActionTitle]="'Create Category'"
       >
       </app-author-quick-action-button>
     </div>
-  </div>
-  <div class="w-100 mt-4">
-    <h4 class="text-underline">Quick statistics</h4>
-    <div class="row mt-2">
-      <ng-container *ngIf="articlesStatistics$ | async as statistics">
-        <div *ngFor="let stat of statistics" class="col-sm-12 col-md-4">
-          <app-authors-number-widget
-          [statistics]="stat"
-        ></app-authors-number-widget>
-        </div>
-      </ng-container>
+  </app-authors-section>
+
+  <app-authors-section [sectionTitle]="'Quick Statistics'">
+    <ng-container *ngIf="articlesStatistics$ | async as statistics">
+      <div *ngFor="let stat of statistics" class="ml-2 mr-2">
+        <app-authors-number-widget
+        [statistics]="stat"
+      ></app-authors-number-widget>
+      </div>
+    </ng-container>
+  </app-authors-section>
+
+  <app-authors-section [sectionTitle]="'All Categories'">
+    <ng-container *ngIf="categoriesSummaries$ | async as categoriesSummaries">
+      <div *ngFor="let summary of categoriesSummaries" class="mr-2 ml-2">
+        <app-authors-category-summary-widget
+          [categorySummary]="summary"
+        ></app-authors-category-summary-widget>
+      </div>
+    </ng-container>
+  </app-authors-section>
+
+  <app-authors-section
+  [sectionTitle]="'Articles Leatherboard'"
+  >
+  <div class="w-100 row mt-2">
+    <div class="col-sm-12 col-md-6 list-panel">
+      <app-authors-list-panel [listTitle]="'Top 10 Articles'">
+        <app-authors-articles-list [articlesList]="top10Articles$ | async"></app-authors-articles-list>
+      </app-authors-list-panel>
+    </div>
+    <div class="col-sm-12 col-md-6 list-panel">
+      <app-authors-list-panel [listTitle]="'Last 10 Drafts'">
+        <app-authors-articles-list [articlesList]="last10Drafts$ | async"></app-authors-articles-list>
+      </app-authors-list-panel>
     </div>
   </div>
 
-  <div class="w-100 mt-4">
-    <h4>Articles Leatherboard</h4>
-    <div class="row mt-2">
-      <div class="col-sm-12 col-md-6 list-panel">
-        <app-authors-list-panel [listTitle]="'Top 10 Articles'">
-          <app-authors-articles-list [articlesList]="top10Articles$ | async"></app-authors-articles-list>
-        </app-authors-list-panel>
-      </div>
-      <div class="col-sm-12 col-md-6 list-panel">
-        <app-authors-list-panel [listTitle]="'Last 10 Drafts'">
-          <app-authors-articles-list [articlesList]="last10Drafts$ | async"></app-authors-articles-list>
-        </app-authors-list-panel>
-      </div>
-    </div>
-  </div>
+  </app-authors-section>
 </div>
 

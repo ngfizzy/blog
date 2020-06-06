@@ -11,6 +11,7 @@ import { authorsPortalReducer } from './state/authors-portal.reducer';
 import { AuthorsArticlesService } from './services/authors-articles.service';
 import { AuthorsPortalEffects } from './state/authors-portal.effects';
 import { DashboardService } from './services/dashboard.service';
+import { CategorySummaryWidgetComponent } from './dashboard/components/category-summary-widget/category-summary-widget.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,9 @@ import { DashboardService } from './services/dashboard.service';
     EffectsModule.forFeature([AuthorsPortalEffects]),
   ],
   providers: [AuthGuard, AuthService, DashboardService, AuthorsArticlesService],
-  declarations: [...AuthorsPortalRoutingModule.moduleComponents],
+  declarations: [
+    ...AuthorsPortalRoutingModule.moduleComponents,
+    CategorySummaryWidgetComponent,
+  ],
 })
 export class AuthorsPortal {}

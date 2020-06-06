@@ -1,20 +1,20 @@
-import { ArticleStatistics } from '../../models/article-statistics.interface';
 import { Component, OnInit, Input } from '@angular/core';
+import { CategorySummary } from '../../../authors-portal-shared/models';
 
 @Component({
-  selector: 'app-authors-number-widget',
+  selector: 'app-authors-category-summary-widget',
   template: `
     <div class="mat-elevation-z2 m-auto content-background-color widget">
-      <h4 class="title">{{ statistics.statisticsTitle }}</h4>
-      <h6 class="article-title" *ngIf="statistics.articleTitle">
-        <a [routerLink]="['.', 'articles', statistics.articleId]">
-          {{ statistics.articleTitle }}
+      <h4 class="text-capitalize title">
+        <a [routerLink]="['.', 'categories', categorySummary.categoryId]">
+          {{ categorySummary.categoryName }}
         </a>
-      </h6>
+      </h4>
 
       <div>
-        <span class="data-description">{{ statistics.countLabel }}: </span
-        >{{ statistics.count }}
+        <span class="data-description"
+          >Articles: {{ categorySummary.articlesCount }}</span
+        >
       </div>
     </div>
   `,
@@ -22,13 +22,16 @@ import { Component, OnInit, Input } from '@angular/core';
     `
       .widget {
         border-radius: 2%;
-        height: 6.5rem;
+        height: 4.77rem;
         width: 15rem;
         padding: 0.5rem;
         font-weight: bolder;
       }
+      .title > a {
+        color: #fcd581;
+      }
       .title {
-        font-size: 1rem;
+        font-size: 1.3rem;
         border-bottom: 1px solid;
       }
       .article-title {
@@ -43,8 +46,8 @@ import { Component, OnInit, Input } from '@angular/core';
     `,
   ],
 })
-export class NumberWidgetComponent implements OnInit {
-  @Input() statistics: ArticleStatistics;
+export class CategorySummaryWidgetComponent implements OnInit {
+  @Input() categorySummary: CategorySummary;
 
   constructor() {}
 

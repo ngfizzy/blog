@@ -1,6 +1,8 @@
-import { Article } from './../../shared/models/article.interface';
-import { ArticleStatistics } from './../authors-portal-shared/models/article-statistics.interface';
+import { CategorySummary } from './../authors-portal-shared/models/category-summary.interface';
+
 import { CoreState } from './../../core/state/core.state';
+import { Article } from 'src/app/shared/models';
+import { ArticleStatistics } from '../authors-portal-shared/models';
 
 export interface AuthorsPortalState extends CoreState {
   dashboardState: {
@@ -13,6 +15,10 @@ export interface AuthorsPortalState extends CoreState {
     last10DraftsState: {
       isLoading: boolean;
       drafts: Article[];
+    };
+    categoriesSummariesState: {
+      isLoading: boolean;
+      summaries: CategorySummary[];
     };
   };
   isLoading: boolean;

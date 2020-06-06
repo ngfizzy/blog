@@ -1,7 +1,10 @@
+import { CategorySummary } from './../authors-portal-shared/models/category-summary.interface';
+import { GetCategoriesSummaries } from './../state/authors-portal.actions';
 import {
   getArticleStatistics,
   getTop10Articles,
   getLast10Drafts,
+  getCategoriesSummaries,
 } from './../state/index';
 import { Store, select } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
@@ -24,6 +27,7 @@ export class DashboardComponent implements OnInit {
   articlesStatistics$: Observable<ArticleStatistics[]>;
   top10Articles$: Observable<Article[]>;
   last10Drafts$: Observable<Article[]>;
+  categoriesSummaries$: Observable<CategorySummary[]>;
 
   constructor(
     private store: Store<AuthorsPortalState>,
@@ -39,6 +43,10 @@ export class DashboardComponent implements OnInit {
 
     this.store.dispatch(new GetLast10Drafts());
     this.last10Drafts$ = this.store.pipe(select(getLast10Drafts));
+
+    this.store.dispatch(new GetCategoriesSummaries());
+
+    this.categoriesSummaries$ = this.store.pipe(select(getCategoriesSummaries));
   }
 
   createNewArticle() {

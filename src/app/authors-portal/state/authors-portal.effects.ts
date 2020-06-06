@@ -63,4 +63,23 @@ export class AuthorsPortalEffects {
         ),
     ),
   );
+
+  @Effect()
+  getCategoriesSummaries$: Observable<Action> = this.actions$.pipe(
+    ofType(
+      authorsPortalActions.AuthorsPortalActionTypes.GetCategoriesSummaries,
+    ),
+    switchMap(() =>
+      this.dashboardService
+        .getCategoriesSummaries()
+        .pipe(
+          map(
+            categories =>
+              new authorsPortalActions.GetCategoriesSummariesSuccess(
+                categories,
+              ),
+          ),
+        ),
+    ),
+  );
 }

@@ -26,3 +26,8 @@ export const getLast10Drafts = createSelector(
   getDashboardState,
   dashboard => dashboard.last10DraftsState.drafts,
 );
+
+export const getCategoriesSummaries = createSelector(
+  getDashboardState,
+  dashboard => dashboard.categoriesSummariesState.summaries,
+);

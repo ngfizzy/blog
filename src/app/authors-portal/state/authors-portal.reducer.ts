@@ -18,6 +18,10 @@ const defaultState: AuthorsPortalState = {
       drafts: [],
       isLoading: false,
     },
+    categoriesSummariesState: {
+      isLoading: true,
+      summaries: [],
+    },
   },
   isLoading: true,
   audienceState: {
@@ -115,6 +119,29 @@ export function authorsPortalReducer(
           last10DraftsState: {
             ...state.dashboardState.last10DraftsState,
             drafts: [...action.payload],
+            isLoading: false,
+          },
+        },
+      };
+    case AuthorsPortalActionTypes.GetCategoriesSummaries:
+      return {
+        ...state,
+        dashboardState: {
+          ...state.dashboardState,
+          categoriesSummariesState: {
+            summaries: [...state.dashboardState.categoriesSummariesState.summaries],
+            isLoading: true,
+          },
+        },
+      };
+    case AuthorsPortalActionTypes.GetCategoriesSummariesSuccess:
+      return {
+        ...state,
+        dashboardState: {
+          ...state.dashboardState,
+          categoriesSummariesState: {
+            ...state.dashboardState,
+            summaries: [...action.payload],
             isLoading: false,
           },
         },

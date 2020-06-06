@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, forkJoin } from 'rxjs';
-import { ArticleStatistics } from '../authors-portal-shared/models';
+import {
+  ArticleStatistics,
+  CategorySummary,
+} from '../authors-portal-shared/models';
 import {
   getMostLikedArticle,
   getArticleWithMostComments,
   getMostPopularArticle,
   getTop10Articles,
   getLast10DraftArticles,
+  getCategoriesSummaries,
 } from 'src/app/mock-server';
 import { AuthorsArticlesService } from './authors-articles.service';
 import { Article } from 'src/app/shared/models';
@@ -27,6 +31,10 @@ export class DashboardService {
 
   getLast10Drafts() {
     return of(getLast10DraftArticles());
+  }
+
+  getCategoriesSummaries(): Observable<CategorySummary[]> {
+    return of(getCategoriesSummaries());
   }
 
   getTop10Articles(): Observable<Article[]> {
