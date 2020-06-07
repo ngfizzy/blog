@@ -23,7 +23,7 @@ import { Component, OnInit, Input } from '@angular/core';
       .widget {
         border-radius: 2%;
         height: 6.5rem;
-        width: 15rem;
+        width: 13.5rem;
         padding: 0.5rem;
         font-weight: bolder;
       }

@@ -1,3 +1,4 @@
+import { AuthorsPortalComponent } from './authors-portal.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -8,17 +9,23 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    component: DashboardComponent,
-  },
-  {
-    path: 'articles',
-    canLoad: [AuthGuard],
-    canActivate: [AuthGuard],
-    loadChildren: () =>
-      import('./authors-articles/authors-articles.module').then(
-        mod => mod.AuthorsArticlesModule,
-      ),
+    component: AuthorsPortalComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: DashboardComponent,
+      },
+      {
+        path: 'articles',
+        canLoad: [AuthGuard],
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('./authors-articles/authors-articles.module').then(
+            mod => mod.AuthorsArticlesModule,
+          ),
+      },
+    ],
   },
   {
     path: 'login',
@@ -29,5 +36,9 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
 })
 export class AuthorsPortalRoutingModule {
-  static readonly moduleComponents = [DashboardComponent, LoginComponent];
+  static readonly moduleComponents = [
+    AuthorsPortalComponent,
+    DashboardComponent,
+    LoginComponent,
+  ];
 }

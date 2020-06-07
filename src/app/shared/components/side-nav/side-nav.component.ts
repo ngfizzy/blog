@@ -24,7 +24,6 @@ export class SideNavComponent  {
   @Input() contentUISizing: SideNavContentSizing;
   // hack to make few routes stick to the top
   @Input() removeTopMargin = false;
-
   @Output() private toggle = new EventEmitter<boolean>();
 
 

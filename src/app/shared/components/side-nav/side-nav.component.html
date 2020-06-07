@@ -7,12 +7,12 @@
   <mat-sidenav (closedStart)="toggleMe()" class="bg-sidenav mat-elevation-z5 w-25 position-fixed" ngClass="{ collapsed: !isOpen }" #sidenav [mode]="mode" [opened]="isOpen">
     <a href="/">
       <div class="p-2 border-bottom m-auto">
-        <img [src]="nav.iconUrl" alt="author avatar" width="232">
+        <img [src]="nav?.iconUrl" alt="author avatar" width="232">
       </div>
     </a>
     <nav>
       <mat-nav-list  class="color-main">
-        <ng-container *ngFor="let item of nav.items">
+        <ng-container *ngFor="let item of nav?.items">
           <a [routerLink]="item.path">
             <mat-list-item class="border-bottom">{{ item.name }}</mat-list-item>
           </a>

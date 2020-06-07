@@ -25,7 +25,6 @@ export class AuthorsArticlesComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private store: Store<fromAuthorsArticles.AuthorsArticlesState>,
-    private zone: NgZone,
   ) {}
 
   ngOnInit() {
@@ -41,10 +40,7 @@ export class AuthorsArticlesComponent implements OnInit {
     this.articleListItemConfig = this.getArticlesConfig();
 
     this.store.dispatch(new fromAuthorsArticlesActions.GetArticles());
-
-    setTimeout(() => {
-      this.articles$ = this.store.pipe(select(fromAuthorsArticles.getArticles));
-    });
+    this.articles$ = this.store.pipe(select(fromAuthorsArticles.getArticles));
 
     this.selectedArticle$ = this.store.pipe(
       select(fromAuthorsArticles.viewArticle),

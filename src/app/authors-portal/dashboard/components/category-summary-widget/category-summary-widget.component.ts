@@ -23,7 +23,7 @@ import { CategorySummary } from '../../../authors-portal-shared/models';
       .widget {
         border-radius: 2%;
         height: 4.77rem;
-        width: 14.5rem;
+        width: 13.5rem;
         padding: 0.5rem;
         font-weight: bolder;
       }

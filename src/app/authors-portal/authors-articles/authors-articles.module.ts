@@ -9,7 +9,6 @@ import { AuthorsArticlesRoutingModule } from './authors-articles-routing.module'
 import { AuthorsArticleToolbarComponent } from './components/authors-article-toolbar/authors-article-toolbar.component';
 import { AuthorsArticleListToolbarComponent } from './components/authors-article-list-toolbar/authors-article-list-toolbar.component';
 import { authorsArticlesReducers } from './state/authors-articles.reducers';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthorsTagComponent } from './components/authors-tag/authors-tag.component';
 import { AuthorsTagsPanelComponent } from './components/authors-tags-panel/authors-tags-panel.component';
 import { AuthorsArticleTitleComponent } from './components/authors-article-title/authors-article-title.component';

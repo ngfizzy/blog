@@ -1,8 +1,11 @@
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { CategorySummary } from './../authors-portal-shared/models/category-summary.interface';
 import {
   GetCategoriesSummaries,
   CreateCategory,
 } from './../state/authors-portal.actions';
+import { Article, Nav } from 'src/app/shared/models';
 import {
   getArticleStatistics,
   getTop10Articles,
@@ -18,9 +21,6 @@ import {
   GetLast10Drafts,
 } from '../state/authors-portal.actions';
 import { ArticleStatistics } from '../authors-portal-shared/models';
-import { Observable } from 'rxjs';
-import { Article } from 'src/app/shared/models';
-import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './dashboard.component.html',

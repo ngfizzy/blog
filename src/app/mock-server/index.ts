@@ -625,4 +625,5 @@ export function getCategoriesSummaries() {
   return categories.map(category => getCategorySummary(category.id));
 }
 
+
 generateArticles(200);
