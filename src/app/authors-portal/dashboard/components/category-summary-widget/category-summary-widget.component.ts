@@ -4,7 +4,7 @@ import { CategorySummary } from '../../../authors-portal-shared/models';
 @Component({
   selector: 'app-authors-category-summary-widget',
   template: `
-    <div class="mat-elevation-z2 m-auto content-background-color widget">
+    <div class="mat-elevation-z2 mb-2 content-background-color widget">
       <h4 class="text-capitalize title">
         <a [routerLink]="['.', 'categories', categorySummary.categoryId]">
           {{ categorySummary.categoryName }}
@@ -23,7 +23,7 @@ import { CategorySummary } from '../../../authors-portal-shared/models';
       .widget {
         border-radius: 2%;
         height: 4.77rem;
-        width: 15rem;
+        width: 14.5rem;
         padding: 0.5rem;
         font-weight: bolder;
       }

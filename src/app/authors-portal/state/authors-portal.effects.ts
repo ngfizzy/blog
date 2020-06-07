@@ -82,4 +82,15 @@ export class AuthorsPortalEffects {
         ),
     ),
   );
+
+  @Effect()
+  createCategory$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsPortalActions.AuthorsPortalActionTypes.CreateCategory),
+    map(action => (action as authorsPortalActions.CreateCategory).payload),
+    switchMap(categoryName =>
+      this.dashboardService
+        .createCategory(categoryName)
+        .pipe(map(() => new authorsPortalActions.GetCategoriesSummaries())),
+    ),
+  );
 }

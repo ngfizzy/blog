@@ -130,7 +130,7 @@ function createTag(tagName: string): Tag {
   };
 }
 
-function createCategory(name: string): Category {
+export function createCategory(name: string): Category {
   const createdAt = new Date().toString();
   const category = {
     name,

@@ -10,7 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
         </h4>
         <p class="w-50 border-bottom"></p>
       </div>
-      <div class="w-100 d-flex">
+      <div class="w-100 d-flex flex-wrap">
         <ng-content></ng-content>
       </div>
     </div>

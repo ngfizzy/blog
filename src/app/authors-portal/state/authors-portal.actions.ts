@@ -12,6 +12,8 @@ export const enum AuthorsPortalActionTypes {
   GetLast10DraftsSuccess = '[Authors] Get Last 10 Drafts Success',
   GetCategoriesSummaries = '[Authors] Get Categories Summaries',
   GetCategoriesSummariesSuccess = '[Authors] Get Categories Summaries Success',
+  CreateCategory = '[Authors] Create Category',
+  CreateCategorySuccess = '[Authors] Create Category Success',
 }
 
 export class GetAuthorsDashboardArticlesStatistics implements Action {
@@ -60,6 +62,18 @@ export class GetCategoriesSummariesSuccess implements Action {
   readonly type = AuthorsPortalActionTypes.GetCategoriesSummariesSuccess;
 
   constructor(public payload: CategorySummary[]) {}
+}
+
+export class CreateCategory implements Action {
+  readonly type = AuthorsPortalActionTypes.CreateCategory;
+
+  constructor(public payload: string) {}
+}
+
+export class CreateCategorySuccess implements Action {
+  readonly type = AuthorsPortalActionTypes.CreateCategorySuccess;
+
+  constructor(public payload: Category) {}
 }
 
 export type AuthorsPortalActions =

@@ -1,3 +1,4 @@
+import { CreateCategoryComponent } from './dashboard/components/create-category-form/create-category.component';
 import { AuthorsPortalSharedModule } from './authors-portal-shared/authors-portal-shared.module';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -25,6 +26,7 @@ import { CategorySummaryWidgetComponent } from './dashboard/components/category-
   declarations: [
     ...AuthorsPortalRoutingModule.moduleComponents,
     CategorySummaryWidgetComponent,
+    CreateCategoryComponent,
   ],
 })
 export class AuthorsPortal {}

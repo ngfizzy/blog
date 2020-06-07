@@ -11,6 +11,7 @@ import {
   getTop10Articles,
   getLast10DraftArticles,
   getCategoriesSummaries,
+  createCategory,
 } from 'src/app/mock-server';
 import { AuthorsArticlesService } from './authors-articles.service';
 import { Article } from 'src/app/shared/models';
@@ -19,6 +20,10 @@ import { Article } from 'src/app/shared/models';
 export class DashboardService {
   constructor(private authorsArticlesService: AuthorsArticlesService) {
     this.authorsArticlesService.getAllArticles();
+  }
+
+  createCategory(category: string) {
+    return of(createCategory(category));
   }
 
   getDashboardStatistics(): Observable<ArticleStatistics[]> {

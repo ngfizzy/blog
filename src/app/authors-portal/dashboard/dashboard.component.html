@@ -14,9 +14,16 @@
       <app-author-quick-action-button
         [faIconClass]="'fa fa-folder-open'"
         [quickActionTitle]="'Create Category'"
+        (clicked)="showCategoryForm()"
       >
       </app-author-quick-action-button>
+      <app-author-create-category
+        *ngIf="isCategoryFormDisplayed"
+        (createCategory)="createCategory($event)"
+      >
+      </app-author-create-category>
     </div>
+
   </app-authors-section>
 
   <app-authors-section [sectionTitle]="'Quick Statistics'">
@@ -39,22 +46,21 @@
     </ng-container>
   </app-authors-section>
 
-  <app-authors-section
-  [sectionTitle]="'Articles Leatherboard'"
-  >
-  <div class="w-100 row mt-2">
-    <div class="col-sm-12 col-md-6 list-panel">
-      <app-authors-list-panel [listTitle]="'Top 10 Articles'">
-        <app-authors-articles-list [articlesList]="top10Articles$ | async"></app-authors-articles-list>
-      </app-authors-list-panel>
+  <app-authors-section [sectionTitle]="'Articles Leatherboard'">
+    <div class="w-100 row mt-2">
+      <div class="col-sm-12 col-md-6 list-panel">
+        <app-authors-list-panel [listTitle]="'Top 10 Articles'">
+          <app-authors-articles-list [articlesList]="top10Articles$ | async">
+          </app-authors-articles-list>
+        </app-authors-list-panel>
+      </div>
+      <div class="col-sm-12 col-md-6 list-panel">
+        <app-authors-list-panel [listTitle]="'Last 10 Drafts'">
+          <app-authors-articles-list [articlesList]="last10Drafts$ | async">
+          </app-authors-articles-list>
+        </app-authors-list-panel>
+      </div>
     </div>
-    <div class="col-sm-12 col-md-6 list-panel">
-      <app-authors-list-panel [listTitle]="'Last 10 Drafts'">
-        <app-authors-articles-list [articlesList]="last10Drafts$ | async"></app-authors-articles-list>
-      </app-authors-list-panel>
-    </div>
-  </div>
-
   </app-authors-section>
 </div>
 

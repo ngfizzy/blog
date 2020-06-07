@@ -4,7 +4,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-authors-number-widget',
   template: `
-    <div class="mat-elevation-z2 m-auto content-background-color widget">
+    <div class="mat-elevation-z2 mb-2 content-background-color widget">
       <h4 class="title">{{ statistics.statisticsTitle }}</h4>
       <h6 class="article-title" *ngIf="statistics.articleTitle">
         <a [routerLink]="['.', 'articles', statistics.articleId]">
