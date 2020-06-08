@@ -2,13 +2,17 @@ import { CoreState } from './core.state';
 import { CoreActions, CoreActionTypes } from './core.actions';
 
 const defaultState: CoreState = {
+  title: '',
   audienceState: {
     isLoading: true,
     audience: null,
-  }
+  },
 };
 
-export function coreReducer(state: CoreState = defaultState, action: CoreActions): CoreState {
+export function coreReducer(
+  state: CoreState = defaultState,
+  action: CoreActions,
+): CoreState {
   switch (action.type) {
     case CoreActionTypes.GetCurrentAudience:
       return state;
@@ -17,10 +21,15 @@ export function coreReducer(state: CoreState = defaultState, action: CoreActions
         ...state,
         audienceState: {
           isLoading: false,
-          audience: { ...action.payload }
-        }
+          audience: { ...action.payload },
+        },
       };
-      default:
-        return state;
+    case CoreActionTypes.SetPageTitle:
+      return {
+        ...state,
+        title: action.payload,
+      };
+    default:
+      return state;
   }
 }

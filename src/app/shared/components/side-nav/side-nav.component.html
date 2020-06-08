@@ -1,8 +1,9 @@
-<div class="collapsed-nav bg-sidenav" *ngIf="!isOpen">
+<div class="w-100 border-white mat-elevation-z2 horizontal-navbar">
   <button class="btn btn-sm" title="Expand Navbar" (click)="toggleMe()">
     <i class="fa fa-arrow-right text-white"></i>
   </button>
 </div>
+<div class="collapsed-nav border border-white bg-sidenav" *ngIf="!isOpen"></div>
 <mat-sidenav-container class="bg-sidenav-container">
   <mat-sidenav (closedStart)="toggleMe()" class="bg-sidenav mat-elevation-z5 w-25 position-fixed" ngClass="{ collapsed: !isOpen }" #sidenav [mode]="mode" [opened]="isOpen">
     <a href="/">
@@ -24,7 +25,7 @@
   <mat-sidenav-content [ngClass]="{
     'no-margin-top': removeTopMargin
   }">
-      <div class="sidenav-content"
+    <div class="sidenav-content"
       [ngClass]="{
         'sidenav-content-full': contentUISizing == contentSizingValues.Fill
       }"

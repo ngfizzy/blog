@@ -246,10 +246,6 @@ export function toggleArticlePublishedState(articleId: number) {
   return article;
 }
 
-export function getAllArticles() {
-  return articles;
-}
-
 export function findAudience(options: Partial<Audience>) {
   let audience: Audience = null;
 
@@ -625,5 +621,19 @@ export function getCategoriesSummaries() {
   return categories.map(category => getCategorySummary(category.id));
 }
 
+export function getAllArticles() {
+  return articles;
+}
+export function getAllPublishedArticles() {
+  return articles.filter(
+    article => !article.categories.find(category => category.name === 'poetry') && article.published,
+  );
+}
+
+export function getAllPublishedPoems() {
+  return articles.filter(article =>
+    article.categories.find(category => category.name === 'poetry' ) && article.published,
+  );
+}
 
 generateArticles(200);

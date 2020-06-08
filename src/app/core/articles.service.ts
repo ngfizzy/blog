@@ -14,7 +14,13 @@ export class ArticlesService {
   }
 
   getAll(): Observable<Article[]> {
-    return of(this.articles.filter(found => found.published === true));
+    return of(
+      this.articles.filter(
+        found =>
+          found.published === true &&
+          !found.categories.find(category => category.name === 'poetry'),
+      ),
+    );
   }
 
   getOne(articleId: number): Observable<Article> {

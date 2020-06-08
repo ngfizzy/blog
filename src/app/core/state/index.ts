@@ -1,17 +1,16 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CoreState } from './core.state';
 
-
 const selectCoreState = createFeatureSelector<CoreState>('app');
 
 export const selectAudienceState = createSelector(
   selectCoreState,
-  state => state.audienceState
+  state => state.audienceState,
 );
 
 export const getAudience = createSelector(
   selectAudienceState,
-  state => state.audience
+  state => state.audience,
 );
 
 export const getAudienceLoadingState = createSelector(
@@ -19,5 +18,9 @@ export const getAudienceLoadingState = createSelector(
   state => state.isLoading,
 );
 
-export { CoreState } from './core.state';
+export const getPageTitle = createSelector(
+  selectCoreState,
+  state => state.title,
+);
 
+export { CoreState } from './core.state';

@@ -4,27 +4,27 @@ import { map, tap } from 'rxjs/operators';
 import { Poem, Poems, CommentPayload, ApplaudPayload } from '../shared/models';
 import { Observable, of } from 'rxjs';
 import { poemThemeImagePlaceholders } from '../core/constants';
-import { applaud, addComment } from '../mock-server';
+import { applaud, getAllPublishedPoems } from '../mock-server';
 
 @Injectable()
 export class PoetryService {
-  constructor(private articlesService: ArticlesService) {}
-
-  getAllPoems() {
-    return this.articlesService.getAll().pipe(
-      map((articles) => {
-        return articles.filter((article) =>
-          article.categories.find((category) => category.name === 'poetry')
-        );
-      }),
-      map((poems) => this.assignRandomThemeImagesToPoems(poems))
+  private poems$: Observable<Poem[]>;
+  constructor(private articlesService: ArticlesService) {
+    this.poems$ = of(getAllPublishedPoems()).pipe(
+      map(poems => this.assignRandomThemeImagesToPoems(poems)),
     );
   }
 
+  getAllPoems() {
+    return this.poems$;
+  }
+
   getPoem(poemId: number) {
-    return this.articlesService
-      .getOne(poemId)
-      .pipe(map((poem) => this.assignRandomThemeImageToPoem(poem)));
+    return this.poems$.pipe(
+      map(poems =>
+        poems.find(found => poemId === found.id && found.published === true),
+      ),
+    );
   }
 
   applaud(applaudPayload: ApplaudPayload) {
@@ -36,7 +36,7 @@ export class PoetryService {
   }
 
   private assignRandomThemeImagesToPoems(poems: Poems) {
-    return poems.map((poem) => this.assignRandomThemeImageToPoem(poem));
+    return poems.map(poem => this.assignRandomThemeImageToPoem(poem));
   }
 
   private assignRandomThemeImageToPoem(poem: Poem): Poem {
@@ -49,7 +49,7 @@ export class PoetryService {
 
   private generateRandomThemeImage(): string {
     const placeHolderIndex = Math.floor(
-      Math.random() * poemThemeImagePlaceholders.length
+      Math.random() * poemThemeImagePlaceholders.length,
     );
 
     return poemThemeImagePlaceholders[placeHolderIndex];

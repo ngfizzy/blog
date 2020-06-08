@@ -90,7 +90,7 @@ export class ArticleComponent implements OnInit, OnChanges {
       const article = this.isExpandedView ? this.article : null;
 
       if (article) {
-        target.scrollIntoView({ behavior: 'smooth' });
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
 
       this.opened.emit(article);

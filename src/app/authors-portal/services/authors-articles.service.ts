@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { map, mergeMap, take } from 'rxjs/operators';
-
-import { ArticlesService } from 'src/app/core/articles.service';
 import { Article } from 'src/app/shared/models/article.interface';
 import {
   createArticle,
@@ -32,10 +30,9 @@ export class AuthorsArticlesService {
   articles: Article[];
 
   constructor(
-    private articlesService: ArticlesService,
     private store: Store<fromAuthorsArticlesState.AuthorsArticlesState>,
   ) {
-    this.articlesService.getAll().subscribe(articles => {
+    of(getAllArticles()).subscribe(articles => {
       this.articles = articles;
     });
   }

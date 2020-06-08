@@ -1,7 +1,4 @@
-<div class="articles-container" >
-  <header class="header">
-    <h2>Articles and Tutorials</h2>
-  </header>
+<div class="articles-container">
   <app-article
     [config]="articleConfig"
     *ngFor="let article of articles$ | async"

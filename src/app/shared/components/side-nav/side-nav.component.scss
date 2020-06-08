@@ -1,23 +1,30 @@
+.horizontal-navbar {
+  height: 4.5rem;
+  position: fixed;
+  z-index: 3000;
+  background-color: rgba(30, 30, 47, 0.977);
+}
+
 .sidenav-content {
   width: 75%;
   min-height: 100vh;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 6%;
+  margin-top: 9%;
   margin-bottom: 10px;
 }
 
 .bg-sidenav-container {
-  background-color:  rgba(30, 30, 50, 0.887);
+  background-color: rgba(30, 30, 50, 0.887);
   overflow-x: hidden;
 }
 
 .bg-sidenav {
-  background-color: rgba(30, 30, 47, 0.977)
+  background-color: rgba(30, 30, 47, 0.977);
 }
 
 .mat-list-item {
-  color: hsla(0,0%,100%,.8);
+  color: hsla(0, 0%, 100%, 0.8);
 }
 
 .collapsed {
@@ -38,5 +45,9 @@
 }
 
 .no-margin-top {
-  margin-top: -5%;
+  margin-top: -3%;
+}
+::ng-deep .mat-drawer-inner-container {
+  height: 75% !important;
+  margin-top: 25%;
 }
