@@ -73,7 +73,13 @@ export class CreateCategory implements Action {
 export class CreateCategorySuccess implements Action {
   readonly type = AuthorsPortalActionTypes.CreateCategorySuccess;
 
-  constructor(public payload: Category) {}
+  constructor(
+    public payload: {
+      createdCategory: Category;
+      categories: Category[];
+      categoriesSummaries: CategorySummary[];
+    },
+  ) {}
 }
 
 export type AuthorsPortalActions =
@@ -84,4 +90,6 @@ export type AuthorsPortalActions =
   | GetLast10Drafts
   | GetLast10DraftsSuccess
   | GetCategoriesSummaries
-  | GetCategoriesSummariesSuccess;
+  | GetCategoriesSummariesSuccess
+  | CreateCategory
+  | CreateCategorySuccess;

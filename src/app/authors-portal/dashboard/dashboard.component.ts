@@ -40,9 +40,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(
-      new SetPageTitle('Dashboard'),
-    );
+    this.store.dispatch(new SetPageTitle('Dashboard'));
 
     this.store.dispatch(new GetAuthorsDashboardArticlesStatistics());
     this.articlesStatistics$ = this.store.pipe(select(getArticleStatistics));

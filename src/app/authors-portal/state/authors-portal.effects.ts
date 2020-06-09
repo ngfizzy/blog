@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
-import { Action } from '@ngrx/store';
-import { map, switchMap } from 'rxjs/operators';
+import { Action, Store } from '@ngrx/store';
+import { map, switchMap, tap, mergeMap, exhaustMap } from 'rxjs/operators';
 
 import { DashboardService } from './../services/dashboard.service';
 import * as authorsPortalActions from './authors-portal.actions';
@@ -87,10 +87,12 @@ export class AuthorsPortalEffects {
   createCategory$: Observable<Action> = this.actions$.pipe(
     ofType(authorsPortalActions.AuthorsPortalActionTypes.CreateCategory),
     map(action => (action as authorsPortalActions.CreateCategory).payload),
-    switchMap(categoryName =>
+    exhaustMap(categoryName =>
       this.dashboardService
         .createCategory(categoryName)
-        .pipe(map(() => new authorsPortalActions.GetCategoriesSummaries())),
+        .pipe(
+          map(result => new authorsPortalActions.CreateCategorySuccess(result)),
+        ),
     ),
   );
 }

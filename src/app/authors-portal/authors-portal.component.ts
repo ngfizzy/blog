@@ -3,7 +3,7 @@ import { SideNavContentSizing, Nav } from './../shared/models/nav';
 import { Component, OnInit } from '@angular/core';
 import { SideNavMode } from '../shared/models';
 import { AuthorsPortalState } from './state';
-import { State, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
@@ -24,7 +24,7 @@ export class AuthorsPortalComponent implements OnInit {
   };
   pageTitle$: Observable<string>;
 
-  constructor(private store: State<AuthorsPortalState>) {}
+  constructor(private store: Store<AuthorsPortalState>) {}
 
   ngOnInit() {
     this.pageTitle$ = this.store.pipe(select(getPageTitle), delay(0));

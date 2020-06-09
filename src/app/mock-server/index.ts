@@ -130,7 +130,7 @@ function createTag(tagName: string): Tag {
   };
 }
 
-export function createCategory(name: string): Category {
+export function createCategory(name: string) {
   const createdAt = new Date().toString();
   const category = {
     name,
@@ -141,7 +141,11 @@ export function createCategory(name: string): Category {
 
   categories.push(category);
 
-  return category;
+  return {
+    categories,
+    categoriesSummaries: getCategoriesSummaries(),
+    createdCategory: category,
+  };
 }
 
 export function generateArticles(length: number) {
@@ -209,7 +213,8 @@ export function categorizeArticle(articleId: number, categoryName: string) {
   let category = categories.find(c => c.name === categoryName);
 
   if (!category) {
-    category = createCategory(categoryName);
+    const { createdCategory } = createCategory(categoryName);
+    category = createdCategory;
   }
 
   const article = articles.find(p => p.id === articleId);
@@ -626,13 +631,17 @@ export function getAllArticles() {
 }
 export function getAllPublishedArticles() {
   return articles.filter(
-    article => !article.categories.find(category => category.name === 'poetry') && article.published,
+    article =>
+      !article.categories.find(category => category.name === 'poetry') &&
+      article.published,
   );
 }
 
 export function getAllPublishedPoems() {
-  return articles.filter(article =>
-    article.categories.find(category => category.name === 'poetry' ) && article.published,
+  return articles.filter(
+    article =>
+      article.categories.find(category => category.name === 'poetry') &&
+      article.published,
   );
 }
 

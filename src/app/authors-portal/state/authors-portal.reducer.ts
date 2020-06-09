@@ -1,4 +1,3 @@
-import { ArticleStatistics } from './../authors-portal-shared/models/article-statistics.interface';
 import { Audience } from './../../shared/models/audience.interface';
 import { AuthorsPortalState } from './authors-portal.state';
 import {
@@ -24,11 +23,15 @@ const defaultState: AuthorsPortalState = {
       summaries: [],
     },
   },
-  isLoading: true,
+  categoriesState: {
+    isLoading: true,
+    categories: [],
+  },
   audienceState: {
     isLoading: false,
     audience: {} as Audience,
   },
+  isLoading: true,
 };
 
 export function authorsPortalReducer(
@@ -130,7 +133,7 @@ export function authorsPortalReducer(
         dashboardState: {
           ...state.dashboardState,
           categoriesSummariesState: {
-            summaries: [...state.dashboardState.categoriesSummariesState.summaries],
+            ...state.dashboardState.categoriesSummariesState,
             isLoading: true,
           },
         },
@@ -141,10 +144,42 @@ export function authorsPortalReducer(
         dashboardState: {
           ...state.dashboardState,
           categoriesSummariesState: {
-            ...state.dashboardState,
+            ...state.dashboardState.categoriesSummariesState,
             summaries: [...action.payload],
             isLoading: false,
           },
+        },
+      };
+    case AuthorsPortalActionTypes.CreateCategory:
+      return {
+        ...state,
+        dashboardState: {
+          ...state.dashboardState,
+          categoriesSummariesState: {
+            ...state.dashboardState.categoriesSummariesState,
+            isLoading: true,
+          },
+        },
+        categoriesState: {
+          ...state.categoriesState,
+          isLoading: true,
+        },
+      };
+    case AuthorsPortalActionTypes.CreateCategorySuccess:
+      return {
+        ...state,
+        dashboardState: {
+          ...state.dashboardState,
+          categoriesSummariesState: {
+            ...state.dashboardState.categoriesSummariesState,
+            summaries: [...action.payload.categoriesSummaries],
+            isLoading: false,
+          },
+        },
+        categoriesState: {
+          ...state.categoriesState,
+          categories: [...action.payload.categories],
+          isLoading: false,
         },
       };
     default:

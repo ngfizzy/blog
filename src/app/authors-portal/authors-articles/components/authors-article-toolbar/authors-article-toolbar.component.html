@@ -19,7 +19,6 @@
         >
         </i>
       </ng-container>
-      <!-- <i class="fa fa-exclamation-triangle font-xxs text-waring"></i> -->
     </div>
     <app-authors-article-title
       [title]="selectedArticleTitle"
@@ -44,7 +43,9 @@
 
     <div title="publish">
       <button class="btn btn-primary btn-sm" (click)="gotoPublishPage(selectedArticleId)">
-        Publish
+        <span *ngIf="!published">Publish</span>
+        <span *ngIf="published">Withhold</span>
+
         <i class="fa fa-arrow-circle-up"></i>
       </button>
     </div>

@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { TogglePublished } from './../../state/authors-articles.actions';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 
 @Component({
   selector: 'app-authors-articles-toolbar',
@@ -14,10 +22,14 @@ export class AuthorsArticleToolbarComponent implements OnInit {
   @Input() selectedArticleId: number;
   @Input() isEditingTitle: boolean;
   @Input() articleStatus: 'saved' | 'saving' | 'erred' = 'saved';
+  @Input() published: boolean;
 
   @Output() editTitle = new EventEmitter<boolean>();
   @Output() saveTitle = new EventEmitter<string>();
-  @Output() gotoPublish = new EventEmitter<number>();
+  @Output() togglePublished = new EventEmitter<{
+    articleId: number;
+    published: boolean;
+  }>();
 
   ngOnInit() {}
 
@@ -34,6 +46,6 @@ export class AuthorsArticleToolbarComponent implements OnInit {
   }
 
   gotoPublishPage(articleId: number) {
-    this.gotoPublish.emit(articleId);
+    this.togglePublished.emit({ articleId, published: this.published });
   }
 }

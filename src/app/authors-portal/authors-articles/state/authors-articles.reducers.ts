@@ -19,6 +19,10 @@ const defaultState: AuthorsArticlesState = {
     status: 'saved',
     article: { title: '', body: '' } as Article,
   },
+  categoriesState: {
+    isLoading: true,
+    categories: [],
+  },
 };
 
 export function authorsArticlesReducers(
