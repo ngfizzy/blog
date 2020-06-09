@@ -45,28 +45,33 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
   audienceActivities$: Observable<AudienceActivity[]>;
   hideScrollBar: boolean;
   currentUserApplauds = 0;
+  pageTitle$: Observable<string>;
 
   constructor(
     private store: Store<ArticlesState>,
     private toastr: ToastrService,
     private title: Title,
-    private meta: Meta
+    private meta: Meta,
   ) {}
 
   ngOnInit() {
     this.store.dispatch(new fromArticlesActions.GetAllArticles());
     this.store.dispatch(new fromAppActions.GetCurrentAudience());
 
+    this.store.dispatch(
+      new fromAppActions.SetPageTitle('Articles and Tutorials'),
+    );
+
     this.articles$ = this.store.pipe(select(fromArticles.getAllArticles));
     this.audience$ = this.store.pipe(select(fromApp.getAudience));
     this.audienceActivities$ = this.store.pipe(
-      select(fromArticles.getSelectedArticleActivities)
+      select(fromArticles.getSelectedArticleActivities),
     );
 
     this.applaudsWatcher$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((applauds) =>
-        this.store.dispatch(new fromArticlesActions.Applaud(applauds))
+      .subscribe(applauds =>
+        this.store.dispatch(new fromArticlesActions.Applaud(applauds)),
       );
 
     this.title.setTitle(`NgFizzy Blog - Tech`);

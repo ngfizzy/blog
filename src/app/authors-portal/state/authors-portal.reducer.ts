@@ -7,6 +7,7 @@ import {
 } from './authors-portal.actions';
 
 const defaultState: AuthorsPortalState = {
+  title: '',
   dashboardState: {
     isLoading: true,
     articlesStatistics: [],

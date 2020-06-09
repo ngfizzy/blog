@@ -1,9 +1,11 @@
 
 <app-side-nav
+  [pageTitle]="pageTitle$ | async"
   [contentUISizing]="sideNavContentSizing"
   [isOpen]="isSideNavOpen"
   [nav]="nav"
   [mode]="'over'"
   [removeTopMargin]="true"
   (toggle)="toggleSideNav($event)"
-></app-side-nav>
+>
+</app-side-nav>

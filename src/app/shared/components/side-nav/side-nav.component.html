@@ -1,7 +1,10 @@
-<div class="w-100 border-white mat-elevation-z2 horizontal-navbar">
+<div class="w-100 border-white mat-elevation-z2 d-flex horizontal-navbar">
   <button class="btn btn-sm" title="Expand Navbar" (click)="toggleMe()">
     <i class="fa fa-arrow-right text-white"></i>
   </button>
+  <div class="mt-auto mb-auto page-title">
+    <h3>{{pageTitle}}</h3>
+  </div>
 </div>
 <div class="collapsed-nav border border-white bg-sidenav" *ngIf="!isOpen"></div>
 <mat-sidenav-container class="bg-sidenav-container">

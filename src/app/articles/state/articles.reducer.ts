@@ -3,6 +3,7 @@ import { ArticlesActions, ArticlesActionTypes } from './articles.actions';
 import { Article } from 'src/app/shared/models';
 
 const defaultState: ArticlesState = {
+  title: '',
   articles: [],
   selectedArticle: {
     isLoading: true,

@@ -1,4 +1,5 @@
 <app-side-nav
+  [pageTitle]="pageTitle$ | async"
   [isOpen]="true"
   [mode]="sideNavMode"
   [nav]="nav"

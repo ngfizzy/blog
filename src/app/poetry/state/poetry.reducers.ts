@@ -2,6 +2,7 @@ import { PoetryState } from './poetry.state';
 import { PoetryActions, PoetryActionTypes } from './poetry.actions';
 
 const defaultState: PoetryState = {
+  title: '',
   isLoading: false,
   poems: [],
   selectedPoem: {

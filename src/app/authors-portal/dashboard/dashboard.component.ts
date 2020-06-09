@@ -21,6 +21,7 @@ import {
   GetLast10Drafts,
 } from '../state/authors-portal.actions';
 import { ArticleStatistics } from '../authors-portal-shared/models';
+import { SetPageTitle } from 'src/app/core/state/core.actions';
 
 @Component({
   templateUrl: './dashboard.component.html',
@@ -39,6 +40,10 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.store.dispatch(
+      new SetPageTitle('Dashboard'),
+    );
+
     this.store.dispatch(new GetAuthorsDashboardArticlesStatistics());
     this.articlesStatistics$ = this.store.pipe(select(getArticleStatistics));
 

@@ -1,7 +1,6 @@
 .articles-drawer-container {
   width: 100%;
-  min-height: 80vh;
-  max-height: 83vh;
+  min-height: 100vh;
   margin-left: auto;
   margin-right: auto;
   background: inherit;
@@ -9,6 +8,8 @@
   .articles-drawer {
     background: inherit;
     width: 25%;
+    height: 66rem;
+    margin-top: -4rem;
     border: 1px solid #fafa;
   }
 

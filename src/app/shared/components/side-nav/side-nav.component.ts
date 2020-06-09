@@ -18,6 +18,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SideNavComponent  {
+  @Input() pageTitle: string;
   @Input() nav: Nav;
   @Input() isOpen: boolean;
   @Input() mode: SideNavMode;

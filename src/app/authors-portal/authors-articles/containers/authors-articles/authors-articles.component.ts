@@ -1,3 +1,4 @@
+import { SetPageTitle } from './../../../../core/state/core.actions';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -32,6 +33,9 @@ export class AuthorsArticlesComponent implements OnInit {
   }
 
   initialize() {
+    this.store.dispatch(new SetPageTitle('Articles'));
+    this.store.dispatch(new fromAuthorsArticlesActions.GetArticles());
+
     this.route.paramMap.subscribe(paramMap => {
       const id = paramMap.get('id');
       this.selectedArticleId = id ? +id : null;
@@ -39,7 +43,6 @@ export class AuthorsArticlesComponent implements OnInit {
 
     this.articleListItemConfig = this.getArticlesConfig();
 
-    this.store.dispatch(new fromAuthorsArticlesActions.GetArticles());
     this.articles$ = this.store.pipe(select(fromAuthorsArticles.getArticles));
 
     this.selectedArticle$ = this.store.pipe(

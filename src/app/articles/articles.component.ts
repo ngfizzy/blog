@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Nav, SideNavMode } from '../shared/models';
+import { ArticlesState } from './state/articles.state';
+import { Store, select } from '@ngrx/store';
+import { getPageTitle } from '../core/state';
 
 @Component({
   templateUrl: './articles.component.html',
-  styleUrls: [ './articles.component.scss' ],
+  styleUrls: ['./articles.component.scss'],
 })
 export class ArticlesComponent implements OnInit {
   sideNavMode: SideNavMode = SideNavMode.Side;
@@ -18,10 +21,11 @@ export class ArticlesComponent implements OnInit {
       { name: 'About', path: null },
     ],
   };
+  pageTitle$: any;
 
+  constructor(private store: Store<ArticlesState>) {}
 
-  constructor() {
+  ngOnInit() {
+    this.pageTitle$ = this.store.pipe(select(getPageTitle));
   }
-
-  ngOnInit() { }
 }
