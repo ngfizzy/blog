@@ -1,3 +1,4 @@
+import { TogglePublished } from './../../state/authors-articles.actions';
 import { SetPageTitle } from './../../../../core/state/core.actions';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Store, select } from '@ngrx/store';
@@ -88,7 +89,11 @@ export class AuthorsArticlesComponent implements OnInit {
     }
   }
 
-  gotoPublishPage(articleId: number) {
-    this.router.navigate(['authors/articles', articleId, 'publish']);
+  togglePublished({ articleId, published }) {
+    if (published) {
+      this.store.dispatch(new TogglePublished({ articleId }));
+    } else {
+      this.router.navigate(['authors/articles', articleId, 'publish']);
+    }
   }
 }

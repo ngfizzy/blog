@@ -27,12 +27,11 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 export class ArticlesListComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
   articles$: Observable<Article[]>;
-
-  private applaudsWatcherSubject$: Subject<ApplaudPayload> = new Subject();
-  private applaudsWatcher$ = this.applaudsWatcherSubject$
-    .asObservable()
-    .pipe(debounceTime(800), distinctUntilChanged());
-
+  audience$: Observable<Audience>;
+  audienceActivities$: Observable<AudienceActivity[]>;
+  pageTitle$: Observable<string>;
+  hideScrollBar: boolean;
+  currentUserApplauds = 0;
   selectedArticle: Article;
   articleConfig: ArticleComponentConfig = {
     isActive: false,
@@ -41,11 +40,11 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     canToggle: true,
     isFull: true,
   };
-  audience$: Observable<Audience>;
-  audienceActivities$: Observable<AudienceActivity[]>;
-  hideScrollBar: boolean;
-  currentUserApplauds = 0;
-  pageTitle$: Observable<string>;
+
+  private applaudsWatcherSubject$: Subject<ApplaudPayload> = new Subject();
+  private applaudsWatcher$ = this.applaudsWatcherSubject$
+    .asObservable()
+    .pipe(debounceTime(800), distinctUntilChanged());
 
   constructor(
     private store: Store<ArticlesState>,

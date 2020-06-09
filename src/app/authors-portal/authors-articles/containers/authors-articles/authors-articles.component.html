@@ -17,9 +17,10 @@
       [isEditingTitle]="isEditingTitle"
       [articleStatus]="articleStatus$ | async"
       [selectedArticleId]="selectedArticle.id"
+      [published]="selectedArticle.published"
       (editTitle)="isEditingTitle = $event"
       (saveTitle)="saveTitle($event, selectedArticle.id)"
-      (gotoPublish)="gotoPublishPage($event)"
+      (togglePublished)="togglePublished($event)"
     >
     </app-authors-articles-toolbar>
     <div class="sidenav-outlet">
