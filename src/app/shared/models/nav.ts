@@ -3,6 +3,8 @@ import { RouterLink, RouterLinkWithHref } from '@angular/router';
 export interface NavItem {
   name: string;
   path: string[];
+  queries?: { [key: string]: string | number };
+  subItems?: NavItem[];
 }
 
 export interface Nav {
@@ -10,7 +12,7 @@ export interface Nav {
   items: NavItem[];
 }
 
-export const enum SideNavMode  {
+export const enum SideNavMode {
   Push = 'push',
   Over = 'over',
   Side = 'side',
@@ -18,5 +20,5 @@ export const enum SideNavMode  {
 
 export enum SideNavContentSizing {
   Fill = 'Fill',
-  ThreeFourths = 'ThreeFourths'
+  ThreeFourths = 'ThreeFourths',
 }

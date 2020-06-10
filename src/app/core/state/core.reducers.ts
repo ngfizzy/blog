@@ -7,6 +7,10 @@ const defaultState: CoreState = {
     isLoading: true,
     audience: null,
   },
+  navState: {
+    isLoading: true,
+    nav: null,
+  },
 };
 
 export function coreReducer(
@@ -28,6 +32,22 @@ export function coreReducer(
       return {
         ...state,
         title: action.payload,
+      };
+    case CoreActionTypes.GetNav:
+      return {
+        ...state,
+        navState: {
+          ...state.navState,
+          isLoading: true,
+        },
+      };
+    case CoreActionTypes.GetNavSuccess:
+      return {
+        ...state,
+        navState: {
+          ...state.navState,
+          nav: { ...action.payload },
+        },
       };
     default:
       return state;

@@ -19,6 +19,10 @@ const defaultState: AuthorsArticlesState = {
     status: 'saved',
     article: { title: '', body: '' } as Article,
   },
+  navState: {
+    isLoading: true,
+    nav: null,
+  },
   categoriesState: {
     isLoading: true,
     categories: [],

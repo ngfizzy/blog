@@ -1,4 +1,8 @@
-import { GetCurrentAudience, SetPageTitle } from 'src/app/core/state/core.actions';
+import { delay } from 'rxjs/operators';
+import {
+  GetCurrentAudience,
+  SetPageTitle,
+} from 'src/app/core/state/core.actions';
 import { CoreState, getPageTitle } from 'src/app/core/state';
 import { Component, OnInit } from '@angular/core';
 import { Nav, SideNavContentSizing } from '../shared/models';
@@ -22,8 +26,7 @@ export class PoetryComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new GetCurrentAudience());
     this.store.dispatch(new SetPageTitle('Poetry'));
-    this.pageTitle$ = this.store.pipe(select(getPageTitle));
-
+    this.pageTitle$ = this.store.pipe(select(getPageTitle), delay(0));
   }
 
   toggleSideNav(isOpen: boolean) {

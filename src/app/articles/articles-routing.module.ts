@@ -7,11 +7,6 @@ import { ArticlesComponent } from './articles.component';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'feed'
-  },
-  {
-    path: 'feed',
     component: ArticlesComponent,
     children: [
       {
@@ -19,7 +14,6 @@ const routes: Routes = [
         pathMatch: 'full',
         loadChildren:  () => import('./articles-list/articles-list.module').then(mod => mod.ArticlesListModule)
       },
-
       {
         path: ':articleId',
         loadChildren: () => import('./article/article.module')

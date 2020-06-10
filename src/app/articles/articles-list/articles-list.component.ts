@@ -1,3 +1,7 @@
+import { SetPageTitle } from 'src/app/core/state/core.actions';
+import { getArticles } from './../../authors-portal/authors-articles/state/index';
+import { selectArticle } from './../state/index';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
@@ -18,7 +22,14 @@ import {
   ApplaudPayload,
   CommentPayload,
 } from 'src/app/shared/models';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  takeUntil,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 
 @Component({
   templateUrl: './articles-list.component.html',
@@ -47,6 +58,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     .pipe(debounceTime(800), distinctUntilChanged());
 
   constructor(
+    private route: ActivatedRoute,
     private store: Store<ArticlesState>,
     private toastr: ToastrService,
     private title: Title,
@@ -78,6 +90,8 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
       name: 'Tech',
       content: 'All things software development',
     });
+
+    this.getArticlesByCategory();
   }
 
   ngOnDestroy() {
@@ -116,6 +130,38 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
 
   updateAudienceApplauds(applauds: number) {
     this.currentUserApplauds = applauds;
+  }
+
+  private getArticlesByCategory() {
+    this.route.queryParamMap.subscribe(queryParamMap => {
+      const categoryId = +queryParamMap.get('categoryId');
+
+      this.articles$ = this.store.pipe(
+        select(getArticles),
+        map(articles => {
+          if (!categoryId) {
+            return articles;
+          }
+
+          return articles.filter(article => {
+            const category = article.categories.find(
+              cat => cat.id === categoryId,
+            );
+
+            return !!category;
+          });
+        }),
+        tap(([article]) => {
+          let pageTitle = 'Articles and Tutorials';
+          if (categoryId) {
+            pageTitle = article.categories.find(cat => cat.id === categoryId)
+              .name;
+          }
+
+          this.store.dispatch(new SetPageTitle(pageTitle));
+        }),
+      );
+    });
   }
 
   private updateTitleAndMeta(article: Article) {

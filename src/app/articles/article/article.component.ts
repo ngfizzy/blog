@@ -1,3 +1,4 @@
+import { SetPageTitle } from './../../core/state/core.actions';
 import { getSelectedArticleActivities } from './../state/index';
 import { ArticlesActions, Applaud } from './../state/articles.actions';
 import { getAudience } from './../../core/state/index';
@@ -49,7 +50,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: ActivatedRoute,
-    private store: Store<fromArticle.ArticleState>
+    private store: Store<fromArticle.ArticleState>,
   ) {}
 
   ngOnInit() {
@@ -57,33 +58,38 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     this.applaudsWatcher$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((applauds) => this.store.dispatch(new Applaud(applauds)));
+      .subscribe(applauds => this.store.dispatch(new Applaud(applauds)));
 
     this.store.dispatch(new GetCurrentAudience());
     this.audience$ = this.store.select(getAudience);
     this.audienceActivities$ = this.store.select(
-      fromArticle.getSelectedArticleActivities
+      fromArticle.getSelectedArticleActivities,
     );
     this.audienceActivities$ = this.store.pipe(
-      select(getSelectedArticleActivities)
+      select(getSelectedArticleActivities),
     );
 
     this.applaudsWatcher$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((applauds) =>
-        this.store.dispatch(new fromArticleActions.Applaud(applauds))
+      .subscribe(applauds =>
+        this.store.dispatch(new fromArticleActions.Applaud(applauds)),
       );
   }
 
   setArticle() {
     this.article$ = this.router.params.pipe(
       takeUntil(this.destroy$),
-      tap((params) =>
+      tap(params =>
         this.store.dispatch(
-          new fromArticleActions.GetOneArticle(+params.articleId)
-        )
+          new fromArticleActions.GetOneArticle(+params.articleId),
+        ),
       ),
-      switchMap(() => this.store.pipe(select(fromArticle.selectArticle)))
+      switchMap(() =>
+        this.store.pipe(
+          select(fromArticle.selectArticle),
+          tap(article => this.store.dispatch(new SetPageTitle(article.title))),
+        ),
+      ),
     );
   }
 

@@ -23,4 +23,11 @@ export const getPageTitle = createSelector(
   state => state.title,
 );
 
+export const selectNavState = createSelector(
+  selectCoreState,
+  state => state.navState,
+);
+
+export const getNav = createSelector(selectNavState, state => state.nav);
+
 export { CoreState } from './core.state';

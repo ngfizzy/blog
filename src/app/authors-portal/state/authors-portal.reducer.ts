@@ -31,6 +31,10 @@ const defaultState: AuthorsPortalState = {
     isLoading: false,
     audience: {} as Audience,
   },
+  navState: {
+    isLoading: false,
+    nav: null
+  },
   isLoading: true,
 };
 

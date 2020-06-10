@@ -1,11 +1,11 @@
 import { Action } from '@ngrx/store';
 
-import { Article } from '../../shared/models/article.interface';
 import {
   ApplaudPayload,
-  AudienceActivity,
   AudienceActivityUpdateSuccessPayload,
   CommentPayload,
+  Category,
+  Article,
 } from 'src/app/shared/models';
 
 export const enum ArticlesActionTypes {
@@ -15,6 +15,8 @@ export const enum ArticlesActionTypes {
   GetOneArticle = '[Articles] Get One Article',
   GetOneArticleSuccess = '[Articles] Get One Article Success',
   GetOneArticleFailure = '[Articles] Get One Article Failure',
+  GetCategoryArticles = '[Articles] Get Category Articles',
+  GetCategoryArticlesSuccess = '[Articles] Get Category Articles Success',
   Applaud = '[Articles] Applaud',
   ApplaudSuccess = '[Articles] Applaud Success',
   AddComment = '[Articles] Add Comment',
@@ -35,6 +37,18 @@ export class GetAllArticlesFailure implements Action {
   readonly type = ArticlesActionTypes.GetAllArticlesFailure;
 
   constructor(public payload: string) {}
+}
+
+export class GetCategoryArticles {
+  readonly type = ArticlesActionTypes.GetCategoryArticles;
+
+  constructor(public payload: number) {}
+}
+
+export class GetCategoryArticlesSuccess {
+  readonly type = ArticlesActionTypes.GetCategoryArticlesSuccess;
+
+  constructor(public payload: Article[]) {}
 }
 
 export class GetOneArticle implements Action {
@@ -89,4 +103,6 @@ export type ArticlesActions =
   | Applaud
   | ApplaudSuccess
   | AddComment
-  | AddCommentSuccess;
+  | AddCommentSuccess
+  | GetCategoryArticles
+  | GetCategoryArticlesSuccess;

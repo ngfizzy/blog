@@ -17,12 +17,16 @@ const defaultState: ArticlesState = {
     audience: null,
     isLoading: true,
   },
+  navState: {
+    isLoading: true,
+    nav: null,
+  },
   isLoading: true,
 };
 
 export function articlesReducer(
   state: ArticlesState = defaultState,
-  action: ArticlesActions
+  action: ArticlesActions,
 ): ArticlesState {
   switch (action.type) {
     case ArticlesActionTypes.GetAllArticles:
@@ -70,7 +74,7 @@ export function articlesReducer(
       };
     case ArticlesActionTypes.ApplaudSuccess: {
       const { articleId, activities } = action.payload;
-      const index = state.articles.findIndex((a) => a.id === articleId);
+      const index = state.articles.findIndex(a => a.id === articleId);
       const article = state.articles[index];
 
       article.audienceActivities = activities;
@@ -113,7 +117,7 @@ export function articlesReducer(
       };
     case ArticlesActionTypes.AddCommentSuccess: {
       const articleIndex = state.articles.findIndex(
-        (art) => art.id === action.payload.articleId
+        art => art.id === action.payload.articleId,
       );
 
       const article = state.articles[articleIndex];

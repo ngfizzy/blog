@@ -13,6 +13,10 @@ const defaultState: PoetryState = {
       activities: [],
     },
   },
+  navState: {
+    isLoading: true,
+    nav: null
+  },
   audienceState: {
     audience: null,
     isLoading: true,

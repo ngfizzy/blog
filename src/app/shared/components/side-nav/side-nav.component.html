@@ -17,7 +17,7 @@
     <nav>
       <mat-nav-list  class="color-main">
         <ng-container *ngFor="let item of nav?.items">
-          <a [routerLink]="item.path">
+          <a [routerLink]="item.path" [queryParams]="item.queries">
             <mat-list-item class="border-bottom">{{ item.name }}</mat-list-item>
           </a>
         </ng-container>
