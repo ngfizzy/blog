@@ -6,6 +6,7 @@
   height: fit-content;
   margin-left: auto;
   margin-right: auto;
+  overflow: hidden;
 
   transition: top 1s ease-in-out;
 
@@ -32,7 +33,7 @@
 
   .card-body {
     height: auto;
-    max-height: 10rem;
+    max-height: 15rem;
     font-size: 90%;
     transition: max-height 1s ease-in;
     overflow: hidden;
@@ -72,4 +73,17 @@
     overflow: hidden;
     text-overflow: hidden;
   }
+}
+
+.truncated {
+  position: relative;
+  background: linear-gradient(
+    rgba($color: #1e1e24, $alpha: 0),
+    rgba($color: #1e1e24, $alpha: 0.5),
+    rgba($color: #1e1e24, $alpha: 1)
+  );
+
+  height: 14rem;
+  top: -14rem;
+  margin-bottom: -14rem;
 }

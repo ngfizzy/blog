@@ -29,7 +29,7 @@ export class ArticleComponent implements OnInit, OnChanges {
   @Output() opened = new EventEmitter<Article>();
 
   state = AnimationState.Small;
-  truncatedArticleLength = 560;
+  truncatedArticleLength = 600;
 
   isActive = false;
   isExpandedView = false;
@@ -114,6 +114,6 @@ export class ArticleComponent implements OnInit, OnChanges {
       return body;
     }
 
-    return body.substr(0, at) + '...';
+    return body.substr(0, at) + '<br> >>click me to read more';
   }
 }
