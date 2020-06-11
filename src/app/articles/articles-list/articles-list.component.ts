@@ -66,13 +66,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(new fromArticlesActions.GetAllArticles());
     this.store.dispatch(new fromAppActions.GetCurrentAudience());
-
-    this.store.dispatch(
-      new fromAppActions.SetPageTitle('Articles and Tutorials'),
-    );
-
     this.articles$ = this.store.pipe(select(fromArticles.getAllArticles));
     this.audience$ = this.store.pipe(select(fromApp.getAudience));
     this.audienceActivities$ = this.store.pipe(

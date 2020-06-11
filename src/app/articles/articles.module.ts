@@ -6,7 +6,6 @@ import { ArticleEffects } from './state/articles.effects';
 import { ArticleRoutingModule } from './articles-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { NavComponent } from './components/nav/nav.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [

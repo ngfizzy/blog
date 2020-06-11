@@ -5,8 +5,21 @@
   <div class="hnav-item">
     <h4><a [routerLink]="['/']">JohnDoe.com</a></h4>
   </div>
-  <div class="hnav-item ml-auto mr-auto">
-    <input name="searchTerm" type="search" [placeholder]="'Search '+pageTitle+ ' By Title'" class="p-2 rounded"/>
+  <div class="hnav-item ml-auto mr-auto" [class.search-panel]="searchBoxHasFocus || searchbox.dirty">
+    <input
+      #searchbox="ngModel"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="performSearch()"
+      (focusin)="searchBoxHasFocus = true"
+      (focusout)="searchBoxHasFocus = false"
+      name="searchTerm"
+      type="search"
+      [placeholder]="'Search '+pageTitle+ ' By Title'"
+      class="p-2 rounded"/>
+    <div class="search-results" [class.d-none]="(searchbox.dirty === false)  && !searchBoxHasFocus">
+
+        <h4>{{ searchResults.length }}</h4>
+    </div>
   </div>
 </div>
 <div class="collapsed-nav border border-white bg-sidenav" *ngIf="!isOpen">

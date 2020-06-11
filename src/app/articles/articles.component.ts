@@ -1,12 +1,15 @@
-import { GetNav } from './../core/state/core.actions';
+import { GetAllArticles } from './state/articles.actions';
+import { getAllArticles } from './state/index';
+import { GetNav, SetPageTitle } from './../core/state/core.actions';
 import { getNav } from './../core/state/index';
 import { delay, tap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-import { Nav, SideNavMode } from '../shared/models';
+import { Nav, SideNavMode, Article } from '../shared/models';
 import { ArticlesState } from './state/articles.state';
 import { Store, select } from '@ngrx/store';
 import { getPageTitle } from '../core/state';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   templateUrl: './articles.component.html',
@@ -17,12 +20,22 @@ export class ArticlesComponent implements OnInit {
 
   pageTitle$: Observable<string>;
   nav$: Observable<Nav>;
+  articles$: Observable<Article[]> = of([]);
+
+  searchResults = [];
 
   constructor(private store: Store<ArticlesState>) {}
 
   ngOnInit() {
-    this.pageTitle$ = this.store.pipe(select(getPageTitle), delay(0));
+    this.store.dispatch(new SetPageTitle('Articles and Tutorials'));
+    this.pageTitle$ = this.store.pipe(select(getPageTitle));
+
     this.store.dispatch(new GetNav());
     this.nav$ = this.store.pipe(select(getNav));
+
+    this.store.dispatch(new GetAllArticles());
+    this.articles$ = this.store.pipe(select(getAllArticles));
   }
+
+  search(searchTerm: string, articles: Article[]) {}
 }

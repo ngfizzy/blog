@@ -54,7 +54,7 @@
 .hnav-item {
   margin-top: auto;
   margin-bottom: auto;
-  margin-right: .2rem;
+  margin-right: 0.2rem;
 }
 
 .hnav-item a {
@@ -69,4 +69,34 @@
   }
 
   transition: all 0.3s ease-in-out;
+}
+
+.search-panel {
+  position: fixed;
+  width: 75%;
+  background-color: #ffffff;
+  left: 24.4%;
+  color: rgba(30, 30, 47, 0.977);
+  margin-top: 2rem;
+  height: 95%;
+  overflow-y: auto;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.16),
+    0 2px 4px rgba(255, 255, 255, 0.23);
+
+  input {
+    display: block;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+
+    transition: all 0.8s ease-in-out;
+  }
+
+  .search-results {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  transition: all 0.5s ease-in-out;
 }
