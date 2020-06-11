@@ -1,31 +1,35 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './authors-portal/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'articles'
+    redirectTo: 'home',
   },
   {
     path: 'articles',
-    loadChildren: () => import('./articles/articles.module').then(mod => mod.ArticlesModule)
+    loadChildren: () =>
+      import('./articles/articles.module').then(mod => mod.ArticlesModule),
   },
   {
     path: 'poetry',
-    loadChildren: () => import('./poetry/poetry.module').then(mod => mod.PoetryModule)
+    loadChildren: () =>
+      import('./poetry/poetry.module').then(mod => mod.PoetryModule),
   },
   {
     path: 'authors',
-    loadChildren: () => import('./authors-portal/authors-portal.module')
-      .then(mod => mod.AuthorsPortal),
+    loadChildren: () =>
+      import('./authors-portal/authors-portal.module').then(
+        mod => mod.AuthorsPortal,
+      ),
   },
   {
-    path: 'about',
-    component: AboutComponent,
-  }
+    path: 'home',
+    component: HomeComponent,
+  },
 ];
 
 @NgModule({
@@ -33,5 +37,5 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {
-  static readonly routeComponents = [ AboutComponent ];
+  static readonly routeComponents = [HomeComponent];
 }

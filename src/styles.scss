@@ -12,6 +12,13 @@ body {
   line-height: 1.5;
   letter-spacing: 0.052rem;
   background-color: rgba(30, 30, 50, 0.887);
+  background: linear-gradient(
+    45deg,
+    rgba(30, 30, 50, 0.887),
+    rgba(30, 30, 36, 0.8),
+    rgba(30, 30, 50, 0.887)
+  );
+
   color: #ece8ef;
 }
 

@@ -2,11 +2,16 @@
   <button class="btn btn-sm" title="Expand Navbar" (click)="toggleMe()">
     <i class="fa fa-arrow-right text-white"></i>
   </button>
-  <div class="mt-auto mb-auto page-title">
-    <h3>{{pageTitle}}</h3>
+  <div class="hnav-item">
+    <h4><a [routerLink]="['/']">JohnDoe.com</a></h4>
+  </div>
+  <div class="hnav-item ml-auto mr-auto">
+    <input name="searchTerm" type="search" [placeholder]="'Search '+pageTitle+ ' By Title'" class="p-2 rounded"/>
   </div>
 </div>
-<div class="collapsed-nav border border-white bg-sidenav" *ngIf="!isOpen"></div>
+<div class="collapsed-nav border border-white bg-sidenav" *ngIf="!isOpen">
+
+</div>
 <mat-sidenav-container class="bg-sidenav-container">
   <mat-sidenav (closedStart)="toggleMe()" class="bg-sidenav mat-elevation-z5 w-25 position-fixed" ngClass="{ collapsed: !isOpen }" #sidenav [mode]="mode" [opened]="isOpen">
     <a href="/">
@@ -18,7 +23,7 @@
       <mat-nav-list  class="color-main">
         <ng-container *ngFor="let item of nav?.items">
           <a [routerLink]="item.path" [queryParams]="item.queries">
-            <mat-list-item class="border-bottom">{{ item.name }}</mat-list-item>
+            <mat-list-item class="text-capitalize border-bottom">{{ item.name }}</mat-list-item>
           </a>
         </ng-container>
       </mat-nav-list>
