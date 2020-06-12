@@ -74,15 +74,25 @@
 .search-panel {
   position: fixed;
   width: 75%;
-  background-color: #ffffff;
+  background-color: rgba($color: #7e7f9a, $alpha: 0.96);
   left: 24.4%;
-  color: rgba(30, 30, 47, 0.977);
+  // color: rgba(30, 30, 47, 0.977);
   margin-top: 2rem;
   height: 95%;
   overflow-y: auto;
   box-shadow: 0 2px 4px rgba(255, 255, 255, 0.16),
     0 2px 4px rgba(255, 255, 255, 0.23);
+  // background-color: #1e1e24;
+  overflow-x: hidden;
 
+  a {
+    background-color: transparent;
+  }
+
+  a:hover {
+    box-shadow: none;
+    text-decoration: underline;
+  }
   input {
     display: block;
     width: 60%;
@@ -96,6 +106,13 @@
   .search-results {
     width: 100%;
     margin-top: 1rem;
+  }
+
+  .search-result-body {
+    color: #1e1e24;
+    p {
+      color: black !important;
+    }
   }
 
   transition: all 0.5s ease-in-out;

@@ -84,12 +84,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
           new fromArticleActions.GetOneArticle(+params.articleId),
         ),
       ),
-      switchMap(() =>
-        this.store.pipe(
-          select(fromArticle.selectArticle),
-          tap(article => this.store.dispatch(new SetPageTitle(article.title))),
-        ),
-      ),
+      switchMap(() => this.store.pipe(select(fromArticle.selectArticle))),
     );
   }
 

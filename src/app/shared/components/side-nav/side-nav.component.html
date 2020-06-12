@@ -5,20 +5,34 @@
   <div class="hnav-item">
     <h4><a [routerLink]="['/']">JohnDoe.com</a></h4>
   </div>
-  <div class="hnav-item ml-auto mr-auto" [class.search-panel]="searchBoxHasFocus || searchbox.dirty">
+  <div class="hnav-item ml-auto mr-auto" [class.search-panel]="isSearchPanelOpen">
+    <span class="fa fa-times p-2" *ngIf="isSearchPanelOpen" (click)="isSearchPanelOpen = false"></span>
     <input
       #searchbox="ngModel"
       [(ngModel)]="searchTerm"
       (ngModelChange)="performSearch()"
-      (focusin)="searchBoxHasFocus = true"
+      (focusin)="searchBoxHasFocus = true; isSearchPanelOpen = true"
       (focusout)="searchBoxHasFocus = false"
       name="searchTerm"
       type="search"
       [placeholder]="'Search '+pageTitle+ ' By Title'"
       class="p-2 rounded"/>
-    <div class="search-results" [class.d-none]="(searchbox.dirty === false)  && !searchBoxHasFocus">
+    <div
+      class="search-results"
+      [class.d-none]="(searchbox.dirty === false)  && !searchBoxHasFocus"
+    >
+        <h3 class="text-capitalize text-center" *ngIf="searchTerm?.length">
+          {{ searchResults.length }} Results Found
+        </h3>
 
-        <h4>{{ searchResults.length }}</h4>
+        <div *ngFor="let result of searchResults" class="row mt-4">
+          <h4 class="text-center text-capitalize col-12">
+            <a [routerLink]="['/articles', result.id]">{{result.title}}</a>
+          </h4>
+          <div markdown class="search-result-body col-sm-12 col-md-8 m-auto">
+            {{ result.body }}
+          </div>
+        </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<ng-container *ngIf="articles$ | async as articles">
+<div *ngIf="articles$ | async as articles">
   <app-side-nav
   [isOpen]="'true'"
   [nav]="nav$ | async"
@@ -6,4 +6,4 @@
   [searchResults]="searchResults"
   (search)="search($event, articles)"
   [pageTitle]="pageTitle$ | async"></app-side-nav>
-</ng-container>
+</div>

@@ -32,6 +32,7 @@ export class SideNavComponent {
 
   searchTerm: string;
   searchBoxHasFocus = false;
+  isSearchPanelOpen = false;
 
   readonly contentSizingValues = SideNavContentSizing;
 
