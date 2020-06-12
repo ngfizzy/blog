@@ -1,6 +1,5 @@
-import { SetPageTitle } from './../../core/state/core.actions';
 import { getSelectedArticleActivities } from './../state/index';
-import { ArticlesActions, Applaud } from './../state/articles.actions';
+import { Applaud } from './../state/articles.actions';
 import { getAudience } from './../../core/state/index';
 import {
   ApplaudPayload,

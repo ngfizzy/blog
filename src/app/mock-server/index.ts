@@ -569,7 +569,7 @@ export function createAudienceActivity(
   return activity as AudienceActivity;
 }
 
-export function getTotalArticleApplauds(activities: AudienceActivity[]) {
+export function getTotalArticleApplauds(activities: AudienceActivity[] = []) {
   return activities.reduce((sum, activity) => sum + activity.applauds, 0);
 }
 
@@ -578,7 +578,7 @@ export function getMostLikedArticle() {
   let greatestLikesCount = 0;
 
   articles.forEach(article => {
-    const likes = article.audienceActivities.length
+    const likes = (article.audienceActivities || []).length
       ? getTotalArticleApplauds(article.audienceActivities)
       : 0;
 
