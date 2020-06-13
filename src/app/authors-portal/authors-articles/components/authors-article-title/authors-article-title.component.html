@@ -1,13 +1,14 @@
 <form class="
+p-1 bg-dark
 d-flex
 justify-content-center
 text-center
 center
-mw-50"
+mw-75"
 #articleTitleForm
 (ngSubmit)="saveTitle(articleTitleForm.articleTitle.value)"
 >
-  <span class="article-title" *ngIf="!isEditing">{{ title }}</span>
+  <span class="article-title " *ngIf="!isEditing">{{ title }}</span>
   <input
     name="articleTitle"
     class="mb-auto mt-auto d-inline-flex title-input"
@@ -19,14 +20,18 @@ mw-50"
     *ngIf="!isEditing"
     title="edit title" class="btn"
     (click)="toggleEditingState()"
+    class="btn btn-sm  btn-secondary title-action"
   >
+    Edit Title
     <i class="fa fa-edit text-primary"></i>
   </button>
   <button
     *ngIf="isEditing"
     title="save" class="btn"
     type="submit"
+    class="btn btn-sm  btn-secondary title-action"
   >
+  Save
   <i class="fa fa-check text-primary"></i>
 </button>
 </form>

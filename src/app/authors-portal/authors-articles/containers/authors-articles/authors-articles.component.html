@@ -1,9 +1,38 @@
+
+<div class="row toolbar">
+  <div class="col-3 pr-1 pl-2 ">
+        <app-authors-article-list-toolbar
+      (createArticle)="createArticle()"
+    >        <app-authors-article-list-toolbar
+    (createArticle)="createArticle()"
+  >
+  </app-authors-article-list-toolbar>
+    </app-authors-article-list-toolbar>
+  </div>
+  <div class="col-9 pl-0">
+    <app-authors-articles-toolbar
+    *ngIf="selectedArticle$ | async; let selectedArticle"
+    [selectedArticleTitle]="selectedArticle.title"
+    [isEditingTitle]="isEditingTitle"
+    [articleStatus]="articleStatus$ | async"
+    [selectedArticleId]="selectedArticle.id"
+    [published]="selectedArticle.published"
+    (editTitle)="isEditingTitle = $event"
+    (saveTitle)="saveTitle($event, selectedArticle.id)"
+    (togglePublished)="togglePublished($event)"
+    >
+    </app-authors-articles-toolbar>
+  </div>
+</div>
+
+
 <mat-sidenav-container class="articles-drawer-container">
   <mat-sidenav mode="side" opened class="articles-drawer">
-    <app-authors-article-list-toolbar
+    <!-- <app-authors-article-list-toolbar
       (createArticle)="createArticle()"
     >
-    </app-authors-article-list-toolbar>
+    </app-authors-article-list-toolbar> -->
+
     <app-authors-articles-list
       [articlesList]="articles$ | async"
       (showFullArticle)="showFullArticle($event)"
@@ -11,18 +40,6 @@
     </app-authors-articles-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-authors-articles-toolbar
-      *ngIf="selectedArticle$ | async; let selectedArticle"
-      [selectedArticleTitle]="selectedArticle.title"
-      [isEditingTitle]="isEditingTitle"
-      [articleStatus]="articleStatus$ | async"
-      [selectedArticleId]="selectedArticle.id"
-      [published]="selectedArticle.published"
-      (editTitle)="isEditingTitle = $event"
-      (saveTitle)="saveTitle($event, selectedArticle.id)"
-      (togglePublished)="togglePublished($event)"
-    >
-    </app-authors-articles-toolbar>
     <div class="sidenav-outlet">
       <router-outlet ></router-outlet>
     </div>

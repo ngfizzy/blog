@@ -1,20 +1,30 @@
 .articles-drawer-container {
-  width: 100%;
-  min-height: 100vh;
+  width: 97%;
+  height: 50rem;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 7%;
   background: inherit;
 
+  &::ng-deep .mat-drawer-inner-container {
+    margin-top: 0;
+  }
   .articles-drawer {
     background: inherit;
     width: 25%;
     height: 66rem;
-    margin-top: -4rem;
-    border: 1px solid #fafa;
   }
 
   .sidenav-outlet {
     width: 100%;
     height: 100%;
   }
+}
+
+.toolbar {
+  position: fixed;
+  top: 5rem;
+  z-index: 2000;
+  width: 76%;
+  margin: auto;
 }

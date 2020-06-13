@@ -3,6 +3,7 @@
     <div class="text-primary font-xxs">
       <ng-container *ngIf="articleStatus === 'saving'">
         <mat-progress-spinner
+            class="p-2 bg-dark"
             mode="indeterminate"
             value="50"
             diameter="15"
@@ -12,6 +13,7 @@
       </ng-container>
       <ng-container *ngIf="articleStatus === 'saved'">
         <i class="
+          p-2 bg-dark
           fa
           fa-check
           font-xss"
@@ -29,12 +31,13 @@
     >
     </app-authors-article-title>
     <div class="controls ml-auto mw-25 text-center">
-      <span title="edit">
+      <span title="edit" class="p-2 bg-dark">
         <a [routerLink]="['edit', selectedArticleId]">
+          Edit Article
           <i class="fa fa-edit"></i>
         </a>
       </span>
-      <span title="delete">
+      <span title="delete article" class="p-2 bg-dark">
         <a href="javascript:;">
           <i class="fa fa-trash"></i>
         </a>
@@ -52,7 +55,7 @@
   </mat-toolbar>
 </ng-container>
 <ng-container *ngIf="!selectedArticleTitle">
-  <div class="text-center mt-5 text-light">
+  <div class="text-center mt-3 text-light">
     <h4>Please select or create article to edit</h4>
   </div>
 </ng-container>
