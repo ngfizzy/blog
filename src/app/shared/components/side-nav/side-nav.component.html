@@ -1,4 +1,4 @@
-<div class="w-100 border-white mat-elevation-z2 d-flex horizontal-navbar">
+<div class="w-100 border-white mat-elevation-z1 d-flex horizontal-navbar">
   <button class="btn btn-sm" title="Expand Navbar" (click)="toggleMe()">
     <i class="fa fa-arrow-right text-white"></i>
   </button>
@@ -19,15 +19,15 @@
       class="p-2 rounded"/>
     <div
       class="search-results"
-      [class.d-none]="(searchbox.dirty === false)  && !searchBoxHasFocus"
+      [class.d-none]="(isSearchPanelOpen === false)  && !searchBoxHasFocus"
     >
         <h3 class="text-capitalize text-center" *ngIf="searchTerm?.length">
           {{ searchResults.length }} Results Found
         </h3>
 
-        <div *ngFor="let result of searchResults" class="row mt-4">
+        <div *ngFor="let result of searchResults" [class.d-none]="!isSearchPanelOpen" class="row mt-4">
           <h4 class="text-center text-capitalize col-12">
-            <a [routerLink]="['/articles', result.id]">{{result.title}}</a>
+            <a href (click)="viewArticle($event, result.id)">{{result.title}}</a>
           </h4>
           <div markdown class="search-result-body col-sm-12 col-md-8 m-auto">
             {{ result.body }}
@@ -40,7 +40,7 @@
 
 </div>
 <mat-sidenav-container class="bg-sidenav-container">
-  <mat-sidenav (closedStart)="toggleMe()" class="bg-sidenav mat-elevation-z5 w-25 position-fixed" ngClass="{ collapsed: !isOpen }" #sidenav [mode]="mode" [opened]="isOpen">
+  <mat-sidenav (closedStart)="toggleMe()" class="bg-sidenav  w-25 position-fixed" ngClass="{ collapsed: !isOpen }" #sidenav [mode]="mode" [opened]="isOpen">
     <a href="/">
       <div class="p-2 border-bottom m-auto">
         <img [src]="nav?.iconUrl" alt="author avatar" width="232">

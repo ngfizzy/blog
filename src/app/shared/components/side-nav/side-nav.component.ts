@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import {
   Component,
   Input,
@@ -35,6 +36,16 @@ export class SideNavComponent {
   isSearchPanelOpen = false;
 
   readonly contentSizingValues = SideNavContentSizing;
+
+  constructor(public router: Router) {}
+
+  viewArticle(event: MouseEvent, articleId: number) {
+    event.preventDefault();
+
+    this.router
+      .navigate(['/articles', articleId])
+      .then(() => (this.isSearchPanelOpen = false));
+  }
 
   toggleMe() {
     return this.toggle.emit(!this.isOpen);
