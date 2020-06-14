@@ -1,4 +1,4 @@
-<div class="card-container"
+<div class="rounded card-container"
   (mouseenter)="toggleElevation()"
   (mouseleave)="toggleElevation()"
   (click)="openArticle($event)"
@@ -10,7 +10,7 @@
   }"
 >
   <mat-card
-    class="card"
+    class="rounded card"
     [class.mat-elevation-z1]="!isActive && !isExpandedView"
     [class.mat-elevation-z8]="isExpandedView && !shouldHideShadows"
   >
@@ -30,8 +30,7 @@
     <mat-card-content *ngIf="!isMini" class="card-body" [innerHtml]="articleBody" markdown>
     </mat-card-content>
   </mat-card>
-  <div     [class.truncated]="!isExpandedView"
-  >
+  <div [class.truncated]="!isExpandedView">
 
   </div>
 </div>
