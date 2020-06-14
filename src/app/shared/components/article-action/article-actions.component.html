@@ -8,6 +8,7 @@
 <div class="wrapper" [ngClass]="{ 'hide-form': !isCommentSectionOpen}">
   <div
     class="comments-container"
+    [class.submitting]="isCollectingAudDetails"
     *ngIf="isCommentSectionOpen"
   >
     <h4 class="text-center text-underline">Comment Section</h4>
@@ -16,16 +17,31 @@
       *ngIf="isCommentSectionOpen"
       class="mat-elevation-z2 comment-form"
     >
-      <ng-container *ngIf="isCollectingAudDetails">
-        <span class=text-info>If you do not provide email or name, your comment would appear as anonymous</span>
-        <input type="text" name="name" (click)="$event.stopPropagation()" [(ngModel)]="name" placeholder="name (optional)"/>
-        <input #emailInput="ngModel" email type="email" (click)="$event.stopPropagation()" name="email" [(ngModel)]="email" placeholder="email (optional)"/>
-        <span class="email-error" *ngIf="emailInput.invalid">Wrong email format</span>
-        <span class="buttons-wrapper">
-          <button class="back" (click)="$event.stopPropagation(); isCollectingAudDetails=false">Back to comment</button>
-          <button class="submit" (click)="$event.stopPropagation(); submitComment()">Submit comment</button>
+      <div class="row" *ngIf="isCollectingAudDetails">
+        <span class="col-12 text-info form-info">
+          If you do not provide email or name, your comment would appear as anonymous
         </span>
-      </ng-container>
+        <input
+          class="col-12"
+          type="text"
+          name="name"
+          (click)="$event.stopPropagation()"
+          [(ngModel)]="name"
+          placeholder="name (optional)"/>
+        <input
+          class="col-12"
+          #emailInput="ngModel"
+          email
+          type="email"
+          (click)="$event.stopPropagation()"
+          name="email" [(ngModel)]="email"
+          placeholder="email (optional)"/>
+        <span class="col-12 email-error" *ngIf="emailInput.invalid">Wrong email format</span>
+        <div class="row buttons-wrapper">
+          <button class="col-sm-12 col-md-6 col-lg-6 back" (click)="$event.stopPropagation(); isCollectingAudDetails=false">Back to comment</button>
+          <button class="col-sm-12 col-md-6 col-lg-6 submit" (click)="$event.stopPropagation(); submitComment()">Submit comment</button>
+        </div>
+      </div>
       <ng-container *ngIf="!isCollectingAudDetails">
         <textarea
         (click)="$event.stopPropagation()"
@@ -51,12 +67,13 @@
       </button>
       </ng-container>
     </form>
-    <div class="comments">
-      <ng-container
+    <div class="row comments">
+      <div
+        class="col-sm-12"
         *ngIf="comments"
       >
-      <div class="comment" *ngFor="let com of comments | orderBy: 'com.date' : true">
-        <span class="text-info audience-name">
+      <div class="row comment" *ngFor="let com of comments | orderBy: 'com.date' : true">
+        <span class="col-sm-12 text-info audience-name">
           <span *ngIf="com.audience">
             {{ com.audience }} Says
           </span>
@@ -64,16 +81,16 @@
             Anonymous Says
           </span>
         </span>
-        <div class="audience-comment">
+        <div class="col-sm-12 audience-comment">
          {{ com.comment}}
          <div class="text-right text-info">{{ com.date | timeago:'live' }}</div>
 
         </div>
       </div>
-      </ng-container>
+      </div>
     </div>
   </div>
-  <div [@transitionInOut] class="actions-container">
+  <div [@transitionInOut] class="actions-container" *ngIf="!isCollectingAudDetails">
     <div class="actions">
       <span class=" mat-elevation-z8 icon" (click)="$event.stopPropagation(); clap()">
         <img src="assets/clap.png" alt="Applaud">

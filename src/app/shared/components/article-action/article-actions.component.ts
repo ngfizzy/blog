@@ -1,4 +1,3 @@
-import { GetCurrentAudience } from './../../../core/state/core.actions';
 import {
   Component,
   OnInit,
