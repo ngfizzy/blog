@@ -14,9 +14,6 @@ import { NavComponent } from './components/nav/nav.component';
     EffectsModule.forFeature([ArticleEffects]),
     ArticleRoutingModule,
   ],
-  declarations: [
-    ...ArticleRoutingModule.routeComponents,
-    NavComponent,
-  ]
+  declarations: [...ArticleRoutingModule.routeComponents, NavComponent],
 })
 export class ArticlesModule {}

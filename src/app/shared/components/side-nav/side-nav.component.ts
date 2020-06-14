@@ -48,7 +48,19 @@ export class SideNavComponent {
   }
 
   toggleMe() {
-    return this.toggle.emit(!this.isOpen);
+    this.toggle.emit(!this.isOpen);
+  }
+
+  goToLocation(
+    path: string[],
+    queryParams: { [key: string]: string | number },
+    toggleNavbar = true,
+  ) {
+    if (toggleNavbar) {
+      this.toggleMe();
+    }
+
+    this.router.navigate(path, { queryParams });
   }
 
   performSearch() {

@@ -1,6 +1,5 @@
 import { SetPageTitle } from 'src/app/core/state/core.actions';
 import { getArticles } from './../../authors-portal/authors-articles/state/index';
-import { selectArticle } from './../state/index';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
@@ -27,7 +26,6 @@ import {
   distinctUntilChanged,
   takeUntil,
   map,
-  switchMap,
   tap,
 } from 'rxjs/operators';
 

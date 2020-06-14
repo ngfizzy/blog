@@ -1,9 +1,10 @@
 <div *ngIf="articles$ | async as articles">
   <app-side-nav
-  [isOpen]="'true'"
+  [isOpen]="isSideNavOpen"
   [nav]="nav$ | async"
   [mode]="sideNavMode"
   [searchResults]="searchResults"
   (search)="search($event, articles)"
+  (toggle)="isSideNavOpen = $event"
   [pageTitle]="pageTitle$ | async"></app-side-nav>
 </div>

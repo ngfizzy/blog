@@ -2,7 +2,7 @@ import { GetAllArticles } from './state/articles.actions';
 import { getAllArticles } from './state/index';
 import { GetNav, SetPageTitle } from './../core/state/core.actions';
 import { getNav } from './../core/state/index';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Nav, SideNavMode, Article } from '../shared/models';
 import { ArticlesState } from './state/articles.state';
 import { Store, select } from '@ngrx/store';
@@ -15,7 +15,7 @@ import { delay } from 'rxjs/operators';
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss'],
 })
-export class ArticlesComponent implements OnInit {
+export class ArticlesComponent implements OnInit, OnChanges {
   sideNavMode: SideNavMode = SideNavMode.Side;
 
   pageTitle$: Observable<string>;
@@ -23,10 +23,14 @@ export class ArticlesComponent implements OnInit {
   articles$: Observable<Article[]> = of([]);
 
   searchResults = [];
+  screenWidth: number;
+  isSideNavOpen = true;
 
   constructor(private store: Store<ArticlesState>) {}
 
   ngOnInit() {
+    this.setSidenavMode();
+
     this.store.dispatch(new SetPageTitle('Articles and Tutorials'));
     this.pageTitle$ = this.store.pipe(select(getPageTitle), delay(0));
 
@@ -35,6 +39,18 @@ export class ArticlesComponent implements OnInit {
 
     this.store.dispatch(new GetAllArticles());
     this.articles$ = this.store.pipe(select(getAllArticles));
+  }
+
+  ngOnChanges() {
+  }
+
+  setSidenavMode() {
+    this.screenWidth = window.innerWidth;
+
+    if (this.screenWidth < 768) {
+      this.sideNavMode = SideNavMode.Over;
+      this.isSideNavOpen = false;
+    }
   }
 
   search(searchTerm: string, articles: Article[]) {

@@ -7,7 +7,6 @@
     (opened)="setSelectedArticle($event)"
   >
   </app-article>
-
   <ng-container *ngIf="selectedArticle">
     <app-article-actions
       (applaud)="submitApplauds($event)"
@@ -19,8 +18,6 @@
       [currentAudienceApplauds]="currentUserApplauds"
       [activities]="audienceActivities$ | async"
     >
-
     </app-article-actions>
   </ng-container>
-
 </div>
