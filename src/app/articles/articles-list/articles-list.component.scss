@@ -19,8 +19,16 @@
   overflow-y: auto;
 }
 
-@media (min-width: 320px) and (max-width: 992px) {
+@media (min-width: 320px) and (max-width: 720px) {
   .articles-container {
     margin-top: 42%;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1200px) {
+  .articles-container {
+    margin: auto;
+    margin-top: 20%;
+    width: 100%;
   }
 }

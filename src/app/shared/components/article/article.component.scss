@@ -39,12 +39,17 @@
     overflow: hidden;
   }
 
-  @media (min-width: 320px) and (max-width: 992px) {
+  @media (min-width: 320px) and (max-width: 720px) {
     .card-body {
       max-height: 5rem;
     }
   }
 
+  @media (min-width: 721px) and (max-width: 1200px) {
+    .card-body {
+      max-height: 8rem;
+    }
+  }
 
   &.mini {
     height: 1.5em;

@@ -124,11 +124,18 @@
   transition: all 0.5s ease-in-out;
 }
 
-@media (min-with: 360px) and (max-width: 992px) {
+@media (min-with: 360px) and (max-width: 720px) {
   .search-panel {
+    width: 100%;
+    input {
+      display: inline-box;
+      margin: auto;
+    }
+
     left: 0;
   }
 }
+
 
 .main-nav {
   width: 20rem;
@@ -138,5 +145,13 @@
     display: inline-block;
     width: 90%;
     margin: auto;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1200px)  {
+  .main-nav {
+    width: 11rem;
+
+    left: 0;
   }
 }
