@@ -1,12 +1,14 @@
 .articles-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  overflow-x: hidden;
-  .header {
-    margin-bottom: 2rem;
-    font-weight: bold;
-  }
+  // display: flex;
+  // flex-direction: column;
+  // // width: 100%;
+  // overflow-x: hidden;
+  // .header {
+  //   margin-bottom: 2rem;
+  //   font-weight: bold;
+  // }
+
+  width: 98%;
 }
 
 .scroll-hidden {
@@ -15,4 +17,10 @@
 
 .scroll-auto {
   overflow-y: auto;
+}
+
+@media (min-width: 320px) and (max-width: 992px) {
+  .articles-container {
+    margin-top: 42%;
+  }
 }

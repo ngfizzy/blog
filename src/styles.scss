@@ -43,3 +43,14 @@ h6 {
 .content-background-color {
   background-color: rgba(30, 30, 36, 0.5);
 }
+
+@media (min-width: 320px) and (max-width: 992px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 85%;
+  }
+}

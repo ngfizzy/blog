@@ -87,7 +87,7 @@
     </nav>
   </mat-sidenav>
   <!-- This is  a quick hack to make few pages stick to the top-->
-  <mat-sidenav-content [ngClass]="{
+  <!-- <mat-sidenav-content [ngClass]="{
     'no-margin-top': removeTopMargin
   }">
     <div class="sidenav-content"
@@ -97,5 +97,21 @@
     >
      <router-outlet></router-outlet>
     </div>
+  </mat-sidenav-content> -->
+
+    <!-- This is  a quick hack to make few pages stick to the top-->
+  <mat-sidenav-content
+    [ngClass]="{ 'no-margin-top': removeTopMargin }"
+    class="row"
+  >
+    <div class="sidenav-content"
+      class="col-sm-12"
+      [ngClass]="{
+        'sidenav-content-full': contentUISizing == contentSizingValues.Fill
+      }"
+    >
+     <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
+
 </mat-sidenav-container>
