@@ -41,3 +41,40 @@ nav a {
 .main {
   height: 52rem;
 }
+
+@media (min-width: 320px) and (max-width: 720px) {
+  header {
+    padding: 1.5rem 0;
+    margin-bottom: -1rem;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  .main {
+    height: 34rem;
+
+    p {
+      font-size: 0.8rem;
+    }
+
+    .avatar-container {
+      margin-top: -1rem;
+    }
+
+    .nav-container {
+      margin-top: 0rem !important;
+    }
+
+    .author-info p {
+      &:first-child {
+        margin-bottom: 1rem !important;
+      }
+    }
+
+    nav a {
+      font-size: .8rem;
+    }
+  }
+}
