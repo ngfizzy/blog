@@ -30,7 +30,7 @@ const articles: Article[] = [
   {
     id: randomId(),
     authorId: 1,
-    title: 'Uniue Article',
+    title: 'Unique Article',
     body:
       `Lorem ipsum dolor sit amet,` +
       `  consectetur adipiscing elit.Duis sit amet vulputate quam.Pellentesque` +

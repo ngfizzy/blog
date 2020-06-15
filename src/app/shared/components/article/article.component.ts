@@ -110,10 +110,11 @@ export class ArticleComponent implements OnInit, OnChanges {
   truncate(at: number) {
     const { body } = this.article;
 
-    if (body.length <= at) {
-      return body;
-    }
+    return body;
+    // if (body.length <= at) {
+    //   return body;
+    // }
 
-    return body.substr(0, at) + '<br> >>click me to read more';
+    // return body.substr(0, at) + '<br> >>click me to read more';
   }
 }

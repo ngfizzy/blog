@@ -31,6 +31,6 @@
     </mat-card-content>
   </mat-card>
   <div [class.truncated]="!isExpandedView">
-
+    <h6 title="Read More" class="text-center" *ngIf="!isExpandedView"><i class="fa fa-arrow-circle-down"></i></h6>
   </div>
 </div>

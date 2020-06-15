@@ -45,9 +45,10 @@
     }
   }
 
-  @media (min-width: 721px) and (max-width: 1200px) {
-    .card-body {
-      max-height: 8rem;
+  @media (min-width: 721px) and (max-width: 1824px) {
+   .card-body {
+      max-height: 20rem;
+      font-size: 105%;
     }
   }
 
@@ -95,7 +96,21 @@
     rgba($color: #1e1e24, $alpha: 1)
   );
 
+  h6 {
+    position: relative;
+    top: 14rem;
+    font-size: 2rem;
+  }
+
   height: 14rem;
   top: -14rem;
   margin-bottom: -14rem;
 }
+
+@media (min-width: 721px) {
+  .truncated {
+    background: linear-gradient(rgba(30, 30, 36, 0), rgba(30, 30, 36, 0.8), #1e1e24);
+    height: 15rem;
+    top: -15rem;
+   }
+ }

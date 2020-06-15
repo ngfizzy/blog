@@ -14,7 +14,7 @@
   top: 7%;
   right: 0;
   padding: 10px;
-  background-color: rgba($color: #000, $alpha: 0.8);
+  background-color: rgba($color: #000, $alpha: 0.96);
   z-index: 4000;
   transition: width 0.5s ease-in-out;
   .comments-container {
@@ -282,6 +282,54 @@
       }
     }
   }
+}
+
+@media (min-width: 721px) {
+  .comment-form .buttons-wrapper {
+    margin: auto;
+  }
+
+  .wrapper .comments-container {
+    width: 92%;
+    margin-left: auto;
+    margin-right: 1rem;
+
+    .audience-comment {
+      font-size: 90%;
+    }
+  }
+
+  @media (min-width: 1825px) {
+    .wrapper {
+      background-color: rgba(255, 255, 255, 0.05);
+
+      margin: 0 !important;
+      // margin-right: auto;
+      position: fixed;
+      left: 67%;
+      // margin-top: 9% !important;
+      width: 34%;
+      min-height: 93vh;
+      .comment-form {
+        width: 109%;
+        margin-left: 1rem;
+      }
+
+      .comments {
+        width: 111%;
+      }
+
+      .actions-container {
+        position: relative;
+        left: -101%;
+      }
+    }
+  }
+}
+
+.close-button {
+  cursor: pointer;
+  font-size: 1.2rem;
 }
 .hide-form {
   width: 4rem;

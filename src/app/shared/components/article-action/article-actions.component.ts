@@ -37,14 +37,14 @@ import { AudienceActivity } from '../../models/audience-activity.interface';
         style({
           height: 0,
           opacity: 0,
-        })
+        }),
       ),
       state(
         '*',
         style({
           height: 'fit-content',
           opacity: 1,
-        })
+        }),
       ),
       transition('void => *, * => void', animate('.5s ease')),
     ]),
@@ -69,18 +69,19 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   name: string;
 
   isClapping = false;
+  isExtraLargeDevice = false;
 
   get comments() {
     const activities =
       this.activities &&
-      this.activities.filter((activity) => !!activity.comments);
+      this.activities.filter(activity => !!activity.comments);
 
-    const com = (activities || []).map((activity) =>
-      activity.comments.map((comment) => ({
+    const com = (activities || []).map(activity =>
+      activity.comments.map(comment => ({
         audience: activity.audience.audienceName,
         comment: comment.comment,
         date: comment.createdAt,
-      }))
+      })),
     );
 
     return [].concat(...com);
@@ -91,7 +92,7 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
       this.activities &&
       this.activities.reduce(
         (accumulator, activity) => accumulator + activity.applauds,
-        0
+        0,
       );
 
     return applauds || 0;
@@ -101,8 +102,8 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
     return (
       this.activities &&
       this.activities.find(
-        (activity) =>
-          activity.audience.deviceUUID === this.currentAudience.deviceUUID
+        activity =>
+          activity.audience.deviceUUID === this.currentAudience.deviceUUID,
       )
     );
   }
@@ -110,6 +111,9 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   constructor() {}
 
   ngOnInit() {
+    this.isExtraLargeDevice = window.innerWidth > 1824;
+    this.isCommentSectionOpen = this.isExtraLargeDevice;
+
     const currentAudienceApplauds = this.currentAudienceActivities
       ? this.currentAudienceActivities.applauds
       : 0;

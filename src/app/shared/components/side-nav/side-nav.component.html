@@ -1,58 +1,61 @@
-<div class="row w-100 mat-elevation-z1 d-flex  p-1 horizontal-navbar">
-  <div class="col-sm-12 col-md-4 nav-group">
-    <div class="row mt-auto mb-auto">
-      <div class="col-2 mt-auto mb-auto">
-        <button class="btn btn-sm" title="Expand Navbar" (click)="toggleMe()">
-          <i class="fa fa-times text-white" *ngIf="isOpen"></i>
-          <i class="fa fa-bars text-white" *ngIf="!isOpen"></i>
-        </button>
-      </div>
+<div class="container-fluid">
 
-      <div class="col-9 hnav-item">
-        <h4 class="mt-auto mb-auto">
-          <a [routerLink]="['/']">JohnDoe.com</a>
-        </h4>
-      </div>
-    </div>
-
-  </div>
-  <div
-    class="col-sm-12 col-md-7 nav-group hnav-item"
-    [class.search-panel]="isSearchPanelOpen"
-    [class.col-md-10]="isSearchPanelOpen"
-  >
-    <span
-      class="fa fa-times p-2"
-      *ngIf="isSearchPanelOpen"
-      (click)="isSearchPanelOpen = false"></span>
-    <input
-      #searchbox="ngModel"
-      [(ngModel)]="searchTerm"
-      (ngModelChange)="performSearch()"
-      (focusin)="searchBoxHasFocus = true; isSearchPanelOpen = true"
-      (focusout)="searchBoxHasFocus = false"
-      name="searchTerm"
-      type="search"
-      [placeholder]="'Search '+pageTitle+ ' By Title'"
-      class="p-2 w-sm-100 rounded"/>
-    <div
-      class="search-results"
-      [class.d-none]="(isSearchPanelOpen === false)  && !searchBoxHasFocus"
-    >
-        <h3 class="text-capitalize text-center" *ngIf="searchTerm?.length">
-          {{ searchResults.length }} Results Found
-        </h3>
-
-        <div *ngFor="let result of searchResults" [class.d-none]="!isSearchPanelOpen" class="row mt-4">
-          <h4 class="text-center text-capitalize col-12">
-            <a href (click)="viewArticle($event, result.id)">
-              {{result.title}}
-            </a>
-          </h4>
-          <div markdown class="search-result-body col-sm-12 col-md-8 m-auto">
-            {{ result.body }}
-          </div>
+  <div class="row w-100 mat-elevation-z1 d-flex  p-1 horizontal-navbar">
+    <div class="col-sm-12 col-md-4 nav-group">
+      <div class="row mt-auto mb-auto">
+        <div class="col-2 mt-auto mb-auto">
+          <button class="btn btn-sm" title="Expand Navbar" (click)="toggleMe()">
+            <i class="fa fa-times text-white" *ngIf="isOpen"></i>
+            <i class="fa fa-bars text-white" *ngIf="!isOpen"></i>
+          </button>
         </div>
+
+        <div class="col-9 hnav-item">
+          <h4 class="mt-auto mb-auto">
+            <a [routerLink]="['/']">JohnDoe.com</a>
+          </h4>
+        </div>
+      </div>
+
+    </div>
+    <div
+      class="col-sm-12 col-md-7 nav-group hnav-item"
+      [class.search-panel]="isSearchPanelOpen"
+      [class.col-md-10]="isSearchPanelOpen"
+    >
+      <span
+        class="fa fa-times p-2"
+        *ngIf="isSearchPanelOpen"
+        (click)="isSearchPanelOpen = false"></span>
+      <input
+        #searchbox="ngModel"
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="performSearch()"
+        (focusin)="searchBoxHasFocus = true; isSearchPanelOpen = true"
+        (focusout)="searchBoxHasFocus = false"
+        name="searchTerm"
+        type="search"
+        [placeholder]="'Search '+pageTitle+ ' By Title'"
+        class="p-2 w-sm-100 rounded"/>
+      <div
+        class="search-results"
+        [class.d-none]="(isSearchPanelOpen === false)  && !searchBoxHasFocus"
+      >
+          <h3 class="text-capitalize text-center" *ngIf="searchTerm?.length">
+            {{ searchResults.length }} Results Found
+          </h3>
+
+          <div *ngFor="let result of searchResults" [class.d-none]="!isSearchPanelOpen" class="row mt-4">
+            <h4 class="text-center text-capitalize col-12">
+              <a href (click)="viewArticle($event, result.id)">
+                {{result.title}}
+              </a>
+            </h4>
+            <div markdown class="search-result-body col-sm-12 col-md-8 m-auto">
+              {{ result.body }}
+            </div>
+          </div>
+      </div>
     </div>
   </div>
 </div>
@@ -105,7 +108,7 @@
     class="row"
   >
     <div class="sidenav-content"
-      class="col-sm-12 col-md-12"
+      class="col-12"
       [ngClass]="{
         'sidenav-content-full': contentUISizing == contentSizingValues.Fill
       }"
