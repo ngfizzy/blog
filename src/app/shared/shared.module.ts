@@ -1,3 +1,4 @@
+import { ArticlesContentWrapperComponent } from './components/articles-content-wrapper/articles-content-wrapper.component';
 import { ArticleActionsComponent } from 'src/app/shared/components/article-action/article-actions.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -94,6 +95,7 @@ import { CopyToClipboardComponent } from './components/copy-to-clipboard/copy-to
     OrderModule,
     TimeagoModule,
     ArticleActionsComponent,
+    ArticlesContentWrapperComponent,
   ],
   declarations: [
     SpinnerComponent,
@@ -102,6 +104,7 @@ import { CopyToClipboardComponent } from './components/copy-to-clipboard/copy-to
     SideNavComponent,
     CopyToClipboardComponent,
     ArticleActionsComponent,
+    ArticlesContentWrapperComponent,
   ],
   providers: [],
 })

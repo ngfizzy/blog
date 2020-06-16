@@ -27,6 +27,7 @@ const usedIds = [];
 
 const tags: Tag[] = [];
 const articles: Article[] = [
+
   {
     id: randomId(),
     authorId: 1,
@@ -35,7 +36,7 @@ const articles: Article[] = [
       `Lorem ipsum dolor sit amet,` +
       `  consectetur adipiscing elit.Duis sit amet vulputate quam.Pellentesque` +
       `porta sollicitudin dui, in tincidunt metus tempor vitae.Sed pretium,` +
-      `<h5>Test Subheading</h5>`+
+      `<h5>Test Subheading</h5>` +
       `ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque` +
       `lectus libero in mi.Praesent vulputate justo vel libero rutrum, et euismod` +
       `sem iaculis.Mauris non erat vitae justo congue faucibus nec et leo.Morbi id` +
@@ -57,6 +58,7 @@ const articles: Article[] = [
       },
     ],
     tags: [],
+    audienceActivities: []
   },
   {
     id: randomId(),
@@ -64,7 +66,7 @@ const articles: Article[] = [
     title: 'Search Subject 1',
     body:
       `Lorem ipsum dolor sit amet,` +
-      `<script>alert('if this shows the app is vulnerable to xss')</script>`+
+      `<script>alert('if this shows the app is vulnerable to xss')</script>` +
       `  consectetur adipiscing elit.Duis sit amet vulputate quam.Pellentesque` +
       `porta sollicitudin dui, in tincidunt metus tempor vitae.Sed pretium,` +
       `ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque` +
@@ -88,6 +90,7 @@ const articles: Article[] = [
       },
     ],
     tags: [],
+    audienceActivities: []
   },
   {
     id: randomId(),
@@ -118,6 +121,7 @@ const articles: Article[] = [
       },
     ],
     tags: [],
+    audienceActivities: []
   },
   {
     id: randomId(),
@@ -148,6 +152,7 @@ const articles: Article[] = [
       },
     ],
     tags: [],
+    audienceActivities: []
   },
 ];
 
@@ -273,7 +278,7 @@ export function createCategory(name: string) {
 }
 
 export function generateArticles(length: number) {
-  if (articles.length > 4) {
+  if (articles.length > 5) {
     return articles;
   }
 
