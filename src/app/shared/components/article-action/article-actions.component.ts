@@ -111,8 +111,7 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   constructor() {}
 
   ngOnInit() {
-    this.isExtraLargeDevice = window.innerWidth > 1824;
-    this.isCommentSectionOpen = this.isExtraLargeDevice;
+    this.adaptToXLScreen();
 
     const currentAudienceApplauds = this.currentAudienceActivities
       ? this.currentAudienceActivities.applauds
@@ -133,6 +132,15 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
       this.name =
         (this.currentAudience && this.currentAudience.audienceName) || '';
     }
+
+    if (changes.articleId && !changes.articleId.isFirstChange()) {
+      this.adaptToXLScreen();
+    }
+  }
+
+  adaptToXLScreen() {
+    this.isExtraLargeDevice = window.innerWidth > 2085;
+    this.isCommentSectionOpen = this.isExtraLargeDevice;
   }
 
   submitComment() {
@@ -165,8 +173,10 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   toggleCommentSection() {
-    this.isCommentSectionOpen = !this.isCommentSectionOpen;
-    this.commentSectionToggled.emit(this.isCommentSectionOpen);
+    if (!this.isExtraLargeDevice) {
+      this.isCommentSectionOpen = !this.isCommentSectionOpen;
+      this.commentSectionToggled.emit(this.isCommentSectionOpen);
+    }
   }
 
   ngOnDestroy() {}

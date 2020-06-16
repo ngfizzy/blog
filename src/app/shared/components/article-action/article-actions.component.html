@@ -3,6 +3,7 @@
   class="backdrop"
   [ngClass]="{ 'hide-form': !isCommentSectionOpen}"
   (click)="$event.stopPropagation(); toggleCommentSection()"
+  *ngIf="!isExtraLargeDevice"
 ></div>
 
 <div class="wrapper" [ngClass]="{ 'hide-form': !isCommentSectionOpen && !isExtraLargeDevice }">
@@ -12,6 +13,7 @@
     *ngIf="isCommentSectionOpen"
   >
     <span
+      *ngIf="!isExtraLargeDevice"
       (click)="toggleCommentSection()"
       class="text-left text-primary p-2 close-button">
       <i class="fa fa-times"></i>
