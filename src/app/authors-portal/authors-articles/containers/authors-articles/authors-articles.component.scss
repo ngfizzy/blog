@@ -1,9 +1,9 @@
 .articles-drawer-container {
   width: 97%;
-  height: 50rem;
+  height: 44rem;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 7%;
+  margin-top: 11%;
   background: inherit;
 
   &::ng-deep .mat-drawer-inner-container {
@@ -25,6 +25,7 @@
   position: fixed;
   top: 5rem;
   z-index: 2000;
-  width: 76%;
-  margin: auto;
+  border: solid;
+  width: 78%;
+  margin-left: 1%;
 }

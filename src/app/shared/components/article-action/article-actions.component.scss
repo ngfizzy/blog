@@ -216,6 +216,7 @@
     position: relative;
     color: white;
     width: 100%;
+    background-color: rgba($color: #fff, $alpha: 0.1);
 
     .audience-name {
       text-decoration: underline;
@@ -311,19 +312,19 @@
       min-height: 93vh;
 
       .comments-container {
-        width: 105%;
+        width: 100%;
         margin-left: -5rem;
       }
 
       .comment-form {
-        width: 101%;
-        margin-left: 1rem;
+        width: 94%;
+        margin-left: 0.7rem;
       }
 
       .submitting {
         form {
-          margin-left: -0.9rem;
-          width: 101%;
+          margin-left: 1.5rem;
+          width: 90%;
 
           .buttons-wrapper {
             margin-top: 0.5rem;
@@ -362,5 +363,3 @@
   width: 4rem;
   background: transparent;
 }
-
-
