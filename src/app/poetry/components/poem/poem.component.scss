@@ -15,20 +15,21 @@
     height: 50%;
     width: 100%;
     transition: all .5s ease-in-out;
-
+    color: #fff;
 
     &:hover {
       background-color: rgba($color: #1E1E24, $alpha: 0.88);
-      height: 100%;
-      top: 0;
-    }
-
-    .title {
-
     }
 
     .body {
       font-size: 80%;
     }
+  }
+
+  .read-more {
+    position: absolute;
+    width: 100%;
+    bottom: 6.5rem;
+    z-index: 1;
   }
 }

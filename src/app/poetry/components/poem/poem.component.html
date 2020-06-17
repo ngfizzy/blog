@@ -2,8 +2,11 @@
   [ngStyle]="backgroundStyle"
   (click)="view(poem.id)"
 >
-  <div class="w-100 poem">
+<h4 class="text-center read-more"><span class="fa fa-arrow-circle-up"></span></h4>
+<div class="w-100 poem">
+  <div class="body">
     <h6 class="text-capitalize title">{{poem?.title}}</h6>
-    <p class="body">{{poem?.body}}</p>
+    <p>{{poem?.body}}</p>
+  </div>
   </div>
 </div>
