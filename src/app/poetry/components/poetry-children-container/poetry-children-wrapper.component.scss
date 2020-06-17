@@ -1,12 +1,19 @@
 .gallery {
   box-sizing: content-box;
-  position: absolute;
   margin-left: auto;
   width: 96vw;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
-  left: 4%;
+  margin-top: 8rem;
+  margin: auto;
+  margin-top: 8rem;
+  margin-right: 1rem;
+  overflow-y: auto;
+  height: 91vh;
 
-  ::ng-deep &>.row {
+
+  ::ng-deep & > .row {
     margin-left: 0;
     margin-right: 0;
   }

@@ -23,7 +23,7 @@
 
 
 <ng-container *ngIf="(selectedPoem$ | async) as poem">
-  <app-article-actions
+  <app-poetry-actions
     (applaud)="submitApplauds($event)"
     (updateUserApplaud)="updateAudienceApplauds($event)"
     (commentSectionToggled)="hidePoem($event)"
@@ -34,5 +34,5 @@
     [activities]="poem.audienceActivities"
   >
 
-  </app-article-actions>
+  </app-poetry-actions>
 </ng-container>

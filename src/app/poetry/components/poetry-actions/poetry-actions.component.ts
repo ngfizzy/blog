@@ -14,7 +14,8 @@ import {
   Audience,
   ApplaudPayload,
   CommentPayload,
-} from '../../models';
+  AudienceActivity
+} from '../../../shared/models';
 import {
   trigger,
   state,
@@ -22,12 +23,11 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import { AudienceActivity } from '../../models/audience-activity.interface';
 
 @Component({
-  selector: 'app-article-actions',
-  templateUrl: './article-actions.component.html',
-  styleUrls: ['./article-actions.component.scss'],
+  selector: 'app-poetry-actions',
+  templateUrl: './poetry-actions.component.html',
+  styleUrls: ['./poetry-actions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 
   animations: [
@@ -50,12 +50,11 @@ import { AudienceActivity } from '../../models/audience-activity.interface';
     ]),
   ],
 })
-export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
+export class PoetryActionsComponent implements OnInit, OnDestroy, OnChanges {
   @Input() articleId: number;
   @Input() activities: AudienceActivity[] = [];
   @Input() currentAudience: Audience;
   @Input() currentAudienceApplauds: number;
-  @Input() isPoetrySection = false;
 
   @Output() applaud = new EventEmitter<ApplaudPayload>();
   @Output() commentSectionToggled = new EventEmitter<boolean>();
@@ -112,8 +111,6 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   constructor() {}
 
   ngOnInit() {
-    this.adaptToXLScreen();
-
     const currentAudienceApplauds = this.currentAudienceActivities
       ? this.currentAudienceActivities.applauds
       : 0;
@@ -134,15 +131,9 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
         (this.currentAudience && this.currentAudience.audienceName) || '';
     }
 
-    if (changes.articleId && !changes.articleId.isFirstChange()) {
-      this.adaptToXLScreen();
-    }
   }
 
-  adaptToXLScreen() {
-    this.isExtraLargeDevice = window.innerWidth > 2085;
-    this.isCommentSectionOpen = this.isExtraLargeDevice;
-  }
+
 
   submitComment() {
     const audience: Audience = {

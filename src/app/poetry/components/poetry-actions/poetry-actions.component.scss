@@ -8,7 +8,7 @@
 }
 
 .wrapper {
-  width: 70%;
+  width: 40%;
   display: flex;
   position: fixed;
   top: 7%;
@@ -28,7 +28,8 @@
   margin-left: auto;
   margin-right: 2px;
   position: relative;
-  left: -2rem;
+  top: 2rem;
+  left: -3rem;
 
   .actions {
     display: flex;
@@ -88,34 +89,6 @@
       &:hover {
         cursor: pointer;
       }
-    }
-  }
-}
-
-@media (min-width: 320px) and (max-width: 720px) {
-  .wrapper {
-    top: 7rem;
-    width: 88%;
-  }
-
-  .actions-container {
-    left: -0.5rem;
-
-    .icon {
-      padding-right: 0.7rem;
-      padding-left: 0.7rem;
-      padding-top: 0.3rem;
-    }
-
-    .actions i {
-      font-size: 1.5rem !important;
-      margin-top: 0.4rem;
-    }
-
-    .actions img {
-      width: 1.5rem !important;
-      height: 1.5rem !important;
-      margin-top: 0.5rem;
     }
   }
 }
@@ -181,6 +154,7 @@
     width: 100%;
     justify-content: space-between;
     margin-top: 0.3rem;
+    margin: auto;
   }
 
   .char-counter {
@@ -202,7 +176,7 @@
 
 .comments {
   margin-top: 1rem;
-  width: 90%;
+  width: 94%;
   height: 79vh;
   position: relative;
   top: -1%;
@@ -236,124 +210,6 @@
   transition: all 0.5s ease-in-out;
 }
 
-@media (min-width: 320px) and (max-width: 720px) {
-  .form-info {
-    font-size: 0.1rem;
-  }
-
-  .comments {
-    width: 116%;
-    height: 50vh;
-
-    .audience-name {
-      margin-right: auto;
-      text-align: left !important;
-    }
-  }
-
-  .submitting {
-    margin: auto;
-    width: 100%;
-
-    form {
-      margin-left: -0.9rem;
-      width: 112%;
-
-      .buttons-wrapper {
-        width: 104%;
-        margin: auto;
-      }
-    }
-  }
-}
-
-@media (min-width: 721px) and (max-width: 2086px) {
-  .submitting {
-    margin: auto;
-    width: 100%;
-
-    form {
-      margin-left: -1.3rem;
-      width: 112%;
-
-      .buttons-wrapper {
-        width: 104%;
-        margin: auto;
-      }
-    }
-  }
-}
-
-@media (min-width: 721px) {
-  .comment-form .buttons-wrapper {
-    margin: auto;
-  }
-
-  .wrapper .comments-container {
-    width: 92%;
-    margin-left: auto;
-    margin-right: 1rem;
-
-    .audience-comment {
-      font-size: 90%;
-    }
-  }
-
-  @media (min-width: 2086px) {
-    .wrapper {
-      background-color: rgba(255, 255, 255, 0);
-      margin: 0 !important;
-      position: fixed;
-      left: 80rem;
-      width: 40rem;
-      top: 4rem;
-
-      min-height: 93vh;
-
-      .comments-container {
-        width: 105%;
-        margin-left: -5rem;
-      }
-
-      .comment-form {
-        width: 101%;
-        margin-left: 1rem;
-      }
-
-      .submitting {
-        form {
-          margin-left: -0.9rem;
-          width: 101%;
-
-          .buttons-wrapper {
-            margin-top: 0.5rem;
-          }
-        }
-      }
-
-      .comments {
-        width: 101%;
-      }
-
-      .actions-container {
-        position: relative;
-        left: -46rem;
-      }
-    }
-  }
-
-  @media (min-width: 2086px) and(max-width: 2360px) {
-    .wrapper {
-      width: 30rem;
-    }
-
-    .actions-container {
-      position: relative;
-      left: -35rem !important;
-    }
-  }
-}
-
 .close-button {
   cursor: pointer;
   font-size: 1.2rem;
@@ -363,4 +219,8 @@
   background: transparent;
 }
 
-
+@media (min-width: 320px) and (max-width: 720px) {
+  .wrapper {
+    width: 88%;
+  }
+}
