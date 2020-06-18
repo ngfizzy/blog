@@ -25,3 +25,9 @@
     opacity: 1;
   }
 }
+
+@media(min-width: 360px) and (max-width: 720px) {
+  .slideshow {
+    margin-left: 1rem;
+  }
+}

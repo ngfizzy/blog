@@ -2,6 +2,7 @@
 <div
   class="backdrop"
   [ngClass]="{ 'hide-form': !isCommentSectionOpen }"
+  *ngIf="isCommentSectionOpen"
   (click)="$event.stopPropagation(); toggleCommentSection()"
 >
 </div>
