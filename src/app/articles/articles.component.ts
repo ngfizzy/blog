@@ -22,6 +22,7 @@ export class ArticlesComponent implements OnInit, OnChanges {
   nav$: Observable<Nav>;
   articles$: Observable<Article[]> = of([]);
 
+  isSmallDevice = window.innerWidth <= 720;
   searchResults = [];
   screenWidth: number;
   isSideNavOpen = true;

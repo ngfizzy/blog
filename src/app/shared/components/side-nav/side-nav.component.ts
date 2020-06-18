@@ -26,6 +26,8 @@ export class SideNavComponent {
   @Input() mode: SideNavMode;
   @Input() contentUISizing: SideNavContentSizing;
   @Input() searchResults: Article[] = [];
+  @Input() isSmallDevice: boolean;
+  @Input() canToggle: boolean;
   // hack to make few routes stick to the top
   @Input() removeTopMargin = false;
   @Output() search = new EventEmitter<string>();
@@ -48,7 +50,9 @@ export class SideNavComponent {
   }
 
   toggleMe() {
-    this.toggle.emit(!this.isOpen);
+    if (this.canToggle) {
+      this.toggle.emit(!this.isOpen);
+    }
   }
 
   goToLocation(

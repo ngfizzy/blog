@@ -6,5 +6,7 @@
   [searchResults]="searchResults"
   (search)="search($event, articles)"
   (toggle)="isSideNavOpen = $event"
+  [isSmallDevice]="isSmallDevice"
+  [canToggle]="true && isSmallDevice"
   [pageTitle]="pageTitle$ | async"></app-side-nav>
 </div>
