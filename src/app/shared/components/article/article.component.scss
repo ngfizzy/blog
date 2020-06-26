@@ -39,16 +39,18 @@
     overflow: hidden;
   }
 
-  @media (min-width: 320px) and (max-width: 720px) {
+  // Small devices
+  @media (min-width: 320px) and (max-width: 767.98px) {
     .card-body {
       max-height: 5rem;
     }
   }
 
-  @media (min-width: 721px) and (max-width: 1824px) {
+  // Medium devices
+  @media (min-width: 768px) {
    .card-body {
       max-height: 30rem;
-      font-size: 105%;
+      font-size: 102%;
     }
   }
 
@@ -107,7 +109,7 @@
   margin-bottom: -14rem;
 }
 
-@media (min-width: 721px) {
+@media (min-width: 768px) {
   .truncated {
     background: linear-gradient(rgba(30, 30, 36, 0), rgba(30, 30, 36, 0.8), #1e1e24);
     height: 15rem;

@@ -53,7 +53,7 @@
 
     .applauds-count {
       top: -37%;
-      right: -61%;
+      right: -40%;
     }
 
     .comments-count {
@@ -219,7 +219,7 @@
   background: transparent;
 }
 
-@media (min-width: 320px) and (max-width: 720px) {
+@media (min-width: 320px) and (max-width: 767.98) {
   .wrapper {
     width: 88%;
   }

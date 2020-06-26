@@ -70,7 +70,7 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   name: string;
 
   isClapping = false;
-  isExtraLargeDevice = false;
+  isLargeDevice = false;
 
   get comments() {
     const activities =
@@ -140,8 +140,8 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   adaptToXLScreen() {
-    this.isExtraLargeDevice = window.innerWidth > 2085;
-    this.isCommentSectionOpen = this.isExtraLargeDevice;
+    this.isLargeDevice = window.innerWidth >= 1200;
+    this.isCommentSectionOpen = this.isLargeDevice;
   }
 
   submitComment() {
@@ -174,7 +174,7 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   toggleCommentSection() {
-    if (!this.isExtraLargeDevice) {
+    if (!this.isLargeDevice) {
       this.isCommentSectionOpen = !this.isCommentSectionOpen;
       this.commentSectionToggled.emit(this.isCommentSectionOpen);
     }

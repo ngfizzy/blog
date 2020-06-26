@@ -1,58 +1,63 @@
-.articles-container {
-  // display: flex;
-  // flex-direction: column;
-  // // width: 100%;
-  // overflow-x: hidden;
-  // .header {
-  //   margin-bottom: 2rem;
-  //   font-weight: bold;
+// .articles-container {
+//   // display: flex;
+//   // flex-direction: column;
+//   // // width: 100%;
+//   // overflow-x: hidden;
+//   // .header {
+//   //   margin-bottom: 2rem;
+//   //   font-weight: bold;
+//   // }
+
+//   width: 98%;
+// }
+
+// .scroll-hidden {
+//   overflow-y: hidden;
+// }
+
+// .scroll-auto {
+//   overflow-y: auto;
+// }
+
+// small devices
+// @media (min-width: 320px) and (max-width: 767.98px) {
+//   .articles-container {
+//     margin-top: 42%;
+//     margin-left: 1rem !important;
+//   }
+// }
+
+// Medium devices
+// @media (min-width: 768px) and (max-width: 991.98px) {
+//   .articles-container {
+//     margin: auto;
+//     margin-top: 14% !important;
+//     width: 100%;
+//   }
+// }
+
+// Large devices
+// @media (min-width: 992px) {
+  // @media(min-width: 768px) {
+  // .articles-container {
+  //   margin: 0 !important;
+  //   margin-left: -3rem !important;
+  //   margin-top: 9% !important;
+  //   width: 60%;
   // }
+// }
 
-  width: 98%;
-}
+.articles-list-row{
+  height: 88.6vh;
 
-.scroll-hidden {
-  overflow-y: hidden;
-}
-
-.scroll-auto {
-  overflow-y: auto;
-}
-
-@media (min-width: 320px) and (max-width: 720px) {
-  .articles-container {
-    margin-top: 42%;
-    margin-left: 1rem !important;
+  .articles-list,
+  .comment-section {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
-}
 
-@media (min-width: 721px) and (max-width: 1200px) {
-  .articles-container {
-    margin: auto;
-    margin-top: 14% !important;
-    width: 100%;
-  }
-}
-
-@media (min-width: 1201px) and (max-width: 2084px) {
-  .articles-container {
-    margin: auto;
-    margin-top: 9% !important;
-    width: 100%;
-  }
-}
-
-@media (min-width: 721px) and (max-width: 2085px) {
-  .articles-container {
-    margin: auto;
-  }
-}
-
-@media (min-width: 2086px) {
-  .articles-container {
-    margin: 0 !important;
-    margin-left: -3rem !important;
-    margin-top: 9% !important;
-    width: 60rem;
+  .comment-section {
+    height: 100%
   }
 }

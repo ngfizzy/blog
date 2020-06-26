@@ -145,7 +145,8 @@
   transition: all 0.5s ease-in-out;
 }
 
-@media (min-width: 360px) and (max-width: 731px) {
+// Large Devices
+@media (min-width: 360px) and (max-width: 767.98px) {
   .search-panel {
     margin: auto;
     width: 90%;
@@ -178,7 +179,8 @@
   }
 }
 
-@media (min-width: 732px) {
+// Large devices for
+@media (min-width: 768px) {
   .main-nav {
     width: 20rem;
 
@@ -197,6 +199,7 @@
     }
   }
 
+
   .search-panel-close {
     width: 30%;
     margin-left: auto;
@@ -205,5 +208,12 @@
       display: inline-block;
       width: 100%;
     }
+  }
+}
+
+@media(min-width: 2001px) {
+  .sidenav-container {
+    width: 2000px;
+    margin: auto;
   }
 }
