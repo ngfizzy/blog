@@ -100,7 +100,7 @@
         <span *ngIf="!isClapping" class="applauds-count">{{ totalApplauds }}</span>
       <span *ngIf="isClapping" class="applauds-count">{{ currentAudienceApplauds }}</span>
        </span>
-       <span class="mat-elevation-z8 rounded icon" (click)="$event.stopPropagation(); toggleCommentSection()">
+       <span class="mat-elevation-z8 rounded icon" (click)="$event.stopPropagation();">
          <i class="fa fa-comment"></i>
         <span class="comments-count">{{comments?.length}}</span>
        </span>
