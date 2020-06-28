@@ -48,16 +48,32 @@
 // }
 
 .articles-list-row{
-  height: 88.6vh;
+
 
   .articles-list,
   .comment-section {
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
+
+    transition: all .3s ease-in-out;
   }
 
   .comment-section {
     height: 100%
+  }
+
+  transition: all .3s ease-in-out;
+}
+
+
+@media(min-width: 1140px) {
+  .articles-list-row {
+
+    .articles-list {
+      &.article-unselected {
+        overflow: visible;
+      }
+    }
   }
 }

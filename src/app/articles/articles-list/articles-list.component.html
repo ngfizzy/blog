@@ -1,27 +1,22 @@
 <app-articles-content-wrapper>
   <div class="row articles-list-row">
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8 mx-auto articles-list">
+    <div
+      class="col-sm-12 col-md-12 col-lg-12 col-xl-8 mx-auto articles-list"
+    >
       <app-article
         [config]="articleConfig"
         *ngFor="let article of articles$ | async"
         [article]="article"
+        [currentAudience]="audience$ | async"
+        [currentUserApplauds]="currentUserApplauds"
+        [audienceActivities]="audienceActivities$ | async"
         (notify)="showNotification($event)"
         (opened)="setSelectedArticle($event)"
+        (applaud)="submitApplauds($event)"
+        (updateUserApplaud)="updateAudienceApplauds($event)"
+        (addComment)="submitComment($event)"
       >
       </app-article>
-    </div>
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4 comment-section" *ngIf="selectedArticle">
-      <app-article-actions
-      (applaud)="submitApplauds($event)"
-      (updateUserApplaud)="updateAudienceApplauds($event)"
-      (commentSectionToggled)="toggleScrollBar($event)"
-      (addComment)="submitComment($event)"
-      [articleId]="selectedArticle?.id"
-      [currentAudience]="audience$ | async"
-      [currentAudienceApplauds]="currentUserApplauds"
-      [activities]="audienceActivities$ | async"
-    >
-      </app-article-actions>
     </div>
   </div>
 

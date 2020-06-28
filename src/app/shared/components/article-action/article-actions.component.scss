@@ -20,22 +20,14 @@
 }
 
 .actions-container {
-  display: flex;
-  flex-direction: row;
-  margin-left: auto;
-  margin-right: 2px;
-  position: relative;
-  left: -2rem;
-
   .actions {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 8rem;
-    background-color: rgba($color: #000, $alpha: 0);
+    height: 5.8rem;
     width: 2rem;
     padding: 0.3rem;
-    margin-top: 95%;
+    margin-top: 122%;
     box-sizing: content-box;
 
     .applauds-count,
@@ -53,33 +45,29 @@
     }
 
     .comments-count {
-      top: -32%;
-      right: -32%;
+      top: 29%;
+      right: 5%;
     }
 
     .icon {
-      display: inline-flex;
-      margin-bottom: 1rem;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: fit-content;
-      height: fit-content;
-      border-radius: 100%;
-      padding-right: 0.9rem;
-      padding-left: 0.9rem;
-      padding-top: 0.7rem;
-
-      background-color: rgba($color: #fff, $alpha: 0.5);
+      // display: inline-flex;
+      // margin-bottom: 1rem;
+      // flex-direction: column;
+      // justify-content: center;
+      // align-items: center;
+      // width: fit-content;
+      // height: fit-content;
+      // border-radius: 100%;
+      // padding-right: 0.9rem;
+      // padding-left: 0.9rem;
+      // padding-top: 0.7rem;
 
       img {
-        display: inline-block;
         width: 2rem;
-        height: 2rem;
       }
 
       i {
-        font-size: 2rem;
+        font-size: 1.3rem;
       }
 
       &:hover {
@@ -172,7 +160,7 @@
 .comments {
   margin-top: 1rem;
   width: 90%;
-  height: 70%;
+  height: 79.5%;
   position: relative;
   top: -1%;
   left: 5%;
@@ -203,7 +191,31 @@
   transition: all 0.5s ease-in-out;
 }
 
-// Small devices
+.actions-container {
+  // left: -0.5rem;
+
+  .icon {
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 2.2rem;
+    width: 2rem;
+    margin-bottom: .5rem;
+  }
+
+  .actions i {
+    position: relative;
+    top: 0.4rem;
+    left: 0.3rem;
+    color: #000000;
+  }
+
+  .actions img {
+    // width: 1.5rem !important;
+    // height: 1.5rem !important;
+    // margin-top: 0.5rem;
+  }
+}
+
+
 @media (min-width: 320px) and (max-width: 767.98px) {
   .wrapper {
     top: 7rem;
@@ -259,200 +271,4 @@
       }
     }
   }
-}
-
-// Large Devices
-@media (min-width: 768px) and (max-width: 1199.98px) {
-  .submitting {
-    margin: auto;
-    width: 100%;
-
-    form {
-      margin-left: -1.3rem;
-      width: 112%;
-
-      .buttons-wrapper {
-        width: 104%;
-        margin: auto;
-      }
-    }
-  }
-}
-
-// Large to extra large devices
-@media (min-width: 768px) {
-
-  .wrapper {
-    // background-color: rgba(255, 255, 255, 0);
-    // margin: 0 !important;
-    // margin-right: auto !important;
-    // width: 120%;
-    // top: 5rem;
-    // height: 100%;
-
-    .comment-form {
-      // width: 97%;
-      // margin-left: 0.7rem;
-    }
-  }
-  .comments {
-    left: 3.19%;
-    margin-left: auto;
-    margin-right: auto;
-    width: 97%;
-  }
-
-  .comment-form .buttons-wrapper {
-    margin: auto;
-  }
-
-  .wrapper .comments-container {
-    width: 92%;
-    margin-left: auto;
-    margin-right: 6%;
-
-    .audience-comment {
-      font-size: 90%;
-    }
-  }
-
-
-}
-
-@media (min-width: 1140px) {
-  .wrapper {
-    background-color: rgba(255, 255, 255, 0);
-    margin: 0 !important;
-    margin-right: auto !important;
-    width: 120%;
-    height: 100%;
-
-    .comments-container {
-      width: 94%;
-      // margin-right: 14%;
-    }
-
-    .comment-form {
-      width: 97%;
-      margin-left: 0.7rem;
-    }
-
-    .submitting {
-      &.comments-container {
-        margin-right: 14%;
-      }
-
-      form {
-        width: 94%;
-
-        .buttons-wrapper,
-        .input {
-          margin-top: 0.5rem;
-          width: 91% !important;
-        }
-
-        .input {
-          display: block;
-          margin-left: 4%;
-        }
-      }
-    }
-
-    .comments {
-      width: 101%;
-    }
-
-    .actions-container {
-      position: relative;
-      left: -96%;
-      top: 22%;
-    }
-  }
-}
-
-// @media(min-width: 1700px) {
-//   .comments {
-//     left: 1.5%;
-
-//     width: 97%;
-//   }
-// }
-
-// @media(min-width: 1900px) {
-//   .wrapper .comments {
-//     width: 96%;
-
-//   }
-// }
-
-// @media (min-width: 1140px) {
-//   .wrapper {
-//     background-color: rgba(255, 255, 255, 0);
-//     margin: 0 !important;
-//     margin-right: auto !important;
-//     width: 120%;
-//     top: 5rem;
-//     height: 100%;
-
-//     .comments-container {
-//       width: 100%;
-//       // margin-right: 14%;
-//     }
-
-//     .comment-form {
-//       width: 97%;
-//       margin-left: 0.7rem;
-//     }
-
-//     .submitting {
-//       &.comments-container {
-//         margin-right: 14%;
-//       }
-
-//       form {
-//         width: 94%;
-
-//         .buttons-wrapper,
-//         .input {
-//           margin-top: 0.5rem;
-//           width: 91% !important;
-//         }
-
-//         .input {
-//           display: block;
-//           margin-left: 4%;
-//         }
-//       }
-//     }
-
-//     .comments {
-//       width: 101%;
-//     }
-
-//     .actions-container {
-//       position: relative;
-//       left: -106%;
-//     }
-//   }
-// }
-
-// @media(min-width: 2001px) {
-//   .wrapper {
-//     position: fixed;
-//     background-color: rgba(255, 255, 255, 0);
-//     margin: 0 !important;
-//     margin-right: auto !important;
-//     width: 670px;
-//     top: 5rem;
-//     min-height: 93vh;
-//     left: 1829px !important;
-//   }
-// }
-.close-button {
-  cursor: pointer;
-  font-size: 1.2rem;
-}
-.hide-form {
-  width: 4rem;
-  background: transparent;
 }

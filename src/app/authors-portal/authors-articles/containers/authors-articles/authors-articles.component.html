@@ -28,11 +28,6 @@
 
 <mat-sidenav-container class="articles-drawer-container">
   <mat-sidenav mode="side" opened class="articles-drawer">
-    <!-- <app-authors-article-list-toolbar
-      (createArticle)="createArticle()"
-    >
-    </app-authors-article-list-toolbar> -->
-
     <app-authors-articles-list
       [articlesList]="articles$ | async"
       (showFullArticle)="showFullArticle($event)"

@@ -29,6 +29,23 @@
     <div class="text-info article-date">{{ article.createdAt | date }}</div>
     <mat-card-content *ngIf="!isMini" class="card-body" [innerHtml]="articleBody" markdown>
     </mat-card-content>
+    <mat-card-content class="card-body" *ngIf="isExpandedView">
+      <div class="row">
+        <div class="col-sm-12 col-lg-10 col-xl-8 mx-auto">
+          <app-article-actions
+            (applaud)="submitApplauds($event)"
+            (updateUserApplaud)="updateAudienceApplauds($event)"
+            (addComment)="submitComment($event)"
+            [articleId]="article?.id"
+            [currentAudience]="currentAudience"
+            [currentAudienceApplauds]="currentUserApplauds"
+            [activities]="audienceActivities"
+          >
+          </app-article-actions>
+        </div>
+      </div>
+    </mat-card-content>
+
   </mat-card>
   <div [class.truncated]="!isExpandedView">
     <h6 title="Read More" class="text-center" *ngIf="!isExpandedView"><i class="fa fa-arrow-circle-down"></i></h6>

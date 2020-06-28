@@ -10,6 +10,11 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { ArticleComponentConfig } from '../../models/article-component-config.interface';
 import { Article } from '../../models/article.interface';
+import { AudienceActivity } from '../../models/audience-activity.interface';
+import { CommentPayload } from '../../models';
+import { Audience } from '../../models/audience.interface';
+import { ApplaudPayload } from '../../models/audience-activity-payloads.interface';
+import { applaud } from '../../../mock-server/index';
 
 enum AnimationState {
   Small = 'small',
@@ -24,9 +29,17 @@ enum AnimationState {
 export class ArticleComponent implements OnInit, OnChanges {
   @Input() config: ArticleComponentConfig;
   @Input() article: Article;
+  @Input() audienceActivities: AudienceActivity[];
+  @Input() currentAudience: Audience;
+  @Input() currentUserApplauds: number;
 
   @Output() notify = new EventEmitter<string>();
   @Output() opened = new EventEmitter<Article>();
+  @Output() commentSectionToggled = new EventEmitter<boolean>();
+  @Output() addComment = new EventEmitter<CommentPayload>();
+  @Output() applaud = new EventEmitter<ApplaudPayload>();
+  @Output() updateUserApplaud = new EventEmitter<number>();
+
 
   state = AnimationState.Small;
   truncatedArticleLength = 600;
@@ -57,6 +70,18 @@ export class ArticleComponent implements OnInit, OnChanges {
     if (!changes.firstChange) {
       this.articleBody = this.getArticleBody();
     }
+  }
+
+  submitApplauds(payload: ApplaudPayload) {
+    this.applaud.emit(payload);
+  }
+
+  submitComment(payload: CommentPayload) {
+    this.addComment.emit(payload);
+  }
+
+  updateAudienceApplauds(payload: number) {
+    this.updateUserApplaud.emit(payload);
   }
 
   private configureComponent() {
@@ -90,7 +115,7 @@ export class ArticleComponent implements OnInit, OnChanges {
       const article = this.isExpandedView ? this.article : null;
 
       if (article) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
 
       this.opened.emit(article);

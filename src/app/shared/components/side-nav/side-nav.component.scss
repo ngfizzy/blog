@@ -179,10 +179,14 @@
   }
 }
 
-// Large devices for
-@media (min-width: 768px) {
+@media(min-width: 720px) and (max-width: 960px) {
   .main-nav {
-    width: 20rem;
+    width: 15rem;
+  }
+}
+// Large devices for
+@media (min-width: 720px) {
+  .main-nav {
 
     left: 0;
   }
