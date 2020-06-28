@@ -31,7 +31,7 @@
     </mat-card-content>
     <mat-card-content class="card-body" *ngIf="isExpandedView">
       <div class="row">
-        <div class="col-sm-12 col-lg-10 col-xl-8 mx-auto">
+        <div class="col-sm-12 col-lg-11 col-xl-10 mx-auto">
           <app-article-actions
             (applaud)="submitApplauds($event)"
             (updateUserApplaud)="updateAudienceApplauds($event)"
@@ -47,7 +47,9 @@
     </mat-card-content>
 
   </mat-card>
-  <div [class.truncated]="!isExpandedView">
-    <h6 title="Read More" class="text-center" *ngIf="!isExpandedView"><i class="fa fa-arrow-circle-down"></i></h6>
+  <div class="truncated" *ngIf="!isExpandedView">
+    <button title="Read More" class="rounded article-cta">
+      Read more and Comment
+    </button>
   </div>
 </div>

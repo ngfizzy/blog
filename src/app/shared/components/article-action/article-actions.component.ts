@@ -50,7 +50,7 @@ import { AudienceActivity } from '../../models/audience-activity.interface';
     ]),
   ],
 })
-export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
+export class ArticleActionsComponent implements OnInit, OnChanges {
   @Input() articleId: number;
   @Input() activities: AudienceActivity[] = [];
   @Input() currentAudience: Audience;
@@ -62,7 +62,6 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   @Output() addComment = new EventEmitter<CommentPayload>();
   @Output() updateUserApplaud = new EventEmitter<number>();
 
-  isCommentSectionOpen = false;
   isCollectingAudDetails = false;
   canContinue = false;
   comment = '';
@@ -70,7 +69,6 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   name: string;
 
   isClapping = false;
-  isLargeDevice = false;
 
   get comments() {
     const activities =
@@ -112,8 +110,6 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
   constructor() {}
 
   ngOnInit() {
-    this.adaptToXLScreen();
-
     const currentAudienceApplauds = this.currentAudienceActivities
       ? this.currentAudienceActivities.applauds
       : 0;
@@ -133,15 +129,6 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
       this.name =
         (this.currentAudience && this.currentAudience.audienceName) || '';
     }
-
-    if (changes.articleId && !changes.articleId.isFirstChange()) {
-      this.adaptToXLScreen();
-    }
-  }
-
-  adaptToXLScreen() {
-    this.isLargeDevice = window.innerWidth >= 1200;
-    this.isCommentSectionOpen = this.isLargeDevice;
   }
 
   submitComment() {
@@ -172,13 +159,4 @@ export class ArticleActionsComponent implements OnInit, OnDestroy, OnChanges {
       audience: this.currentAudience,
     });
   }
-
-  toggleCommentSection() {
-    if (!this.isLargeDevice) {
-      this.isCommentSectionOpen = !this.isCommentSectionOpen;
-      this.commentSectionToggled.emit(this.isCommentSectionOpen);
-    }
-  }
-
-  ngOnDestroy() {}
 }

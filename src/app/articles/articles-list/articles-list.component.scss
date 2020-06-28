@@ -1,31 +1,9 @@
-// .articles-container {
-//   // display: flex;
-//   // flex-direction: column;
-//   // // width: 100%;
-//   // overflow-x: hidden;
-//   // .header {
-//   //   margin-bottom: 2rem;
-//   //   font-weight: bold;
-//   // }
 
-//   width: 98%;
-// }
-
-// .scroll-hidden {
-//   overflow-y: hidden;
-// }
-
-// .scroll-auto {
-//   overflow-y: auto;
-// }
-
-// small devices
-// @media (min-width: 320px) and (max-width: 767.98px) {
-//   .articles-container {
-//     margin-top: 42%;
-//     margin-left: 1rem !important;
-//   }
-// }
+@media (min-width: 320px) and (max-width: 767.98px) {
+  .articles-list-row {
+    margin-left: 1.5%;
+  }
+}
 
 // Medium devices
 // @media (min-width: 768px) and (max-width: 991.98px) {

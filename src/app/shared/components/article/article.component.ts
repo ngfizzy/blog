@@ -106,7 +106,6 @@ export class ArticleComponent implements OnInit, OnChanges {
   }
 
   openArticle(event: MouseEvent) {
-    const target = event.target as HTMLElement;
     if (this.canToggle) {
       this.isTouched = true;
       this.isExpandedView = !this.isExpandedView;
@@ -114,32 +113,12 @@ export class ArticleComponent implements OnInit, OnChanges {
 
       const article = this.isExpandedView ? this.article : null;
 
-      if (article) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-
       this.opened.emit(article);
     }
   }
 
   getArticleBody() {
-    const { body } = this.article;
-
-    if (this.isExpandedView || this.isTouched) {
-      return body;
-    }
-
-    return this.truncate(this.truncatedArticleLength);
+    return this.article.body;
   }
 
-  truncate(at: number) {
-    const { body } = this.article;
-
-    return body;
-    // if (body.length <= at) {
-    //   return body;
-    // }
-
-    // return body.substr(0, at) + '<br> >>click me to read more';
-  }
 }

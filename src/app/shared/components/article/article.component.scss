@@ -114,6 +114,19 @@
     background: linear-gradient(rgba(30, 30, 36, 0), rgba(30, 30, 36, 0.8), #1e1e24);
     height: 15rem;
     top: -15rem;
+
+    .article-cta {
+      display: block;
+      position: relative;
+      margin: auto;
+      margin-bottom: 1rem;
+      top: 78%;
+      background-color: rgba(#fcd581, 0.5);
+      font-size: .9rem;
+      padding: .4rem;
+      border: none;
+      color: white;
+    }
    }
  }
 

@@ -1,15 +1,5 @@
 
-<div
-  class="backdrop"
-  [ngClass]="{ 'hide-form': !isCommentSectionOpen }"
-  (click)="$event.stopPropagation(); toggleCommentSection()"
-  *ngIf="!isLargeDevice "
->
-</div>
-
 <div class="wrapper" [ngClass]="{
-  'mat-elevation-z3': isCommentSectionOpen,
-  'hide-form': !isCommentSectionOpen && !isLargeDevice || (isPoetrySection && isLargeDevice),
   'poetry-section': isPoetrySection
 }"
 (click)="$event.stopPropagation()"
@@ -17,17 +7,9 @@
   <div
     class="comments-container"
     [class.submitting]="isCollectingAudDetails"
-    *ngIf="isCommentSectionOpen"
   >
-    <span
-      *ngIf="!isLargeDevice"
-      (click)="toggleCommentSection()"
-      class="text-left text-primary p-2 close-button">
-      <i class="fa fa-times"></i>
-    </span>
     <h4 class="text-center text-underline">Comment Section</h4>
     <form
-      *ngIf="isCommentSectionOpen"
       class="mat-elevation-z2 comment-form"
     >
       <div class="row" *ngIf="isCollectingAudDetails">
@@ -115,7 +97,6 @@
     <div class="actions">
       <span class=" mat-elevation-z8 rounded icon" (click)="$event.stopPropagation(); clap()">
         <img src="assets/clap.png" alt="Applaud">
-        <!-- <i class="fa fa-applaud"></i> -->
         <span *ngIf="!isClapping" class="applauds-count">{{ totalApplauds }}</span>
       <span *ngIf="isClapping" class="applauds-count">{{ currentAudienceApplauds }}</span>
        </span>
