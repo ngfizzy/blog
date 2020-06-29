@@ -14,10 +14,11 @@ body {
   background-color: rgba(30, 30, 50, 0.887);
   background: linear-gradient(
     45deg,
+    rgba(30, 30, 50, 0.997),
     rgba(30, 30, 50, 0.887),
-    rgba(30, 30, 36, 0.8),
-    rgba(30, 30, 50, 0.887)
+    rgba(30, 30, 50, 0.997)
   );
+  background-repeat: no-repeat;
 
   color: #ece8ef;
 }

@@ -20,7 +20,13 @@
 }
 
 .bg-sidenav-container {
-  background-color: rgba(30, 30, 50, 0.887);
+  background: linear-gradient(
+    45deg,
+    rgba(30, 30, 50, 0.997),
+    rgba(30, 30, 50, 0.887),
+    rgba(30, 30, 50, 0.997)
+  );
+  background-repeat: no-repeat;
 }
 
 .bg-sidenav {
@@ -100,8 +106,7 @@
 .search-panel {
   position: fixed;
   background-color: rgba($color: #7e7f9a, $alpha: 0.96);
-  // left: 24.4%;
-  // color: rgba(30, 30, 47, 0.977);
+
   margin-top: 2rem;
   height: 95%;
   overflow-y: auto;
