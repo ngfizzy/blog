@@ -8,11 +8,11 @@
     mini: isMini,
     full: isFull
   }"
->
+  >
   <mat-card
-    class="rounded card"
-    [class.mat-elevation-z1]="!isActive && !isExpandedView"
-    [class.mat-elevation-z8]="isExpandedView && !shouldHideShadows"
+  class="rounded card"
+  [class.mat-elevation-z1]="!isActive && !isExpandedView"
+  [class.mat-elevation-z8]="isExpandedView && !shouldHideShadows"
   >
     <mat-card-title class="title text-center">
       <h3 class="d-inline-block"><a [routerLink]="[article.id]">{{article.title}}</a></h3>
