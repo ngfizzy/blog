@@ -1,4 +1,5 @@
 .poem-container {
+  overflow-y: hidden;
   &:hover {
     cursor: pointer;
     background-color: rgba($color: #1E1E24, $alpha: 0.8);
@@ -33,3 +34,21 @@
     z-index: 1;
   }
 }
+
+@media(min-width: 360px) and (max-width: 767.98px) {
+  .poem-container {
+    margin-bottom: 0.5rem;
+  }
+}
+
+// min-height: 30vh;
+// max-height: 50vh;
+// padding: 0 0.1rem;
+// width: 100%;
+// margin-bottom: 0.2rem;
+// overflow-x: hidden;
+// -webkit-animation: transitionIn 1s;
+// animation: transitionIn 1s;
+// margin-left: 0px;
+// overflow-y: auto;
+// margin-bottom: 0.5rem;
