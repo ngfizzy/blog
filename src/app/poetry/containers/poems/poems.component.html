@@ -3,7 +3,7 @@
 <app-poetry-children-wrapper>
   <div class="row">
     <ng-container *ngIf="(poems$ | async) as poems">
-      <div class="col-sm-4 col-md-3 col-lg-2 poems-container mat-elevation-z2" *ngFor="let poem of poems">
+      <div class="col-sm-4 col-md-3 col-lg-2 poem-container mat-elevation-z2" *ngFor="let poem of poems">
         <app-poem [poem]="poem" (viewPoem)="showPoemDialog($event)"></app-poem>
       </div>
     </ng-container>

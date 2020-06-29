@@ -9,9 +9,10 @@
 
 .wrapper {
   width: 40%;
+  height: 86%;
   display: flex;
   position: fixed;
-  top: 7%;
+  top: 12%;
   right: 0;
   padding: 10px;
   background-color: rgba($color: #000, $alpha: 0.95);
@@ -19,6 +20,7 @@
   transition: width 0.5s ease-in-out;
   .comments-container {
     width: 87%;
+    padding-bottom: 5%;
   }
 }
 
@@ -28,7 +30,7 @@
   margin-left: auto;
   margin-right: 2px;
   position: relative;
-  top: 2rem;
+  top: 1rem;
   left: -1rem;
 
   .actions {
@@ -179,9 +181,8 @@
   width: 94%;
   height: 79.5%;
   position: relative;
-  top: -1%;
   left: 5%;
-  padding-bottom: 2rem;
+  padding-bottom: 5%;
   overflow-y: auto;
 
   .comment {
@@ -219,7 +220,7 @@
   background: transparent;
 }
 
-@media (min-width: 320px) and (max-width: 767.98) {
+@media (min-width: 320px) and (max-width: 767.98px) {
   .wrapper {
     width: 88%;
   }
