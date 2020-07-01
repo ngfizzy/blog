@@ -58,7 +58,6 @@ export class ArticleActionsComponent implements OnInit, OnChanges {
   @Input() isPoetrySection = false;
 
   @Output() applaud = new EventEmitter<ApplaudPayload>();
-  @Output() commentSectionToggled = new EventEmitter<boolean>();
   @Output() addComment = new EventEmitter<CommentPayload>();
   @Output() updateUserApplaud = new EventEmitter<number>();
 

@@ -103,10 +103,4 @@ export class ArticleComponent implements OnInit, OnDestroy {
   updateAudienceApplauds(applauds: number) {
     this.currentAudienceApplauds = applauds;
   }
-
-  toggleScrollBar(hide: boolean) {
-    document.body.style.overflowY = hide ? 'hidden' : 'auto';
-
-    this.hideScrollBar = hide;
-  }
 }

@@ -35,7 +35,6 @@ export class ArticleComponent implements OnInit, OnChanges {
 
   @Output() notify = new EventEmitter<string>();
   @Output() opened = new EventEmitter<Article>();
-  @Output() commentSectionToggled = new EventEmitter<boolean>();
   @Output() addComment = new EventEmitter<CommentPayload>();
   @Output() applaud = new EventEmitter<ApplaudPayload>();
   @Output() updateUserApplaud = new EventEmitter<number>();

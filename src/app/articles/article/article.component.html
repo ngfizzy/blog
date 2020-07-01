@@ -9,7 +9,6 @@
     <app-article-actions
     (applaud)="submitApplauds($event)"
     (updateUserApplaud)="updateAudienceApplauds($event)"
-    (commentSectionToggled)="toggleScrollBar($event)"
     (addComment)="submitComment($event)"
     [articleId]="article.id"
     [currentAudience]="audience$ | async"
