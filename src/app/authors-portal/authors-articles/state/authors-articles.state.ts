@@ -4,7 +4,7 @@ import { AuthorsPortalState } from '../../state';
 export interface AuthorsArticlesState extends AuthorsPortalState {
   isLoading: boolean;
   articles: Article[];
-
+  error: string;
   selectedArticle: {
     article: Article;
     isLoading: boolean;

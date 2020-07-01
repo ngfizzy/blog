@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
 import { Action } from '@ngrx/store';
-import { mergeMap, map, switchMap } from 'rxjs/operators';
+import { mergeMap, map, switchMap, catchError } from 'rxjs/operators';
 
-import { AuthorsArticlesService } from '../../services/authors-articles.service';
+import { AuthorsArticlesService } from '../../services/authors-articles/authors-articles.service';
 import * as authorsArticlesActions from './authors-articles.actions';
 import { Article } from 'src/app/shared/models';
+import { GQLError } from '../../../shared/models/gql-error.interface';
 
 @Injectable()
 export class AuthorsArticlesEffects {
@@ -19,9 +20,10 @@ export class AuthorsArticlesEffects {
   @Effect()
   getArticles$: Observable<Action> = this.actions$.pipe(
     ofType(authorsArticlesActions.AuthorsArticlesActionTypes.GetArticles),
-    mergeMap(() => this.articlesService.getAllArticles().pipe(
-      map(articles => new authorsArticlesActions.GetArticlesSuccess(articles))
-    ))
+    mergeMap(() => this.performGetAllArticles()),
+    catchError((error: GQLError) =>
+    of(new authorsArticlesActions.GetArticlesError(this.getErrorMessage(error)))
+  )
   );
 
   @Effect()
@@ -136,4 +138,21 @@ export class AuthorsArticlesEffects {
       ),
     ),
   );
+
+  private performGetAllArticles() {
+    return this.articlesService.getAllArticles().pipe(
+      map(articlesResponse => {
+        if (!articlesResponse.error) {
+          return new authorsArticlesActions
+            .GetArticlesSuccess(articlesResponse.articles);
+        }
+
+        throw new Error(articlesResponse.error.message);
+      }),
+    );
+  }
+
+  private getErrorMessage(error: GQLError): string {
+    return error.error ? (error.error || { message: ''}).message : (error.error as string);
+  }
 }

@@ -1,6 +1,5 @@
 
 const articles = [];
-const categories = [];
 const audienceActivities = [];
 const audienceComments = [];
 
@@ -12,6 +11,29 @@ const audienceRecord = [
   { id: 4, audienceName: 'Jen', deviceUUID: 'lliw.zow' },
   { id: 5, audienceName: 'Yung', deviceUUID: 'alilqla.oiaoso' },
   { id: 6, audienceName: 'Wanja', deviceUUID: '.aoioqlaoo.aose' },
+];
+
+const audienceList = [];
+
+const categories = [
+  {
+    id: 1,
+    name: 'poetry',
+    updatedAt: new Date().toString(),
+    createdAt: new Date().toString(),
+  },
+  {
+    id: 2,
+    name: 'tech',
+    updatedAt: new Date().toString(),
+    createdAt: new Date().toString(),
+  },
+  {
+    id: 3,
+    name: 'self help',
+    updatedAt: new Date().toString(),
+    createdAt: new Date().toString(),
+  },
 ];
 
 const usedIds = [];

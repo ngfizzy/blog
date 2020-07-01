@@ -1,4 +1,4 @@
-const datastore = require('../datastore');
+const datastore = require('./datastore');
 
 class Data {
   constructor() {

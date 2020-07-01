@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { map, mergeMap, take } from 'rxjs/operators';
+import { map, mergeMap, take, tap } from 'rxjs/operators';
 import { Article } from 'src/app/shared/models/article.interface';
 import {
   createArticle,
@@ -13,9 +13,10 @@ import {
   editArticleTitle,
   toggleArticlePublishedState,
   getAllArticles,
-} from '../../mock-server';
-import * as fromAuthorsArticlesState from '../authors-articles/state';
-import { UnknownObjectPath } from '../../shared/Exceptions';
+} from '../../../mock-server';
+import * as fromAuthorsArticlesState from '../../authors-articles/state';
+import { UnknownObjectPath } from '../../../shared/Exceptions';
+import { AuthorsArticlesGQLService } from './authors-articles-gql.service';
 
 const enum EditableArticlePaths {
   Title = 'title',
@@ -27,15 +28,11 @@ const enum EditableArticlePaths {
 
 @Injectable()
 export class AuthorsArticlesService {
-  articles: Article[];
 
   constructor(
     private store: Store<fromAuthorsArticlesState.AuthorsArticlesState>,
-  ) {
-    of(getAllArticles()).subscribe(articles => {
-      this.articles = articles;
-    });
-  }
+    private articlesGqlService: AuthorsArticlesGQLService,
+  ) {}
 
   createArticle(article: Partial<Article>): Observable<Article> {
     return of(
@@ -138,7 +135,7 @@ export class AuthorsArticlesService {
   }
 
   getAllArticles() {
-    return of(getAllArticles());
+    return this.articlesGqlService.getAllArticles();
   }
 
   getOneArticle(articleId: number) {

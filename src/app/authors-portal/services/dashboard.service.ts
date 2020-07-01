@@ -13,7 +13,7 @@ import {
   getCategoriesSummaries,
   createCategory,
 } from 'src/app/mock-server';
-import { AuthorsArticlesService } from './authors-articles.service';
+import { AuthorsArticlesService } from './authors-articles/authors-articles.service';
 import { Article } from 'src/app/shared/models';
 
 @Injectable()

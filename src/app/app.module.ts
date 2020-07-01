@@ -8,6 +8,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloModule, Apollo } from 'apollo-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +24,9 @@ import { CoreEffects } from './core/state/core.effects';
 @NgModule({
   declarations: [...AppRoutingModule.routeComponents, AppComponent],
   imports: [
+    HttpClientModule,
+    HttpLinkModule,
+    ApolloModule,
     BrowserModule,
     AppRoutingModule,
     ToastrModule,
@@ -46,7 +52,15 @@ import { CoreEffects } from './core/state/core.effects';
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+  constructor(
+    apollo: Apollo,
+    httpLink: HttpLink,
+    @Optional() @SkipSelf() parentModule: CoreModule
+  ) {
     throwIfAlreadyLoaded(parentModule, 'CoreModule');
+    apollo.create({
+      link: httpLink.create({ uri: 'http://localhost:4000/graphql' }),
+      cache: new InMemoryCache()
+    });
   }
 }

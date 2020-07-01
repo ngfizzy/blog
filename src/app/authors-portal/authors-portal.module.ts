@@ -9,10 +9,11 @@ import { AuthorsPortalRoutingModule } from './authors-portal-routing.module';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { authorsPortalReducer } from './state/authors-portal.reducer';
-import { AuthorsArticlesService } from './services/authors-articles.service';
+import { AuthorsArticlesService } from './services/authors-articles/authors-articles.service';
 import { AuthorsPortalEffects } from './state/authors-portal.effects';
 import { DashboardService } from './services/dashboard.service';
 import { CategorySummaryWidgetComponent } from './dashboard/components/category-summary-widget/category-summary-widget.component';
+import { AuthorsArticlesGQLService } from './services/authors-articles/authors-articles-gql.service';
 
 @NgModule({
   imports: [
@@ -22,7 +23,13 @@ import { CategorySummaryWidgetComponent } from './dashboard/components/category-
     StoreModule.forFeature('authorsPortal', authorsPortalReducer),
     EffectsModule.forFeature([AuthorsPortalEffects]),
   ],
-  providers: [AuthGuard, AuthService, DashboardService, AuthorsArticlesService],
+  providers: [
+    AuthGuard,
+    AuthService,
+    DashboardService,
+    AuthorsArticlesService,
+    AuthorsArticlesGQLService,
+  ],
   declarations: [
     ...AuthorsPortalRoutingModule.moduleComponents,
     CategorySummaryWidgetComponent,

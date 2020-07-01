@@ -9,6 +9,7 @@ export const enum AuthorsArticlesActionTypes {
   EditArticleSuccess = '[Authors Articles] Edit Article Success',
   GetArticles = '[Authors Articles] Get Articles',
   GetArticlesSuccess = '[Authors Articles] Get Articles Success',
+  GetArticlesError = '[Authors Articles] Get Articles Error',
   ViewArticle = '[Authors Articles] View Article',
   ViewArticleSuccess = '[Authors Articles] View Article Success',
   TagArticle = '[Authors Articles] Tag Article',
@@ -33,6 +34,11 @@ export class GetArticles implements Action {
   constructor() {}
 }
 
+export class GetArticlesError implements Action {
+  readonly type = AuthorsArticlesActionTypes.GetArticlesError;
+
+  constructor(payload: string) {}
+}
 export class GetArticlesSuccess implements Action {
   readonly type = AuthorsArticlesActionTypes.GetArticlesSuccess;
 
@@ -170,4 +176,5 @@ export type AuthorsArticlesActions = GetArticles
 | RemoveArticleFromCategory
 | RemoveArticleFromCategorySuccess
 | TogglePublished
-| TogglePublishedSuccess;
+| TogglePublishedSuccess
+| GetArticlesError;

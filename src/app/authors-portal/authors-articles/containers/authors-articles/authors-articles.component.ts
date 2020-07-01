@@ -9,6 +9,7 @@ import { Article } from 'src/app/shared/models/article.interface';
 import { ArticleComponentConfig } from 'src/app/shared/models/article-component-config.interface';
 import * as fromAuthorsArticles from '../../state';
 import * as fromAuthorsArticlesActions from '../../state/authors-articles.actions';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-authors-articles',

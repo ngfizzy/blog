@@ -7,6 +7,7 @@ import { Article } from 'src/app/shared/models';
 
 const defaultState: AuthorsArticlesState = {
   title: 'Authors Portal',
+  error: '',
   audienceState: {
     isLoading: false,
     audience: null,
@@ -43,6 +44,12 @@ export function authorsArticlesReducers(
       return {
         ...state,
         articles: [...action.payload],
+        isLoading: false,
+        error: ''
+      };
+    case AuthorsArticlesActionTypes.GetArticlesError:
+      return {
+        ...state,
         isLoading: false,
       };
     case AuthorsArticlesActionTypes.CreateArticle:
