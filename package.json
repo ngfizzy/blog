@@ -27,6 +27,7 @@
     "@ngrx/entity": "^9.1.2",
     "@ngrx/store": "^8.0.1",
     "@ngrx/store-devtools": "latest",
+    "apollo-angular": "^1.9.1",
     "apollo-server": "^2.15.1",
     "apollo-server-express": "^2.15.0",
     "body-parser": "^1.19.0",

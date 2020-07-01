@@ -176,8 +176,6 @@ generators.generateArticles(200);
 
 module.exports = {
   getAllArticles() {
-    console.log('this is called>>>>>>>>', articles)
-
     return articles;
   },
   getOneArticle(articleId) {
