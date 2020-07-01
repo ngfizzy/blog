@@ -449,7 +449,6 @@ function generateRandomAudienceActivities(
     };
 
     audienceActivities.push(activity);
-    articleActivities.push(activity);
   }
 
   return articleActivities;
