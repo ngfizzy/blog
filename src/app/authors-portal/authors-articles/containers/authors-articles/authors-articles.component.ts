@@ -23,6 +23,7 @@ export class AuthorsArticlesComponent implements OnInit {
   articleListItemConfig: ArticleComponentConfig;
   articleStatus$: Observable<'saved' | 'erred' | 'saving'>;
   selectedArticleId: number;
+  articlesListLoad$: Observable<boolean>;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,6 +47,7 @@ export class AuthorsArticlesComponent implements OnInit {
     this.articleListItemConfig = this.getArticlesConfig();
 
     this.articles$ = this.store.pipe(select(fromAuthorsArticles.getArticles));
+    this.articlesListLoad$ = this.store.pipe(select(fromAuthorsArticles.getArticlesLoadingState));
 
     this.selectedArticle$ = this.store.pipe(
       select(fromAuthorsArticles.viewArticle),
