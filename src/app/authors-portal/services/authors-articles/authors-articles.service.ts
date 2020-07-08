@@ -16,8 +16,6 @@ import * as fromAuthorsArticlesState from '../../authors-articles/state';
 import { UnknownObjectPath } from '../../../shared/Exceptions';
 import { AuthorsArticlesGQLService } from './authors-articles-gql.service';
 import { EditArticleResponse } from '../../authors-portal-shared/models';
-import { editArticleTitle } from './mutations/edit-article-title.mutation';
-import { editArticleBody } from '../../../mock-server/index';
 import { EditArticleEffectResponse } from '../../authors-portal-shared/models/edit-article-effect-response';
 
 const enum EditableArticlePaths {
@@ -52,7 +50,7 @@ export class AuthorsArticlesService {
     return this.editArticlePath(articleId, EditableArticlePaths.Title, title);
   }
 
-  editArticleBody(body: string, articleId: number) {
+  editArticleBody(body: string, articleId: number): Observable<EditArticleEffectResponse> {
     return this.editArticlePath(articleId, EditableArticlePaths.Body, body);
   }
 
@@ -104,9 +102,10 @@ export class AuthorsArticlesService {
         let response$: Observable<EditArticleResponse>;
 
         switch (path) {
-          // case EditableArticlePaths.Body:
-          //   article = editArticleBody(articleId, newPathValue);
-          //   break;
+          case EditableArticlePaths.Body:
+            response$ = this.articlesGqlService
+              .editArticleBody(articleId, newPathValue);
+            break;
           case EditableArticlePaths.Title:
             response$ = this.articlesGqlService
               .editArticleTitle(articleId, newPathValue);

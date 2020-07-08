@@ -21,6 +21,7 @@ export const enum AuthorsArticlesActionTypes {
   EditArticleTitleSuccess = '[Authors Articles] Edit Article Title Success',
   EditArticleTitleError = '[Authors Articles] Edit ARticle Title Error',
   EditArticleBody = '[Authors Articles] Edit Article Body',
+  EditArticleBodyError = '[Authors Articles] Edit Article Body Error',
   EditArticleBodySuccess = '[Authors Articles] Edit Article Body Success',
   CategorizeArticle = '[Authors Articles] Categorize Article',
   CategorizeArticleSuccess = '[Authors Articles] Categorize Article Success',
@@ -41,6 +42,7 @@ export class GetArticlesError implements Action {
 
   constructor(payload: string) {}
 }
+
 export class GetArticlesSuccess implements Action {
   readonly type = AuthorsArticlesActionTypes.GetArticlesSuccess;
 
@@ -99,10 +101,16 @@ export class EditArticleBody implements Action {
   constructor(public payload: { body: string, articleId: number }) {}
 }
 
+export class EditArticleBodyError implements Action {
+  readonly type = AuthorsArticlesActionTypes.EditArticleBodyError;
+
+  constructor(public payload: string) {}
+}
+
 export class EditArticleBodySuccess implements Action {
   readonly type = AuthorsArticlesActionTypes.EditArticleBodySuccess;
 
-  constructor(public payload: { articles: Article[], selectedArticle: Article }) {}
+  constructor(public payload: EditArticleEffectResponse) {}
 }
 export class TagArticle implements Action {
   readonly type = AuthorsArticlesActionTypes.TagArticle;
@@ -173,6 +181,7 @@ export type AuthorsArticlesActions = GetArticles
 | EditArticleTitleSuccess
 | EditArticleTitleError
 | EditArticleBody
+| EditArticleBodyError
 | EditArticleBodySuccess
 | ViewArticle
 | ViewArticleSuccess

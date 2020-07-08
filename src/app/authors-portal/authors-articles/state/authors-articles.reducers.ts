@@ -120,6 +120,12 @@ export function authorsArticlesReducers(
           status: 'saved',
         },
       };
+    case AuthorsArticlesActionTypes.EditArticleBodyError:
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false
+      };
     case AuthorsArticlesActionTypes.ChangeArticleStatus:
       return {
         ...state,

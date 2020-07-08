@@ -91,18 +91,22 @@ export class AuthorsArticlesEffects {
     )
   );
 
-  // @Effect()
-  // editArticleBody$: Observable<Action> = this.actions$.pipe(
-  //   ofType(authorsArticlesActions.AuthorsArticlesActionTypes.EditArticleBody),
-  //   map(action => (action as authorsArticlesActions.EditArticleBody).payload),
-  //   mergeMap(({ body, articleId }) => this.articlesService
-  //     .editArticleBody(body, articleId).pipe(
-  //       map((articleEdit) => (
-  //         new authorsArticlesActions.EditArticleBodySuccess(articleEdit)
-  //       )),
-  //     ),
-  //   ),
-  // );
+  @Effect()
+  editArticleBody$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsArticlesActions.AuthorsArticlesActionTypes.EditArticleBody),
+    map(action => (action as authorsArticlesActions.EditArticleBody).payload),
+    mergeMap(({ body, articleId }) => this.articlesService
+      .editArticleBody(body, articleId).pipe(
+        map((articleEdit) => {
+          if (articleEdit.error) {
+            return new authorsArticlesActions.EditArticleBodyError(articleEdit.error);
+          }
+
+          return new authorsArticlesActions.EditArticleBodySuccess(articleEdit);
+        }),
+      ),
+    ),
+  );
 
   // @Effect()
   // categorizeArticle$: Observable<Action> = this.actions$.pipe(

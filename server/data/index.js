@@ -17,6 +17,9 @@ class Data {
     return this.dataStore.editArticleTitle(articleId, title)
   }
 
+  editArticleBody(articleId, body) {
+    return this.dataStore.editArticleBody(articleId, body);
+  }
 }
 
 module.exports = new Data();

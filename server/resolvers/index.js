@@ -12,6 +12,9 @@ const resolvers = {
   Mutation: {
     editArticleTitle(_, { articleId, value }) {
       return dataApi.editArticleTitle(articleId, value);
+    },
+    editArticleBody(_, { articleId, value}) {
+      return dataApi.editArticleBody(articleId, value);
     }
   }
 };
