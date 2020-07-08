@@ -73,20 +73,25 @@ const typeDefs = gql`
     categories: [Category]
   }
 
+  type ArticleMutationResponse {
+    article: Article
+    error: String
+  }
+
   type Query {
     article(id: Int!): Article
     articles: [Article]
   }
 
   type Mutation {
-    createArticle(title: String, body: String): Article
-    editArticleBody(articleId: Int!, value: String): Article
-    editArticleTitle(articleId: Int!, value: String): Article
-    tagArticle(value: String, articleId: Int!): Article
-    untagArticle(value: String, articleId: Int!): Article
-    categorizeArticle(articleId: Int!, value: String): Article
-    removeArticleFromCategory(articleId: Int!, value: String): Article
-    toggleArticlePublishedState(articleId: Int!): Article
+    createArticle(title: String, body: String): ArticleMutationResponse
+    editArticleBody(articleId: Int!, value: String): ArticleMutationResponse
+    editArticleTitle(articleId: Int!, value: String): ArticleMutationResponse
+    tagArticle(value: String, articleId: Int!): ArticleMutationResponse
+    untagArticle(value: String, articleId: Int!): ArticleMutationResponse
+    categorizeArticle(articleId: Int!, value: String): ArticleMutationResponse
+    removeArticleFromCategory(articleId: Int!, value: String): ArticleMutationResponse
+    toggleArticlePublishedState(articleId: Int!): ArticleMutationResponse
   }
 `;
 

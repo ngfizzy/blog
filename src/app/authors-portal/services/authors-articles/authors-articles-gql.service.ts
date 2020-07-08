@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { Article } from 'src/app/shared/models';
 import { articlesQuery } from './queries';
+import { editArticleTitle } from './mutations';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { GQLError } from '../../../shared/models/';
+import { ArticlesResponse, EditArticleResponse } from '../../authors-portal-shared/models';
+import { EditArticleTitleResponse } from '../../authors-portal-shared/models/gql-responses.interface';
 
-
-type ArticlesResponse = { articles: Article[]} & GQLError;
 
 @Injectable()
 export class AuthorsArticlesGQLService {
@@ -18,5 +17,15 @@ export class AuthorsArticlesGQLService {
     return this.apollo.watchQuery<ArticlesResponse>({
       query: articlesQuery,
     }).valueChanges.pipe(map(response => response.data));
+  }
+
+  editArticleTitle(articleId: number, title: string) {
+    return this.apollo.mutate<EditArticleTitleResponse>({
+      mutation: editArticleTitle,
+      variables: {
+        articleId,
+        value: title
+      }
+    }).pipe(map(response => response.data.editArticleTitle));
   }
 }

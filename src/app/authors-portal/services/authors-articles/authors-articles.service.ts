@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { map, mergeMap, take, tap } from 'rxjs/operators';
+import { map, mergeMap, take, tap, switchMap } from 'rxjs/operators';
 import { Article } from 'src/app/shared/models/article.interface';
 import {
   createArticle,
@@ -9,14 +9,16 @@ import {
   untagArticle,
   categorizeArticle,
   removeArticleFromCategory,
-  editArticleBody,
-  editArticleTitle,
   toggleArticlePublishedState,
   getAllArticles,
 } from '../../../mock-server';
 import * as fromAuthorsArticlesState from '../../authors-articles/state';
 import { UnknownObjectPath } from '../../../shared/Exceptions';
 import { AuthorsArticlesGQLService } from './authors-articles-gql.service';
+import { EditArticleResponse } from '../../authors-portal-shared/models';
+import { editArticleTitle } from './mutations/edit-article-title.mutation';
+import { editArticleBody } from '../../../mock-server/index';
+import { EditArticleEffectResponse } from '../../authors-portal-shared/models/edit-article-effect-response';
 
 const enum EditableArticlePaths {
   Title = 'title',
@@ -46,7 +48,7 @@ export class AuthorsArticlesService {
   editArticleTitle(
     title: string,
     articleId: number,
-  ): Observable<{ articles: Article[]; selectedArticle: Article }> {
+  ): Observable<EditArticleEffectResponse> {
     return this.editArticlePath(articleId, EditableArticlePaths.Title, title);
   }
 
@@ -90,46 +92,51 @@ export class AuthorsArticlesService {
     articleId: number,
     path: EditableArticlePaths,
     newPathValue: any,
-  ) {
+  ): Observable<any> {
     return this.pluckArticleFromStore(articleId).pipe(
-      map(pluckResult => {
+      switchMap(pluckResult => {
         const { articles, plucked } = pluckResult;
-        let article = plucked;
 
-        if (!article) {
-          return { articles, selectedArticle: plucked };
+        if (!plucked) {
+          return of({ articles, selectedArticle: plucked });
         }
 
+        let response$: Observable<EditArticleResponse>;
+
         switch (path) {
-          case EditableArticlePaths.Body:
-            article = editArticleBody(articleId, newPathValue);
-            break;
+          // case EditableArticlePaths.Body:
+          //   article = editArticleBody(articleId, newPathValue);
+          //   break;
           case EditableArticlePaths.Title:
-            article = editArticleTitle(articleId, newPathValue);
+            response$ = this.articlesGqlService
+              .editArticleTitle(articleId, newPathValue);
+
+          // case EditableArticlePaths.Tags:
+          //   article =
+          //     typeof newPathValue === 'string'
+          //       ? tagArticle(newPathValue, articleId)
+          //       : untagArticle(newPathValue, articleId);
             break;
-          case EditableArticlePaths.Tags:
-            article =
-              typeof newPathValue === 'string'
-                ? tagArticle(newPathValue, articleId)
-                : untagArticle(newPathValue, articleId);
-            break;
-          case EditableArticlePaths.Categories:
-            article =
-              typeof newPathValue === 'string'
-                ? categorizeArticle(articleId, newPathValue)
-                : removeArticleFromCategory(articleId, newPathValue);
-            break;
-          case EditableArticlePaths.Published:
-            article = toggleArticlePublishedState(articleId);
-            break;
+          // case EditableArticlePaths.Categories:
+          //   article =
+          //     typeof newPathValue === 'string'
+          //       ? categorizeArticle(articleId, newPathValue)
+          //       : removeArticleFromCategory(articleId, newPathValue);
+          //   break;
+          // case EditableArticlePaths.Published:
+          //   article = toggleArticlePublishedState(articleId);
+          //   break;
           default:
             const message = `Cannot update property ${path} because it doesn't exist`;
             throw new UnknownObjectPath(path, message);
         }
 
-        articles.unshift(article);
+        return response$.pipe(map(response => {
+          articles.unshift(response.article);
 
-        return { articles, selectedArticle: article };
+          return { articles, selectedArticle: response.article, error: response.error };
+        }));
+
       }),
     );
   }

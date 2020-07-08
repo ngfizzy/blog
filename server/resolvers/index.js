@@ -8,6 +8,11 @@ const resolvers = {
     article(authorId) {
       return dataApi.getOneArticle(authorId);
     }
+  },
+  Mutation: {
+    editArticleTitle(_, { articleId, value }) {
+      return dataApi.editArticleTitle(articleId, value);
+    }
   }
 };
 

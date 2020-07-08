@@ -12,6 +12,11 @@ class Data {
   getOneArticle(id) {
     return this.dataStore.getOneArticle(id);
   }
+
+  editArticleTitle(articleId, title) {
+    return this.dataStore.editArticleTitle(articleId, title)
+  }
+
 }
 
 module.exports = new Data();

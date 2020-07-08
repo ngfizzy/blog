@@ -104,6 +104,11 @@ export function authorsArticlesReducers(
           status: 'saved',
         },
       };
+    case AuthorsArticlesActionTypes.EditArticleTitleError:
+      return {
+        ...state,
+        error: action.payload
+      };
     case AuthorsArticlesActionTypes.EditArticleBodySuccess:
       return {
         ...state,

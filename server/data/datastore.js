@@ -204,5 +204,14 @@ module.exports = {
     return articles.find(
       found => articleId === found
     );
+  },
+  editArticleTitle(articleId, title) {
+    const article = articles.find(p => p.id === articleId);
+
+    if (article) {
+      article.title = title;
+    }
+
+    return {article};
   }
 }

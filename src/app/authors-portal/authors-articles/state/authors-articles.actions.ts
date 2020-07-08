@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Article } from 'src/app/shared/models/article.interface';
+import { EditArticleEffectResponse } from '../../authors-portal-shared/models/edit-article-effect-response';
 
 export const enum AuthorsArticlesActionTypes {
   CreateArticle = '[Authors Articles] Create Article',
@@ -18,6 +19,7 @@ export const enum AuthorsArticlesActionTypes {
   UntagArticleSuccess = '[Authors Articles] Untag Article Success',
   EditArticleTitle = '[Authors Articles] Edit Article Title',
   EditArticleTitleSuccess = '[Authors Articles] Edit Article Title Success',
+  EditArticleTitleError = '[Authors Articles] Edit ARticle Title Error',
   EditArticleBody = '[Authors Articles] Edit Article Body',
   EditArticleBodySuccess = '[Authors Articles] Edit Article Body Success',
   CategorizeArticle = '[Authors Articles] Categorize Article',
@@ -79,10 +81,16 @@ export class EditArticleTitle implements Action {
   constructor(public payload: { title: string, articleId: number }) {}
 }
 
+export class EditArticleTitleError implements Action {
+  readonly type = AuthorsArticlesActionTypes.EditArticleTitleError;
+
+  constructor(public payload: string) {}
+}
+
 export class EditArticleTitleSuccess implements Action {
   readonly type = AuthorsArticlesActionTypes.EditArticleTitleSuccess;
 
-  constructor(public payload: { articles: Article[], selectedArticle: Article }) {}
+  constructor(public payload: EditArticleEffectResponse) {}
 }
 
 export class EditArticleBody implements Action {
@@ -163,6 +171,7 @@ export type AuthorsArticlesActions = GetArticles
 | ChangeArticleStatus
 | EditArticleTitle
 | EditArticleTitleSuccess
+| EditArticleTitleError
 | EditArticleBody
 | EditArticleBodySuccess
 | ViewArticle
