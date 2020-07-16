@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { articlesQuery } from './queries';
-import { editArticleTitle, editArticleBody } from './mutations';
+import { editArticleTitle, editArticleBody, tagArticle } from './mutations';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ArticlesResponse, EditArticleResponse } from '../../authors-portal-shared/models';
-import { EditArticleTitleResponse, EditArticleBodyResponse } from '../../authors-portal-shared/models/gql-responses.interface';
+import { UntagArticleResponse } from '../../authors-portal-shared/models/gql-responses.interface';
+import { untagArticle } from './mutations/untag-article.mutation';
+import {
+  EditArticleTitleResponse,
+  EditArticleBodyResponse,
+  TagArticleResponse
+} from '../../authors-portal-shared/models/gql-responses.interface';
 
 
 @Injectable()
@@ -37,5 +43,25 @@ export class AuthorsArticlesGQLService {
         value: title,
       },
     }).pipe(map(response => response.data.editArticleBody));
+  }
+
+  tagArticle(articleId: number, tagName: string) {
+    return this.apollo.mutate<TagArticleResponse>({
+      mutation: tagArticle,
+      variables: {
+        articleId,
+        tagName,
+      }
+    }).pipe(map(response => response.data.tagArticle));
+  }
+
+  untagArticle(articleId: number, tagId: number) {
+    return this.apollo.mutate<UntagArticleResponse>({
+      mutation: untagArticle,
+      variables: {
+        articleId,
+        tagId,
+      }
+    }).pipe(map(response => response.data.untagArticle));
   }
 }

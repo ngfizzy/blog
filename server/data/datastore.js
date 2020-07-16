@@ -14,7 +14,6 @@ const audienceRecord = [
 ];
 
 const audienceList = [];
-
 const categories = [
   {
     id: 1,
@@ -35,8 +34,8 @@ const categories = [
     createdAt: new Date().toString(),
   },
 ];
-
 const usedIds = [];
+const tags = [];
 
 const generators = {
   randomId() {
@@ -190,6 +189,16 @@ const generators = {
     audienceComments.push(comm);
 
     return comm;
+  },
+  createTag(tagName) {
+    const createdAt = new Date().toString();
+
+    return {
+      name: tagName,
+      id: this.randomId(),
+      createdAt,
+      updatedAt: createdAt,
+    }
   }
 };
 
@@ -219,6 +228,35 @@ module.exports = {
 
     if(article) {
       article.body = body;
+    }
+
+    return {article};
+  },
+  tagArticle(articleId, tagName) {
+    const tag = tags.find(t => t.name === tagName);
+    const article = articles.find(p => p.id === articleId);
+
+    if (tag) {
+      if (article.tags.find(t => t.name === tagName)) {
+        return article;
+      }
+    }
+
+
+    const created = generators.createTag(tagName);
+
+    tags.push(created);
+    article.tags.push(created);
+
+    return {article};
+  },
+  untagArticle(articleId, tagId) {
+    const article = articles.find(p => p.id === articleId);
+
+    if (article) {
+      const filtered = article.tags.filter(tag => tag.id !== tagId);
+      article.tags = filtered;
+      article.updatedAt = new Date().toString();
     }
 
     return {article};

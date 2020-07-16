@@ -14,9 +14,11 @@ export const enum AuthorsArticlesActionTypes {
   ViewArticle = '[Authors Articles] View Article',
   ViewArticleSuccess = '[Authors Articles] View Article Success',
   TagArticle = '[Authors Articles] Tag Article',
+  TagArticleError = '[Authors Articles] Tag Article Error',
   TagArticleSuccess = '[Authors Articles] Tag Article Success',
   UntagArticle = '[Authors Articles] Untag Article',
   UntagArticleSuccess = '[Authors Articles] Untag Article Success',
+  UntagArticleError = '[Authors Articles] Untag Article Error',
   EditArticleTitle = '[Authors Articles] Edit Article Title',
   EditArticleTitleSuccess = '[Authors Articles] Edit Article Title Success',
   EditArticleTitleError = '[Authors Articles] Edit ARticle Title Error',
@@ -40,7 +42,7 @@ export class GetArticles implements Action {
 export class GetArticlesError implements Action {
   readonly type = AuthorsArticlesActionTypes.GetArticlesError;
 
-  constructor(payload: string) {}
+  constructor(public payload: string) {}
 }
 
 export class GetArticlesSuccess implements Action {
@@ -121,13 +123,26 @@ export class TagArticle implements Action {
 export class TagArticleSuccess implements Action {
   readonly type = AuthorsArticlesActionTypes.TagArticleSuccess;
 
-  constructor(public payload: { articles: Article[]; selectedArticle: Article; }) {}
+  constructor(public payload: EditArticleEffectResponse) {}
+}
+
+
+export class TagArticleError implements Action {
+  readonly type = AuthorsArticlesActionTypes.TagArticleError;
+
+  constructor(public payload: string) {}
 }
 
 export class UntagArticle implements Action {
   readonly type = AuthorsArticlesActionTypes.UntagArticle;
 
   constructor(public payload: { tagId: number; articleId: number; }) {}
+}
+
+export class UntagArticleError implements Action {
+  readonly type = AuthorsArticlesActionTypes.UntagArticleError;
+
+  constructor(public payload: string) {}
 }
 
 export class UntagArticleSuccess implements Action {

@@ -15,6 +15,13 @@ const resolvers = {
     },
     editArticleBody(_, { articleId, value}) {
       return dataApi.editArticleBody(articleId, value);
+    },
+    tagArticle(_, {articleId, tagName}) {
+      return dataApi.tagArticle(articleId, tagName);
+
+    },
+    untagArticle(_, {articleId, tagId}) {
+      return dataApi.untagArticle(articleId, tagId);
     }
   }
 };

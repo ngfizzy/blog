@@ -8,6 +8,7 @@ import { AuthorsArticlesService } from '../../services/authors-articles/authors-
 import * as authorsArticlesActions from './authors-articles.actions';
 import { Article } from 'src/app/shared/models';
 import { GQLError } from '../../../shared/models/gql-error.interface';
+import { EditArticleEffectResponse } from '../../authors-portal-shared/models/edit-article-effect-response';
 
 @Injectable()
 export class AuthorsArticlesEffects {
@@ -48,31 +49,43 @@ export class AuthorsArticlesEffects {
     ),
   );
 
-  // @Effect()
-  // tagArticle$: Observable<Action> = this.actions$.pipe(
-  //   ofType(authorsArticlesActions.AuthorsArticlesActionTypes.TagArticle),
-  //   map(action => (action as authorsArticlesActions.TagArticle).payload),
-  //   mergeMap(({articleId, tag}) => this.articlesService
-  //     .tagArticle(tag, articleId).pipe(
-  //       map((articleTaggingResult: { articles: Article[], selectedArticle: Article }) =>
-  //         new authorsArticlesActions.TagArticleSuccess(articleTaggingResult)
-  //       ),
-  //     ),
-  //   ),
-  // );
+  @Effect()
+  tagArticle$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsArticlesActions.AuthorsArticlesActionTypes.TagArticle),
+    map(action => (action as authorsArticlesActions.TagArticle).payload),
+    mergeMap(({articleId, tag}) => this.articlesService
+      .tagArticle(tag, articleId).pipe(
+        map((articleTaggingResults: EditArticleEffectResponse) => {
+          const { error } = articleTaggingResults;
 
-  // @Effect()
-  // untagArticle$: Observable<Action>  =  this.actions$.pipe(
-  //   ofType(authorsArticlesActions.AuthorsArticlesActionTypes.UntagArticle),
-  //   map(action => (action as authorsArticlesActions.UntagArticle).payload),
-  //   mergeMap(({ articleId, tagId }) => this.articlesService
-  //     .untagArticle(tagId, articleId).pipe(
-  //       map(untaggingResult =>
-  //         new authorsArticlesActions.UntagArticleSuccess(untaggingResult)
-  //       ),
-  //     ),
-  //   ),
-  // );
+          if (!error) {
+            return new authorsArticlesActions.TagArticleSuccess(articleTaggingResults);
+          } else {
+            return new authorsArticlesActions.TagArticleError(error);
+          }
+        }),
+      ),
+    ),
+  );
+
+  @Effect()
+  untagArticle$: Observable<Action>  =  this.actions$.pipe(
+    ofType(authorsArticlesActions.AuthorsArticlesActionTypes.UntagArticle),
+    map(action => (action as authorsArticlesActions.UntagArticle).payload),
+    mergeMap(({ articleId, tagId }) => this.articlesService
+      .untagArticle(tagId, articleId).pipe(
+        map(untaggingResult => {
+          const { error } = untaggingResult;
+
+          if (!error) {
+            return new authorsArticlesActions.UntagArticleSuccess(untaggingResult);
+          }
+
+          return new authorsArticlesActions.UntagArticleError(error);
+        }),
+      ),
+    ),
+  );
 
   @Effect()
   editArticleTitle$: Observable<Action> = this.actions$.pipe(
@@ -146,6 +159,9 @@ export class AuthorsArticlesEffects {
   //     ),
   //   ),
   // );
+  private getToggleTagTagResult() {
+
+  }
 
   private performGetAllArticles() {
     return this.articlesService.getAllArticles().pipe(

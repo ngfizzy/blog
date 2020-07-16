@@ -54,7 +54,7 @@ export class AuthorsArticlesService {
     return this.editArticlePath(articleId, EditableArticlePaths.Body, body);
   }
 
-  tagArticle(tag: string, articleId: number) {
+  tagArticle(tag: string, articleId: number): Observable<EditArticleEffectResponse> {
     return this.editArticlePath(articleId, EditableArticlePaths.Tags, tag);
   }
 
@@ -109,12 +109,12 @@ export class AuthorsArticlesService {
           case EditableArticlePaths.Title:
             response$ = this.articlesGqlService
               .editArticleTitle(articleId, newPathValue);
-
-          // case EditableArticlePaths.Tags:
-          //   article =
-          //     typeof newPathValue === 'string'
-          //       ? tagArticle(newPathValue, articleId)
-          //       : untagArticle(newPathValue, articleId);
+            break;
+          case EditableArticlePaths.Tags:
+            response$ =
+              typeof newPathValue === 'string'
+                ? this.articlesGqlService.tagArticle(articleId, newPathValue)
+                : this.articlesGqlService.untagArticle(articleId, newPathValue);
             break;
           // case EditableArticlePaths.Categories:
           //   article =

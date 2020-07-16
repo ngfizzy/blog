@@ -14,3 +14,11 @@ export interface EditArticleTitleResponse  {
 export interface EditArticleBodyResponse {
   editArticleBody: EditArticleResponse;
 }
+
+export interface TagArticleResponse {
+  tagArticle: EditArticleResponse;
+}
+
+export interface UntagArticleResponse {
+  untagArticle: EditArticleResponse;
+}

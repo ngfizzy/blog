@@ -20,6 +20,14 @@ class Data {
   editArticleBody(articleId, body) {
     return this.dataStore.editArticleBody(articleId, body);
   }
+
+  tagArticle(articleId, tagName) {
+    return this.dataStore.tagArticle(articleId, tagName);
+  }
+
+  untagArticle(articleId, tagId) {
+    return this.dataStore.untagArticle(articleId, tagId);
+  }
 }
 
 module.exports = new Data();
