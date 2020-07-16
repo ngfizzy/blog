@@ -1,5 +1,5 @@
 <ng-container *ngIf="article$ | async; let article">
-  <div class="w-100 ml-auto mt-2 mr-auto mat-elevation-z2 p-2" *ngIf="!article.published; else published">
+  <div class="ml-auto mt-2 mr-auto mat-elevation-z2 p-2 publish-container" *ngIf="!article.published; else published">
     <div class="row p-2">
       <h3 class="text-light col-2 pt-1 ">Tags:</h3>
       <span class="col-10">
