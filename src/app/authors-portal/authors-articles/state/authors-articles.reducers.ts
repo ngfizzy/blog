@@ -57,13 +57,18 @@ export function authorsArticlesReducers(
     case AuthorsArticlesActionTypes.CreateArticleSuccess:
       return {
         ...state,
-        articles: [{ ...action.payload }, ...state.articles],
+        articles: [{ ...action.payload.article }, ...state.articles],
         selectedArticle: {
-          article: { ...action.payload },
+          article: { ...action.payload.article },
           isLoading: false,
           status: 'saved',
         },
         isLoading: false,
+      };
+    case AuthorsArticlesActionTypes.CreateArticleError:
+      return {
+        ...state,
+        error: action.payload,
       };
     case AuthorsArticlesActionTypes.ViewArticle:
       return {

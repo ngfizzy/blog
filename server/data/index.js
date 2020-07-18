@@ -13,6 +13,10 @@ class Data {
     return this.dataStore.getOneArticle(id);
   }
 
+  createArticle(title, body) {
+    return this.dataStore.createArticle(title, body);
+  }
+
   editArticleTitle(articleId, title) {
     return this.dataStore.editArticleTitle(articleId, title)
   }
@@ -24,6 +28,7 @@ class Data {
   tagArticle(articleId, tagName) {
     return this.dataStore.tagArticle(articleId, tagName);
   }
+
 
   untagArticle(articleId, tagId) {
     return this.dataStore.untagArticle(articleId, tagId);

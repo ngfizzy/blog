@@ -17,6 +17,7 @@ export class AuthorsArticlesListComponent {
   @Input() articlesList: Article[];
   @Output() showFullArticle = new EventEmitter<number>();
 
+
   onShowFullArticle(articleId: number) {
     this.showFullArticle.emit(articleId);
   }

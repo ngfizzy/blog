@@ -1,33 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { articlesQuery } from './queries';
-import { editArticleTitle, editArticleBody, tagArticle } from './mutations';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { ArticlesResponse, EditArticleResponse } from '../../authors-portal-shared/models';
-import { UntagArticleResponse } from '../../authors-portal-shared/models/gql-responses.interface';
-import { untagArticle } from './mutations/untag-article.mutation';
-import {
-  EditArticleTitleResponse,
-  EditArticleBodyResponse,
-  TagArticleResponse
-} from '../../authors-portal-shared/models/gql-responses.interface';
 
+import * as mutations from './mutations';
+import * as iGraphqlResponses from '../../authors-portal-shared/models/gql-responses.interface';
 
 @Injectable()
 export class AuthorsArticlesGQLService {
 
   constructor(private apollo: Apollo) {}
 
-  getAllArticles(): Observable<ArticlesResponse> {
-    return this.apollo.watchQuery<ArticlesResponse>({
+  createArticle(title: string, body: string) {
+    return this.apollo.mutate<iGraphqlResponses.CreateArticleResponse>({
+      mutation: mutations.createArticle,
+      variables: {
+        title,
+        body
+      },
+    }).pipe(map(response => response.data.createArticle));
+  }
+
+  getAllArticles(): Observable<iGraphqlResponses.ArticlesResponse> {
+    return this.apollo.watchQuery<iGraphqlResponses.ArticlesResponse>({
       query: articlesQuery,
     }).valueChanges.pipe(map(response => response.data));
   }
 
   editArticleTitle(articleId: number, title: string) {
-    return this.apollo.mutate<EditArticleTitleResponse>({
-      mutation: editArticleTitle,
+    return this.apollo.mutate<iGraphqlResponses.EditArticleTitleResponse>({
+      mutation: mutations.editArticleTitle,
       variables: {
         articleId,
         value: title
@@ -36,8 +39,8 @@ export class AuthorsArticlesGQLService {
   }
 
   editArticleBody(articleId: number, title: string) {
-    return this.apollo.mutate<EditArticleBodyResponse>({
-      mutation: editArticleBody,
+    return this.apollo.mutate<iGraphqlResponses.EditArticleBodyResponse>({
+      mutation: mutations.editArticleBody,
       variables: {
         articleId,
         value: title,
@@ -46,8 +49,8 @@ export class AuthorsArticlesGQLService {
   }
 
   tagArticle(articleId: number, tagName: string) {
-    return this.apollo.mutate<TagArticleResponse>({
-      mutation: tagArticle,
+    return this.apollo.mutate<iGraphqlResponses.TagArticleResponse>({
+      mutation: mutations.tagArticle,
       variables: {
         articleId,
         tagName,
@@ -56,8 +59,8 @@ export class AuthorsArticlesGQLService {
   }
 
   untagArticle(articleId: number, tagId: number) {
-    return this.apollo.mutate<UntagArticleResponse>({
-      mutation: untagArticle,
+    return this.apollo.mutate<iGraphqlResponses.UntagArticleResponse>({
+      mutation: mutations.untagArticle,
       variables: {
         articleId,
         tagId,

@@ -3,20 +3,15 @@ import { of, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { map, mergeMap, take, tap, switchMap } from 'rxjs/operators';
 import { Article } from 'src/app/shared/models/article.interface';
-import {
-  createArticle,
-  tagArticle,
-  untagArticle,
-  categorizeArticle,
-  removeArticleFromCategory,
-  toggleArticlePublishedState,
-  getAllArticles,
-} from '../../../mock-server';
+
 import * as fromAuthorsArticlesState from '../../authors-articles/state';
 import { UnknownObjectPath } from '../../../shared/Exceptions';
 import { AuthorsArticlesGQLService } from './authors-articles-gql.service';
-import { EditArticleResponse } from '../../authors-portal-shared/models';
-import { EditArticleEffectResponse } from '../../authors-portal-shared/models/edit-article-effect-response';
+import { ArticleResponse } from '../../authors-portal-shared/models/gql-responses.interface';
+import {
+  EditArticleEffectResponse,
+  CreateArticleEffectResponse
+} from '../../authors-portal-shared/models';
 
 const enum EditableArticlePaths {
   Title = 'title',
@@ -34,13 +29,8 @@ export class AuthorsArticlesService {
     private articlesGqlService: AuthorsArticlesGQLService,
   ) {}
 
-  createArticle(article: Partial<Article>): Observable<Article> {
-    return of(
-      createArticle({
-        body: article.body,
-        title: article.title,
-      }),
-    );
+  createArticle(title: string, body: string): Observable<CreateArticleEffectResponse> {
+    return this.articlesGqlService.createArticle(title, body);
   }
 
   editArticleTitle(
@@ -99,7 +89,7 @@ export class AuthorsArticlesService {
           return of({ articles, selectedArticle: plucked });
         }
 
-        let response$: Observable<EditArticleResponse>;
+        let response$: Observable<ArticleResponse>;
 
         switch (path) {
           case EditableArticlePaths.Body:

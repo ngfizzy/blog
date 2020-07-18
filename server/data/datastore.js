@@ -223,11 +223,31 @@ module.exports = {
 
     return {article};
   },
+  createArticle(title, body) {
+    const id = generators.randomId();
+    const article = {
+      id,
+      title,
+      body,
+      authorId: 1,
+      createdAt: new Date().toString(),
+      updatedAt: new Date().toString(),
+      categories: [],
+      tags: [],
+      audienceActivities: [],
+      published: false,
+    };
+
+    articles.push(article);
+
+    return {article};
+  },
   editArticleBody(articleId, body) {
     const article = articles.find(p => p.id === articleId);
 
     if(article) {
       article.body = body;
+      article.updatedAt = new Date().toString();
     }
 
     return {article};
@@ -247,6 +267,7 @@ module.exports = {
 
     tags.push(created);
     article.tags.push(created);
+    article.updatedAt = new Date().toString();
 
     return {article};
   },

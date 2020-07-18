@@ -10,6 +10,9 @@ const resolvers = {
     }
   },
   Mutation: {
+    createArticle(_, { title, body}) {
+      return dataApi.createArticle(title, body);
+    },
     editArticleTitle(_, { articleId, value }) {
       return dataApi.editArticleTitle(articleId, value);
     },

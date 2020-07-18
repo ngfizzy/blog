@@ -5,6 +5,9 @@ fragment ArticleProperties on Article {
   id
   title
   body
+  createdAt
+  updatedAt
+  deletedAt
   tags {
     id
     name

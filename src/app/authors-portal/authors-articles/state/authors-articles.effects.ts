@@ -6,9 +6,8 @@ import { mergeMap, map, switchMap, catchError, tap } from 'rxjs/operators';
 
 import { AuthorsArticlesService } from '../../services/authors-articles/authors-articles.service';
 import * as authorsArticlesActions from './authors-articles.actions';
-import { Article } from 'src/app/shared/models';
 import { GQLError } from '../../../shared/models/gql-error.interface';
-import { EditArticleEffectResponse } from '../../authors-portal-shared/models/edit-article-effect-response';
+import { EditArticleEffectResponse } from '../../authors-portal-shared/models/edit-article-effect-response.interface';
 
 @Injectable()
 export class AuthorsArticlesEffects {
@@ -31,11 +30,16 @@ export class AuthorsArticlesEffects {
   createArticles$: Observable<Action> = this.actions$.pipe(
     ofType(authorsArticlesActions.AuthorsArticlesActionTypes.CreateArticle),
     map(action => (action as authorsArticlesActions.CreateArticle).payload),
-    mergeMap((article) => this.articlesService.createArticle(article).pipe(
-      map(createdArticle =>
-        new  authorsArticlesActions.CreateArticleSuccess(createdArticle),
-      )
-    )),
+    switchMap(({title, body}) => this.articlesService
+      .createArticle(title, body).pipe(
+        map(result => {
+          if (!result.error) {
+            return new authorsArticlesActions.CreateArticleSuccess(result);
+          }
+
+          return new authorsArticlesActions.CreateArticleError(result.error);
+        })
+      )),
   );
 
   @Effect()
@@ -91,7 +95,7 @@ export class AuthorsArticlesEffects {
   editArticleTitle$: Observable<Action> = this.actions$.pipe(
     ofType(authorsArticlesActions.AuthorsArticlesActionTypes.EditArticleTitle),
     map(action => (action as authorsArticlesActions.EditArticleTitle).payload),
-    mergeMap(({ title, articleId}) => this.articlesService
+    switchMap(({ title, articleId}) => this.articlesService
       .editArticleTitle(title, articleId).pipe(
         map((editingResult) => {
           if (editingResult.error) {
@@ -108,7 +112,7 @@ export class AuthorsArticlesEffects {
   editArticleBody$: Observable<Action> = this.actions$.pipe(
     ofType(authorsArticlesActions.AuthorsArticlesActionTypes.EditArticleBody),
     map(action => (action as authorsArticlesActions.EditArticleBody).payload),
-    mergeMap(({ body, articleId }) => this.articlesService
+    switchMap(({ body, articleId }) => this.articlesService
       .editArticleBody(body, articleId).pipe(
         map((articleEdit) => {
           if (articleEdit.error) {
@@ -159,9 +163,7 @@ export class AuthorsArticlesEffects {
   //     ),
   //   ),
   // );
-  private getToggleTagTagResult() {
 
-  }
 
   private performGetAllArticles() {
     return this.articlesService.getAllArticles().pipe(

@@ -1,9 +1,11 @@
 import { Action } from '@ngrx/store';
 import { Article } from 'src/app/shared/models/article.interface';
-import { EditArticleEffectResponse } from '../../authors-portal-shared/models/edit-article-effect-response';
+import { EditArticleEffectResponse } from '../../authors-portal-shared/models/edit-article-effect-response.interface';
+import { CreateArticleEffectResponse } from '../../authors-portal-shared/models/create-article-effect-response.interface';
 
 export const enum AuthorsArticlesActionTypes {
   CreateArticle = '[Authors Articles] Create Article',
+  CreateArticleError = '[Authors Articles] Create Article Error',
   CreateArticleSuccess = '[Authors Articles] Create Articles Success',
   ChangeArticleStatus = '[Authors Articles] Change Article Status',
   EditArticle = '[Authors Articles] Edit Article',
@@ -72,7 +74,13 @@ export class CreateArticle implements Action {
 export class CreateArticleSuccess implements Action {
   readonly type = AuthorsArticlesActionTypes.CreateArticleSuccess;
 
-  constructor(public payload: Article) {}
+  constructor(public payload: CreateArticleEffectResponse) {}
+}
+
+export class CreateArticleError implements Action {
+  readonly type = AuthorsArticlesActionTypes.CreateArticleError;
+
+  constructor(public payload: string) {}
 }
 
 export class ChangeArticleStatus {
@@ -125,7 +133,6 @@ export class TagArticleSuccess implements Action {
 
   constructor(public payload: EditArticleEffectResponse) {}
 }
-
 
 export class TagArticleError implements Action {
   readonly type = AuthorsArticlesActionTypes.TagArticleError;
@@ -190,6 +197,7 @@ export class TogglePublishedSuccess implements Action {
 export type AuthorsArticlesActions = GetArticles
 | GetArticlesSuccess
 | CreateArticle
+| CreateArticleError
 | CreateArticleSuccess
 | ChangeArticleStatus
 | EditArticleTitle

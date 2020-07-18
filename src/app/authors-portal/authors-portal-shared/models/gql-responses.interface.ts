@@ -2,23 +2,27 @@ import { GQLError, Article } from 'src/app/shared/models';
 
 export type ArticlesResponse = { articles: Article[]} & GQLError;
 
-export interface EditArticleResponse {
+export interface ArticleResponse {
   article: Article;
   error: string;
 }
 
 export interface EditArticleTitleResponse  {
-  editArticleTitle: EditArticleResponse;
+  editArticleTitle: ArticleResponse;
 }
 
 export interface EditArticleBodyResponse {
-  editArticleBody: EditArticleResponse;
+  editArticleBody: ArticleResponse;
 }
 
 export interface TagArticleResponse {
-  tagArticle: EditArticleResponse;
+  tagArticle: ArticleResponse;
 }
 
 export interface UntagArticleResponse {
-  untagArticle: EditArticleResponse;
+  untagArticle: ArticleResponse;
+}
+
+export interface CreateArticleResponse {
+  createArticle: ArticleResponse;
 }

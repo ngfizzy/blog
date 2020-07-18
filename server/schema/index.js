@@ -84,7 +84,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createArticle(title: String, body: String): ArticleMutationResponse
+    createArticle(title: String!, body: String!): ArticleMutationResponse
     editArticleBody(articleId: Int!, value: String): ArticleMutationResponse
     editArticleTitle(articleId: Int!, value: String): ArticleMutationResponse
     tagArticle(articleId: Int!, tagName: String!): ArticleMutationResponse
