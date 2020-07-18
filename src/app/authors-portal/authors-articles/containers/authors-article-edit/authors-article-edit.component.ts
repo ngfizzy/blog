@@ -70,7 +70,7 @@ export class ArticleEditComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.saveAfter(3000);
-    this.changeArticleStatutsAfter(1000);
+    this.changeArticleStatusAfter(1000);
   }
 
   tagArticle(tag: string) {
@@ -132,7 +132,7 @@ export class ArticleEditComponent implements OnInit, OnDestroy, AfterViewInit {
    *
    * @param time Time in ms to wait before changing save status
    */
-  private changeArticleStatutsAfter(time: number) {
+  private changeArticleStatusAfter(time: number) {
     fromEvent(this.editor.nativeElement, 'keyup')
       .pipe(throttleTime(time), takeUntil(this.unsubscribe$))
       .subscribe(() => {

@@ -7,7 +7,7 @@ import { Article } from 'src/app/shared/models/article.interface';
 import * as fromAuthorsArticlesState from '../../authors-articles/state';
 import { UnknownObjectPath } from '../../../shared/Exceptions';
 import { AuthorsArticlesGQLService } from './authors-articles-gql.service';
-import { ArticleResponse } from '../../authors-portal-shared/models/gql-responses.interface';
+import { ArticleResponse, ArticlesResponse } from '../../authors-portal-shared/models/gql-responses.interface';
 import {
   EditArticleEffectResponse,
   CreateArticleEffectResponse
@@ -31,6 +31,10 @@ export class AuthorsArticlesService {
 
   createArticle(title: string, body: string): Observable<CreateArticleEffectResponse> {
     return this.articlesGqlService.createArticle(title, body);
+  }
+
+  deleteArticle(articleId: number): Observable<ArticlesResponse> {
+    return this.articlesGqlService.deleteArticle(articleId);
   }
 
   editArticleTitle(

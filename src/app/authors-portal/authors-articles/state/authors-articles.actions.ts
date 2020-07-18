@@ -1,7 +1,11 @@
 import { Action } from '@ngrx/store';
 import { Article } from 'src/app/shared/models/article.interface';
-import { EditArticleEffectResponse } from '../../authors-portal-shared/models/edit-article-effect-response.interface';
-import { CreateArticleEffectResponse } from '../../authors-portal-shared/models/create-article-effect-response.interface';
+import {
+  EditArticleEffectResponse,
+  CreateArticleEffectResponse,
+  ArticlesResponse
+} from '../../authors-portal-shared/models';
+
 
 export const enum AuthorsArticlesActionTypes {
   CreateArticle = '[Authors Articles] Create Article',
@@ -9,6 +13,9 @@ export const enum AuthorsArticlesActionTypes {
   CreateArticleSuccess = '[Authors Articles] Create Articles Success',
   ChangeArticleStatus = '[Authors Articles] Change Article Status',
   EditArticle = '[Authors Articles] Edit Article',
+  DeleteArticle = '[Authors Articles] Delete Article',
+  DeleteArticleSuccess = '[Authors Articles] Delete Article Success',
+  DeleteArticleError = '[Delete Articles] Delete Article Error',
   EditArticleSuccess = '[Authors Articles] Edit Article Success',
   GetArticles = '[Authors Articles] Get Articles',
   GetArticlesSuccess = '[Authors Articles] Get Articles Success',
@@ -79,6 +86,24 @@ export class CreateArticleSuccess implements Action {
 
 export class CreateArticleError implements Action {
   readonly type = AuthorsArticlesActionTypes.CreateArticleError;
+
+  constructor(public payload: string) {}
+}
+
+export class DeleteArticle implements Action {
+  readonly type = AuthorsArticlesActionTypes.DeleteArticle;
+
+  constructor(public payload: number) {}
+}
+
+export class DeleteArticleSuccess implements Action {
+  readonly type = AuthorsArticlesActionTypes.DeleteArticleSuccess;
+
+  constructor(public payload: ArticlesResponse) {}
+}
+
+export class DeleteArticleError implements Action {
+  readonly type = AuthorsArticlesActionTypes.DeleteArticleError;
 
   constructor(public payload: string) {}
 }
@@ -200,6 +225,9 @@ export type AuthorsArticlesActions = GetArticles
 | CreateArticleError
 | CreateArticleSuccess
 | ChangeArticleStatus
+| DeleteArticle
+| DeleteArticleSuccess
+| DeleteArticleError
 | EditArticleTitle
 | EditArticleTitleSuccess
 | EditArticleTitleError

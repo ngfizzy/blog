@@ -53,7 +53,7 @@ export function authorsArticlesReducers(
         isLoading: false,
       };
     case AuthorsArticlesActionTypes.CreateArticle:
-      return { ...state, isLoading: true };
+      return state;
     case AuthorsArticlesActionTypes.CreateArticleSuccess:
       return {
         ...state,
@@ -65,9 +65,39 @@ export function authorsArticlesReducers(
         },
         isLoading: false,
       };
+    case AuthorsArticlesActionTypes.DeleteArticle:
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          isLoading: true,
+        },
+        error: null,
+      };
+    case AuthorsArticlesActionTypes.DeleteArticleSuccess:
+      return {
+        ...state,
+        articles: [ ...action.payload.articles ],
+        selectedArticle: {
+          ...state.selectedArticle,
+          article: { ...action.payload.articles[0] },
+          isLoading: false,
+        },
+        error: null,
+      };
+    case AuthorsArticlesActionTypes.DeleteArticleError:
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          isLoading: false,
+        },
+        error: action.payload,
+      };
     case AuthorsArticlesActionTypes.CreateArticleError:
       return {
         ...state,
+        isLoading: false,
         error: action.payload,
       };
     case AuthorsArticlesActionTypes.ViewArticle:

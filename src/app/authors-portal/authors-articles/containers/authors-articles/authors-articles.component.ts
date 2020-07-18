@@ -10,6 +10,7 @@ import { ArticleComponentConfig } from 'src/app/shared/models/article-component-
 import * as fromAuthorsArticles from '../../state';
 import * as fromAuthorsArticlesActions from '../../state/authors-articles.actions';
 import { tap } from 'rxjs/operators';
+import { deleteArticle } from '../../../services/authors-articles/mutations/delete-article.mutation';
 
 @Component({
   selector: 'app-authors-articles',
@@ -59,6 +60,10 @@ export class AuthorsArticlesComponent implements OnInit {
 
   createArticle() {
     this.router.navigate(['authors/articles/edit/new']);
+  }
+
+  deleteArticle(articleId: number) {
+    this.store.dispatch(new fromAuthorsArticlesActions.DeleteArticle(articleId));
   }
 
   showFullArticle(articleId: number) {

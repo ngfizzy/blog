@@ -242,6 +242,18 @@ module.exports = {
 
     return {article};
   },
+  deleteArticle(articleId) {
+    const index = articles.findIndex(a => a.id === articleId);
+    let error = null;
+
+    if (index > -1) {
+      articles.splice(index, 1);
+    } else {
+      error = 'Article not found';
+    }
+
+    return { articles, error };
+  },
   editArticleBody(articleId, body) {
     const article = articles.find(p => p.id === articleId);
 

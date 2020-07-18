@@ -25,6 +25,7 @@ export class AuthorsArticleToolbarComponent implements OnInit {
   @Input() published: boolean;
 
   @Output() editTitle = new EventEmitter<boolean>();
+  @Output() deleteArticle = new EventEmitter<number>();
   @Output() saveTitle = new EventEmitter<string>();
   @Output() togglePublished = new EventEmitter<{
     articleId: number;
@@ -37,6 +38,10 @@ export class AuthorsArticleToolbarComponent implements OnInit {
     const isEditing = !this.isEditingTitle;
 
     this.editTitle.emit(isEditing);
+  }
+
+  emitDeleteEvent() {
+    this.deleteArticle.emit(this.selectedArticleId);
   }
 
   onSaveTitle(title: string) {

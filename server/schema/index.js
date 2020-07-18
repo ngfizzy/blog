@@ -78,6 +78,11 @@ const typeDefs = gql`
     error: String
   }
 
+  type ArticlesMutationResponse {
+    articles: [Article]
+    error: String
+  }
+
   type Query {
     article(id: Int!): Article
     articles: [Article]
@@ -85,6 +90,7 @@ const typeDefs = gql`
 
   type Mutation {
     createArticle(title: String!, body: String!): ArticleMutationResponse
+    deleteArticle(articleId: Int!): ArticlesMutationResponse
     editArticleBody(articleId: Int!, value: String): ArticleMutationResponse
     editArticleTitle(articleId: Int!, value: String): ArticleMutationResponse
     tagArticle(articleId: Int!, tagName: String!): ArticleMutationResponse

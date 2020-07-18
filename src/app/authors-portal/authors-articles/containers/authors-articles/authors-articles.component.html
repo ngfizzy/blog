@@ -21,15 +21,16 @@
     </div>
     <div class="col-9 pl-0">
       <app-authors-articles-toolbar
-      *ngIf="selectedArticle$ | async; let selectedArticle"
-      [selectedArticleTitle]="selectedArticle.title"
-      [isEditingTitle]="isEditingTitle"
-      [articleStatus]="articleStatus$ | async"
-      [selectedArticleId]="selectedArticle.id"
-      [published]="selectedArticle.published"
-      (editTitle)="isEditingTitle = $event"
-      (saveTitle)="saveTitle($event, selectedArticle.id)"
-      (togglePublished)="togglePublished($event)"
+        *ngIf="selectedArticle$ | async; let selectedArticle"
+        [selectedArticleTitle]="selectedArticle.title"
+        [isEditingTitle]="isEditingTitle"
+        [articleStatus]="articleStatus$ | async"
+        [selectedArticleId]="selectedArticle.id"
+        [published]="selectedArticle.published"
+        (editTitle)="isEditingTitle = $event"
+        (saveTitle)="saveTitle($event, selectedArticle.id)"
+        (deleteArticle)="deleteArticle($event)"
+        (togglePublished)="togglePublished($event)"
       >
       </app-authors-articles-toolbar>
     </div>

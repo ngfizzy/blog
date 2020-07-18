@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { articlesQuery } from './queries';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import * as mutations from './mutations';
@@ -20,6 +20,15 @@ export class AuthorsArticlesGQLService {
         body
       },
     }).pipe(map(response => response.data.createArticle));
+  }
+
+  deleteArticle(articleId: number) {
+    return this.apollo.mutate<iGraphqlResponses.DeleteArticleResponse>({
+      mutation: mutations.deleteArticle,
+      variables: {
+        articleId,
+      },
+    }).pipe(map(response => response.data.deleteArticle));
   }
 
   getAllArticles(): Observable<iGraphqlResponses.ArticlesResponse> {

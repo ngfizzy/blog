@@ -125,6 +125,21 @@ export class AuthorsArticlesEffects {
     ),
   );
 
+  @Effect()
+  deleteArticle$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsArticlesActions.AuthorsArticlesActionTypes.DeleteArticle),
+    map(action => (action as authorsArticlesActions.DeleteArticle).payload),
+    mergeMap(articleId => this.articlesService.deleteArticle(articleId).pipe(
+      map(result => {
+        if (result.error) {
+          return new authorsArticlesActions.DeleteArticleError(result.error);
+        }
+
+        return new authorsArticlesActions.DeleteArticleSuccess(result);
+      })
+    ))
+  );
+
   // @Effect()
   // categorizeArticle$: Observable<Action> = this.actions$.pipe(
   //   ofType(authorsArticlesActions.AuthorsArticlesActionTypes.CategorizeArticle),
@@ -173,7 +188,7 @@ export class AuthorsArticlesEffects {
             .GetArticlesSuccess(articlesResponse.articles);
         }
 
-        throw new Error(articlesResponse.error.message);
+        throw new Error(articlesResponse.error);
       }),
     );
   }
