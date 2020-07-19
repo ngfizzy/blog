@@ -36,6 +36,14 @@ class Data {
   untagArticle(articleId, tagId) {
     return this.dataStore.untagArticle(articleId, tagId);
   }
+
+  categorizeArticle(articleId, categoryName) {
+    return this.dataStore.categorizeArticle(articleId, categoryName);
+  }
+
+  removeArticleFromCategory(articleId, categoryId) {
+    return this.dataStore.removeArticleFromCategory(articleId, categoryId);
+  }
 }
 
 module.exports = new Data();

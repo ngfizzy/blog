@@ -27,6 +27,12 @@ const resolvers = {
     },
     untagArticle(_, {articleId, tagId}) {
       return dataApi.untagArticle(articleId, tagId);
+    },
+    categorizeArticle(_, { articleId, categoryName }) {
+      return dataApi.categorizeArticle(articleId, categoryName);
+    },
+    removeArticleFromCategory(_, { articleId, categoryId}) {
+      return dataApi.removeArticleFromCategory(_, { articleId, categoryId});
     }
   }
 };

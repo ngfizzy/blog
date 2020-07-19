@@ -95,8 +95,8 @@ const typeDefs = gql`
     editArticleTitle(articleId: Int!, value: String): ArticleMutationResponse
     tagArticle(articleId: Int!, tagName: String!): ArticleMutationResponse
     untagArticle(articleId: Int!, tagId: Int!): ArticleMutationResponse
-    categorizeArticle(articleId: Int!, value: String): ArticleMutationResponse
-    removeArticleFromCategory(articleId: Int!, value: String): ArticleMutationResponse
+    categorizeArticle(articleId: Int!, categoryName: String!): ArticleMutationResponse
+    removeArticleFromCategory(articleId: Int!, categoryId: Int!): ArticleMutationResponse
     toggleArticlePublishedState(articleId: Int!): ArticleMutationResponse
   }
 `;

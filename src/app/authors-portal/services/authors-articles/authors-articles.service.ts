@@ -56,7 +56,7 @@ export class AuthorsArticlesService {
     return this.editArticlePath(articleId, EditableArticlePaths.Tags, tagId);
   }
 
-  categorizeArticle(articleId: number, categoryName: string) {
+  categorizeArticle(articleId: number, categoryName: string): Observable<EditArticleEffectResponse> {
     return this.editArticlePath(
       articleId,
       EditableArticlePaths.Categories,
@@ -71,6 +71,7 @@ export class AuthorsArticlesService {
       categoryId,
     );
   }
+
 
   toggleArticlePublishedState(articleId: number) {
     return this.editArticlePath(
@@ -110,12 +111,12 @@ export class AuthorsArticlesService {
                 ? this.articlesGqlService.tagArticle(articleId, newPathValue)
                 : this.articlesGqlService.untagArticle(articleId, newPathValue);
             break;
-          // case EditableArticlePaths.Categories:
-          //   article =
-          //     typeof newPathValue === 'string'
-          //       ? categorizeArticle(articleId, newPathValue)
-          //       : removeArticleFromCategory(articleId, newPathValue);
-          //   break;
+          case EditableArticlePaths.Categories:
+            response$ =
+              typeof newPathValue === 'string'
+                ? this.articlesGqlService.categorizeArticle(articleId, newPathValue)
+                : this.articlesGqlService.removeArticleFromCategory(articleId, newPathValue);
+            break;
           // case EditableArticlePaths.Published:
           //   article = toggleArticlePublishedState(articleId);
           //   break;

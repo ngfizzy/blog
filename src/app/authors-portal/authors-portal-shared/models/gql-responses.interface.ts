@@ -33,3 +33,12 @@ export interface CreateArticleResponse {
 export interface DeleteArticleResponse {
   deleteArticle: ArticlesResponse;
 }
+
+export interface CategorizeArticleResponse {
+  categorizeArticle: ArticleResponse;
+}
+
+export interface RemoveArticleFromCategoryResponse {
+  removeArticleFromCategory: ArticleResponse;
+}
+

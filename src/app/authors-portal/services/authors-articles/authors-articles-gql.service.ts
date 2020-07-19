@@ -76,4 +76,24 @@ export class AuthorsArticlesGQLService {
       }
     }).pipe(map(response => response.data.untagArticle));
   }
+
+  categorizeArticle(articleId: number, categoryName: string) {
+    return this.apollo.mutate<iGraphqlResponses.CategorizeArticleResponse>({
+      mutation: mutations.categorizeArticle,
+      variables: {
+        articleId,
+        categoryName,
+      },
+    }).pipe(map(response => response.data.categorizeArticle));
+  }
+
+  removeArticleFromCategory(articleId: number, categoryId: number) {
+    return this.apollo.mutate<iGraphqlResponses.RemoveArticleFromCategoryResponse>({
+      mutation: mutations.removeArticleFromCategory,
+      variables: {
+        articleId,
+        categoryId,
+      },
+    }).pipe(map(response => response.data.removeArticleFromCategory));
+  }
 }

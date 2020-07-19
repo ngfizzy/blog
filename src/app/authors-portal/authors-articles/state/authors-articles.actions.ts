@@ -36,8 +36,10 @@ export const enum AuthorsArticlesActionTypes {
   EditArticleBodySuccess = '[Authors Articles] Edit Article Body Success',
   CategorizeArticle = '[Authors Articles] Categorize Article',
   CategorizeArticleSuccess = '[Authors Articles] Categorize Article Success',
+  CategorizeArticleError = '[Authors Articles] Categorize Article Error',
   RemoveArticleFromCategory = '[Authors Articles] Remove Article From Category',
   RemoveArticleFromCategorySuccess = '[Authors Articles] Remove Article From Category Success',
+  RemoveArticleFromCategoryError = '[Authors Articles] Remove Article From Category Error',
   TogglePublished = '[Authors Articles] Toggle Published',
   TogglePublishedSuccess = '[Authors Articles] Toggle Published Success',
 }
@@ -192,9 +194,14 @@ export class CategorizeArticle implements Action {
 export class CategorizeArticleSuccess implements Action {
   readonly type = AuthorsArticlesActionTypes.CategorizeArticleSuccess;
 
-  constructor(public payload: { articles: Article[]; selectedArticle: Article; }) {}
+  constructor(public payload: EditArticleEffectResponse) {}
 }
 
+export class CategorizeArticleError implements Action {
+  readonly type = AuthorsArticlesActionTypes.CategorizeArticleError;
+
+  constructor(public payload: string) {}
+}
 export class RemoveArticleFromCategory implements Action {
   readonly type = AuthorsArticlesActionTypes.RemoveArticleFromCategory;
 
@@ -204,9 +211,14 @@ export class RemoveArticleFromCategory implements Action {
 export class RemoveArticleFromCategorySuccess implements Action {
   readonly type = AuthorsArticlesActionTypes.RemoveArticleFromCategorySuccess;
 
-  constructor(public payload: { articles: Article[]; selectedArticle: Article }) {}
+  constructor(public payload: EditArticleEffectResponse) {}
 }
 
+export class RemoveArticleFromCategoryError implements Action {
+  readonly type = AuthorsArticlesActionTypes.RemoveArticleFromCategoryError;
+
+  constructor(public payload: string) {}
+}
 export class TogglePublished implements Action {
   readonly type = AuthorsArticlesActionTypes.TogglePublished;
 
@@ -242,8 +254,10 @@ export type AuthorsArticlesActions = GetArticles
 | UntagArticleSuccess
 | CategorizeArticle
 | CategorizeArticleSuccess
+| CategorizeArticleError
 | RemoveArticleFromCategory
 | RemoveArticleFromCategorySuccess
+| RemoveArticleFromCategoryError
 | TogglePublished
 | TogglePublishedSuccess
 | GetArticlesError;

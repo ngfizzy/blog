@@ -193,9 +193,22 @@ export function authorsArticlesReducers(
         },
       };
     case AuthorsArticlesActionTypes.CategorizeArticle:
-      return state;
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          isLoading: true,
+        },
+      };
     case AuthorsArticlesActionTypes.RemoveArticleFromCategory:
-      return state;
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          isLoading: true,
+        },
+        error: '',
+      };
     case AuthorsArticlesActionTypes.CategorizeArticleSuccess:
       return {
         ...state,
@@ -206,7 +219,18 @@ export function authorsArticlesReducers(
             ...action.payload.selectedArticle,
             categories: [...action.payload.selectedArticle.categories],
           },
+          isLoading: false,
         },
+        error: ''
+      };
+    case AuthorsArticlesActionTypes.CategorizeArticleError:
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          isLoading: true,
+        },
+        error: action.payload,
       };
     case AuthorsArticlesActionTypes.TogglePublished:
       return state;

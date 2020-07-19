@@ -302,5 +302,70 @@ module.exports = {
     }
 
     return {article};
+  },
+  categorizeArticle(articleId, categoryName) {
+    let category = categories.find(c => c.name === categoryName);
+
+    if (!category) {
+      const { createdCategory } = this.createCategory(categoryName);
+      category = createdCategory;
+    }
+
+    const article = articles.find(p => p.id === articleId);
+
+    if (article) {
+      article.categories.push(category);
+    }
+
+    return {article};
+  },
+  createCategory(name) {
+    const createdAt = new Date().toString();
+    const category = {
+      name,
+      createdAt,
+      id: generators.randomId(),
+      updatedAt: createdAt,
+    };
+
+    categories.push(category);
+
+    return {
+      categories,
+      categoriesSummaries: this.getCategoriesSummaries(),
+      createdCategory: category,
+    };
+  },
+  getCategoriesSummaries() {
+    return categories.map(category => this.getCategorySummary(category.id));
+  },
+  getCategorySummary(categoryId) {
+    const categoryArticles = this.getCategoryArticles(categoryId);
+
+    return {
+      categoryId,
+      articlesCount: categoryArticles.length,
+      categoryName: categories.find(category => category.id === categoryId).name,
+    };
+  },
+  getCategoryArticles(categoryId) {
+    return articles.filter(article => {
+      const inCategory = !!article.categories.find(
+        category => category.id === categoryId,
+      );
+
+      return inCategory;
+    });
+  },
+  removeArticleFromCategory(articleId, categoryId) {
+    const article = articles.find(p => p.id === articleId);
+
+    if (article) {
+      const filtered = article.categories.filter(c => c.id !== categoryId);
+
+      article.categories = filtered;
+    }
+
+    return {article};
   }
 }

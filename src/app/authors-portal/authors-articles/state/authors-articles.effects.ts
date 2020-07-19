@@ -8,6 +8,7 @@ import { AuthorsArticlesService } from '../../services/authors-articles/authors-
 import * as authorsArticlesActions from './authors-articles.actions';
 import { GQLError } from '../../../shared/models/gql-error.interface';
 import { EditArticleEffectResponse } from '../../authors-portal-shared/models/edit-article-effect-response.interface';
+import { CategorizeArticleSuccess } from './authors-articles.actions';
 
 @Injectable()
 export class AuthorsArticlesEffects {
@@ -140,31 +141,41 @@ export class AuthorsArticlesEffects {
     ))
   );
 
-  // @Effect()
-  // categorizeArticle$: Observable<Action> = this.actions$.pipe(
-  //   ofType(authorsArticlesActions.AuthorsArticlesActionTypes.CategorizeArticle),
-  //   map(action => (action as authorsArticlesActions.CategorizeArticle).payload),
-  //   mergeMap(({articleId, category}) => this.articlesService
-  //     .categorizeArticle(articleId, category).pipe(
-  //       map((categorizationResult) =>
-  //         new authorsArticlesActions.CategorizeArticleSuccess(categorizationResult)
-  //       )
-  //     ),
-  //   ),
-  // );
+  @Effect()
+  categorizeArticle$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsArticlesActions.AuthorsArticlesActionTypes.CategorizeArticle),
+    map(action => (action as authorsArticlesActions.CategorizeArticle).payload),
+    mergeMap(({articleId, category}) => this.articlesService
+      .categorizeArticle(articleId, category).pipe(
+        map((result) => {
+          const resultEffects = {
+            SuccessEffect: authorsArticlesActions.CategorizeArticleSuccess,
+            ErrorEffect: authorsArticlesActions.CategorizeArticleError
+          };
 
-  // @Effect()
-  // removeArticleFromCategory$: Observable<Action> = this.actions$.pipe(
-  //   ofType(authorsArticlesActions.AuthorsArticlesActionTypes.CategorizeArticle),
-  //   map(action => (action as authorsArticlesActions.RemoveArticleFromCategory).payload),
-  //   mergeMap(({ articleId, categoryId }) => this.articlesService
-  //     .removeArticleFromCategory(articleId, categoryId).pipe(
-  //       map((articleEdit) => (
-  //         new authorsArticlesActions.RemoveArticleFromCategorySuccess(articleEdit)
-  //       )),
-  //     ),
-  //   ),
-  // );
+          return this.emitNextEditArticleEffect(result, resultEffects);
+        })
+      ),
+    ),
+  );
+
+  @Effect()
+  removeArticleFromCategory$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsArticlesActions.AuthorsArticlesActionTypes.RemoveArticleFromCategory),
+    map(action => (action as authorsArticlesActions.RemoveArticleFromCategory).payload),
+    mergeMap(({ articleId, categoryId }) => this.articlesService
+      .removeArticleFromCategory(articleId, categoryId).pipe(
+        map((result) => {
+          const resultEffects = {
+            SuccessEffect: authorsArticlesActions.RemoveArticleFromCategorySuccess,
+            ErrorEffect: authorsArticlesActions.RemoveArticleFromCategoryError
+          };
+
+          return this.emitNextEditArticleEffect(result, resultEffects);
+        })
+      ),
+    ),
+  );
 
   // @Effect()
   // publish$: Observable<Action> = this.actions$.pipe(
@@ -179,6 +190,16 @@ export class AuthorsArticlesEffects {
   //   ),
   // );
 
+  private emitNextEditArticleEffect(
+    result: EditArticleEffectResponse,
+    effects: { ErrorEffect: any, SuccessEffect: any}) {
+
+    if (result.error) {
+      return new effects.ErrorEffect(result.error);
+    }
+
+    return new effects.SuccessEffect(result);
+  }
 
   private performGetAllArticles() {
     return this.articlesService.getAllArticles().pipe(
