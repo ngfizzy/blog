@@ -207,7 +207,16 @@ generators.generateArticles(200);
 
 module.exports = {
   getAllArticles() {
-    return articles;
+    return articles.sort((a, b) => {
+      const aDate = new Date(a.updatedAt);
+      const bDate = new Date(b.updatedAt);
+
+      if(a.updatedAt > b.updatedAt) {
+        return -1;
+      }
+
+      return 1;
+    })
   },
   getOneArticle(articleId) {
     return articles.find(

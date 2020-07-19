@@ -6,7 +6,7 @@ class Data {
   }
 
   getAllArticles() {
-    return this.dataStore.getAllArticles()
+    return this.dataStore.getAllArticles();
   }
 
   getOneArticle(id) {

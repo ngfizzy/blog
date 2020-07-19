@@ -45,3 +45,8 @@ export const selectArticleStatus = createSelector(
   viewArticleState,
   state => state.status
 );
+
+export const isArticlesListLoading = createSelector(
+  getArticlesState,
+  state => state.isArticlesListLoading
+);

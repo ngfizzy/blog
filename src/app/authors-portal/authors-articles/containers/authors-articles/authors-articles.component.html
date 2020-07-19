@@ -4,19 +4,16 @@
     *ngIf="(articlesListLoad$ | async) === true"
     class="p-fixed mt-5 mx-auto"
     mode="indeterminate"
-    value="50"
+    value="75"
     diameter="100"
     title="'saving'"
   >
   </mat-progress-spinner>
   <div class="row toolbar" *ngIf="(articlesListLoad$ | async) === false">
     <div class="col-3 pr-1 pl-2 ">
-          <app-authors-article-list-toolbar
+      <app-authors-article-list-toolbar
         (createArticle)="createArticle()"
-      >        <app-authors-article-list-toolbar
-      (createArticle)="createArticle()"
-    >
-    </app-authors-article-list-toolbar>
+      >
       </app-authors-article-list-toolbar>
     </div>
     <div class="col-9 pl-0">
@@ -39,6 +36,7 @@
     <mat-sidenav mode="side" opened class="articles-drawer">
       <app-authors-articles-list
         [articlesList]="articles$ | async"
+        [isLoading]="isArticlesListLoading$ | async"
         (showFullArticle)="showFullArticle($event)"
       >
       </app-authors-articles-list>

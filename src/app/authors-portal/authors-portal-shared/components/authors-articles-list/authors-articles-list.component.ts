@@ -15,8 +15,8 @@ import { Article } from 'src/app/shared/models/article.interface';
 })
 export class AuthorsArticlesListComponent {
   @Input() articlesList: Article[];
+  @Input() isLoading: boolean;
   @Output() showFullArticle = new EventEmitter<number>();
-
 
   onShowFullArticle(articleId: number) {
     this.showFullArticle.emit(articleId);

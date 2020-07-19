@@ -14,6 +14,7 @@ const defaultState: AuthorsArticlesState = {
   },
   dashboardState: {} as any,
   isLoading: false,
+  isArticlesListLoading: false,
   articles: [],
   selectedArticle: {
     isLoading: false,
@@ -53,11 +54,12 @@ export function authorsArticlesReducers(
         isLoading: false,
       };
     case AuthorsArticlesActionTypes.CreateArticle:
-      return state;
+      return { ...state, isArticlesListLoading: true };
     case AuthorsArticlesActionTypes.CreateArticleSuccess:
       return {
         ...state,
         articles: [{ ...action.payload.article }, ...state.articles],
+        isArticlesListLoading: false,
         selectedArticle: {
           article: { ...action.payload.article },
           isLoading: false,
@@ -68,6 +70,7 @@ export function authorsArticlesReducers(
     case AuthorsArticlesActionTypes.DeleteArticle:
       return {
         ...state,
+        isArticlesListLoading: true,
         selectedArticle: {
           ...state.selectedArticle,
           isLoading: true,
@@ -77,6 +80,7 @@ export function authorsArticlesReducers(
     case AuthorsArticlesActionTypes.DeleteArticleSuccess:
       return {
         ...state,
+        isArticlesListLoading: false,
         articles: [ ...action.payload.articles ],
         selectedArticle: {
           ...state.selectedArticle,
@@ -88,6 +92,7 @@ export function authorsArticlesReducers(
     case AuthorsArticlesActionTypes.DeleteArticleError:
       return {
         ...state,
+        isArticlesListLoading: false,
         selectedArticle: {
           ...state.selectedArticle,
           isLoading: false,
@@ -97,6 +102,7 @@ export function authorsArticlesReducers(
     case AuthorsArticlesActionTypes.CreateArticleError:
       return {
         ...state,
+        isArticlesListLoading: false,
         isLoading: false,
         error: action.payload,
       };
