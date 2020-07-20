@@ -42,6 +42,7 @@ export const enum AuthorsArticlesActionTypes {
   RemoveArticleFromCategoryError = '[Authors Articles] Remove Article From Category Error',
   TogglePublished = '[Authors Articles] Toggle Published',
   TogglePublishedSuccess = '[Authors Articles] Toggle Published Success',
+  TogglePublishedError = '[Authors Articles] Toggle Published Error'
 }
 
 export class GetArticles implements Action {
@@ -228,7 +229,13 @@ export class TogglePublished implements Action {
 export class TogglePublishedSuccess implements Action {
   readonly type = AuthorsArticlesActionTypes.TogglePublishedSuccess;
 
-  constructor(public payload: { articles: Article[]; selectedArticle: Article }) {}
+  constructor(public payload: EditArticleEffectResponse) {}
+}
+
+export class TogglePublishedError implements Action {
+  readonly type = AuthorsArticlesActionTypes.TogglePublishedError;
+
+  constructor(public payload: string) {}
 }
 
 export type AuthorsArticlesActions = GetArticles
@@ -260,4 +267,5 @@ export type AuthorsArticlesActions = GetArticles
 | RemoveArticleFromCategoryError
 | TogglePublished
 | TogglePublishedSuccess
+| TogglePublishedError
 | GetArticlesError;

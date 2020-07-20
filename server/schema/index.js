@@ -69,6 +69,8 @@ const typeDefs = gql`
     body: String
     deletedAt: String
     published: Boolean
+    publishedAt: String
+    unpublishedAt: String
     tags: [Tag]
     categories: [Category]
   }

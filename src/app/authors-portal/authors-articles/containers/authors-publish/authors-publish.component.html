@@ -14,7 +14,7 @@
    <div class="row p-2">
     <h4 class="text-light col-1">Category</h4>
     <div class="col-10 ml-auto w-75">
-      <form *ngIf="article.categories.length == 0" (ngSubmit)="addToCategory(category, article.id)" >
+      <form *ngIf="article.categories?.length == 0" (ngSubmit)="addToCategory(category, article.id)" >
         <input type="text" name="category" placeholder="category" [(ngModel)]="category">
         <button type="submit">Add To Category</button>
       </form>

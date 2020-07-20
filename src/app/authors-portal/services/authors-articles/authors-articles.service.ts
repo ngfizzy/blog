@@ -73,7 +73,7 @@ export class AuthorsArticlesService {
   }
 
 
-  toggleArticlePublishedState(articleId: number) {
+  toggleArticlePublishedState(articleId: number): Observable<EditArticleEffectResponse> {
     return this.editArticlePath(
       articleId,
       EditableArticlePaths.Published,
@@ -117,9 +117,9 @@ export class AuthorsArticlesService {
                 ? this.articlesGqlService.categorizeArticle(articleId, newPathValue)
                 : this.articlesGqlService.removeArticleFromCategory(articleId, newPathValue);
             break;
-          // case EditableArticlePaths.Published:
-          //   article = toggleArticlePublishedState(articleId);
-          //   break;
+          case EditableArticlePaths.Published:
+            response$ = this.articlesGqlService.toggleArticlePublishedState(articleId);
+            break;
           default:
             const message = `Cannot update property ${path} because it doesn't exist`;
             throw new UnknownObjectPath(path, message);

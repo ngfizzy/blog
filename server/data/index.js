@@ -44,6 +44,10 @@ class Data {
   removeArticleFromCategory(articleId, categoryId) {
     return this.dataStore.removeArticleFromCategory(articleId, categoryId);
   }
+
+  toggleArticlePublishedState(articleId) {
+    return this.dataStore.toggleArticlePublishedState(articleId);
+  }
 }
 
 module.exports = new Data();

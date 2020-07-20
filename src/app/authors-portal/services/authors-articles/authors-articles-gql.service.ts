@@ -96,4 +96,13 @@ export class AuthorsArticlesGQLService {
       },
     }).pipe(map(response => response.data.removeArticleFromCategory));
   }
+
+  toggleArticlePublishedState(articleId: number) {
+    return this.apollo.mutate<iGraphqlResponses.ToggleArticlePublishedStateResponse>({
+      mutation: mutations.toggleArticlePublishedState,
+      variables: {
+        articleId,
+      }
+    }).pipe(map(response => response.data.toggleArticlePublishedState));
+  }
 }

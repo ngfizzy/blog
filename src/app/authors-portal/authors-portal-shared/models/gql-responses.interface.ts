@@ -1,4 +1,5 @@
 import { Article } from 'src/app/shared/models';
+import { toggleArticlePublishedState } from '../../services/authors-articles/mutations/toggle-article-published-state.mutation';
 
 export interface ArticlesResponse {
   articles: Article[];
@@ -42,3 +43,6 @@ export interface RemoveArticleFromCategoryResponse {
   removeArticleFromCategory: ArticleResponse;
 }
 
+export interface ToggleArticlePublishedStateResponse {
+  toggleArticlePublishedState: ArticleResponse;
+}

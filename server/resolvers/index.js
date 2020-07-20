@@ -33,6 +33,9 @@ const resolvers = {
     },
     removeArticleFromCategory(_, { articleId, categoryId}) {
       return dataApi.removeArticleFromCategory(_, { articleId, categoryId});
+    },
+    toggleArticlePublishedState(_, { articleId }) {
+      return dataApi.toggleArticlePublishedState(articleId);
     }
   }
 };

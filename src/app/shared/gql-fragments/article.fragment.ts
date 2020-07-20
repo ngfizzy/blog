@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const articleFragment = `
+export const articleFragment = gql`
 fragment ArticleProperties on Article {
   id
   title
@@ -40,6 +40,8 @@ fragment ArticleProperties on Article {
     createdAt
   }
   published
+  publishedAt
+  unpublishedAt
   themeImage
 }
 `;

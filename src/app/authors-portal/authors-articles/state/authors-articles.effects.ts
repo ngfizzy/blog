@@ -177,18 +177,23 @@ export class AuthorsArticlesEffects {
     ),
   );
 
-  // @Effect()
-  // publish$: Observable<Action> = this.actions$.pipe(
-  //   ofType(authorsArticlesActions.AuthorsArticlesActionTypes.TogglePublished),
-  //   map(action => (action as authorsArticlesActions.TogglePublished).payload),
-  //   switchMap(({ articleId }) => this.articlesService
-  //     .toggleArticlePublishedState(articleId).pipe(
-  //       map((articleEdit) => (
-  //         new authorsArticlesActions.TogglePublishedSuccess(articleEdit)
-  //       )),
-  //     ),
-  //   ),
-  // );
+  @Effect()
+  publish$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsArticlesActions.AuthorsArticlesActionTypes.TogglePublished),
+    map(action => (action as authorsArticlesActions.TogglePublished).payload),
+    switchMap(({ articleId }) => this.articlesService
+      .toggleArticlePublishedState(articleId).pipe(
+        map((result) => {
+          const nextEffect = {
+            ErrorEffect: authorsArticlesActions.TogglePublishedError,
+            SuccessEffect: authorsArticlesActions.TogglePublishedSuccess,
+          };
+
+          return this.emitNextEditArticleEffect(result, nextEffect);
+        }),
+      ),
+    ),
+  );
 
   private emitNextEditArticleEffect(
     result: EditArticleEffectResponse,
