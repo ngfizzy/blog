@@ -13,10 +13,12 @@ const defaultState: AuthorsPortalState = {
     top10ArticlesState: {
       isLoading: true,
       articles: [],
+      error: ''
     },
     last10DraftsState: {
       drafts: [],
       isLoading: false,
+      error: ''
     },
     categoriesSummariesState: {
       isLoading: true,
@@ -82,10 +84,11 @@ export function authorsPortalReducer(
           top10ArticlesState: {
             ...state.dashboardState.top10ArticlesState,
             isLoading: true,
+            error: '',
           },
         },
       };
-    case AuthorsPortalActionTypes.GetTop10Articles:
+    case AuthorsPortalActionTypes.GetTop10ArticlesError:
       return {
         ...state,
         dashboardState: {
@@ -93,6 +96,7 @@ export function authorsPortalReducer(
           top10ArticlesState: {
             ...state.dashboardState.top10ArticlesState,
             isLoading: true,
+            error: action.payload
           },
         },
       };
@@ -103,8 +107,23 @@ export function authorsPortalReducer(
           ...state.dashboardState,
           top10ArticlesState: {
             ...state.dashboardState.top10ArticlesState,
-            articles: [...action.payload],
+            articles: [...action.payload.articles],
             isLoading: false,
+            error: ''
+          },
+        },
+      };
+    case AuthorsPortalActionTypes.GetTop10ArticlesSuccess:
+      console.log('action', action.payload.articles)
+      return {
+        ...state,
+        dashboardState: {
+          ...state.dashboardState,
+          top10ArticlesState: {
+            ...state.dashboardState.top10ArticlesState,
+            articles: [...action.payload.articles],
+            isLoading: false,
+            error: ''
           },
         },
       };
@@ -116,6 +135,7 @@ export function authorsPortalReducer(
           last10DraftsState: {
             ...state.dashboardState.last10DraftsState,
             isLoading: true,
+            error: ''
           },
         },
       };
@@ -139,6 +159,7 @@ export function authorsPortalReducer(
           last10DraftsState: {
             ...state.dashboardState.last10DraftsState,
             isLoading: false,
+            error: action.payload,
           },
         },
       };

@@ -11,10 +11,12 @@ export interface AuthorsPortalState extends CoreState {
     top10ArticlesState: {
       isLoading: boolean;
       articles: Article[];
+      error: string;
     };
     last10DraftsState: {
       isLoading: boolean;
       drafts: Article[];
+      error: string;
     };
     categoriesSummariesState: {
       isLoading: boolean;

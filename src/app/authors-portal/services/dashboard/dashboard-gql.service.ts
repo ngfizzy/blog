@@ -15,4 +15,10 @@ export class DashboardGqlService {
       query: queries.getLast10Drafts
     }).valueChanges.pipe(map(response => response.data.getLast10Drafts));
   }
+
+  getTop10Articles() {
+    return this.apollo.watchQuery<iGraphqlResponses.GetTop10ArticlesResponse>({
+      query: queries.getTop10Articles,
+    }).valueChanges.pipe(map(response => response.data.getTop10Articles));
+  }
 }

@@ -401,7 +401,41 @@ module.exports = {
     });
   
     return { articles: sorted.slice(0, 10) };
-
-
+  },
+  getTop10Articles() {
+    const sorted = articles.sort((a, b) => {
+      const aPopularity = this.getPopularity(a.audienceActivities);
+      const bPopularity = this.getPopularity(b.audienceActivities);
+  
+      if (aPopularity > bPopularity) {
+        return -1;
+      } else if (aPopularity < bPopularity) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  
+    return { articles: sorted.slice(0, 10)};
+  },
+  getPopularity(activities) {
+    const { commentsCount, likes } = this.getTotalLikesAndComments(activities);
+  
+    return commentsCount + likes;
+  },
+  getTotalLikesAndComments(activities) {
+    return {
+      commentsCount: this.getCommentsCount(activities),
+      likes: this.getTotalArticleApplauds(activities),
+    };
+  },
+  getCommentsCount() {
+    return audienceActivities.reduce(
+      (sum, activity) => sum + activity.comments.length,
+      0,
+    );
+  },
+  getTotalArticleApplauds(activities) {
+    return activities.reduce((sum, activity) => sum + activity.applauds, 0);
   }
 }

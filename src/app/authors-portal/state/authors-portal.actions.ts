@@ -9,6 +9,7 @@ export const enum AuthorsPortalActionTypes {
   GetAuthorsDashboardArticlesStatisticsSuccess = '[Authors] Get Dashboard Article Statistics Success',
   GetTop10Articles = '[Authors] Get Top 10 Articles',
   GetTop10ArticlesSuccess = '[Authors] Get Top 10 Article Success',
+  GetTop10ArticlesError = '[Authors] Get Top 10 Article Errors',
   GetLast10DraftsError = '[Authors] Get Top 10 Articles Error',
   GetLast10Drafts = '[Authors] Get Last 10 Drafts',
   GetLast10DraftsSuccess = '[Authors] Get Last 10 Drafts Success',
@@ -39,7 +40,13 @@ export class GetTop10Articles implements Action {
 export class GetTop10ArticlesSuccess implements Action {
   readonly type = AuthorsPortalActionTypes.GetTop10ArticlesSuccess;
 
-  constructor(public payload: Article[]) {}
+  constructor(public payload: ArticlesResponse) {}
+}
+
+export class GetTop10ArticlesError implements Action {
+  readonly type = AuthorsPortalActionTypes.GetTop10ArticlesError;
+
+  constructor(public payload: string) {}
 }
 
 export class GetLast10Drafts implements Action {
@@ -95,6 +102,7 @@ export type AuthorsPortalActions =
   | GetAuthorsDashboardArticlesStatisticsSuccess
   | GetTop10Articles
   | GetTop10ArticlesSuccess
+  | GetTop10ArticlesError
   | GetLast10Drafts
   | GetLast10DraftsSuccess
   | GetLast10DraftsError

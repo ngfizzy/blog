@@ -52,6 +52,10 @@ class Data {
   getLast10Drafts() {
     return this.dataStore.getLast10Drafts()
   }
+
+  getTop10Articles() {
+    return this.dataStore.getTop10Articles();
+  }
 }
 
 module.exports = new Data();

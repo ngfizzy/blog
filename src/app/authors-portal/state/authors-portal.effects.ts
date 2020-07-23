@@ -41,9 +41,14 @@ export class AuthorsPortalEffects {
         .getTop10Articles()
         .pipe(
           map(
-            articles =>
-              new authorsPortalActions.GetTop10ArticlesSuccess(articles),
-          ),
+            result => {
+              const nextEffect = {
+                ErrorEffect: authorsPortalActions.GetTop10ArticlesError,
+                SuccessEffect: authorsPortalActions.GetTop10ArticlesSuccess,
+              };
+
+              return this.emitEffectResult(result, nextEffect);
+          }),
         ),
     ),
   );

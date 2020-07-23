@@ -14,8 +14,8 @@ import {
   createCategory,
 } from 'src/app/mock-server';
 import { AuthorsArticlesService } from '../authors-articles/authors-articles.service';
-import { Article } from 'src/app/shared/models';
 import { DashboardGqlService } from './dashboard-gql.service';
+import { ArticlesResponse } from '../../authors-portal-shared/models/graphql-responses/articles-response.interface';
 
 @Injectable()
 export class DashboardService {
@@ -44,8 +44,8 @@ export class DashboardService {
     return of(getCategoriesSummaries());
   }
 
-  getTop10Articles(): Observable<Article[]> {
-    return of(getTop10Articles());
+  getTop10Articles(): Observable<ArticlesResponse> {
+    return this.dashboardGqlService.getTop10Articles();
   }
 
   private getMostPopularArticle(): Observable<ArticleStatistics> {
