@@ -114,7 +114,6 @@ export function authorsPortalReducer(
         },
       };
     case AuthorsPortalActionTypes.GetTop10ArticlesSuccess:
-      console.log('action', action.payload.articles)
       return {
         ...state,
         dashboardState: {
