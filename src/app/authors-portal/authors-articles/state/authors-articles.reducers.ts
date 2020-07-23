@@ -44,7 +44,7 @@ export function authorsArticlesReducers(
     case AuthorsArticlesActionTypes.GetArticlesSuccess:
       return {
         ...state,
-        articles: [...action.payload],
+        articles: [...action.payload.articles ],
         isLoading: false,
         error: ''
       };

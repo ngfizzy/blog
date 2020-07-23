@@ -204,10 +204,9 @@ const generators = {
 
 generators.generateArticles(200);
 
-
 module.exports = {
   getAllArticles() {
-    return articles.sort((a, b) => {
+    const sorted = articles.sort((a, b) => {
       const aDate = new Date(a.updatedAt);
       const bDate = new Date(b.updatedAt);
 
@@ -216,12 +215,16 @@ module.exports = {
       }
 
       return 1;
-    })
+    });
+
+    return { articles: sorted }
   },
   getOneArticle(articleId) {
-    return articles.find(
+    const article = articles.find(
       found => articleId === found
     );
+
+    return { article };
   },
   editArticleTitle(articleId, title) {
     const article = articles.find(p => p.id === articleId);
@@ -381,5 +384,24 @@ module.exports = {
     }
 
     return { article };
+  },
+  getLast10Drafts() {
+    const drafts = articles.filter(article => !article.published);
+  
+    const sorted = drafts.sort((a, b) => {
+      const aTimestamp = new Date(a.updatedAt).getTime();
+      const bTimestamp = new Date(b.updatedAt).getTime();
+      if (aTimestamp > bTimestamp) {
+        return -1;
+      } else if (aTimestamp < bTimestamp) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  
+    return { articles: sorted.slice(0, 10) };
+
+
   }
 }

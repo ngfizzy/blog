@@ -2,12 +2,14 @@ import { CategorySummary } from './../authors-portal-shared/models';
 import { Action } from '@ngrx/store';
 import { ArticleStatistics } from '../authors-portal-shared/models';
 import { Article, Category } from 'src/app/shared/models';
+import { ArticlesResponse } from '../authors-portal-shared/models/graphql-responses/articles-response.interface';
 
 export const enum AuthorsPortalActionTypes {
   GetAuthorsDashboardArticlesStatistics = '[Authors] Get Dashboard Article Statistics',
   GetAuthorsDashboardArticlesStatisticsSuccess = '[Authors] Get Dashboard Article Statistics Success',
   GetTop10Articles = '[Authors] Get Top 10 Articles',
   GetTop10ArticlesSuccess = '[Authors] Get Top 10 Article Success',
+  GetLast10DraftsError = '[Authors] Get Top 10 Articles Error',
   GetLast10Drafts = '[Authors] Get Last 10 Drafts',
   GetLast10DraftsSuccess = '[Authors] Get Last 10 Drafts Success',
   GetCategoriesSummaries = '[Authors] Get Categories Summaries',
@@ -49,7 +51,13 @@ export class GetLast10Drafts implements Action {
 export class GetLast10DraftsSuccess implements Action {
   readonly type = AuthorsPortalActionTypes.GetLast10DraftsSuccess;
 
-  constructor(public payload: Article[]) {}
+  constructor(public payload: ArticlesResponse) {}
+}
+
+export class GetLast10DraftsError implements Action {
+  readonly type = AuthorsPortalActionTypes.GetLast10DraftsError;
+
+  constructor(public payload: string) {}
 }
 
 export class GetCategoriesSummaries implements Action {
@@ -89,6 +97,7 @@ export type AuthorsPortalActions =
   | GetTop10ArticlesSuccess
   | GetLast10Drafts
   | GetLast10DraftsSuccess
+  | GetLast10DraftsError
   | GetCategoriesSummaries
   | GetCategoriesSummariesSuccess
   | CreateCategory

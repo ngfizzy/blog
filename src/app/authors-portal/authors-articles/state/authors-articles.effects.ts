@@ -6,9 +6,11 @@ import { mergeMap, map, switchMap, catchError, tap } from 'rxjs/operators';
 
 import { AuthorsArticlesService } from '../../services/authors-articles/authors-articles.service';
 import * as authorsArticlesActions from './authors-articles.actions';
-import { GQLError } from '../../../shared/models/gql-error.interface';
-import { EditArticleEffectResponse } from '../../authors-portal-shared/models/edit-article-effect-response.interface';
+import {
+  EditArticleEffectResponse,
+} from '../../authors-portal-shared/models/edit-article-effect-response.interface';
 import { CategorizeArticleSuccess } from './authors-articles.actions';
+import { ArticleResponse } from '../../authors-portal-shared/models/graphql-responses/articles-response.interface';
 
 @Injectable()
 export class AuthorsArticlesEffects {
@@ -22,9 +24,6 @@ export class AuthorsArticlesEffects {
   getArticles$: Observable<Action> = this.actions$.pipe(
     ofType(authorsArticlesActions.AuthorsArticlesActionTypes.GetArticles),
     mergeMap(() => this.performGetAllArticles()),
-    catchError((error: GQLError) =>
-    of(new authorsArticlesActions.GetArticlesError(this.getErrorMessage(error)))
-  )
   );
 
   @Effect()
@@ -153,7 +152,7 @@ export class AuthorsArticlesEffects {
             ErrorEffect: authorsArticlesActions.CategorizeArticleError
           };
 
-          return this.emitNextEditArticleEffect(result, resultEffects);
+          return this.emitNextEffect(result, resultEffects);
         })
       ),
     ),
@@ -171,7 +170,7 @@ export class AuthorsArticlesEffects {
             ErrorEffect: authorsArticlesActions.RemoveArticleFromCategoryError
           };
 
-          return this.emitNextEditArticleEffect(result, resultEffects);
+          return this.emitNextEffect(result, resultEffects);
         })
       ),
     ),
@@ -189,15 +188,16 @@ export class AuthorsArticlesEffects {
             SuccessEffect: authorsArticlesActions.TogglePublishedSuccess,
           };
 
-          return this.emitNextEditArticleEffect(result, nextEffect);
+          return this.emitNextEffect(result, nextEffect);
         }),
       ),
     ),
   );
 
-  private emitNextEditArticleEffect(
-    result: EditArticleEffectResponse,
-    effects: { ErrorEffect: any, SuccessEffect: any}) {
+  private emitNextEffect(
+    result: Partial<EditArticleEffectResponse> | ArticleResponse,
+    effects: { ErrorEffect: any, SuccessEffect: any}
+  ) {
 
     if (result.error) {
       return new effects.ErrorEffect(result.error);
@@ -208,18 +208,15 @@ export class AuthorsArticlesEffects {
 
   private performGetAllArticles() {
     return this.articlesService.getAllArticles().pipe(
-      map(articlesResponse => {
-        if (!articlesResponse.error) {
-          return new authorsArticlesActions
-            .GetArticlesSuccess(articlesResponse.articles);
-        }
+      map(response => {
+        const nextEffect = {
+          ErrorEffect: authorsArticlesActions.GetArticlesError,
+          SuccessEffect: authorsArticlesActions.GetArticlesSuccess
+        };
 
-        throw new Error(articlesResponse.error);
+        return this.emitNextEffect(response, nextEffect);
       }),
     );
   }
 
-  private getErrorMessage(error: GQLError): string {
-    return error.error ? (error.error || { message: ''}).message : (error.error as string);
-  }
 }

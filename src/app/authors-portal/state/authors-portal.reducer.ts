@@ -115,7 +115,7 @@ export function authorsPortalReducer(
           ...state.dashboardState,
           last10DraftsState: {
             ...state.dashboardState.last10DraftsState,
-            isLoading: false,
+            isLoading: true,
           },
         },
       };
@@ -126,7 +126,18 @@ export function authorsPortalReducer(
           ...state.dashboardState,
           last10DraftsState: {
             ...state.dashboardState.last10DraftsState,
-            drafts: [...action.payload],
+            drafts: [...action.payload.articles],
+            isLoading: false,
+          },
+        },
+      };
+    case AuthorsPortalActionTypes.GetLast10DraftsError:
+      return {
+        ...state,
+        dashboardState: {
+          ...state.dashboardState,
+          last10DraftsState: {
+            ...state.dashboardState.last10DraftsState,
             isLoading: false,
           },
         },

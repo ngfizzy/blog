@@ -1,13 +1,9 @@
 const dataApi = require('../data');
+const authorsArticlesQueries = require('./queries');
 
 const resolvers = {
   Query: {
-    articles() {
-      return dataApi.getAllArticles()
-    },
-    article(authorId) {
-      return dataApi.getOneArticle(authorId);
-    }
+    ...authorsArticlesQueries,
   },
   Mutation: {
     createArticle(_, { title, body}) {

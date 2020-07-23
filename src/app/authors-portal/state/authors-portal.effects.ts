@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
-import { Action, Store } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { map, switchMap, tap, mergeMap, exhaustMap } from 'rxjs/operators';
-
-import { DashboardService } from './../services/dashboard.service';
+import { DashboardService } from '../services/dashboard/dashboard.service';
 import * as authorsPortalActions from './authors-portal.actions';
 
 @Injectable()
@@ -50,16 +49,20 @@ export class AuthorsPortalEffects {
   );
 
   @Effect()
-  getTopLast10Drafts$: Observable<Action> = this.actions$.pipe(
+  getLast10Drafts$: Observable<Action> = this.actions$.pipe(
     ofType(authorsPortalActions.AuthorsPortalActionTypes.GetTop10Articles),
     switchMap(() =>
       this.dashboardService
         .getLast10Drafts()
         .pipe(
-          map(
-            articles =>
-              new authorsPortalActions.GetLast10DraftsSuccess(articles),
-          ),
+          map(result => {
+            const nextEffects = {
+              ErrorEffect: authorsPortalActions.GetLast10DraftsError,
+              SuccessEffect: authorsPortalActions.GetLast10DraftsSuccess
+            };
+
+            return this.emitEffectResult(result, nextEffects);
+          }),
         ),
     ),
   );
@@ -95,4 +98,12 @@ export class AuthorsPortalEffects {
         ),
     ),
   );
+
+  private emitEffectResult(result, { ErrorEffect, SuccessEffect }) {
+    if (result.error) {
+      return new ErrorEffect(result.error);
+    }
+
+    return new SuccessEffect(result);
+  }
 }

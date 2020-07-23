@@ -11,9 +11,10 @@ import { AuthService } from './auth.service';
 import { authorsPortalReducer } from './state/authors-portal.reducer';
 import { AuthorsArticlesService } from './services/authors-articles/authors-articles.service';
 import { AuthorsPortalEffects } from './state/authors-portal.effects';
-import { DashboardService } from './services/dashboard.service';
+import { DashboardService } from './services/dashboard/dashboard.service';
 import { CategorySummaryWidgetComponent } from './dashboard/components/category-summary-widget/category-summary-widget.component';
 import { AuthorsArticlesGQLService } from './services/authors-articles/authors-articles-gql.service';
+import { DashboardGqlService } from './services/dashboard/dashboard-gql.service';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { AuthorsArticlesGQLService } from './services/authors-articles/authors-a
     AuthGuard,
     AuthService,
     DashboardService,
+    DashboardGqlService,
     AuthorsArticlesService,
     AuthorsArticlesGQLService,
   ],

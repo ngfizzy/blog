@@ -7,7 +7,7 @@ import { Article } from 'src/app/shared/models/article.interface';
 import * as fromAuthorsArticlesState from '../../authors-articles/state';
 import { UnknownObjectPath } from '../../../shared/Exceptions';
 import { AuthorsArticlesGQLService } from './authors-articles-gql.service';
-import { ArticleResponse, ArticlesResponse } from '../../authors-portal-shared/models/gql-responses.interface';
+import { ArticleResponse, ArticlesResponse } from '../../authors-portal-shared/models/graphql-responses';
 import {
   EditArticleEffectResponse,
   CreateArticleEffectResponse

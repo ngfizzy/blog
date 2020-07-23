@@ -3,7 +3,7 @@ import { Observable, of, forkJoin } from 'rxjs';
 import {
   ArticleStatistics,
   CategorySummary,
-} from '../authors-portal-shared/models';
+} from '../../authors-portal-shared/models';
 import {
   getMostLikedArticle,
   getArticleWithMostComments,
@@ -13,14 +13,16 @@ import {
   getCategoriesSummaries,
   createCategory,
 } from 'src/app/mock-server';
-import { AuthorsArticlesService } from './authors-articles/authors-articles.service';
+import { AuthorsArticlesService } from '../authors-articles/authors-articles.service';
 import { Article } from 'src/app/shared/models';
+import { DashboardGqlService } from './dashboard-gql.service';
 
 @Injectable()
 export class DashboardService {
-  constructor(private authorsArticlesService: AuthorsArticlesService) {
-    this.authorsArticlesService.getAllArticles();
-  }
+  constructor(
+    private authorsArticlesService: AuthorsArticlesService,
+    private dashboardGqlService: DashboardGqlService,
+    ) {}
 
   createCategory(category: string) {
     return of(createCategory(category));
@@ -35,7 +37,7 @@ export class DashboardService {
   }
 
   getLast10Drafts() {
-    return of(getLast10DraftArticles());
+    return this.dashboardGqlService.getLast10Drafts();
   }
 
   getCategoriesSummaries(): Observable<CategorySummary[]> {
@@ -45,6 +47,7 @@ export class DashboardService {
   getTop10Articles(): Observable<Article[]> {
     return of(getTop10Articles());
   }
+
   private getMostPopularArticle(): Observable<ArticleStatistics> {
     return of(getMostPopularArticle());
   }

@@ -48,6 +48,10 @@ class Data {
   toggleArticlePublishedState(articleId) {
     return this.dataStore.toggleArticlePublishedState(articleId);
   }
+
+  getLast10Drafts() {
+    return this.dataStore.getLast10Drafts()
+  }
 }
 
 module.exports = new Data();

@@ -60,7 +60,7 @@ export class GetArticlesError implements Action {
 export class GetArticlesSuccess implements Action {
   readonly type = AuthorsArticlesActionTypes.GetArticlesSuccess;
 
-  constructor(public payload: Article[]) {}
+  constructor(public payload: ArticlesResponse) {}
 }
 
 export class ViewArticle implements Action {

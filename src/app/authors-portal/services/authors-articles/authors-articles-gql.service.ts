@@ -5,7 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import * as mutations from './mutations';
-import * as iGraphqlResponses from '../../authors-portal-shared/models/gql-responses.interface';
+import * as iGraphqlResponses from '../../authors-portal-shared/models/graphql-responses';
 
 @Injectable()
 export class AuthorsArticlesGQLService {
@@ -32,9 +32,9 @@ export class AuthorsArticlesGQLService {
   }
 
   getAllArticles(): Observable<iGraphqlResponses.ArticlesResponse> {
-    return this.apollo.watchQuery<iGraphqlResponses.ArticlesResponse>({
+    return this.apollo.watchQuery<iGraphqlResponses.GetAllArticlesResponse>({
       query: articlesQuery,
-    }).valueChanges.pipe(map(response => response.data));
+    }).valueChanges.pipe(map(response => response.data.getAllArticles));
   }
 
   editArticleTitle(articleId: number, title: string) {
