@@ -201,7 +201,6 @@ const generators = {
   }
 };
 
-
 module.exports = {
   articles,
   audienceActivities,

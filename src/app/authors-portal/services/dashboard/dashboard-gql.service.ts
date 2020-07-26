@@ -21,4 +21,11 @@ export class DashboardGqlService {
       query: queries.getTop10Articles,
     }).valueChanges.pipe(map(response => response.data.getTop10Articles));
   }
+
+  getDashboardStatistics() {
+    return this.apollo.watchQuery<iGraphqlResponses.GetDashboardStatisticsResponse>({
+      query: queries.getDashboardStatistics
+    })
+    .valueChanges.pipe(map(response => response.data.getDashboardStatistics));
+  }
 }

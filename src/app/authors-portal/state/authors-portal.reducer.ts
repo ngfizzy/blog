@@ -9,7 +9,11 @@ const defaultState: AuthorsPortalState = {
   title: '',
   dashboardState: {
     isLoading: true,
-    articlesStatistics: [],
+    articlesStatisticsState: {
+      statistics: null,
+      isLoading: false,
+      error: ''
+    },
     top10ArticlesState: {
       isLoading: true,
       articles: [],
@@ -50,20 +54,45 @@ export function authorsPortalReducer(
         ...state,
         dashboardState: {
           ...state.dashboardState,
-          isLoading: true,
-          articlesStatistics: [],
+          articlesStatisticsState: {
+            ...state.dashboardState.articlesStatisticsState,
+            isLoading: true,
+            error: ''
+          },
         },
         isLoading: false,
       };
     case AuthorsPortalActionTypes.GetAuthorsDashboardArticlesStatisticsSuccess:
+      const { error, ...statistics } = action.payload;
+
       return {
         ...state,
         dashboardState: {
           ...state.dashboardState,
           isLoading: false,
-          articlesStatistics: [...action.payload],
+          articlesStatisticsState: {
+            ...state.dashboardState.articlesStatisticsState,
+            statistics,
+            isLoading: false,
+            error: '',
+          }
         },
         isLoading: false,
+      };
+    case AuthorsPortalActionTypes.GetAuthorsDashboardArticleStatisticsError:
+      return {
+        ...state,
+        isLoading: false,
+        dashboardState: {
+          ...state.dashboardState,
+          isLoading: false,
+          articlesStatisticsState: {
+            ...state.dashboardState.articlesStatisticsState,
+            isLoading: false,
+            ...state.dashboardState,
+            error: action.payload,
+          }
+        },
       };
     case AuthorsPortalActionTypes.GetTop10Articles:
       return {

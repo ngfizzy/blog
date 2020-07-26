@@ -12,9 +12,24 @@ export const getDashboardState = createSelector(
   state => state.dashboardState,
 );
 
-export const getArticleStatistics = createSelector(
+export const getArticleStatisticsState = createSelector(
   getDashboardState,
-  dashboard => dashboard.articlesStatistics,
+  state => state.articlesStatisticsState,
+)
+
+export const getArticleStatistics = createSelector(
+  getArticleStatisticsState,
+  state => state.statistics,
+);
+
+export const isArticleStatisticsLoading = createSelector(
+  getArticleStatisticsState,
+  state => state.isLoading
+);
+
+export const selectArticleStatisticsError = createSelector(
+  getArticleStatisticsState,
+  state => state.error
 );
 
 export const getTop10Articles = createSelector(

@@ -1,12 +1,12 @@
-import { CategorySummary } from './../authors-portal-shared/models';
+import { CategorySummary, ArticleStatisticsCollection } from './../authors-portal-shared/models';
 import { Action } from '@ngrx/store';
-import { ArticleStatistics } from '../authors-portal-shared/models';
-import { Article, Category } from 'src/app/shared/models';
+import { Category } from 'src/app/shared/models';
 import { ArticlesResponse } from '../authors-portal-shared/models/graphql-responses/articles-response.interface';
 
 export const enum AuthorsPortalActionTypes {
   GetAuthorsDashboardArticlesStatistics = '[Authors] Get Dashboard Article Statistics',
   GetAuthorsDashboardArticlesStatisticsSuccess = '[Authors] Get Dashboard Article Statistics Success',
+  GetAuthorsDashboardArticleStatisticsError = '[Authors] Get Dashboard Article Statistics Error',
   GetTop10Articles = '[Authors] Get Top 10 Articles',
   GetTop10ArticlesSuccess = '[Authors] Get Top 10 Article Success',
   GetTop10ArticlesError = '[Authors] Get Top 10 Article Errors',
@@ -30,7 +30,13 @@ export class GetAuthorsDashboardArticlesStatisticsSuccess implements Action {
   readonly type =
     AuthorsPortalActionTypes.GetAuthorsDashboardArticlesStatisticsSuccess;
 
-  constructor(public payload: ArticleStatistics[]) {}
+  constructor(public payload: ArticleStatisticsCollection) {}
+}
+
+export class GetAuthorsDashboardArticlesStatisticsError {
+  readonly type = AuthorsPortalActionTypes.GetAuthorsDashboardArticleStatisticsError;
+
+  constructor(public payload: string) {}
 }
 
 export class GetTop10Articles implements Action {
@@ -100,6 +106,7 @@ export class CreateCategorySuccess implements Action {
 export type AuthorsPortalActions =
   | GetAuthorsDashboardArticlesStatistics
   | GetAuthorsDashboardArticlesStatisticsSuccess
+  | GetAuthorsDashboardArticlesStatisticsError
   | GetTop10Articles
   | GetTop10ArticlesSuccess
   | GetTop10ArticlesError

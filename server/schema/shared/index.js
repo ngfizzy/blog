@@ -32,7 +32,6 @@ const articleAndRelatedModels = gql`
     comments: [Comment]
   }
 
-
   """
   Category
   """
@@ -72,7 +71,7 @@ const articleAndRelatedModels = gql`
     tags: [Tag]
     categories: [Category]
   }
-  
+
   """
   ArticlesResponse
   """

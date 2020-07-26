@@ -56,6 +56,10 @@ class Data {
   getTop10Articles() {
     return this.dataStore.getTop10Articles();
   }
+
+  getDashboardStatistics() {
+    return this.dataStore.getDashboardStatistics();
+  }
 }
 
 module.exports = new Data();

@@ -25,11 +25,21 @@
   </app-authors-section>
 
   <app-authors-section [sectionTitle]="'Quick Statistics'">
-    <ng-container *ngIf="articlesStatistics$ | async as statistics">
-      <div *ngFor="let stat of statistics" class="ml-2 mr-2">
+    <ng-container *ngIf="articlesStatistics$ | async as stat">
+      <div class="ml-2 mr-2">
         <app-authors-number-widget
-        [statistics]="stat"
-      ></app-authors-number-widget>
+          [statistics]="stat.articleWithMostComments"
+        ></app-authors-number-widget>
+      </div>
+      <div class="ml-2 mr-2">
+        <app-authors-number-widget
+          [statistics]="stat.mostLikedArticle"
+        ></app-authors-number-widget>
+      </div>
+      <div class="ml-2 mr-2">
+        <app-authors-number-widget
+          [statistics]="stat.mostPopularArticle"
+        ></app-authors-number-widget>
       </div>
     </ng-container>
   </app-authors-section>

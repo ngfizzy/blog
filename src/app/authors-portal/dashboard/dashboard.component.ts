@@ -20,19 +20,20 @@ import {
   GetTop10Articles,
   GetLast10Drafts,
 } from '../state/authors-portal.actions';
-import { ArticleStatistics } from '../authors-portal-shared/models';
+import { ArticleStatistics, ArticleStatisticsCollection } from '../authors-portal-shared/models';
 import { SetPageTitle } from 'src/app/core/state/core.actions';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  articlesStatistics$: Observable<ArticleStatistics[]>;
   top10Articles$: Observable<Article[]>;
   last10Drafts$: Observable<Article[]>;
   categoriesSummaries$: Observable<CategorySummary[]>;
   isCategoryFormDisplayed: boolean;
+  articlesStatistics$: Observable<ArticleStatisticsCollection>;
 
   constructor(
     private store: Store<AuthorsPortalState>,

@@ -12,6 +12,9 @@ const authorsArticlesQueries = {
   },
   getTop10Articles() {
     return dataApi.getTop10Articles();
+  },
+  getDashboardStatistics() {
+    return dataApi.getDashboardStatistics();
   }
 };
 

@@ -230,12 +230,6 @@ module.exports = {
 
     return commentsCount + likes;
   },
-  getTotalLikesAndComments(activities) {
-    return {
-      commentsCount: this.getCommentsCount(activities),
-      likes: this.getTotalArticleApplauds(activities),
-    };
-  },
   getCommentsCount() {
     return audienceActivities.reduce(
       (sum, activity) => sum + activity.comments.length,
@@ -244,5 +238,106 @@ module.exports = {
   },
   getTotalArticleApplauds(activities) {
     return activities.reduce((sum, activity) => sum + activity.applauds, 0);
+  },
+  getMostLikedArticle() {
+    let mostLiked;
+    let greatestLikesCount = 0;
+
+    articles.forEach(article => {
+      const likes = (article.audienceActivities || []).length
+        ? this.getTotalArticleApplauds(article.audienceActivities)
+        : 0;
+
+      if (greatestLikesCount <= likes) {
+        greatestLikesCount = likes;
+        mostLiked = article;
+      }
+    });
+
+    return mostLiked
+      ? {
+          articleId: mostLiked.id,
+          statisticsTitle: 'Most Liked Article',
+          articleTitle: mostLiked.title,
+          countLabel: 'Comments',
+          count: greatestLikesCount,
+        }
+      : null;
+  },
+  getArticleWithMostComments() {
+    let articleWithMostComments;
+    let greatestCommentsCounts = 0;
+
+    articles.forEach(article => {
+      const commentsCount = this.getCommentsCount(article.audienceActivities);
+
+      if (greatestCommentsCounts <= commentsCount) {
+        greatestCommentsCounts = commentsCount;
+        articleWithMostComments = article;
+      }
+    });
+
+    return {
+      articleId: articleWithMostComments.id,
+      statisticsTitle: 'Most Commented On',
+      articleTitle: articleWithMostComments.title,
+      countLabel: 'Comments',
+      count: greatestCommentsCounts,
+    };
+  },
+  getMostPopularArticle() {
+    const { mostPopular, popularity } = this._getMostPopularArticle(articles);
+
+    return {
+      articleId: mostPopular.id,
+      statisticsTitle: 'Most Popular Article',
+      articleTitle: mostPopular.title,
+      countLabel: 'Comments + Likes',
+      count: popularity,
+    };
+  },
+  getMostPopularArticle() {
+    const { mostPopular, popularity } = this._getMostPopularArticle(articles);
+
+    return {
+      articleId: mostPopular.id,
+      statisticsTitle: 'Most Popular Article',
+      articleTitle: mostPopular.title,
+      countLabel: 'Comments + Likes',
+      count: popularity,
+    };
+  },
+  _getMostPopularArticle(sourceArticlesList) {
+    let mostPopular;
+    let greatestPopularity = 0;
+
+    sourceArticlesList.forEach(article => {
+      const popularity = this.getPopularity(article.audienceActivities);
+
+      if (greatestPopularity <= popularity) {
+        greatestPopularity = popularity;
+        mostPopular = article;
+      }
+    });
+
+    return { mostPopular, popularity: greatestPopularity };
+  },
+  getDashboardStatistics() {
+    return {
+      mostLikedArticle: this.getMostLikedArticle(),
+      articleWithMostComments: this.getArticleWithMostComments(),
+      mostPopularArticle: this.getMostPopularArticle(),
+    }
+  },
+  getPopularity(activities) {
+    const { commentsCount, likes } = this.getTotalLikesAndComments(activities);
+
+    return commentsCount + likes;
+  },
+  getTotalLikesAndComments(activities) {
+    return {
+      commentsCount: this.getCommentsCount(activities),
+      likes: this.getTotalArticleApplauds(activities),
+    };
   }
 }

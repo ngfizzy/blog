@@ -3,6 +3,7 @@ import { Observable, of, forkJoin } from 'rxjs';
 import {
   ArticleStatistics,
   CategorySummary,
+  ArticleStatisticsCollection,
 } from '../../authors-portal-shared/models';
 import {
   getMostLikedArticle,
@@ -28,13 +29,8 @@ export class DashboardService {
     return of(createCategory(category));
   }
 
-  getDashboardStatistics(): Observable<ArticleStatistics[]> {
-    return forkJoin([
-      this.getMostLikedArticle(),
-      this.getArticleWithMostComments(),
-      this.getMostPopularArticle(),
-    ]);
-    
+  getDashboardStatistics(): Observable<ArticleStatisticsCollection> {
+    return this.dashboardGqlService.getDashboardStatistics();
   }
 
   getLast10Drafts() {

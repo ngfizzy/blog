@@ -23,12 +23,14 @@ export class AuthorsPortalEffects {
       this.dashboardService
         .getDashboardStatistics()
         .pipe(
-          map(
-            statistics =>
-              new authorsPortalActions.GetAuthorsDashboardArticlesStatisticsSuccess(
-                statistics,
-              ),
-          ),
+          map(response => {
+            const nextEffects = {
+              ErrorEffect: authorsPortalActions.GetAuthorsDashboardArticlesStatisticsError,
+              SuccessEffect: authorsPortalActions.GetAuthorsDashboardArticlesStatisticsSuccess
+            };
+
+            return this.emitEffectResult(response, nextEffects);
+          }),
         ),
     ),
   );
