@@ -34,6 +34,7 @@ export class DashboardService {
       this.getArticleWithMostComments(),
       this.getMostPopularArticle(),
     ]);
+    
   }
 
   getLast10Drafts() {
