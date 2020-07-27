@@ -44,16 +44,4 @@ export class DashboardService {
   getTop10Articles(): Observable<ArticlesResponse> {
     return this.dashboardGqlService.getTop10Articles();
   }
-
-  private getMostPopularArticle(): Observable<ArticleStatistics> {
-    return of(getMostPopularArticle());
-  }
-
-  private getArticleWithMostComments(): Observable<ArticleStatistics> {
-    return of(getArticleWithMostComments());
-  }
-
-  private getMostLikedArticle(): Observable<ArticleStatistics> {
-    return of(getMostLikedArticle());
-  }
 }
