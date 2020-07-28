@@ -140,9 +140,11 @@ module.exports = {
 
     categories.push(category);
 
+    const { categoriesSummaries } = this.getCategoriesSummaries()
+
     return {
       categories,
-      categoriesSummaries: this.getCategoriesSummaries(),
+      categoriesSummaries,
       createdCategory: category,
     };
   },

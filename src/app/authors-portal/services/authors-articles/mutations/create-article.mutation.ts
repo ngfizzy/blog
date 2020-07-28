@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import { articleFragment } from '../../../../shared/gql-fragments';
+import { articleFragment } from '../../../../shared/graphql-fragments';
 
 export const createArticle = gql`
   mutation createArticle($title: String!, $body: String!) {

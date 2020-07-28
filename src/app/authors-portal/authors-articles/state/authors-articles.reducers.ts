@@ -27,6 +27,7 @@ const defaultState: AuthorsArticlesState = {
   },
   categoriesState: {
     isLoading: true,
+    error: '',
     categories: [],
   },
 };

@@ -105,7 +105,14 @@ export class AuthorsPortalEffects {
       this.dashboardService
         .createCategory(categoryName)
         .pipe(
-          map(result => new authorsPortalActions.CreateCategorySuccess(result)),
+          map(result => {
+            const nextEffects = {
+              SuccessEffect: authorsPortalActions.CreateCategorySuccess,
+              ErrorEffect: authorsPortalActions.CreateCategoryError,
+            };
+
+            return this.emitEffectResult(result, nextEffects);
+          }),
         ),
     ),
   );

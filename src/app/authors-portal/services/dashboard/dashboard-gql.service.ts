@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
+import { map, tap } from 'rxjs/operators';
 
-import * as iGraphqlResponses from '../../authors-portal-shared/models/graphql-responses';
 import * as queries from './queries';
-import { map } from 'rxjs/operators';
-
+import * as mutations from './mutations';
+import * as iGraphqlResponses from '../../authors-portal-shared/models/graphql-responses';
 @Injectable()
 export class DashboardGqlService {
 
   constructor(private apollo: Apollo) {}
+
+  createCategory(categoryName: string) {
+    return this.apollo.mutate<iGraphqlResponses.CreateCategoryResponse>({
+      mutation: mutations.createCategory,
+      variables: {
+        categoryName,
+      }
+    }).pipe(map(response => response.data.createCategory));
+  }
 
   getLast10Drafts() {
     return this.apollo.watchQuery<iGraphqlResponses.GetLast10DraftsResponse>({

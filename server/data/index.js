@@ -64,6 +64,10 @@ class Data {
   getCategoriesSummaries() {
     return this.dataStore.getCategoriesSummaries();
   }
+
+  createCategory(categoryName) {
+    return this.dataStore.createCategory(categoryName);
+  }
 }
 
 module.exports = new Data();

@@ -26,6 +26,13 @@ const dashboardTypeDefs = gql`
     error: String
   }
 
+  type CategoryCreationResponse {
+    categories: [Category]
+    categoriesSummaries: [CategorySummary]
+    createdCategory: Category
+    error: String
+  }
+
   type DashboardStatisticsResponse {
     mostPopularArticle: ArticleStatistics
     articleWithMostComments: ArticleStatistics
@@ -38,6 +45,10 @@ const dashboardTypeDefs = gql`
     getTop10Articles: ArticlesResponse
     getDashboardStatistics: DashboardStatisticsResponse
     getCategoriesSummaries: CategoriesSummariesResponse
+  }
+
+  extend type Mutation {
+    createCategory(categoryName: String!): CategoryCreationResponse
   }
 `;
 

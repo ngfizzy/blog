@@ -1,6 +1,9 @@
-import { ArticlesResponse } from './responses/articles-response.interface';
-import { ArticleStatisticsCollection } from './responses/article-statistics-collection.interface';
-import { CategoriesSummariesResponse } from './responses/categories-summaries-response.interface';
+import {
+  ArticlesResponse,
+  ArticleStatisticsCollection,
+   CategoriesSummariesResponse,
+   CategoryCreationResponse
+} from './responses';
 
 export interface GetLast10DraftsResponse {
   getLast10Drafts: ArticlesResponse;
@@ -16,4 +19,8 @@ export interface GetDashboardStatisticsResponse {
 
 export interface GetCategoriesSummariesResponse {
   getCategoriesSummaries: CategoriesSummariesResponse;
+}
+
+export interface CreateCategoryResponse {
+  createCategory: CategoryCreationResponse;
 }

@@ -18,6 +18,8 @@ import { AuthorsArticlesService } from '../authors-articles/authors-articles.ser
 import { DashboardGqlService } from './dashboard-gql.service';
 import { ArticlesResponse } from '../../authors-portal-shared/models/graphql-responses/responses/articles-response.interface';
 import { CategoriesSummariesResponse } from '../../authors-portal-shared/models/graphql-responses/responses/categories-summaries-response.interface';
+import { CategoryCreationResponse } from '../../authors-portal-shared/models/graphql-responses/responses';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class DashboardService {
@@ -26,8 +28,8 @@ export class DashboardService {
     private dashboardGqlService: DashboardGqlService,
     ) {}
 
-  createCategory(category: string) {
-    return of(createCategory(category));
+  createCategory(category: string): Observable<CategoryCreationResponse> {
+    return this.dashboardGqlService.createCategory(category);
   }
 
   getDashboardStatistics(): Observable<ArticleStatisticsCollection> {

@@ -87,6 +87,8 @@ const articleAndRelatedModels = gql`
     article: Article
     error: String
   }
+
+
 `;
 
 module.exports = articleAndRelatedModels;

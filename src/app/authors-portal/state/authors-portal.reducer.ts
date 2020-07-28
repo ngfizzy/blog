@@ -26,12 +26,14 @@ const defaultState: AuthorsPortalState = {
     },
     categoriesSummariesState: {
       isLoading: true,
+      error: '',
       summaries: [],
     },
   },
   categoriesState: {
     isLoading: true,
     categories: [],
+    error: ''
   },
   audienceState: {
     isLoading: false,
@@ -238,14 +240,33 @@ export function authorsPortalReducer(
             ...state.dashboardState.categoriesSummariesState,
             summaries: [...action.payload.categoriesSummaries],
             isLoading: false,
+            error: ''
           },
         },
         categoriesState: {
           ...state.categoriesState,
           categories: [...action.payload.categories],
           isLoading: false,
+          error: ''
         },
       };
+      case AuthorsPortalActionTypes.CreateCategoryError:
+        return {
+          ...state,
+          dashboardState: {
+            ...state.dashboardState,
+            categoriesSummariesState: {
+              ...state.dashboardState.categoriesSummariesState,
+              isLoading: false,
+              error: action.payload
+            },
+          },
+          categoriesState: {
+            ...state.categoriesState,
+            isLoading: false,
+            error: action.payload
+          },
+        };
     default:
       return state;
   }

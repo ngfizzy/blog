@@ -24,12 +24,14 @@ export interface AuthorsPortalState extends CoreState {
     };
     categoriesSummariesState: {
       isLoading: boolean;
+      error: string
       summaries: CategorySummary[];
     };
   };
   categoriesState: {
     isLoading: boolean;
     categories: Category[];
+    error: string;
   };
   isLoading: boolean;
 }
