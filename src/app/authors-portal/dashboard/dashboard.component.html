@@ -54,18 +54,28 @@
     </ng-container>
   </app-authors-section>
 
+  <!-- Articles Motherboard  -->
   <app-authors-section [sectionTitle]="'Articles Leatherboard'">
+
+    <!-- Top 10 Drafts  -->
     <div class="w-100 row mt-2">
       <div class="col-sm-12 col-md-6 list-panel">
         <app-authors-list-panel [listTitle]="'Top 10 Articles'">
-          <app-authors-articles-list [articlesList]="top10Articles$ | async">
+          <app-authors-articles-list
+            [articlesList]="top10Articles$ | async"
+            [isLoading]="isTop10ArticlesLoading$ | async"
+          >
           </app-authors-articles-list>
         </app-authors-list-panel>
       </div>
+
+      <!-- Last 10  Drafts-->
       <div class="col-sm-12 col-md-6 list-panel">
         <app-authors-list-panel [listTitle]="'Last 10 Drafts'">
-          <app-authors-articles-list [articlesList]="last10Drafts$ | async">
-          </app-authors-articles-list>
+          <app-authors-articles-list
+            [articlesList]="last10Drafts$ | async"
+            [isLoading]="isLast10DraftsLoading$ | async"
+          ></app-authors-articles-list>
         </app-authors-list-panel>
       </div>
     </div>

@@ -32,14 +32,47 @@ export const selectArticleStatisticsError = createSelector(
   state => state.error
 );
 
-export const getTop10Articles = createSelector(
+
+// Top 10 Articles
+export const getTop10ArticlesState = createSelector(
   getDashboardState,
-  dashboard => dashboard.top10ArticlesState.articles,
+  dashboard => dashboard.top10ArticlesState,
+);
+
+export const getTop10Articles = createSelector(
+  getTop10ArticlesState,
+  state => state.articles
+);
+
+export const isTop10ArticlesLoading = createSelector(
+  getTop10ArticlesState,
+  state => state.isLoading
+);
+
+export const getTop10ArticlesError = createSelector(
+  getTop10ArticlesState,
+  state => state.error
+);
+
+ // Last 10 Draft Selectors
+export const getLast10DraftsState = createSelector(
+  getDashboardState,
+  dashboard => dashboard.last10DraftsState
 );
 
 export const getLast10Drafts = createSelector(
-  getDashboardState,
-  dashboard => dashboard.last10DraftsState.drafts,
+  getLast10DraftsState,
+  state => state.drafts,
+);
+
+export const isLast10DraftsLoading = createSelector(
+  getLast10DraftsState,
+  state => state.isLoading
+);
+
+export const last10DraftsError = createSelector(
+  getLast10DraftsState,
+  state => state.error
 );
 
 export const getCategoriesSummaries = createSelector(

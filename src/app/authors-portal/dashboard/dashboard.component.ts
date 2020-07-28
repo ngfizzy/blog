@@ -11,6 +11,8 @@ import {
   getTop10Articles,
   getLast10Drafts,
   getCategoriesSummaries,
+  isLast10DraftsLoading,
+  isTop10ArticlesLoading,
 } from './../state/index';
 import { Store, select } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
@@ -34,6 +36,8 @@ export class DashboardComponent implements OnInit {
   categoriesSummaries$: Observable<CategorySummary[]>;
   isCategoryFormDisplayed: boolean;
   articlesStatistics$: Observable<ArticleStatisticsCollection>;
+  isLast10DraftsLoading$: Observable<boolean>;
+  isTop10ArticlesLoading$: Observable<boolean>;
 
   constructor(
     private store: Store<AuthorsPortalState>,
@@ -48,9 +52,11 @@ export class DashboardComponent implements OnInit {
 
     this.store.dispatch(new GetTop10Articles());
     this.top10Articles$ = this.store.pipe(select(getTop10Articles));
+    this.isTop10ArticlesLoading$ = this.store.pipe(select(isTop10ArticlesLoading));
 
     this.store.dispatch(new GetLast10Drafts());
     this.last10Drafts$ = this.store.pipe(select(getLast10Drafts));
+    this.isLast10DraftsLoading$ = this.store.pipe(select(isLast10DraftsLoading))
 
     this.store.dispatch(new GetCategoriesSummaries());
 
