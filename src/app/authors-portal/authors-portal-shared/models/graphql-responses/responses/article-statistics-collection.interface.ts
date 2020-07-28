@@ -1,4 +1,4 @@
-import { ArticleStatistics } from '../article-statistics.interface';
+import { ArticleStatistics } from '../../article-statistics.interface';
 
 export interface ArticleStatisticsCollection {
   mostPopularArticle: ArticleStatistics,

@@ -209,7 +209,7 @@ export function authorsPortalReducer(
           ...state.dashboardState,
           categoriesSummariesState: {
             ...state.dashboardState.categoriesSummariesState,
-            summaries: [...action.payload],
+            summaries: [...action.payload.categoriesSummaries ],
             isLoading: false,
           },
         },

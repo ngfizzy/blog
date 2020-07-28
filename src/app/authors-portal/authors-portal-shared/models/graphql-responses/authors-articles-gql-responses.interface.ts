@@ -1,6 +1,6 @@
 import { Article } from 'src/app/shared/models';
 import { toggleArticlePublishedState } from '../../../services/authors-articles/mutations/toggle-article-published-state.mutation';
-import { ArticleResponse, ArticlesResponse } from './articles-response.interface';
+import { ArticleResponse, ArticlesResponse } from './responses/articles-response.interface';
 
 
 

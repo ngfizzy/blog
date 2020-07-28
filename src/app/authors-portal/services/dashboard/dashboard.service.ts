@@ -16,7 +16,8 @@ import {
 } from 'src/app/mock-server';
 import { AuthorsArticlesService } from '../authors-articles/authors-articles.service';
 import { DashboardGqlService } from './dashboard-gql.service';
-import { ArticlesResponse } from '../../authors-portal-shared/models/graphql-responses/articles-response.interface';
+import { ArticlesResponse } from '../../authors-portal-shared/models/graphql-responses/responses/articles-response.interface';
+import { CategoriesSummariesResponse } from '../../authors-portal-shared/models/graphql-responses/responses/categories-summaries-response.interface';
 
 @Injectable()
 export class DashboardService {
@@ -37,8 +38,8 @@ export class DashboardService {
     return this.dashboardGqlService.getLast10Drafts();
   }
 
-  getCategoriesSummaries(): Observable<CategorySummary[]> {
-    return of(getCategoriesSummaries());
+  getCategoriesSummaries(): Observable<CategoriesSummariesResponse> {
+    return this.dashboardGqlService.getCategoriesSummaries();
   }
 
   getTop10Articles(): Observable<ArticlesResponse> {

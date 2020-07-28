@@ -10,7 +10,7 @@ import {
   EditArticleEffectResponse,
 } from '../../authors-portal-shared/models/edit-article-effect-response.interface';
 import { CategorizeArticleSuccess } from './authors-articles.actions';
-import { ArticleResponse } from '../../authors-portal-shared/models/graphql-responses/articles-response.interface';
+import { ArticleResponse } from '../../authors-portal-shared/models/graphql-responses/responses/articles-response.interface';
 
 @Injectable()
 export class AuthorsArticlesEffects {

@@ -10,7 +10,7 @@ import { AuthorsArticlesGQLService } from './authors-articles-gql.service';
 import { ArticleResponse, ArticlesResponse } from '../../authors-portal-shared/models/graphql-responses';
 import {
   EditArticleEffectResponse,
-  CreateArticleEffectResponse
+
 } from '../../authors-portal-shared/models';
 
 const enum EditableArticlePaths {
@@ -29,7 +29,7 @@ export class AuthorsArticlesService {
     private articlesGqlService: AuthorsArticlesGQLService,
   ) {}
 
-  createArticle(title: string, body: string): Observable<CreateArticleEffectResponse> {
+  createArticle(title: string, body: string): Observable<ArticleResponse> {
     return this.articlesGqlService.createArticle(title, body);
   }
 

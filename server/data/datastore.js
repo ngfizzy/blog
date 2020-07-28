@@ -147,7 +147,9 @@ module.exports = {
     };
   },
   getCategoriesSummaries() {
-    return categories.map(category => this.getCategorySummary(category.id));
+    const categoriesSummaries = categories.map(category => this.getCategorySummary(category.id));
+
+    return { categoriesSummaries };
   },
   getCategorySummary(categoryId) {
     const categoryArticles = this.getCategoryArticles(categoryId);
@@ -339,5 +341,5 @@ module.exports = {
       commentsCount: this.getCommentsCount(activities),
       likes: this.getTotalArticleApplauds(activities),
     };
-  }
+  },
 }

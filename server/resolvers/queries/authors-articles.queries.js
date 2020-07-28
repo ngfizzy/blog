@@ -15,6 +15,9 @@ const authorsArticlesQueries = {
   },
   getDashboardStatistics() {
     return dataApi.getDashboardStatistics();
+  },
+  getCategoriesSummaries() {
+    return dataApi.getCategoriesSummaries();
   }
 };
 

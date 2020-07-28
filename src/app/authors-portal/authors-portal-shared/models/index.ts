@@ -4,4 +4,3 @@ export * from './article-statistics.interface';
 export * from './category-summary.interface';
 export * from './graphql-responses';
 export * from './edit-article-effect-response.interface';
-export * from './create-article-effect-response.interface';

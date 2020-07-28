@@ -84,10 +84,14 @@ export class AuthorsPortalEffects {
         .getCategoriesSummaries()
         .pipe(
           map(
-            categories =>
-              new authorsPortalActions.GetCategoriesSummariesSuccess(
-                categories,
-              ),
+            categories => {
+              const nextEffects = {
+                SuccessEffect: authorsPortalActions.GetCategoriesSummariesSuccess,
+                ErrorEffect: authorsPortalActions.GetCategoriesSummariesError,
+              };
+
+              return this.emitEffectResult(categories, nextEffects);
+            }
           ),
         ),
     ),

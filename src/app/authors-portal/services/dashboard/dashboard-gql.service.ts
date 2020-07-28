@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 
 import * as iGraphqlResponses from '../../authors-portal-shared/models/graphql-responses';
 import * as queries from './queries';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class DashboardGqlService {
@@ -27,5 +27,11 @@ export class DashboardGqlService {
       query: queries.getDashboardStatistics
     })
     .valueChanges.pipe(map(response => response.data.getDashboardStatistics));
+  }
+
+  getCategoriesSummaries() {
+    return this.apollo.watchQuery<iGraphqlResponses.GetCategoriesSummariesResponse>({
+      query: queries.getCategoriesSummaries,
+    }).valueChanges.pipe(map(response => response.data.getCategoriesSummaries))
   }
 }

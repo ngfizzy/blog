@@ -2,8 +2,8 @@ import { Action } from '@ngrx/store';
 import { Article } from 'src/app/shared/models/article.interface';
 import {
   EditArticleEffectResponse,
-  CreateArticleEffectResponse,
-  ArticlesResponse
+  ArticlesResponse,
+  ArticleResponse
 } from '../../authors-portal-shared/models';
 
 
@@ -84,7 +84,7 @@ export class CreateArticle implements Action {
 export class CreateArticleSuccess implements Action {
   readonly type = AuthorsArticlesActionTypes.CreateArticleSuccess;
 
-  constructor(public payload: CreateArticleEffectResponse) {}
+  constructor(public payload: ArticleResponse) {}
 }
 
 export class CreateArticleError implements Action {

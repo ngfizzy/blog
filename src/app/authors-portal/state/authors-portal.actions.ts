@@ -1,7 +1,8 @@
 import { CategorySummary, ArticleStatisticsCollection } from './../authors-portal-shared/models';
 import { Action } from '@ngrx/store';
 import { Category } from 'src/app/shared/models';
-import { ArticlesResponse } from '../authors-portal-shared/models/graphql-responses/articles-response.interface';
+import { ArticlesResponse } from '../authors-portal-shared/models/graphql-responses/responses/articles-response.interface';
+import { CategoriesSummariesResponse } from '../authors-portal-shared/models/graphql-responses/responses/categories-summaries-response.interface';
 
 export const enum AuthorsPortalActionTypes {
   GetAuthorsDashboardArticlesStatistics = '[Authors] Get Dashboard Article Statistics',
@@ -15,6 +16,7 @@ export const enum AuthorsPortalActionTypes {
   GetLast10DraftsSuccess = '[Authors] Get Last 10 Drafts Success',
   GetCategoriesSummaries = '[Authors] Get Categories Summaries',
   GetCategoriesSummariesSuccess = '[Authors] Get Categories Summaries Success',
+  GetCategoriesSummariesError = '[Authors] Get Categories Summaries Error',
   CreateCategory = '[Authors] Create Category',
   CreateCategorySuccess = '[Authors] Create Category Success',
 }
@@ -82,7 +84,13 @@ export class GetCategoriesSummaries implements Action {
 export class GetCategoriesSummariesSuccess implements Action {
   readonly type = AuthorsPortalActionTypes.GetCategoriesSummariesSuccess;
 
-  constructor(public payload: CategorySummary[]) {}
+  constructor(public payload: CategoriesSummariesResponse) {}
+}
+
+export class GetCategoriesSummariesError implements Action {
+  readonly type = AuthorsPortalActionTypes.GetCategoriesSummariesError;
+
+  constructor(public payload: string) {}
 }
 
 export class CreateCategory implements Action {
@@ -115,5 +123,6 @@ export type AuthorsPortalActions =
   | GetLast10DraftsError
   | GetCategoriesSummaries
   | GetCategoriesSummariesSuccess
+  | GetCategoriesSummariesError
   | CreateCategory
   | CreateCategorySuccess;

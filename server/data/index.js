@@ -60,6 +60,10 @@ class Data {
   getDashboardStatistics() {
     return this.dataStore.getDashboardStatistics();
   }
+
+  getCategoriesSummaries() {
+    return this.dataStore.getCategoriesSummaries();
+  }
 }
 
 module.exports = new Data();
