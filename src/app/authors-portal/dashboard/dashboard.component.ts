@@ -1,30 +1,31 @@
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { CategorySummary } from './../authors-portal-shared/models/category-summary.interface';
+import { Store, select } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
+import { CategorySummary, ArticleStatisticsCollection } from './../authors-portal-shared/models';
 import {
   GetCategoriesSummaries,
   CreateCategory,
 } from './../state/authors-portal.actions';
-import { Article, Nav } from 'src/app/shared/models';
+import { Article } from 'src/app/shared/models';
 import {
+  AuthorsPortalState,
   getArticleStatistics,
   getTop10Articles,
   getLast10Drafts,
   getCategoriesSummaries,
   isLast10DraftsLoading,
   isTop10ArticlesLoading,
-} from './../state/index';
-import { Store, select } from '@ngrx/store';
-import { Component, OnInit } from '@angular/core';
-import { AuthorsPortalState } from '../state';
+  isCategoriesSummariesLoading,
+  isArticleStatisticsLoading,
+} from './../state/';
+
 import {
   GetAuthorsDashboardArticlesStatistics,
   GetTop10Articles,
   GetLast10Drafts,
 } from '../state/authors-portal.actions';
-import { ArticleStatistics, ArticleStatisticsCollection } from '../authors-portal-shared/models';
 import { SetPageTitle } from 'src/app/core/state/core.actions';
-import { map, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './dashboard.component.html',
@@ -38,6 +39,9 @@ export class DashboardComponent implements OnInit {
   articlesStatistics$: Observable<ArticleStatisticsCollection>;
   isLast10DraftsLoading$: Observable<boolean>;
   isTop10ArticlesLoading$: Observable<boolean>;
+  isCategoriesSummariesLoading$: Observable<boolean>;
+  $: Observable<boolean>;
+  isArticlesStatisticsLoading$: Observable<boolean>;
 
   constructor(
     private store: Store<AuthorsPortalState>,
@@ -49,6 +53,7 @@ export class DashboardComponent implements OnInit {
 
     this.store.dispatch(new GetAuthorsDashboardArticlesStatistics());
     this.articlesStatistics$ = this.store.pipe(select(getArticleStatistics));
+    this.isArticlesStatisticsLoading$ = this.store.pipe(select(isArticleStatisticsLoading));
 
     this.store.dispatch(new GetTop10Articles());
     this.top10Articles$ = this.store.pipe(select(getTop10Articles));
@@ -59,8 +64,8 @@ export class DashboardComponent implements OnInit {
     this.isLast10DraftsLoading$ = this.store.pipe(select(isLast10DraftsLoading))
 
     this.store.dispatch(new GetCategoriesSummaries());
-
     this.categoriesSummaries$ = this.store.pipe(select(getCategoriesSummaries));
+    this.isCategoriesSummariesLoading$ = this.store.pipe(select(isCategoriesSummariesLoading))
   }
 
   showCategoryForm() {

@@ -7,6 +7,7 @@ const getAuthorsPortalState = createFeatureSelector<AuthorsPortalState>(
   'authorsPortal',
 );
 
+// Articles Statistics
 export const getDashboardState = createSelector(
   getAuthorsPortalState,
   state => state.dashboardState,
@@ -75,7 +76,23 @@ export const last10DraftsError = createSelector(
   state => state.error
 );
 
-export const getCategoriesSummaries = createSelector(
+// Categories Summaries
+export const getCategoriesSummariesState = createSelector(
   getDashboardState,
-  dashboard => dashboard.categoriesSummariesState.summaries,
+  dashboard => dashboard.categoriesSummariesState,
+);
+
+export const getCategoriesSummaries = createSelector(
+  getCategoriesSummariesState,
+  state => state.summaries
+);
+
+export const isCategoriesSummariesLoading = createSelector(
+  getCategoriesSummariesState,
+  state => state.isLoading
+);
+
+export const categoriesSummariesError = createSelector(
+  getCategoriesSummariesState,
+  state => state.error
 );

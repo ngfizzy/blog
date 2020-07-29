@@ -24,7 +24,11 @@
 
   </app-authors-section>
 
-  <app-authors-section [sectionTitle]="'Quick Statistics'">
+  <!-- Quick Statistics -->
+  <app-authors-section
+  [sectionTitle]="'Quick Statistics'"
+  [isLoading]="isArticlesStatisticsLoading$ | async"
+  >
     <ng-container *ngIf="articlesStatistics$ | async as stat">
       <div class="ml-2 mr-2">
         <app-authors-number-widget
@@ -44,7 +48,9 @@
     </ng-container>
   </app-authors-section>
 
-  <app-authors-section [sectionTitle]="'All Categories'">
+  <app-authors-section
+    [sectionTitle]="'All Categories'"
+    [isLoading]="isCategoriesSummariesLoading$ | async">
     <ng-container *ngIf="categoriesSummaries$ | async as categoriesSummaries">
       <div *ngFor="let summary of categoriesSummaries" class="mr-2 ml-2">
         <app-authors-category-summary-widget
