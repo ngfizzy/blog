@@ -1,26 +1,22 @@
-import { CommentPayload } from './../shared/models/audience-activity-payloads.interface';
+import { CommentPayload } from '../../../shared/models/audience-activity-payloads.interface';
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
-import { Article } from '../shared/models/article.interface';
-import { getAllArticles, applaud, addComment } from '../mock-server';
-import { ApplaudPayload } from '../shared/models';
+import { Article } from '../../../shared/models/article.interface';
+import { getAllArticles, applaud, addComment } from '../../../mock-server';
+import { ApplaudPayload } from '../../../shared/models';
+import { ArticlesGqlService } from './articles-gql.service';
+import { ArticlesResponse } from 'src/app/shared/models/graphql-responses/responses';
 
 @Injectable({ providedIn: 'root' })
 export class ArticlesService {
   articles: Article[];
 
-  constructor() {
+  constructor(private articlesGqlService: ArticlesGqlService) {
     this.articles = getAllArticles();
   }
 
-  getAll(): Observable<Article[]> {
-    return of(
-      this.articles.filter(
-        found =>
-          found.published === true &&
-          !found.categories.find(category => category.name === 'poetry'),
-      ),
-    );
+  getAll(): Observable<ArticlesResponse> {
+    return this.articlesGqlService.getAllArticles();
   }
 
   getOne(articleId: number): Observable<Article> {

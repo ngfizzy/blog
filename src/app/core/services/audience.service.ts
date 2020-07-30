@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DeviceUUID } from 'device-uuid';
-import { Audience } from '../shared/models';
-import { findAudience } from '../mock-server';
+import { Audience } from '../../shared/models';
+import { findAudience } from '../../mock-server';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 

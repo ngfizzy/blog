@@ -6,14 +6,17 @@ import { Actions, ofType, Effect } from '@ngrx/effects';
 import { catchError, mergeMap, map, switchMap } from 'rxjs/operators';
 
 import * as articlesActions from './articles.actions';
-import { ArticlesService } from '../../core/articles.service';
+import { ArticlesService } from '../../core/services/articles/articles.service';
+import { response } from 'express';
+import { NextActionService } from 'src/app/core/services/next-action.service';
 
 @Injectable()
 export class ArticleEffects {
   constructor(
     private store: Store<fromArticle.ArticleState>,
     private actions$: Actions,
-    private articlesService: ArticlesService
+    private articlesService: ArticlesService,
+    private nextAction: NextActionService,
   ) {}
 
   @Effect()
@@ -21,10 +24,14 @@ export class ArticleEffects {
     ofType(articlesActions.ArticlesActionTypes.GetAllArticles),
     mergeMap(() =>
       this.articlesService.getAll().pipe(
-        map((articles) => new articlesActions.GetAllArticlesSuccess(articles)),
-        catchError((error) =>
-          of(new articlesActions.GetAllArticlesFailure(error.message))
-        )
+        map((response) => {
+          const nextActions = {
+            ErrorAction: articlesActions.GetAllArticlesFailure,
+            SuccessAction: articlesActions.GetAllArticlesSuccess
+          };
+
+          return this.nextAction.getNextActions(response, nextActions);
+        })
       )
     )
   );

@@ -2,7 +2,7 @@ const dataApi = require('../../data');
 
 const authorsArticlesQueries = {
   getAllArticles() {
-    return dataApi.getAllArticles()
+    return dataApi.getAllArticles();
   },
   getOneArticle(authorId) {
     return dataApi.getOneArticle(authorId);
@@ -18,7 +18,7 @@ const authorsArticlesQueries = {
   },
   getCategoriesSummaries() {
     return dataApi.getCategoriesSummaries();
-  }
+  },
 };
 
 module.exports = authorsArticlesQueries;

@@ -8,9 +8,8 @@ import { AuthorsArticlesService } from '../../services/authors-articles/authors-
 import * as authorsArticlesActions from './authors-articles.actions';
 import {
   EditArticleEffectResponse,
-} from '../../authors-portal-shared/models/edit-article-effect-response.interface';
-import { CategorizeArticleSuccess } from './authors-articles.actions';
-import { ArticleResponse } from '../../authors-portal-shared/models/graphql-responses/responses/articles-response.interface';
+} from '../../authors-portal-shared/models/';
+import { ArticleResponse } from '../../../shared/models/graphql-responses/responses/articles-response.interface';
 
 @Injectable()
 export class AuthorsArticlesEffects {

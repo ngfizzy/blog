@@ -16,7 +16,7 @@ import {
 } from 'src/app/mock-server';
 import { AuthorsArticlesService } from '../authors-articles/authors-articles.service';
 import { DashboardGqlService } from './dashboard-gql.service';
-import { ArticlesResponse } from '../../authors-portal-shared/models/graphql-responses/responses/articles-response.interface';
+import { ArticlesResponse } from '../../../shared/models/graphql-responses/responses/articles-response.interface';
 import { CategoriesSummariesResponse } from '../../authors-portal-shared/models/graphql-responses/responses/categories-summaries-response.interface';
 import { CategoryCreationResponse } from '../../authors-portal-shared/models/graphql-responses/responses';
 import { tap } from 'rxjs/operators';

@@ -1,6 +1,7 @@
 const { gql } = require('apollo-server');
 const articleAndRelatedModels = require('./shared');
 const authorsArticlesTypeDefs = require('./authors-articles-type-defs');
+const articlesTypeDefs = require('./articles-type-defs');
 const dashboardTypeDefs = require('./dashboard-type-defs');
 
 const root = gql`
@@ -10,9 +11,11 @@ const root = gql`
   type Mutation {
     _empty: String
   }
-`
+`;
+
 const typeDefs = [
   root,
+  articlesTypeDefs,
   articleAndRelatedModels,
   authorsArticlesTypeDefs,
   dashboardTypeDefs,

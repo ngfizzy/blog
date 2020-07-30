@@ -22,7 +22,7 @@ class Data {
   }
 
   editArticleTitle(articleId, title) {
-    return this.dataStore.editArticleTitle(articleId, title)
+    return this.dataStore.editArticleTitle(articleId, title);
   }
 
   editArticleBody(articleId, body) {
@@ -50,7 +50,7 @@ class Data {
   }
 
   getLast10Drafts() {
-    return this.dataStore.getLast10Drafts()
+    return this.dataStore.getLast10Drafts();
   }
 
   getTop10Articles() {
@@ -67,6 +67,10 @@ class Data {
 
   createCategory(categoryName) {
     return this.dataStore.createCategory(categoryName);
+  }
+
+  getPublishedArticles() {
+    return this.dataStore.getPublishedArticles();
   }
 }
 

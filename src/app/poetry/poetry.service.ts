@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ArticlesService } from '../core/articles.service';
+import { ArticlesService } from '../core/services/articles/articles.service';
 import { map, tap } from 'rxjs/operators';
 import { Poem, Poems, CommentPayload, ApplaudPayload } from '../shared/models';
 import { Observable, of } from 'rxjs';

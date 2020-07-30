@@ -21,6 +21,7 @@ const defaultState: ArticlesState = {
     isLoading: true,
     nav: null,
   },
+  error: '',
   isLoading: true,
 };
 
@@ -33,13 +34,20 @@ export function articlesReducer(
       return {
         ...state,
         isLoading: true,
+        error: ''
       };
     case ArticlesActionTypes.GetAllArticlesSuccess:
       return {
         ...state,
-        articles: [...action.payload],
+        articles: [...action.payload.articles],
         isLoading: false,
+        error: ''
       };
+    case ArticlesActionTypes.GetAllArticlesFailure:
+      return {
+        ...state,
+        error: action.payload
+      }
     case ArticlesActionTypes.GetOneArticle:
       return {
         ...state,

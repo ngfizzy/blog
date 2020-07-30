@@ -7,6 +7,7 @@ import {
   Category,
   Article,
 } from 'src/app/shared/models';
+import { ArticlesResponse } from 'src/app/shared/models/graphql-responses/responses';
 
 export const enum ArticlesActionTypes {
   GetAllArticles = '[Articles] Get All Articles',
@@ -30,7 +31,7 @@ export class GetAllArticles implements Action {
 export class GetAllArticlesSuccess implements Action {
   readonly type = ArticlesActionTypes.GetAllArticlesSuccess;
 
-  constructor(public payload: Article[]) {}
+  constructor(public payload: ArticlesResponse) {}
 }
 
 export class GetAllArticlesFailure implements Action {

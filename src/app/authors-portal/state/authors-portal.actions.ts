@@ -1,7 +1,7 @@
 import { CategorySummary, ArticleStatisticsCollection } from './../authors-portal-shared/models';
 import { Action } from '@ngrx/store';
 import { Category } from 'src/app/shared/models';
-import { ArticlesResponse } from '../authors-portal-shared/models/graphql-responses/responses/articles-response.interface';
+import { ArticlesResponse } from '../../shared/models/graphql-responses/responses/articles-response.interface';
 import { CategoriesSummariesResponse } from '../authors-portal-shared/models/graphql-responses/responses/categories-summaries-response.interface';
 import { CategoryCreationResponse } from '../authors-portal-shared/models/graphql-responses/responses';
 

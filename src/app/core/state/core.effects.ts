@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { AudienceService } from '../audience.service';
+import { AudienceService } from '../services/audience.service';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import {
@@ -10,7 +10,7 @@ import {
   GetNavSuccess,
 } from './core.actions';
 import { map, switchMap } from 'rxjs/operators';
-import { CoreService } from '../core.service';
+import { CoreService } from '../services/core.service';
 
 @Injectable()
 export class CoreEffects {

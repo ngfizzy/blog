@@ -1,4 +1,4 @@
-import { BaseResponse } from './base-response.interface';
+import { BaseResponse } from '../../../../../shared/models/graphql-responses/responses/base-response.interface';
 import { Category } from 'src/app/shared/models';
 import { CategorySummary } from '../../category-summary.interface';
 

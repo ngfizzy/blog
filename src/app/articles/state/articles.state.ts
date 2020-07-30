@@ -12,5 +12,6 @@ export interface ArticlesState extends CoreState {
     }
     isLoading: boolean;
   };
+  error: string;
   isLoading: boolean;
 }

@@ -140,7 +140,7 @@ module.exports = {
 
     categories.push(category);
 
-    const { categoriesSummaries } = this.getCategoriesSummaries()
+    const { categoriesSummaries } = this.getCategoriesSummaries();
 
     return {
       categories,
@@ -189,7 +189,7 @@ module.exports = {
       article.published = !article.published;
       article.updatedAt = new Date().toString();
       article.publishedAt = article.published ?
-        article.updatedAt : article.publishedAt
+        article.updatedAt : article.publishedAt;
       article.unpublishedAt = !article.published ?
         article.updatedAt : article.unpublishedAt;
     }
@@ -248,8 +248,8 @@ module.exports = {
     let greatestLikesCount = 0;
 
     articles.forEach(article => {
-      const likes = (article.audienceActivities || []).length
-        ? this.getTotalArticleApplauds(article.audienceActivities)
+      const likes = (article.audienceActivities || []).length ?
+        this.getTotalArticleApplauds(article.audienceActivities)
         : 0;
 
       if (greatestLikesCount <= likes) {
@@ -258,8 +258,7 @@ module.exports = {
       }
     });
 
-    return mostLiked
-      ? {
+    return mostLiked ? {
           articleId: mostLiked.id,
           statisticsTitle: 'Most Liked Article',
           articleTitle: mostLiked.title,
@@ -300,17 +299,6 @@ module.exports = {
       count: popularity,
     };
   },
-  getMostPopularArticle() {
-    const { mostPopular, popularity } = this._getMostPopularArticle(articles);
-
-    return {
-      articleId: mostPopular.id,
-      statisticsTitle: 'Most Popular Article',
-      articleTitle: mostPopular.title,
-      countLabel: 'Comments + Likes',
-      count: popularity,
-    };
-  },
   _getMostPopularArticle(sourceArticlesList) {
     let mostPopular;
     let greatestPopularity = 0;
@@ -331,12 +319,7 @@ module.exports = {
       mostLikedArticle: this.getMostLikedArticle(),
       articleWithMostComments: this.getArticleWithMostComments(),
       mostPopularArticle: this.getMostPopularArticle(),
-    }
-  },
-  getPopularity(activities) {
-    const { commentsCount, likes } = this.getTotalLikesAndComments(activities);
-
-    return commentsCount + likes;
+    };
   },
   getTotalLikesAndComments(activities) {
     return {
@@ -344,4 +327,13 @@ module.exports = {
       likes: this.getTotalArticleApplauds(activities),
     };
   },
-}
+  getPublishedArticles() {
+    const published = articles.filter(
+      article =>
+        !article.categories.find(category => category.name === 'poetry') &&
+        article.published,
+    );
+
+    return { articles: published };
+  }
+};

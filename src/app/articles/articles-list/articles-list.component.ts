@@ -9,12 +9,12 @@ import { ToastrService } from 'ngx-toastr';
 import * as fromArticles from '../state';
 import * as fromArticlesActions from '../state/articles.actions';
 import * as fromAppActions from '../../core/state/core.actions';
+import { Title, Meta } from '@angular/platform-browser';
 import * as fromApp from '../../core/state';
 
 import { ArticlesState } from '../state/articles.state';
 import { Article } from '../../shared/models/article.interface';
 import { ArticleComponentConfig } from '../../shared/models/article-component-config.interface';
-import { Title, Meta } from '@angular/platform-browser';
 import {
   Audience,
   AudienceActivity,
