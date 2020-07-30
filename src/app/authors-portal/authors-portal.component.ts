@@ -20,6 +20,7 @@ export class AuthorsPortalComponent implements OnInit {
     items: [
       { name: 'Dashboard', path: ['/authors'] },
       { name: 'Articles', path: ['/authors/articles'] },
+      { name: 'Categories', path: ['/authors/categories'] },
     ],
   };
   pageTitle$: Observable<string>;

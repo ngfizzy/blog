@@ -37,6 +37,15 @@ h6 {
   color: #fcd581;
 }
 
+.authors-route-content {
+  position: relative;
+  height: 89vh;
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .active {
   border: 1px solid #c0b7b1;
 }

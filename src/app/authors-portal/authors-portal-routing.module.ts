@@ -25,6 +25,12 @@ const routes: Routes = [
             mod => mod.AuthorsArticlesModule,
           ),
       },
+      {
+        path: 'categories',
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
+        loadChildren: async () => (await import('./categories/categories.module')).CategoriesModule
+      }
     ],
   },
   {
