@@ -24,7 +24,7 @@ module.exports = {
       return 1;
     });
 
-    return { articles: sorted }
+    return { articles: sorted };
   },
   getOneArticle(articleId) {
     const article = articles.find(

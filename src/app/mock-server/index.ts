@@ -758,6 +758,7 @@ export function getCategoriesSummaries() {
 export function getAllArticles() {
   return articles;
 }
+
 export function getAllPublishedArticles() {
   return articles.filter(
     article =>

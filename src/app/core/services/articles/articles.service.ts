@@ -6,6 +6,7 @@ import { getAllArticles, applaud, addComment } from '../../../mock-server';
 import { ApplaudPayload } from '../../../shared/models';
 import { ArticlesGqlService } from './articles-gql.service';
 import { ArticlesResponse } from 'src/app/shared/models/graphql-responses/responses';
+import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ArticlesService {

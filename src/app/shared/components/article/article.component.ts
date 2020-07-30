@@ -14,7 +14,6 @@ import { AudienceActivity } from '../../models/audience-activity.interface';
 import { CommentPayload } from '../../models';
 import { Audience } from '../../models/audience.interface';
 import { ApplaudPayload } from '../../models/audience-activity-payloads.interface';
-import { applaud } from '../../../mock-server/index';
 
 enum AnimationState {
   Small = 'small',

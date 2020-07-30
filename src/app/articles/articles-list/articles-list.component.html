@@ -9,7 +9,7 @@
         [article]="article"
         [currentAudience]="audience$ | async"
         [currentUserApplauds]="currentUserApplauds"
-        [audienceActivities]="audienceActivities$ | async"
+        [audienceActivities]="article.audienceActivities"
         (notify)="showNotification($event)"
         (opened)="setSelectedArticle($event)"
         (applaud)="submitApplauds($event)"

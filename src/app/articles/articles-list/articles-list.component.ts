@@ -65,7 +65,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.dispatch(new fromAppActions.GetCurrentAudience());
-    this.articles$ = this.store.pipe(select(fromArticles.getAllArticles));
+    this.articles$ = this.store.pipe(select(fromArticles.getAllArticles),tap(t => console.table(t)));
     this.audience$ = this.store.pipe(select(fromApp.getAudience));
     this.audienceActivities$ = this.store.pipe(
       select(fromArticles.getSelectedArticleActivities),

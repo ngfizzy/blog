@@ -73,6 +73,7 @@ const generators = {
       id,
       authorId: 1,
       published: isPublished,
+      publishedAt: isPublished ? new Date().toString() : null,
       title: 'Lorem ipsum ' + id,
       body:
         `Lorem ipsum dolor sit amet,` +
@@ -137,8 +138,7 @@ const generators = {
       const audience = fetchRandomAudience();
       const applauds = Math.round(Math.random() * 50);
 
-      const activityId = !audienceActivities.length
-        ? 0
+      const activityId = !audienceActivities.length ? 0
         : audienceActivities[audienceActivities.length - 1].id + 1;
 
       const activity = {
@@ -151,6 +151,7 @@ const generators = {
       };
 
       audienceActivities.push(activity);
+      articleActivities.push(activity);
     }
 
     return articleActivities;
@@ -173,8 +174,7 @@ const generators = {
     articleId,
     audienceId,
   ) {
-    const commentId = !audienceComments.length
-      ? 0
+    const commentId = !audienceComments.length ? 0
       : audienceComments[audienceComments.length - 1].id + 1;
 
     const comm = {
@@ -197,7 +197,7 @@ const generators = {
       id: this.randomId(),
       createdAt,
       updatedAt: createdAt,
-    }
+    };
   }
 };
 
@@ -209,4 +209,4 @@ module.exports = {
   categories,
   tags,
   generators,
-}
+};
