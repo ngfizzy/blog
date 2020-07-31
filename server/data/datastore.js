@@ -335,5 +335,100 @@ module.exports = {
     );
 
     return { articles: published };
+  },
+  applaud(payload) {
+    const { applauds, articleId, audience: currentAudience } = payload;
+
+    const audience = this.findOrCreateAudience(currentAudience);
+    const article = articles.find(({ id }) => id === articleId);
+
+    let actIndex = article.audienceActivities.findIndex(activity => {
+      return activity.audience.id === audience.id;
+    });
+
+    let act;
+
+
+    if (actIndex < 0) {
+      act = this.createAudienceActivity(payload);
+
+      act.applauds = applauds;
+      audienceActivities.push(act);
+      article.audienceActivities.push(act);
+    } else {
+      console.table(article);
+      act = article.audienceActivities[actIndex];
+      act.applauds = applauds;
+    }
+
+
+    return {
+       articleId, activities: article.audienceActivities
+    };
+  },
+  createAudienceActivity(activity) {
+    const activityId = !audienceActivities.length ? 0 :
+      audienceActivities[audienceActivities.length - 1].id + 1;
+
+    activity.id = activityId;
+    activity.comments = [];
+    activity.applauds = 0;
+    activity.createdAt = new Date().toString();
+
+    audienceActivities.push(activity);
+
+    return activity;
+  },
+  findOrCreateAudience(criteria) {
+    let audience = this.findAudience(criteria);
+    if (!audience) {
+      audience = this.createAudience(criteria);
+    }
+
+    return audience;
+  },
+  findAudience(options) {
+    let audience;
+
+    function fillMissingAudienceDetails(
+      foundAudience,
+      providedAudienceAudience
+    ) {
+      const { email, audienceName } = providedAudienceAudience;
+
+      if (foundAudience) {
+        foundAudience.email = email;
+        foundAudience.audienceName = audienceName;
+      }
+    }
+
+    if (options.id) {
+      audience = audienceRecord.find(aud => aud.id === options.id);
+    }
+
+    if (!audience && options.email) {
+      audience = audienceRecord.find(aud => aud.email === options.email);
+    } else if (!audience && options.audienceName) {
+      audience = audienceRecord.find(
+        aud =>
+          aud.audienceName === options.audienceName &&
+          aud.deviceUUID === aud.deviceUUID,
+      );
+    } else {
+      audience = audienceRecord.find(aud => aud.deviceUUID === options.deviceUUID);
+    }
+
+    fillMissingAudienceDetails(audience, options);
+
+    return audience;
+  },
+  createAudience(audience) {
+    const lastAudienceId = audienceRecord[audienceRecord.length - 1].id;
+
+    audience.id = lastAudienceId + 1;
+
+    audienceRecord.push(audience);
+
+    return audience;
   }
 };

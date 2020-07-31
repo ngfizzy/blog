@@ -72,6 +72,10 @@ class Data {
   getPublishedArticles() {
     return this.dataStore.getPublishedArticles();
   }
+
+  applaud(payload) {
+    return this.dataStore.applaud(payload);
+  }
 }
 
 module.exports = new Data();

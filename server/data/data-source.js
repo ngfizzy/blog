@@ -12,7 +12,6 @@ const audienceRecord = [
   { id: 6, audienceName: 'Wanja', deviceUUID: '.aoioqlaoo.aose' },
 ];
 
-const audienceList = [];
 const categories = [
   {
     id: 1,

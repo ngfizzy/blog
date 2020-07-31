@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseResponse } from 'src/app/shared/models/graphql-responses/responses';
+
+
 interface NextActions {
   ErrorAction: any,
   SuccessAction: any,

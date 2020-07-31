@@ -5,8 +5,7 @@ import { Article } from '../../../shared/models/article.interface';
 import { getAllArticles, applaud, addComment } from '../../../mock-server';
 import { ApplaudPayload } from '../../../shared/models';
 import { ArticlesGqlService } from './articles-gql.service';
-import { ArticlesResponse } from 'src/app/shared/models/graphql-responses/responses';
-import { tap } from 'rxjs/operators';
+import { ArticlesResponse, AudienceActivitiesResponse } from 'src/app/shared/models/graphql-responses/responses';
 
 @Injectable({ providedIn: 'root' })
 export class ArticlesService {
@@ -29,13 +28,15 @@ export class ArticlesService {
   }
 
   applaud(applaudPayload: ApplaudPayload) {
-    const audienceActivity = applaud(applaudPayload);
+    // const audienceActivity = applaud(applaudPayload);
 
-    return of(audienceActivity);
+    // return of(audienceActivity);
+
+    return this.articlesGqlService.applaud(applaudPayload);
   }
 
-  addComment(commentPayload: CommentPayload) {
-    const audienceActivity = addComment(commentPayload);
+  addComment(commentPayload: CommentPayload): Observable<AudienceActivitiesResponse> {
+    const audienceActivity: any = addComment(commentPayload);
 
     return of(audienceActivity);
   }

@@ -7,7 +7,6 @@ import { catchError, mergeMap, map, switchMap, tap } from 'rxjs/operators';
 
 import * as articlesActions from './articles.actions';
 import { ArticlesService } from '../../core/services/articles/articles.service';
-import { response } from 'express';
 import { NextActionService } from 'src/app/core/services/next-action.service';
 
 @Injectable()
@@ -58,21 +57,28 @@ export class ArticleEffects {
       this.articlesService
         .applaud(payload)
         .pipe(
-          map((activities) => new articlesActions.ApplaudSuccess(activities))
+          map((activities) => {
+            const nextActions = {
+              SuccessAction: articlesActions.ApplaudSuccess,
+              ErrorAction: articlesActions.ApplaudFailure
+            };
+
+            return this.nextAction.getNextActions(activities, nextActions);
+          })
         )
     )
   );
 
-  @Effect()
-  addComment$: Observable<Action> = this.actions$.pipe(
-    ofType(articlesActions.ArticlesActionTypes.AddComment),
-    map((action) => (action as articlesActions.AddComment).payload),
-    switchMap((payload) =>
-      this.articlesService
-        .addComment(payload)
-        .pipe(
-          map((activities) => new articlesActions.AddCommentSuccess(activities))
-        )
-    )
-  );
+  // @Effect()
+  // addComment$: Observable<Action> = this.actions$.pipe(
+  //   ofType(articlesActions.ArticlesActionTypes.AddComment),
+  //   map((action) => (action as articlesActions.AddComment).payload),
+  //   switchMap((payload) =>
+  //     this.articlesService
+  //       .addComment(payload)
+  //       .pipe(
+  //         map((activities) => new articlesActions.AddCommentSuccess(activities))
+  //       )
+  //   )
+  // );
 }

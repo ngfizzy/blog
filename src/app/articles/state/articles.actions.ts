@@ -2,12 +2,11 @@ import { Action } from '@ngrx/store';
 
 import {
   ApplaudPayload,
-  AudienceActivityUpdateSuccessPayload,
   CommentPayload,
   Category,
   Article,
 } from 'src/app/shared/models';
-import { ArticlesResponse } from 'src/app/shared/models/graphql-responses/responses';
+import { ArticlesResponse, AudienceActivitiesResponse } from 'src/app/shared/models/graphql-responses/responses';
 
 export const enum ArticlesActionTypes {
   GetAllArticles = '[Articles] Get All Articles',
@@ -20,6 +19,7 @@ export const enum ArticlesActionTypes {
   GetCategoryArticlesSuccess = '[Articles] Get Category Articles Success',
   Applaud = '[Articles] Applaud',
   ApplaudSuccess = '[Articles] Applaud Success',
+  ApplaudFailure = '[Article] Applaud Failure',
   AddComment = '[Articles] Add Comment',
   AddCommentSuccess = '[Articles] Add Comment Success',
 }
@@ -79,7 +79,13 @@ export class Applaud implements Action {
 export class ApplaudSuccess implements Action {
   readonly type = ArticlesActionTypes.ApplaudSuccess;
 
-  constructor(public payload: AudienceActivityUpdateSuccessPayload) {}
+  constructor(public payload: AudienceActivitiesResponse) {}
+}
+
+export class ApplaudFailure implements Action {
+  readonly type = ArticlesActionTypes.ApplaudFailure;
+
+  constructor(public payload: string) {}
 }
 
 export class AddComment implements Action {
@@ -91,7 +97,7 @@ export class AddComment implements Action {
 export class AddCommentSuccess implements Action {
   readonly type = ArticlesActionTypes.AddCommentSuccess;
 
-  constructor(public payload: AudienceActivityUpdateSuccessPayload) {}
+  constructor(public payload: AudienceActivitiesResponse) {}
 }
 
 export type ArticlesActions =
@@ -103,6 +109,7 @@ export type ArticlesActions =
   | GetOneArticleFailure
   | Applaud
   | ApplaudSuccess
+  | ApplaudFailure
   | AddComment
   | AddCommentSuccess
   | GetCategoryArticles

@@ -7,4 +7,4 @@ export const categoryPropsFragment = gql`
     createdAt
     updatedAt
   }
-`
+`;

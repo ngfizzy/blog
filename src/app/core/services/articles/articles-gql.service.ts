@@ -1,9 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Apollo } from 'apollo-angular';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import * as iGqlResponses from '../../../shared/models/graphql-responses';
-import * as queries from './queries'
+import * as queries from './queries';
+import * as mutations from './mutations';
+import { ApplaudPayload } from 'src/app/shared/models';
 
 @Injectable({ providedIn: 'root' })
 export class ArticlesGqlService {
@@ -15,4 +17,12 @@ export class ArticlesGqlService {
     }).valueChanges.pipe(map(response => response.data.getPublishedArticles));
   }
 
+  applaud(applaudPayload: ApplaudPayload) {
+    return this.apollo.mutate<iGqlResponses.ApplaudResponse>({
+      mutation: mutations.applaud,
+      variables: {
+        applaudPayload,
+      }
+    }).pipe(map(response => response.data.applaud));
+  }
 }

@@ -28,6 +28,6 @@ const authorsArticlesMutations = {
   toggleArticlePublishedState(_, { articleId }) {
     return dataApi.toggleArticlePublishedState(articleId);
   }
-}
+};
 
 module.exports = authorsArticlesMutations;

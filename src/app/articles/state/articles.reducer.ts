@@ -90,12 +90,13 @@ export function articlesReducer(
 
       return {
         ...state,
+        articles:  [ ...state.articles ],
         selectedArticle: {
           ...state.selectedArticle,
           article: {
-            ...article,
+            ...state.selectedArticle.article,
             audienceActivities: [
-              ...state.selectedArticle.article.audienceActivities,
+              ...activities
             ],
           },
           activitiesState: {

@@ -2,9 +2,9 @@ import { CommentPayload } from './../../shared/models/audience-activity-payloads
 import { Action } from '@ngrx/store';
 import {
   Poem,
-  AudienceActivityUpdateSuccessPayload,
   ApplaudPayload,
 } from 'src/app/shared/models';
+import { AudienceActivitiesResponse } from 'src/app/shared/models/graphql-responses/responses';
 
 export const enum PoetryActionTypes {
   GetAllPoems = '[Poetry] Get All',
@@ -47,7 +47,7 @@ export class Applaud implements Action {
 export class ApplaudSuccess implements Action {
   readonly type = PoetryActionTypes.ApplaudSuccess;
 
-  constructor(public payload: AudienceActivityUpdateSuccessPayload) {}
+  constructor(public payload) {}
 }
 
 export class AddComment implements Action {
@@ -59,7 +59,7 @@ export class AddComment implements Action {
 export class AddCommentSuccess implements Action {
   readonly type = PoetryActionTypes.AddCommentSuccess;
 
-  constructor(public payload: AudienceActivityUpdateSuccessPayload) {}
+  constructor(public payload: AudienceActivitiesResponse) {}
 }
 
 export type PoetryActions =

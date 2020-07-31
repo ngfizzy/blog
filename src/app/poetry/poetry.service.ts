@@ -5,6 +5,7 @@ import { Poem, Poems, CommentPayload, ApplaudPayload } from '../shared/models';
 import { Observable, of } from 'rxjs';
 import { poemThemeImagePlaceholders } from '../core/constants';
 import { applaud, getAllPublishedPoems } from '../mock-server';
+import { AudienceActivitiesResponse } from '../shared/models/graphql-responses/responses';
 
 @Injectable()
 export class PoetryService {
@@ -31,7 +32,7 @@ export class PoetryService {
     return this.articlesService.applaud(applaudPayload);
   }
 
-  addComment(commentPayload: CommentPayload) {
+  addComment(commentPayload: CommentPayload): Observable<any> {
     return this.articlesService.addComment(commentPayload);
   }
 

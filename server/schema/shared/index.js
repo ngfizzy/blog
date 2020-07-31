@@ -2,7 +2,14 @@ const { gql } = require('apollo-server');
 
 const articleAndRelatedModels = gql`
   type Audience {
-    id: Int!
+    id: Int
+    email: String
+    audienceName: String
+    deviceUUID: String
+  }
+
+  input AudiencePayload {
+    id: Int
     email: String
     audienceName: String
     deviceUUID: String!
@@ -87,8 +94,6 @@ const articleAndRelatedModels = gql`
     article: Article
     error: String
   }
-
-
 `;
 
 module.exports = articleAndRelatedModels;
