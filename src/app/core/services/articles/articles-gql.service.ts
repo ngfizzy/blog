@@ -17,6 +17,13 @@ export class ArticlesGqlService {
     }).valueChanges.pipe(map(response => response.data.getPublishedArticles));
   }
 
+  getOneArticle(articleId: number) {
+    return this.apollo.watchQuery<iGqlResponses.GetOnePublishedArticleResponse>({
+      query: queries.getOnePublishedArticle,
+      variables: { articleId }
+    }).valueChanges.pipe(map(response => response.data.getOnePublishedArticle))
+  }
+
   applaud(applaudPayload: ApplaudPayload) {
     return this.apollo.mutate<iGqlResponses.ApplaudResponse>({
       mutation: mutations.applaud,

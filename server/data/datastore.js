@@ -328,13 +328,20 @@ module.exports = {
     };
   },
   getPublishedArticles() {
-    const published = articles.filter(
+    const publishedArticles = articles.filter(
       article =>
         !article.categories.find(category => category.name === 'poetry') &&
         article.published,
     );
 
-    return { articles: published };
+    return { articles: publishedArticles };
+  },
+  getOnePublishedArticle() {
+    const publishedArticle = this.articles.find(
+      found => articleId === found.id && found.published === true,
+    );
+
+    return { article: publishedArticle };
   },
   applaud(payload) {
     const { applauds, articleId, audience: currentAudience } = payload;

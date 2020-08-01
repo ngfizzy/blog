@@ -41,10 +41,14 @@ export class ArticleEffects {
     map((action) => (action as articlesActions.GetOneArticle).payload),
     mergeMap((articleId) =>
       this.articlesService.getOne(articleId).pipe(
-        map((article) => new articlesActions.GetOneArticleSuccess(article)),
-        catchError((error) =>
-          of(new articlesActions.GetOneArticleFailure(error.message))
-        )
+        map((response) => {
+          const nextActions = {
+            SuccessAction: articlesActions.GetOneArticleSuccess,
+            ErrorAction: articlesActions.GetOneArticleFailure,
+          };
+
+          return this.nextAction.getNextActions(response, nextActions);
+        }),
       )
     )
   );

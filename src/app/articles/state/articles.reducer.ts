@@ -60,7 +60,7 @@ export function articlesReducer(
       return {
         ...state,
         selectedArticle: {
-          article: { ...action.payload },
+          article: { ...action.payload.article },
           activitiesState: {
             ...state.selectedArticle.activitiesState,
             isLoading: false,

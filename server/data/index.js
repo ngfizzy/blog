@@ -80,6 +80,10 @@ class Data {
   addComment(payload) {
     return this.dataStore.addComment(payload);
   }
+
+  getOnePublishedArticle(articleId) {
+    return this.dataStore.getOnePublishedArticle(articleId);
+  }
 }
 
 module.exports = new Data();

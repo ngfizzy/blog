@@ -1,9 +1,12 @@
 const dataApi = require('../../data/');
 
-const authorsArticlesQueries = {
+const articlesQueries = {
   getPublishedArticles() {
     return dataApi.getPublishedArticles();
+  },
+  getOnePublishedArticle(_, { articleId }) {
+    return dataApi.getPublishedArticles(articleId);
   }
 };
 
-module.exports = authorsArticlesQueries;
+module.exports = articlesQueries;
