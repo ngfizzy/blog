@@ -8,6 +8,7 @@ export interface ArticlesState extends CoreState {
     article: Article;
     activitiesState: {
       isLoading: boolean;
+      error: string;
       activities: AudienceActivity[]
     }
     isLoading: boolean;

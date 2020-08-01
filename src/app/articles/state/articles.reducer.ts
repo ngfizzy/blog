@@ -10,6 +10,7 @@ const defaultState: ArticlesState = {
     article: {} as Article,
     activitiesState: {
       isLoading: true,
+      error: '',
       activities: [],
     },
   },
@@ -40,6 +41,9 @@ export function articlesReducer(
       return {
         ...state,
         articles: [...action.payload.articles],
+        selectedArticle: {
+          ...state.selectedArticle
+        },
         isLoading: false,
         error: ''
       };
@@ -62,11 +66,25 @@ export function articlesReducer(
         selectedArticle: {
           article: { ...action.payload.article },
           activitiesState: {
-            ...state.selectedArticle.activitiesState,
+            activities: [...action.payload.article.audienceActivities ],
             isLoading: false,
+            error: ''
           },
           isLoading: false,
         },
+      };
+    case ArticlesActionTypes.GetOneArticleFailure:
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          activitiesState: {
+            ...state.selectedArticle.activitiesState,
+            activities: [ ...state.selectedArticle.activitiesState.activities ],
+            isLoading: false,
+            error: action.payload
+          }
+        }
       };
     case ArticlesActionTypes.Applaud:
       return {

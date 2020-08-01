@@ -23,6 +23,8 @@ import { ArticleComponentConfig } from '../../shared/models/article-component-co
 import { Article } from '../../shared/models/article.interface';
 import { Audience, AudienceActivity } from 'src/app/shared/models';
 import { GetCurrentAudience } from 'src/app/core/state/core.actions';
+import { ToastrService } from 'ngx-toastr';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   templateUrl: './article.component.html',
@@ -41,15 +43,20 @@ export class ArticleComponent implements OnInit, OnDestroy {
   audience$: Observable<Audience>;
   audienceActivities$: Observable<AudienceActivity[]>;
   hideScrollBar: boolean;
+  currentUserApplauds = 0;
 
   private applaudsWatcherSubject$: Subject<ApplaudPayload> = new Subject();
   private applaudsWatcher$ = this.applaudsWatcherSubject$
     .asObservable()
     .pipe(debounceTime(800), distinctUntilChanged());
+  selectedArticle: Article;
 
   constructor(
     private router: ActivatedRoute,
+    private toastr: ToastrService,
     private store: Store<fromArticle.ArticleState>,
+    private title: Title,
+    private meta: Meta,
   ) {}
 
   ngOnInit() {
@@ -61,11 +68,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(new GetCurrentAudience());
     this.audience$ = this.store.select(getAudience);
+
     this.audienceActivities$ = this.store.select(
-      fromArticle.getSelectedArticleActivities,
-    );
-    this.audienceActivities$ = this.store.pipe(
-      select(getSelectedArticleActivities),
+      fromArticle.getSelectedArticleActivities
     );
 
     this.applaudsWatcher$
@@ -87,6 +92,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
     );
   }
 
+
+  showNotification(message: string) {
+    this.toastr.info(message);
+  }
+
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
@@ -102,5 +112,14 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   updateAudienceApplauds(applauds: number) {
     this.currentAudienceApplauds = applauds;
+  }
+  private updateTitleAndMeta(article: Article) {
+    if (article) {
+      this.title.setTitle(`NgFizzy Blog - Tech: ${article.title}`);
+      this.meta.updateTag({
+        name: `NgFizzy Blog - Full Article`,
+        content: article.title,
+      });
+    }
   }
 }

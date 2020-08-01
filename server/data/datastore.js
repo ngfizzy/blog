@@ -336,8 +336,8 @@ module.exports = {
 
     return { articles: publishedArticles };
   },
-  getOnePublishedArticle() {
-    const publishedArticle = this.articles.find(
+  getOnePublishedArticle(articleId) {
+    const publishedArticle = articles.find(
       found => articleId === found.id && found.published === true,
     );
 

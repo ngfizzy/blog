@@ -5,7 +5,7 @@ const articlesQueries = {
     return dataApi.getPublishedArticles();
   },
   getOnePublishedArticle(_, { articleId }) {
-    return dataApi.getPublishedArticles(articleId);
+    return dataApi.getOnePublishedArticle(articleId);
   }
 };
 
