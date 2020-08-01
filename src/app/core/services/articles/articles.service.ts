@@ -32,10 +32,6 @@ export class ArticlesService {
   }
 
   addComment(commentPayload: CommentPayload): Observable<AudienceActivitiesResponse> {
-    // const audienceActivity: any = addComment(commentPayload);
-
-    // return of(audienceActivity);
-
     return this.articlesGqlService.addComment(commentPayload);
   }
 }
