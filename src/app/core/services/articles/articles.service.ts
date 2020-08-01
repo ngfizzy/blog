@@ -28,16 +28,14 @@ export class ArticlesService {
   }
 
   applaud(applaudPayload: ApplaudPayload) {
-    // const audienceActivity = applaud(applaudPayload);
-
-    // return of(audienceActivity);
-
     return this.articlesGqlService.applaud(applaudPayload);
   }
 
   addComment(commentPayload: CommentPayload): Observable<AudienceActivitiesResponse> {
-    const audienceActivity: any = addComment(commentPayload);
+    // const audienceActivity: any = addComment(commentPayload);
 
-    return of(audienceActivity);
+    // return of(audienceActivity);
+
+    return this.articlesGqlService.addComment(commentPayload);
   }
 }

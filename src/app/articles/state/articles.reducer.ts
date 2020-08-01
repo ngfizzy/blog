@@ -114,9 +114,6 @@ export function articlesReducer(
           ...state.selectedArticle,
           article: {
             ...state.selectedArticle.article,
-            audienceActivities: [
-              ...state.selectedArticle.article.audienceActivities,
-            ],
           },
           activitiesState: {
             ...state.selectedArticle.activitiesState,
@@ -136,7 +133,7 @@ export function articlesReducer(
 
       return {
         ...state,
-        articles: [...state.articles],
+        articles: [ ...state.articles ],
         selectedArticle: {
           ...state.selectedArticle,
           article: { ...article },

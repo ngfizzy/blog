@@ -22,6 +22,7 @@ export const enum ArticlesActionTypes {
   ApplaudFailure = '[Article] Applaud Failure',
   AddComment = '[Articles] Add Comment',
   AddCommentSuccess = '[Articles] Add Comment Success',
+  AddCommentFailure = '[Articles] Add Comment Failure',
 }
 
 export class GetAllArticles implements Action {
@@ -98,6 +99,12 @@ export class AddCommentSuccess implements Action {
   readonly type = ArticlesActionTypes.AddCommentSuccess;
 
   constructor(public payload: AudienceActivitiesResponse) {}
+}
+
+export class AddCommentFailure implements Action {
+  readonly type = ArticlesActionTypes.AddCommentFailure;
+
+  constructor(public payload: string) {}
 }
 
 export type ArticlesActions =

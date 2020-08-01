@@ -69,16 +69,23 @@ export class ArticleEffects {
     )
   );
 
-  // @Effect()
-  // addComment$: Observable<Action> = this.actions$.pipe(
-  //   ofType(articlesActions.ArticlesActionTypes.AddComment),
-  //   map((action) => (action as articlesActions.AddComment).payload),
-  //   switchMap((payload) =>
-  //     this.articlesService
-  //       .addComment(payload)
-  //       .pipe(
-  //         map((activities) => new articlesActions.AddCommentSuccess(activities))
-  //       )
-  //   )
-  // );
+  @Effect()
+  addComment$: Observable<Action> = this.actions$.pipe(
+    ofType(articlesActions.ArticlesActionTypes.AddComment),
+    map((action) => (action as articlesActions.AddComment).payload),
+    switchMap((payload) =>
+      this.articlesService
+        .addComment(payload)
+        .pipe(
+          map((activities) => {
+            const nextActions = {
+              ErrorAction: articlesActions.AddCommentFailure,
+              SuccessAction: articlesActions.AddCommentSuccess
+            };
+
+            return this.nextAction.getNextActions(activities, nextActions)
+          })
+        )
+    )
+  );
 }

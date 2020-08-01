@@ -76,6 +76,10 @@ class Data {
   applaud(payload) {
     return this.dataStore.applaud(payload);
   }
+
+  addComment(payload) {
+    return this.dataStore.addComment(payload);
+  }
 }
 
 module.exports = new Data();

@@ -430,5 +430,43 @@ module.exports = {
     audienceRecord.push(audience);
 
     return audience;
+  },
+  addComment(payload) {
+    const { comment, articleId, audience: currentAudience } = payload;
+
+    const audience = this.findOrCreateAudience(currentAudience);
+    const article = articles.find(({ id }) => id === articleId);
+
+    let act = article.audienceActivities.find(
+      activity => activity.audience.id === audience.id,
+    );
+
+    const com = this.createComment(comment, articleId, audience.id);
+    audienceComments.push(com);
+
+    if (!act) {
+      act = this.createAudienceActivity(payload);
+      article.audienceActivities.push(act);
+    }
+
+    act.comments.push(com);
+
+    return { articleId, activities: article.audienceActivities };
+  },
+  createComment(comment, articleId, audienceId) {
+    const commentId = !audienceComments.length ? 0
+      : audienceComments[audienceComments.length - 1].id + 1;
+
+    const comm = {
+      articleId,
+      audienceId,
+      comment,
+      id: commentId,
+      createdAt: new Date().toString(),
+    };
+
+    audienceComments.push(comm);
+
+    return comm;
   }
 };

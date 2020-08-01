@@ -8,6 +8,12 @@ const articlesTypeDefs = gql`
     audience: AudiencePayload
   }
 
+  input CommentPayload {
+    articleId: Int
+    comment: String
+    audience: AudiencePayload
+  }
+
   type AudienceActivitiesResponse {
     articleId: Int
     activities: [AudienceActivity]
@@ -16,6 +22,7 @@ const articlesTypeDefs = gql`
 
   extend type Mutation {
     applaud(applaudPayload: ApplaudPayload): AudienceActivitiesResponse
+    addComment(commentPayload: CommentPayload): AudienceActivitiesResponse
   }
 `;
 

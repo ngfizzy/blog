@@ -5,7 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import * as iGqlResponses from '../../../shared/models/graphql-responses';
 import * as queries from './queries';
 import * as mutations from './mutations';
-import { ApplaudPayload } from 'src/app/shared/models';
+import { ApplaudPayload, CommentPayload } from 'src/app/shared/models';
 
 @Injectable({ providedIn: 'root' })
 export class ArticlesGqlService {
@@ -24,5 +24,14 @@ export class ArticlesGqlService {
         applaudPayload,
       }
     }).pipe(map(response => response.data.applaud));
+  }
+
+  addComment(commentPayload: CommentPayload) {
+    return this.apollo.mutate<iGqlResponses.AddCommentResponse>({
+      mutation: mutations.addComment,
+      variables: {
+        commentPayload
+      }
+    }).pipe(map(response => response.data.addComment));
   }
 }
