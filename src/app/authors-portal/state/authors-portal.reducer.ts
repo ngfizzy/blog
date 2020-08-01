@@ -104,17 +104,6 @@ export function authorsPortalReducer(
           top10ArticlesState: {
             ...state.dashboardState.top10ArticlesState,
             isLoading: true,
-          },
-        },
-      };
-    case AuthorsPortalActionTypes.GetTop10Articles:
-      return {
-        ...state,
-        dashboardState: {
-          ...state.dashboardState,
-          top10ArticlesState: {
-            ...state.dashboardState.top10ArticlesState,
-            isLoading: true,
             error: '',
           },
         },
