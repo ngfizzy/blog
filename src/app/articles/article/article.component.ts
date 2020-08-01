@@ -1,8 +1,6 @@
+import { Store, select } from '@ngrx/store';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Applaud } from './../state/articles.actions';
-import { getAudience } from './../../core/state/index';
-import { ApplaudPayload, CommentPayload } from './../../shared/models/';
 import {
   takeUntil,
   tap,
@@ -11,16 +9,24 @@ import {
   distinctUntilChanged,
 } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
+import { Title, Meta } from '@angular/platform-browser'
+
+import { Applaud } from './../state/articles.actions';
+import { getAudience } from './../../core/state/';
 import * as fromArticle from '../state';
 import * as fromArticleActions from '../state/articles.actions';
 
-import { ArticleComponentConfig } from '../../shared/models/article-component-config.interface';
-import { Article } from '../../shared/models/article.interface';
-import { Audience, AudienceActivity } from 'src/app/shared/models';
+import {
+  ArticleComponentConfig,
+  Article,
+  Audience,
+  AudienceActivity,
+  CommentPayload,
+  ApplaudPayload
+} from '../../shared/models';
 import { GetCurrentAudience } from 'src/app/core/state/core.actions';
-import { ToastrService } from 'ngx-toastr';
-import { Title, Meta } from '@angular/platform-browser';
+;
 
 @Component({
   templateUrl: './article.component.html',
@@ -88,7 +94,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
       tap(article => this.updateTitleAndMeta(article))
     );
   }
-
 
   showNotification(message: string) {
     this.toastr.info(message);

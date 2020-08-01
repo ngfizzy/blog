@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { of, Observable } from 'rxjs';
-
-import { CommentPayload } from '../../../shared/models/audience-activity-payloads.interface';
-import { Article } from '../../../shared/models/article.interface';
-import { ApplaudPayload } from '../../../shared/models';
-import { ArticlesGqlService } from './articles-gql.service';
-import { ArticlesResponse, AudienceActivitiesResponse, ArticleResponse } from 'src/app/shared/models/graphql-responses/responses';
 import { switchMap } from 'rxjs/operators';
+
+import { Article } from '../../../shared/models';
+import { ApplaudPayload, CommentPayload } from '../../../shared/models';
+import { ArticlesGqlService } from './articles-gql.service';
+import {
+  ArticlesResponse,
+  AudienceActivitiesResponse,
+  ArticleResponse
+} from 'src/app/shared/models/graphql-responses/responses';
 import { ArticlesState } from 'src/app/articles/state/articles.state';
 import { getAllArticles } from 'src/app/articles/state';
 
