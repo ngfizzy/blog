@@ -1,12 +1,8 @@
-import { getSelectedArticleActivities } from './../state/index';
-import { Applaud } from './../state/articles.actions';
-import { getAudience } from './../../core/state/index';
-import {
-  ApplaudPayload,
-  CommentPayload,
-} from './../../shared/models/audience-activity-payloads.interface';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Applaud } from './../state/articles.actions';
+import { getAudience } from './../../core/state/index';
+import { ApplaudPayload, CommentPayload } from './../../shared/models/';
 import {
   takeUntil,
   tap,
@@ -89,6 +85,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
         ),
       ),
       switchMap(() => this.store.pipe(select(fromArticle.selectArticle))),
+      tap(article => this.updateTitleAndMeta(article))
     );
   }
 
