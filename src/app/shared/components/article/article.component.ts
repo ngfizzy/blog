@@ -109,10 +109,10 @@ export class ArticleComponent implements OnInit, OnChanges {
       this.isExpandedView = !this.isExpandedView;
       this.articleBody = this.getArticleBody();
 
-      const article = this.isExpandedView ? this.article : null;
-
-      this.opened.emit(article);
     }
+    // const article = this.isExpandedView ? this.article : null;
+
+    this.opened.emit(this.article);
   }
 
   getArticleBody() {

@@ -1,6 +1,6 @@
 import { SetPageTitle } from 'src/app/core/state/core.actions';
 import { getArticles } from './../../authors-portal/authors-articles/state/index';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
@@ -46,7 +46,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     isActive: false,
     isExpandedView: false,
     isTouched: false,
-    canToggle: true,
+    canToggle: false,
     isFull: true,
   };
 
@@ -58,6 +58,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private store: Store<ArticlesState>,
+    private router: Router,
     private toastr: ToastrService,
     private title: Title,
     private meta: Meta,
@@ -105,9 +106,10 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     if (article) {
       this.store.dispatch(new fromArticlesActions.GetOneArticle(article.id));
       this.currentUserApplauds = 0;
+      this.updateTitleAndMeta(article);
+      this.router.navigate(['/articles/', article.id])
     }
 
-    this.updateTitleAndMeta(article);
   }
 
   showNotification(message: string) {
