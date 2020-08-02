@@ -45,6 +45,14 @@
               "node_modules/prismjs/components/prism-csharp.min.js",
               "node_modules/prismjs/components/prism-css.min.js",
               "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "device-uuid",
+              "ngx-ellipsis",
+              "graphql-tag",
+              "element-resize-detector",
+              "zen-observable",
+              "batch-processor"
             ]
           },
           "configurations": {
