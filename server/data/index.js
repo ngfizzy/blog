@@ -73,6 +73,10 @@ class Data {
     return this.dataStore.getPublishedArticles();
   }
 
+  getPublishedPoems() {
+    return this.dataStore.getPublishedPoems();
+  }
+
   applaud(payload) {
     return this.dataStore.applaud(payload);
   }
@@ -84,6 +88,7 @@ class Data {
   getOnePublishedArticle(articleId) {
     return this.dataStore.getOnePublishedArticle(articleId);
   }
+
 }
 
 module.exports = new Data();

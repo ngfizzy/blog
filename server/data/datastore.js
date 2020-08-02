@@ -336,6 +336,15 @@ module.exports = {
 
     return { articles: publishedArticles };
   },
+  getPublishedPoems() {
+    const publishedPoems = articles.filter(
+      article =>
+        article.categories.find(category => category.name === 'poetry') &&
+          article.published,
+    );
+
+    return { poems: publishedPoems };
+  },
   getOnePublishedArticle(articleId) {
     const publishedArticle = articles.find(
       found => articleId === found.id && found.published === true,

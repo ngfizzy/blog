@@ -5,10 +5,12 @@ import {
   ApplaudPayload,
 } from 'src/app/shared/models';
 import { AudienceActivitiesResponse } from 'src/app/shared/models/graphql-responses/responses';
+import { PoemsResponse } from '../poetry-shared/models/graphql-responses/responses';
 
 export const enum PoetryActionTypes {
   GetAllPoems = '[Poetry] Get All',
   GetAllPoemsSuccess = '[Poetry] Get All Poems Success',
+  GetPoemError = '[Poetry] Get Poems Error',
   GetPoem = '[Poetry] Get Poem',
   GetPoemSuccess = '[Poetry] Get Poem Success',
   Applaud = '[Poetry] Applaud',
@@ -24,7 +26,13 @@ export class GetAllPoems implements Action {
 export class GetAllPoemsSuccess implements Action {
   readonly type = PoetryActionTypes.GetAllPoemsSuccess;
 
-  constructor(public payload: Poem[]) {}
+  constructor(public payload: PoemsResponse) {}
+}
+
+export class GetAllPoemsError {
+  readonly type = PoetryActionTypes.GetPoemError;
+
+  constructor(public payload: string) {}
 }
 
 export class GetPoem implements Action {
@@ -65,6 +73,7 @@ export class AddCommentSuccess implements Action {
 export type PoetryActions =
   | GetAllPoems
   | GetAllPoemsSuccess
+  | GetAllPoemsError
   | GetPoem
   | GetPoemSuccess
   | Applaud

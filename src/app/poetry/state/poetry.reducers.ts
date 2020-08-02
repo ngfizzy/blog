@@ -8,9 +8,11 @@ const defaultState: PoetryState = {
   selectedPoem: {
     isLoading: false,
     poem: null,
+    error: '',
     activitiesState: {
       isLoading: true,
       activities: [],
+      error: ''
     },
   },
   navState: {
@@ -21,6 +23,7 @@ const defaultState: PoetryState = {
     audience: null,
     isLoading: true,
   },
+  error: ''
 };
 
 export function poetryReducers(
@@ -33,7 +36,7 @@ export function poetryReducers(
     case PoetryActionTypes.GetAllPoemsSuccess:
       return {
         ...state,
-        poems: [...action.payload],
+        poems: [...action.payload.poems],
         isLoading: false,
       };
     case PoetryActionTypes.GetPoem:

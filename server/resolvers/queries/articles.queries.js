@@ -6,6 +6,9 @@ const articlesQueries = {
   },
   getOnePublishedArticle(_, { articleId }) {
     return dataApi.getOnePublishedArticle(articleId);
+  },
+  getPublishedPoems() {
+    return dataApi.getPublishedPoems();
   }
 };
 

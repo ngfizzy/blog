@@ -1,23 +1,32 @@
 import { Injectable } from '@angular/core';
-import { ArticlesService } from '../core/services/articles/articles.service';
+import { ArticlesService } from '../../core/services/articles/articles.service';
 import { map, tap } from 'rxjs/operators';
-import { Poem, Poems, CommentPayload, ApplaudPayload } from '../shared/models';
+import { Poem, Poems, CommentPayload, ApplaudPayload } from '../../shared/models';
 import { Observable, of } from 'rxjs';
-import { poemThemeImagePlaceholders } from '../core/constants';
-import { applaud, getAllPublishedPoems } from '../mock-server';
-import { AudienceActivitiesResponse } from '../shared/models/graphql-responses/responses';
+import { poemThemeImagePlaceholders } from '../../core/constants';
+import { getAllPublishedPoems } from '../../mock-server';
+import { PoetryGqlService } from './poetry-gql.service';
 
 @Injectable()
 export class PoetryService {
   private poems$: Observable<Poem[]>;
-  constructor(private articlesService: ArticlesService) {
+  constructor(
+    private articlesService: ArticlesService,
+    private poetryGqlService: PoetryGqlService
+  ) {
     this.poems$ = of(getAllPublishedPoems()).pipe(
       map(poems => this.assignRandomThemeImagesToPoems(poems)),
     );
   }
 
   getAllPoems() {
-    return this.poems$;
+    return this.poetryGqlService.getAllPoems()
+      .pipe(map(response => {
+        const poems = this.assignRandomThemeImagesToPoems(response.poems);
+        response.poems = poems;
+
+        return response;
+      }));
   }
 
   getPoem(poemId: number) {
