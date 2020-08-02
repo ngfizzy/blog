@@ -7,6 +7,7 @@ import * as poetryActions from './poetry.actions';
 import { mergeMap, map, switchMap } from 'rxjs/operators';
 import { Poem } from 'src/app/shared/models';
 import { NextActionService } from 'src/app/core/services/next-action.service';
+import { PoemResponse } from '../poetry-shared/models/graphql-responses/responses';
 
 @Injectable()
 export class PoetryEffects {
@@ -42,7 +43,15 @@ export class PoetryEffects {
     mergeMap((poemId) =>
       this.poetryService
         .getPoem(poemId)
-        .pipe(map((poem: Poem) => new poetryActions.GetPoemSuccess(poem)))
+        .pipe(map((response: PoemResponse) => {
+          const nextError = {
+            SuccessAction: poetryActions.GetPoemSuccess,
+            ErrorAction: poetryActions.GetPoemError
+          };
+
+          return this.nextAction.getNextActions(response, nextError);
+        }),
+      )
     )
   );
 

@@ -1,5 +1,8 @@
 import { PoetryState } from './poetry.state';
 import { PoetryActions, PoetryActionTypes } from './poetry.actions';
+import { Poem } from 'src/app/shared/models';
+import { PoemsCarouselComponent } from '../components/poems-carousel/poems-carousel.component';
+import { strictEqual } from 'assert';
 
 const defaultState: PoetryState = {
   title: '',
@@ -56,7 +59,7 @@ export function poetryReducers(
         ...state,
         selectedPoem: {
           ...state.selectedPoem,
-          poem: { ...action.payload },
+          poem: { ...action.payload.poem },
           activitiesState: {
             ...state.selectedPoem.activitiesState,
             isLoading: false,
@@ -79,19 +82,19 @@ export function poetryReducers(
     case PoetryActionTypes.ApplaudSuccess: {
       const { articleId, activities } = action.payload;
       const index = state.poems.findIndex((a) => a.id === articleId);
-      const poem = state.poems[index];
-
-      poem.audienceActivities = activities;
-      state.poems[index] = poem;
+      const poem: Poem = {
+        ...state.poems[index],
+        audienceActivities: activities
+      };
+      const poems = [ ...state.poems];
+      poems[index] = poem;
 
       return {
         ...state,
+        poems: poems,
         selectedPoem: {
           ...state.selectedPoem,
-          poem: {
-            ...poem,
-            audienceActivities: [...poem.audienceActivities],
-          },
+          poem: poem,
           activitiesState: {
             ...state.selectedPoem.activitiesState,
             activities: [...activities],
@@ -119,20 +122,24 @@ export function poetryReducers(
       const poemIndex = state.poems.findIndex(
         (p) => p.id === action.payload.articleId
       );
+      const poem: Poem = {
+        ...state.poems[poemIndex],
+        audienceActivities: action.payload.activities
+     };
+     const poems = [...state.poems]
 
-      const poem = state.poems[poemIndex];
-
-      poem.audienceActivities = [...action.payload.activities];
-      state.poems[poemIndex] = poem;
+     poems[poemIndex] = poem;
 
       return {
         ...state,
-        poems: [...state.poems],
+        poems: poems,
         selectedPoem: {
           ...state.selectedPoem,
-          poem: { ...poem },
+          poem: poem,
           isLoading: false,
+          error: ''
         },
+        error: ''
       };
     }
     default:
