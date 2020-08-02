@@ -19,10 +19,10 @@ import { takeWhile, repeatWhen, map, tap } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PoemFullCardComponent implements OnChanges {
-  @ViewChild('poemContainer', { static: false }) poemContainer: ElementRef;
-  @ViewChild('poemTitleWrapper', { static: false })
+  @ViewChild('poemContainer') poemContainer: ElementRef;
+  @ViewChild('poemTitleWrapper')
   poemTitleWrapper: ElementRef;
-  @ViewChild('poemTitle', { static: false }) poemTitle: ElementRef;
+  @ViewChild('poemTitle') poemTitle: ElementRef;
 
   @Input() poem: Poem;
   @Input() maxHeight: string;
