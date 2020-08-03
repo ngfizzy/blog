@@ -1,17 +1,20 @@
 
 <app-articles-content-wrapper>
   <ng-container *ngIf="(article$ | async) as article">
-    <app-article
-        [config]="articleConfig"
-        [article]="article"
-        [currentAudience]="audience$ | async"
-        [currentUserApplauds]="currentAudienceApplauds"
-        [audienceActivities]="(audienceActivities$ | async)"
-        (notify)="showNotification($event)"
-        (applaud)="submitApplauds($event)"
-        (updateUserApplaud)="updateAudienceApplauds($event)"
-        (addComment)="submitComment($event)"
-      >
-      </app-article>
-  </ng-container>
+    <main class="col-sm-12 col-md-12 col-lg-12 col-xl-11">
+      <app-article
+      [config]="articleConfig"
+      [article]="article"
+      [currentAudience]="audience$ | async"
+      [currentUserApplauds]="currentAudienceApplauds"
+      [audienceActivities]="(audienceActivities$ | async)"
+      (notify)="showNotification($event)"
+      (applaud)="submitApplauds($event)"
+      (updateUserApplaud)="updateAudienceApplauds($event)"
+      (addComment)="submitComment($event)"
+    >
+    </app-article>
+  </main>
+</ng-container>
+
 </app-articles-content-wrapper>

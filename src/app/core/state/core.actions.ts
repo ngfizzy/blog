@@ -7,7 +7,10 @@ export const enum CoreActionTypes {
   GetCurrentAudienceSuccess = '[App] Get Current Audience Success',
   SetPageTitle = '[App] Set Page Title',
   GetNav = '[App] Get Nav',
-  GetNavSuccess = '[Nav] Get Nav Success',
+  GetNavSuccess = '[App] Get Nav Success',
+  SubmitContact = '[App] Submit Contact',
+  SubmitContactSuccess = '[App] Submit Contact Success',
+  SubmitContactError = '[App] Submit Contact Error'
 }
 export class GetCurrentAudience implements Action {
   readonly type = CoreActionTypes.GetCurrentAudience;
@@ -32,6 +35,7 @@ export class GetNav implements Action {
 
   constructor() {}
 }
+
 
 export class GetNavSuccess implements Action {
   readonly type = CoreActionTypes.GetNavSuccess;

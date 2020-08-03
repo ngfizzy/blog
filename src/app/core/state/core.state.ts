@@ -10,4 +10,8 @@ export interface CoreState {
     isLoading: boolean;
     audience: Audience;
   };
+  // contactState?: {
+  //   contacted: boolean;
+  //   submitting: boolean;
+  // }
 }

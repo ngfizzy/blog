@@ -44,6 +44,7 @@ import { NotFoundComponent } from './components/Not Found/not-found.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { CopyToClipboardComponent } from './components/copy-to-clipboard/copy-to-clipboard.component';
 import { SecondsToJustNowPipe } from './pipes/seconds-to-just-now.pipe';
+import { ContactFormComponent } from './components/contact-form/contact-form.component'
 
 @NgModule({
   imports: [
@@ -97,7 +98,8 @@ import { SecondsToJustNowPipe } from './pipes/seconds-to-just-now.pipe';
     TimeagoModule,
     ArticleActionsComponent,
     ArticlesContentWrapperComponent,
-    SecondsToJustNowPipe
+    SecondsToJustNowPipe,
+    ContactFormComponent
   ],
   declarations: [
     SpinnerComponent,
@@ -108,6 +110,7 @@ import { SecondsToJustNowPipe } from './pipes/seconds-to-just-now.pipe';
     ArticleActionsComponent,
     ArticlesContentWrapperComponent,
     SecondsToJustNowPipe,
+    ContactFormComponent,
   ],
   providers: [],
 })

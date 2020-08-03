@@ -115,6 +115,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   updateAudienceApplauds(applauds: number) {
     this.currentAudienceApplauds = applauds;
   }
+
   private updateTitleAndMeta(article: Article) {
     if (article) {
       this.title.setTitle(`NgFizzy Blog - Tech: ${article.title}`);
