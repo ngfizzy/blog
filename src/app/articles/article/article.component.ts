@@ -69,10 +69,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
       .subscribe(applauds => this.store.dispatch(new Applaud(applauds)));
 
     this.store.dispatch(new GetCurrentAudience());
-    this.audience$ = this.store.select(getAudience);
+    this.audience$ = this.store.pipe(select(getAudience));
 
-    this.audienceActivities$ = this.store.select(
-      fromArticle.getSelectedArticleActivities
+    this.audienceActivities$ = this.store.pipe(
+      select(fromArticle.getSelectedArticleActivities),
     );
 
     this.applaudsWatcher$

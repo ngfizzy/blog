@@ -101,22 +101,19 @@ export function articlesReducer(
     case ArticlesActionTypes.ApplaudSuccess: {
       const { articleId, activities } = action.payload;
       const index = state.articles.findIndex(a => a.id === articleId);
-      const article = state.articles[index];
-
-      article.audienceActivities = activities;
-      state.articles[index] = article;
+      const article = {
+        ...state.articles[index],
+        audienceActivities: [...activities]
+      };
+      const articles = [ ...state.articles];
+      articles[index] = article;
 
       return {
         ...state,
-        articles:  [ ...state.articles ],
+        articles: [ ...articles ],
         selectedArticle: {
           ...state.selectedArticle,
-          article: {
-            ...state.selectedArticle.article,
-            audienceActivities: [
-              ...activities
-            ],
-          },
+          article: { ...article },
           activitiesState: {
             ...state.selectedArticle.activitiesState,
             activities: [...activities],
