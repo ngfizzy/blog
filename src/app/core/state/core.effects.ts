@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { AudienceService } from '../services/audience.service';
+import { AudienceService } from '../services/audience/audience.service';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import {
@@ -8,9 +8,11 @@ import {
   GetCurrentAudience,
   GetCurrentAudienceSuccess,
   GetNavSuccess,
+  GetCurrentAudienceError,
 } from './core.actions';
 import { map, switchMap } from 'rxjs/operators';
 import { CoreService } from '../services/core.service';
+import { NextActionService } from '../services/next-action.service';
 
 @Injectable()
 export class CoreEffects {
@@ -18,6 +20,7 @@ export class CoreEffects {
     private actions$: Actions,
     private audienceService: AudienceService,
     private coreService: CoreService,
+    private nextAction: NextActionService,
   ) {}
 
   @Effect()
@@ -25,8 +28,15 @@ export class CoreEffects {
     ofType(CoreActionTypes.GetCurrentAudience),
     map(action => action as GetCurrentAudience),
     switchMap(() =>
-      this.audienceService.audience$.pipe(
-        map(audience => new GetCurrentAudienceSuccess(audience)),
+      this.audienceService.audienceResponse$.pipe(
+        map(res =>{
+          const nextActions ={
+            SuccessAction: GetCurrentAudienceSuccess,
+            ErrorAction: GetCurrentAudienceError
+          };
+
+          return this.nextAction.getNextActions(res, nextActions);
+        }),
       ),
     ),
   );

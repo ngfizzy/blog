@@ -89,6 +89,10 @@ class Data {
     return this.dataStore.getOnePublishedArticle(articleId);
   }
 
+  findAudience(audience) {
+    return this.dataStore.findAudience(audience);
+  }
+
 }
 
 module.exports = new Data();

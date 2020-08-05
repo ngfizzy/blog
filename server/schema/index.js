@@ -4,6 +4,7 @@ const authorsArticlesTypeDefs = require('./authors-articles-type-defs');
 const articlesTypeDefs = require('./articles-type-defs');
 const dashboardTypeDefs = require('./dashboard-type-defs');
 const audienceActivitiesTypeDefs = require('./audience-activities-type-defs');
+const audienceTypeDefs = require('./audience-type-defs');
 
 const root = gql`
   type Query {
@@ -17,6 +18,7 @@ const root = gql`
 const typeDefs = [
   root,
   articlesTypeDefs,
+  audienceTypeDefs,
   audienceActivitiesTypeDefs,
   articleAndRelatedModels,
   authorsArticlesTypeDefs,

@@ -364,7 +364,6 @@ module.exports = {
 
     let act;
 
-
     if (actIndex < 0) {
       act = this.createAudienceActivity(payload);
 
@@ -372,7 +371,6 @@ module.exports = {
       audienceActivities.push(act);
       article.audienceActivities.push(act);
     } else {
-      console.table(article);
       act = article.audienceActivities[actIndex];
       act.applauds = applauds;
     }
@@ -436,7 +434,7 @@ module.exports = {
 
     fillMissingAudienceDetails(audience, options);
 
-    return audience;
+    return {audience};
   },
   createAudience(audience) {
     const lastAudienceId = audienceRecord[audienceRecord.length - 1].id;

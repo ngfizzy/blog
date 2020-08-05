@@ -8,7 +8,7 @@ const articleAndRelatedModels = gql`
     deviceUUID: String
   }
 
-  input AudiencePayload {
+  input AudienceInput{
     id: Int
     email: String
     audienceName: String

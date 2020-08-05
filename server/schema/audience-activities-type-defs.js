@@ -5,13 +5,13 @@ const articlesTypeDefs = gql`
   input ApplaudPayload {
     applauds: Int
     articleId: Int
-    audience: AudiencePayload
+    audience: AudienceInput
   }
 
   input CommentPayload {
     articleId: Int
     comment: String
-    audience: AudiencePayload
+    audience: AudienceInput
   }
 
   type AudienceActivitiesResponse {

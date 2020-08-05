@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { DeviceUUID } from 'device-uuid';
-import { Audience } from '../../shared/models';
-import { findAudience } from '../../mock-server';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { Audience } from '../../../shared/models';
+import { AudienceGqlService } from './audience-gql.service';
+import { AudienceResponse } from 'src/app/shared/models/graphql-responses/responses/audience-response.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AudienceService {
@@ -12,18 +14,17 @@ export class AudienceService {
   /**
    * Current audience reading
    */
-  audience$: Observable<Audience>;
+  audienceResponse$: Observable<AudienceResponse>;
 
   /**
    * True if current audience already already exists in database
    */
   get isAudienceSaved$(): Observable<boolean> {
-    return this.audience$ &&
-      this.audience$.pipe(map(aud => aud && !!aud.id))
-      ;
+    return this.audienceResponse$ &&
+      this.audienceResponse$.pipe(map(res => res.audience && !!res.audience.id));
   }
 
-  constructor() {
+  constructor(private audienceGqlService: AudienceGqlService) {
     this.deviceUUID = new DeviceUUID().get();
     this.loadAudience();
   }
@@ -35,23 +36,23 @@ export class AudienceService {
     > = JSON.parse(localStorage.getItem('currentUser'));
 
     if (currentUser) {
-      this.audience$ = of(this.findAudience(currentUser) as Audience);
+      this.audienceResponse$ = this.findAudience(currentUser).pipe(map(res => {
+
+        return res.audience ?
+        res
+        :
+        { ...res, audience: {deviceUUID: this.deviceUUID }} as AudienceResponse;
+      }));
     } else {
-      const audience: Partial<Audience> = {
+      const audience = {
         deviceUUID: this.deviceUUID,
       };
 
-      this.audience$ = of(audience) as Observable<Audience>;
+      this.audienceResponse$ = of({audience} as AudienceResponse );
     }
   }
 
   private findAudience(audience: Partial<Audience>) {
-    const found = findAudience({ ...audience });
-
-    if (!found) {
-      audience.deviceUUID = this.deviceUUID;
-    }
-
-    return found || audience;
+    return this.audienceGqlService.getAudience(audience);
   }
 }

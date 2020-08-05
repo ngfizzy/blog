@@ -1,6 +1,5 @@
 import { AudienceActivitiesResponse } from './responses';
 
-
 export interface ApplaudResponse {
   applaud: AudienceActivitiesResponse;
 }

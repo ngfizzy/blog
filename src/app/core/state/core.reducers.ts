@@ -6,11 +6,13 @@ const defaultState: CoreState = {
   audienceState: {
     isLoading: true,
     audience: null,
+    contacted: false,
   },
   navState: {
     isLoading: true,
     nav: null,
   },
+
 };
 
 export function coreReducer(
@@ -25,8 +27,16 @@ export function coreReducer(
         ...state,
         audienceState: {
           isLoading: false,
-          audience: { ...action.payload },
+          audience: { ...action.payload.audience },
         },
+      };
+    case CoreActionTypes.GetCurrentAudienceError:
+      return {
+        ...state,
+        audienceState: {
+          ...state.audienceState,
+          isLoading: false
+        }
       };
     case CoreActionTypes.SetPageTitle:
       return {

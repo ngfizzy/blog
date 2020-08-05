@@ -17,6 +17,7 @@ const defaultState: ArticlesState = {
   audienceState: {
     audience: null,
     isLoading: true,
+    contacted: false,
   },
   navState: {
     isLoading: true,
