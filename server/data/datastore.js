@@ -395,8 +395,9 @@ module.exports = {
   },
   findOrCreateAudience(criteria) {
     let audience = this.findAudience(criteria);
-    if (!audience) {
-      audience = this.createAudience(criteria);
+
+    if (!audience.audience) {
+      audience = { audience: this.createAudience(criteria) };
     }
 
     return audience;
@@ -438,7 +439,6 @@ module.exports = {
   },
   createAudience(audience) {
     const lastAudienceId = audienceRecord[audienceRecord.length - 1].id;
-
     audience.id = lastAudienceId + 1;
 
     audienceRecord.push(audience);
@@ -448,14 +448,14 @@ module.exports = {
   addComment(payload) {
     const { comment, articleId, audience: currentAudience } = payload;
 
-    const audience = this.findOrCreateAudience(currentAudience);
+    const {audience: {id}} = this.findOrCreateAudience(currentAudience);
     const article = articles.find(({ id }) => id === articleId);
 
     let act = article.audienceActivities.find(
-      activity => activity.audience.id === audience.id,
+      activity => activity.audience.id === id,
     );
 
-    const com = this.createComment(comment, articleId, audience.id);
+    const com = this.createComment(comment, articleId, id);
     audienceComments.push(com);
 
     if (!act) {
@@ -465,9 +465,11 @@ module.exports = {
 
     act.comments.push(com);
 
+
     return { articleId, activities: article.audienceActivities };
   },
   createComment(comment, articleId, audienceId) {
+
     const commentId = !audienceComments.length ? 0
       : audienceComments[audienceComments.length - 1].id + 1;
 

@@ -141,18 +141,20 @@ export function articlesReducer(
       const articleIndex = state.articles.findIndex(
         art => art.id === action.payload.articleId,
       );
+      const article: Article = {
+        ...state.articles[articleIndex],
+        audienceActivities: [...action.payload.activities ],
+      };
+      const articles = [...state.articles]
 
-      const article = state.articles[articleIndex];
-
-      article.audienceActivities = [...action.payload.activities];
-      state.articles[articleIndex] = article;
+      articles[articleIndex] = article;
 
       return {
         ...state,
-        articles: [ ...state.articles ],
+        articles,
         selectedArticle: {
           ...state.selectedArticle,
-          article: { ...article },
+          article,
           isLoading: false,
         },
       };
