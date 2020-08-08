@@ -6,6 +6,8 @@
     "esversion",
     "hnav",
     "hnavbar",
+    "maxlength",
+    "minlength",
     "ngrx",
     "sidenav",
     "timeago",

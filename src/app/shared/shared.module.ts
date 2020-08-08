@@ -12,6 +12,7 @@ import {
   MatFormFieldModule,
   MatFormField,
   MatLabel,
+  MatError,
 } from '@angular/material/form-field';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MatCardModule } from '@angular/material/card';
@@ -96,6 +97,7 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
     MatDialogModule,
     OrderModule,
     TimeagoModule,
+    MatError,
     ArticleActionsComponent,
     ArticlesContentWrapperComponent,
     SecondsToJustNowPipe,

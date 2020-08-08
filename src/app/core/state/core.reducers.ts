@@ -59,6 +59,32 @@ export function coreReducer(
           nav: { ...action.payload },
         },
       };
+    case CoreActionTypes.SendMessage:
+      return {
+        ...state,
+        audienceState: {
+          ...state.audienceState,
+          isLoading: true,
+        }
+      };
+    case CoreActionTypes.SendMessageSuccess:
+      return {
+        ...state,
+        audienceState: {
+          ...state.audienceState,
+          isLoading: false,
+          contacted: true,
+        },
+      };
+    case CoreActionTypes.SendMessageError:
+      return {
+        ...state,
+        audienceState: {
+          ...state.audienceState,
+          isLoading: false,
+          contacted: false,
+        },
+      };
     default:
       return state;
   }

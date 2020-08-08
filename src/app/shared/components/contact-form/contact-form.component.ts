@@ -1,44 +1,34 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { CoreState, audienceContacted } from 'src/app/core/state';
+import { Store, select } from '@ngrx/store';
+import { NgForm, FormControl, FormGroupDirective } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { SendMessage } from 'src/app/core/state/core.actions';
+import { Audience } from '../../models';
+import { Observable } from 'rxjs';
+
+
 @Component({
   selector: 'app-contact-form',
-  template: `
-    <div class="mat-elevation-z2 rounded fit-width form-container">
-      <h5 class="text-center">Contact Me</h5>
-      <span *ngIf="errorMessage">{{errorMessage}}</span>
-      <form class="fit-width">
-        <mat-form-field class="fit-width mat-form-field" appearance="fill">
-          <mat-label>Email Address</mat-label>
-          <input matInput type="email" name="email" [(ngModel)]="email" required>
-        </mat-form-field>
-        <mat-form-field class="fit-width mat-form-field" appearance="fill">
-          <mat-label>Name</mat-label>
-          <input matInput type="text" name="name" [(ngModel)]="name" required>
-        </mat-form-field>
-        <mat-form-field class="fit-width mat-form-field" appearance="fill">
-          <mat-label>Message</mat-label>
-          <textarea matInput type="text" name="message" [(ngModel)]="message" required></textarea>
-        </mat-form-field>
-
-        <div class="fit-width mat-form-field">
-          <button mat-raised-button color="primary" class="fit-width" type="Submit">Send Message</button>
-        </div>
-      </form>
-    </div>
-  `,
+  templateUrl: './contact-form.component.html',
   styles: [`
     .mat-form-field {
+      margin-bottom: 1.3rem;
+    }
+
+    form {
+      background-color: rgba(255, 255, 255, 0.01);
     }
 
     .form-container {
-      background-color: rgba(255, 255, 255, .6);
       padding: .5rem;
+      background-color: rgba(255, 255, 255, 0.3);
     }
 
     .fit-width {
       width: 100%;
     }
   `],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactFormComponent implements OnInit {
   errorMessage: string;
@@ -46,7 +36,26 @@ export class ContactFormComponent implements OnInit {
   message: string;
   email: string;
 
-  constructor() { }
+  contacted$: Observable<boolean>;
 
-  ngOnInit() { }
+  constructor(private store: Store<CoreState>) { }
+
+  ngOnInit() {
+    this.contacted$ = this.store.pipe(select(audienceContacted));
+   }
+
+  sendMessage(form: NgForm) {
+    if(form.invalid) {
+      this.errorMessage = 'Please correct the invalid field';
+    } else {
+      this.errorMessage = '';
+
+      const audience = { email: this.email, audienceName: this.name } as Audience
+
+      this.store.dispatch(new SendMessage({
+        audience,
+        message: this.message
+      }));
+    }
+  }
 }

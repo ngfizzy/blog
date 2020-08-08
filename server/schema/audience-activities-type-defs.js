@@ -20,9 +20,15 @@ const articlesTypeDefs = gql`
     error: String
   }
 
+  type SendMessageResponse {
+    success: Boolean!
+    error: String
+  }
+
   extend type Mutation {
     applaud(applaudPayload: ApplaudPayload): AudienceActivitiesResponse
     addComment(commentPayload: CommentPayload): AudienceActivitiesResponse
+    sendMessage(audience: AudienceInput!, message: String!): SendMessageResponse
   }
 `;
 

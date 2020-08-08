@@ -6,6 +6,7 @@ const {
   audienceRecord,
   categories,
   generators,
+  messages
 } = require('./data-source');
 
 
@@ -484,5 +485,22 @@ module.exports = {
     audienceComments.push(comm);
 
     return comm;
+  },
+  sendMessage(aud, message) {
+    const { audience } = this.findOrCreateAudience(aud);
+    const lastMessage = messages[messages.length - 1];
+
+    const id = lastMessage ? lastMessage.id + 1 : 0;
+
+    messages.push({
+      id,
+      read: false,
+      message,
+      audienceId: audience.id,
+      email: audience.email,
+      name: audience.name
+    });
+
+    return { success: true };
   }
 };

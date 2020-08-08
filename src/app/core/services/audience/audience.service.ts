@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DeviceUUID } from 'device-uuid';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 import { Audience } from '../../../shared/models';
 import { AudienceGqlService } from './audience-gql.service';
@@ -29,6 +29,15 @@ export class AudienceService {
     this.loadAudience();
   }
 
+  sendMessage(email: string, audienceName: string, message: string) {
+    return this.audienceResponse$.pipe(
+      switchMap(res => {
+        const audience = { ...res.audience, email, audienceName};
+
+        return this.audienceGqlService.sendMessage(audience, message);
+      }),
+    )
+  }
   private loadAudience() {
     const currentUser: Pick<
       Audience,

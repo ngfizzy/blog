@@ -34,6 +34,7 @@ const categories = [
 ];
 const usedIds = [];
 const tags = [];
+const messages = [];
 
 const generators = {
   randomId() {
@@ -208,4 +209,5 @@ module.exports = {
   categories,
   tags,
   generators,
+  messages,
 };

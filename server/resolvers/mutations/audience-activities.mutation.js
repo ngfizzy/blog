@@ -6,6 +6,9 @@ const audienceActivities = {
   },
   addComment(_, { commentPayload }) {
     return dataApi.addComment(commentPayload);
+  },
+  sendMessage(_, { audience, comment}) {
+    return dataApi.sendMessage(audience, comment);
   }
 };
 

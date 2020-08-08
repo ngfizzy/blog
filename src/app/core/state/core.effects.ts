@@ -9,6 +9,9 @@ import {
   GetCurrentAudienceSuccess,
   GetNavSuccess,
   GetCurrentAudienceError,
+  SendMessage,
+  SendMessageSuccess,
+  SendMessageError,
 } from './core.actions';
 import { map, switchMap } from 'rxjs/operators';
 import { CoreService } from '../services/core.service';
@@ -30,7 +33,7 @@ export class CoreEffects {
     switchMap(() =>
       this.audienceService.audienceResponse$.pipe(
         map(res =>{
-          const nextActions ={
+          const nextActions = {
             SuccessAction: GetCurrentAudienceSuccess,
             ErrorAction: GetCurrentAudienceError
           };
@@ -48,4 +51,23 @@ export class CoreEffects {
       this.coreService.getNav().pipe(map(nav => new GetNavSuccess(nav))),
     ),
   );
+
+  @Effect()
+  sendMessage$: Observable<Action> = this.actions$.pipe(
+    ofType(CoreActionTypes.SendMessage),
+    map((action) => (action as SendMessage).payload),
+    switchMap(({audience, message}) => {
+     return this.audienceService
+      .sendMessage(audience.email, audience.audienceName, message).pipe(
+        map(res => {
+          const nextActions = {
+            SuccessAction: SendMessageSuccess,
+            ErrorAction: SendMessageError
+          };
+
+          return this.nextAction.getNextActions(res, nextActions);
+        })
+      );
+    })
+  )
 }

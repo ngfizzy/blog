@@ -93,6 +93,10 @@ class Data {
     return this.dataStore.findAudience(audience);
   }
 
+  sendMessage(audience, message) {
+    return this.dataStore.sendMessage(audience, message);
+  }
+
 }
 
 module.exports = new Data();

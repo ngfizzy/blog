@@ -1,7 +1,8 @@
 import { Nav } from './../../shared/models/nav';
 import { Action } from '@ngrx/store';
-import { Audience } from '../../shared/models';
 import { AudienceResponse } from 'src/app/shared/models/graphql-responses/responses/audience-response.interface';
+import { SendMessagePayload } from 'src/app/shared/models';
+import { SendMessageResponse } from 'src/app/shared/models/graphql-responses/responses';
 
 export const enum CoreActionTypes {
   GetCurrentAudience = '[App] Get Current Audience',
@@ -10,9 +11,9 @@ export const enum CoreActionTypes {
   SetPageTitle = '[App] Set Page Title',
   GetNav = '[App] Get Nav',
   GetNavSuccess = '[App] Get Nav Success',
-  SubmitContact = '[App] Submit Contact',
-  SubmitContactSuccess = '[App] Submit Contact Success',
-  SubmitContactError = '[App] Submit Contact Error'
+  SendMessage = '[App] Contact Author',
+  SendMessageSuccess = '[App] Contact Author Success',
+  SendMessageError = '[App] Contact Author Error'
 }
 export class GetCurrentAudience implements Action {
   readonly type = CoreActionTypes.GetCurrentAudience;
@@ -44,11 +45,28 @@ export class GetNav implements Action {
   constructor() {}
 }
 
-
 export class GetNavSuccess implements Action {
   readonly type = CoreActionTypes.GetNavSuccess;
 
   constructor(public payload: Nav) {}
+}
+
+export class SendMessage implements Action {
+  readonly type = CoreActionTypes.SendMessage;
+
+  constructor(public payload: SendMessagePayload) {}
+}
+
+export class SendMessageSuccess implements Action {
+  readonly type = CoreActionTypes.SendMessageSuccess;
+
+  constructor(public payload: SendMessageResponse) {}
+}
+
+export class SendMessageError implements Action {
+  readonly type = CoreActionTypes.SendMessageError;
+
+  constructor(public payload: string) {}
 }
 
 export type CoreActions =
@@ -57,4 +75,7 @@ export type CoreActions =
   | GetCurrentAudienceError
   | SetPageTitle
   | GetNav
-  | GetNavSuccess;
+  | GetNavSuccess
+  | SendMessage
+  | SendMessageSuccess
+  | SendMessageError;
