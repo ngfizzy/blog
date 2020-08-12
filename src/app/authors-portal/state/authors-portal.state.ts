@@ -1,7 +1,7 @@
 import { CategorySummary } from './../authors-portal-shared/models/category-summary.interface';
 
 import { CoreState } from './../../core/state/core.state';
-import { Article, Category } from 'src/app/shared/models';
+import { Article, Category, Message } from 'src/app/shared/models';
 import { ArticleStatisticsCollection } from '../authors-portal-shared/models';
 
 export interface AuthorsPortalState extends CoreState {
@@ -31,6 +31,11 @@ export interface AuthorsPortalState extends CoreState {
   categoriesState: {
     isLoading: boolean;
     categories: Category[];
+    error: string;
+  };
+  messagesState: {
+    isLoading: boolean;
+    messages: Record<string, Message>;
     error: string;
   };
   isLoading: boolean;

@@ -1,9 +1,9 @@
 import { CategorySummary, ArticleStatisticsCollection } from './../authors-portal-shared/models';
 import { Action } from '@ngrx/store';
-import { Category } from 'src/app/shared/models';
+import { Category, MessagesMap } from 'src/app/shared/models';
 import { ArticlesResponse } from '../../shared/models/graphql-responses/responses/articles-response.interface';
 import { CategoriesSummariesResponse } from '../authors-portal-shared/models/graphql-responses/responses/categories-summaries-response.interface';
-import { CategoryCreationResponse } from '../authors-portal-shared/models/graphql-responses/responses';
+import { CategoryCreationResponse, MessagesResponse } from '../authors-portal-shared/models/graphql-responses/responses';
 
 export const enum AuthorsPortalActionTypes {
   GetAuthorsDashboardArticlesStatistics = '[Authors] Get Dashboard Article Statistics',
@@ -20,7 +20,10 @@ export const enum AuthorsPortalActionTypes {
   GetCategoriesSummariesError = '[Authors] Get Categories Summaries Error',
   CreateCategory = '[Authors] Create Category',
   CreateCategorySuccess = '[Authors] Create Category Success',
-  CreateCategoryError = '[Authors] Create Category Error'
+  CreateCategoryError = '[Authors] Create Category Error',
+  GetMessages = '[Authors] Get Messages',
+  GetMessagesSuccess = '[Authors] Get Messages Success',
+  GetMessagesError = '[Authors] Get Messages Error'
 }
 
 export class GetAuthorsDashboardArticlesStatistics implements Action {
@@ -113,6 +116,22 @@ export class CreateCategoryError implements Action {
   constructor(public payload: string) {}
 }
 
+export class GetMessages implements Action {
+  readonly type = AuthorsPortalActionTypes.GetMessages;
+}
+
+export class GetMessagesSuccess implements Action {
+  readonly type = AuthorsPortalActionTypes.GetMessagesSuccess;
+
+  constructor(public payload: MessagesResponse) {}
+}
+
+export class GetMessagesError implements Action {
+  readonly type = AuthorsPortalActionTypes.GetMessagesError;
+
+  constructor(public payload: string) {}
+}
+
 export type AuthorsPortalActions =
   | GetAuthorsDashboardArticlesStatistics
   | GetAuthorsDashboardArticlesStatisticsSuccess
@@ -128,4 +147,7 @@ export type AuthorsPortalActions =
   | GetCategoriesSummariesError
   | CreateCategory
   | CreateCategorySuccess
-  | CreateCategoryError;
+  | CreateCategoryError
+  | GetMessagesError
+  | GetMessagesSuccess
+  | GetMessages;

@@ -94,6 +94,19 @@ const articleAndRelatedModels = gql`
     article: Article
     error: String
   }
+
+  """
+  Messages Sent By Audience
+  """
+  type Message {
+    id: Int
+    read: String
+    message: String
+    audienceId: String
+    email: String
+    name: String
+    createdAt: String
+  }
 `;
 
 module.exports = articleAndRelatedModels;

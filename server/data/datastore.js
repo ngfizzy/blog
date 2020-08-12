@@ -498,9 +498,18 @@ module.exports = {
       message,
       audienceId: audience.id,
       email: audience.email,
-      name: audience.name
+      name: audience.audienceName,
+      createdAt: new Date().toString(),
     });
 
     return { success: true };
+  },
+  getMessages() {
+    const sorted =  messages.sort((a, b) =>
+        (new Date(b.createdAt).getTime()) -
+        (new Date(a.createdAt).getTime())
+      );
+
+    return { messages: sorted };
   }
 };

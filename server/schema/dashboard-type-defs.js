@@ -40,11 +40,17 @@ const dashboardTypeDefs = gql`
     error: String
   }
 
+  type MessagesResponse {
+    messages: [Message]
+    error: String
+  }
+
   extend type Query {
     getLast10Drafts: ArticlesResponse
     getTop10Articles: ArticlesResponse
     getDashboardStatistics: DashboardStatisticsResponse
     getCategoriesSummaries: CategoriesSummariesResponse
+    getMessages: MessagesResponse
   }
 
   extend type Mutation {

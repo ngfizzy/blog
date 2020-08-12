@@ -7,8 +7,8 @@ const audienceActivities = {
   addComment(_, { commentPayload }) {
     return dataApi.addComment(commentPayload);
   },
-  sendMessage(_, { audience, comment}) {
-    return dataApi.sendMessage(audience, comment);
+  sendMessage(_, { audience, message}) {
+    return dataApi.sendMessage(audience, message);
   }
 };
 

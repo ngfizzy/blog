@@ -96,3 +96,24 @@ export const categoriesSummariesError = createSelector(
   getCategoriesSummariesState,
   state => state.error
 );
+
+// Messages
+export const messagesState = createSelector(
+  getAuthorsPortalState,
+  state => state.messagesState
+);
+
+export const selectMessages = createSelector(
+  messagesState,
+  state => state.messages,
+);
+
+export const isMessagesLoading = createSelector(
+  messagesState,
+  state => state.isLoading,
+);
+
+export const selectMessagesError = createSelector(
+  messagesState,
+  state => state.error
+);

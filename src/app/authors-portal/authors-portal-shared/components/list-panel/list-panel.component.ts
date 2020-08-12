@@ -9,7 +9,7 @@ import {
   selector: 'app-authors-list-panel',
   template: `<div class="mat-elevation-z2 content-background-color list-panel">
     <div class="mat-elevation-z2 content-background-color title-wrapper">
-      <h6>{{ listTitle }}</h6>
+      <h6 class="title-case">{{ listTitle }}</h6>
     </div>
     <div class="list-container">
       <ng-content></ng-content>

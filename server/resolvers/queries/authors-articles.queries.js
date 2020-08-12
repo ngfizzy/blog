@@ -18,7 +18,7 @@ const authorsArticlesQueries = {
   },
   getCategoriesSummaries() {
     return dataApi.getCategoriesSummaries();
-  },
+  }
 };
 
 module.exports = authorsArticlesQueries;

@@ -11,3 +11,4 @@ export * from './audience.interface';
 export * from './audience-activity-payloads.interface';
 export * from './gql-error.interface';
 export * from './send-message-payload.interface';
+export * from './message.interface';

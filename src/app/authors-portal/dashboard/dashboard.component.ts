@@ -6,8 +6,9 @@ import { CategorySummary, ArticleStatisticsCollection } from './../authors-porta
 import {
   GetCategoriesSummaries,
   CreateCategory,
+  GetMessages,
 } from './../state/authors-portal.actions';
-import { Article } from 'src/app/shared/models';
+import { Article, Message } from 'src/app/shared/models';
 import {
   AuthorsPortalState,
   getArticleStatistics,
@@ -18,6 +19,8 @@ import {
   isTop10ArticlesLoading,
   isCategoriesSummariesLoading,
   isArticleStatisticsLoading,
+  selectMessages,
+  isMessagesLoading
 } from './../state/';
 
 import {
@@ -26,6 +29,7 @@ import {
   GetLast10Drafts,
 } from '../state/authors-portal.actions';
 import { SetPageTitle } from 'src/app/core/state/core.actions';
+import { map } from 'rxjs/operators';
 
 @Component({
   templateUrl: './dashboard.component.html',
@@ -42,6 +46,9 @@ export class DashboardComponent implements OnInit {
   isCategoriesSummariesLoading$: Observable<boolean>;
   $: Observable<boolean>;
   isArticlesStatisticsLoading$: Observable<boolean>;
+  messages$: Observable<Record<string, Message>>;
+  isMessagesLoading$: Observable<boolean>;
+  messagesWithIndices$: Observable<{ indices: string[]; messages: Record<string, Message>; }>;
 
   constructor(
     private store: Store<AuthorsPortalState>,
@@ -65,7 +72,22 @@ export class DashboardComponent implements OnInit {
 
     this.store.dispatch(new GetCategoriesSummaries());
     this.categoriesSummaries$ = this.store.pipe(select(getCategoriesSummaries));
-    this.isCategoriesSummariesLoading$ = this.store.pipe(select(isCategoriesSummariesLoading))
+    this.isCategoriesSummariesLoading$ = this.store.pipe(select(isCategoriesSummariesLoading));
+
+    this.store.dispatch(new GetMessages());
+    this.messages$ = this.store.pipe(select(selectMessages));
+    this.isMessagesLoading$ = this.store.pipe(select(isMessagesLoading));
+
+    this.messagesWithIndices$ = this.messages$.pipe(
+      map(messages => {
+        const indices = Object.keys(messages).sort((a, b) =>
+          (parseInt(b) - parseInt(a))
+        );
+
+        return { indices, messages }
+      })
+    )
+
   }
 
   showCategoryForm() {

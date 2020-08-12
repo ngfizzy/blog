@@ -4,6 +4,7 @@ import {
   AuthorsPortalActionTypes,
   AuthorsPortalActions,
 } from './authors-portal.actions';
+import { Message } from 'src/app/shared/models';
 
 const defaultState: AuthorsPortalState = {
   title: '',
@@ -42,6 +43,11 @@ const defaultState: AuthorsPortalState = {
   navState: {
     isLoading: false,
     nav: null
+  },
+  messagesState: {
+    isLoading: false,
+    messages: {},
+    error: ''
   },
   isLoading: true,
 };
@@ -256,6 +262,34 @@ export function authorsPortalReducer(
             error: action.payload
           },
         };
+    case AuthorsPortalActionTypes.GetMessages:
+      return {
+        ...state,
+        messagesState: {
+          ...state.messagesState,
+          isLoading: true,
+          error: ''
+        }
+      };
+    case AuthorsPortalActionTypes.GetMessagesSuccess:
+      return {
+        ...state,
+        messagesState: {
+          ...state.messagesState,
+          messages: {...action.payload.messages as Record<string, Message>},
+          isLoading: false,
+          error: ''
+        }
+      };
+    case AuthorsPortalActionTypes.GetMessagesError:
+      return {
+        ...state,
+        messagesState: {
+          ...state.messagesState,
+          isLoading: false,
+          error: action.payload
+        }
+      };
     default:
       return state;
   }

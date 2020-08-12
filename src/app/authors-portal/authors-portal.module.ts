@@ -14,7 +14,10 @@ import { AuthorsPortalEffects } from './state/authors-portal.effects';
 import { DashboardService } from './services/dashboard/dashboard.service';
 import { CategorySummaryWidgetComponent } from './dashboard/components/category-summary-widget/category-summary-widget.component';
 import { AuthorsArticlesGQLService } from './services/authors-articles/authors-articles-gql.service';
+import { MessagePanelComponent } from './dashboard/components/message-panel/message-panel.component';
 import { DashboardGqlService } from './services/dashboard/dashboard-gql.service';
+import { MessagesService } from './services/messages/messages.service';
+import { MessagesGqlService } from './services/messages/messages-gql.service';
 
 @NgModule({
   imports: [
@@ -31,11 +34,14 @@ import { DashboardGqlService } from './services/dashboard/dashboard-gql.service'
     DashboardGqlService,
     AuthorsArticlesService,
     AuthorsArticlesGQLService,
+    MessagesService,
+    MessagesGqlService,
   ],
   declarations: [
     ...AuthorsPortalRoutingModule.moduleComponents,
     CategorySummaryWidgetComponent,
     CreateCategoryComponent,
+    MessagePanelComponent
   ],
 })
 export class AuthorsPortal {}

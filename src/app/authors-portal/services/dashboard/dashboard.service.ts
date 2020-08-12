@@ -1,32 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, forkJoin } from 'rxjs';
-import {
-  ArticleStatistics,
-  CategorySummary,
-  ArticleStatisticsCollection,
-} from '../../authors-portal-shared/models';
-import {
-  getMostLikedArticle,
-  getArticleWithMostComments,
-  getMostPopularArticle,
-  getTop10Articles,
-  getLast10DraftArticles,
-  getCategoriesSummaries,
-  createCategory,
-} from 'src/app/mock-server';
-import { AuthorsArticlesService } from '../authors-articles/authors-articles.service';
+import { Observable } from 'rxjs';
+import { ArticleStatisticsCollection } from '../../authors-portal-shared/models';;
 import { DashboardGqlService } from './dashboard-gql.service';
-import { ArticlesResponse } from '../../../shared/models/graphql-responses/responses/articles-response.interface';
-import { CategoriesSummariesResponse } from '../../authors-portal-shared/models/graphql-responses/responses/categories-summaries-response.interface';
-import { CategoryCreationResponse } from '../../authors-portal-shared/models/graphql-responses/responses';
-import { tap } from 'rxjs/operators';
+import { ArticlesResponse } from '../../../shared/models/graphql-responses/responses/';
+import {
+  CategoryCreationResponse,
+  CategoriesSummariesResponse
+} from '../../authors-portal-shared/models/graphql-responses/responses';
 
 @Injectable()
 export class DashboardService {
-  constructor(
-    private authorsArticlesService: AuthorsArticlesService,
-    private dashboardGqlService: DashboardGqlService,
-    ) {}
+  constructor(private dashboardGqlService: DashboardGqlService) {}
 
   createCategory(category: string): Observable<CategoryCreationResponse> {
     return this.dashboardGqlService.createCategory(category);

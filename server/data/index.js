@@ -97,6 +97,9 @@ class Data {
     return this.dataStore.sendMessage(audience, message);
   }
 
+  getMessages() {
+    return this.dataStore.getMessages();
+  }
 }
 
 module.exports = new Data();

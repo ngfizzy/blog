@@ -1,5 +1,3 @@
-
-const articles = [];
 const audienceActivities = [];
 const audienceComments = [];
 const audienceRecord = [
@@ -35,19 +33,150 @@ const categories = [
 const usedIds = [];
 const tags = [];
 const messages = [];
+const articles = [
+  {
+    id: randomId(),
+    authorId: 1,
+    title: 'Unique Article',
+    body:
+      `Lorem ipsum dolor sit amet,` +
+      `  consectetur adipiscing elit.Duis sit amet vulputate quam.Pellentesque` +
+      `porta sollicitudin dui, in tincidunt metus tempor vitae.Sed pretium,` +
+      `<h5>Test Subheading</h5>` +
+      `ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque` +
+      `lectus libero in mi.Praesent vulputate justo vel libero rutrum, et euismod` +
+      `sem iaculis.Mauris non erat vitae justo congue faucibus nec et leo.Morbi id` +
+      `porta neque.Vestibulum laoreet volutpat risus non hendrerit.Vestibulum sapien` +
+      `leo, varius quis finibus nec, iaculis eget lorem.In nec ex elit.Maecenas at` +
+      `finibus augue, eget feugiat odio.Ut vel ultricies ipsum.` +
+      `<br/>
+  <br/>
+  <br/>`,
+    createdAt: new Date().toString(),
+    updatedAt: new Date().toString(),
+    published: true,
+    categories: [
+      {
+        id: 2,
+        name: 'tech',
+        updatedAt: new Date().toString(),
+        createdAt: new Date().toString(),
+      },
+    ],
+    tags: [],
+    audienceActivities: []
+  },
+  {
+    id: randomId(),
+    authorId: 1,
+    title: 'Search Subject 1',
+    body:
+      `Lorem ipsum dolor sit amet,` +
+      `<script>alert('if this shows the app is vulnerable to xss')</script>` +
+      `  consectetur adipiscing elit.Duis sit amet vulputate quam.Pellentesque` +
+      `porta sollicitudin dui, in tincidunt metus tempor vitae.Sed pretium,` +
+      `ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque` +
+      `lectus libero in mi.Praesent vulputate justo vel libero rutrum, et euismod` +
+      `sem iaculis.Mauris non erat vitae justo congue faucibus nec et leo.Morbi id` +
+      `porta neque.Vestibulum laoreet volutpat risus non hendrerit.Vestibulum sapien` +
+      `leo, varius quis finibus nec, iaculis eget lorem.In nec ex elit.Maecenas at` +
+      `finibus augue, eget feugiat odio.Ut vel ultricies ipsum.` +
+      `<br/>
+  <br/>
+  <br/>`,
+    createdAt: new Date().toString(),
+    updatedAt: new Date().toString(),
+    published: true,
+    categories: [
+      {
+        id: 2,
+        name: 'tech',
+        updatedAt: new Date().toString(),
+        createdAt: new Date().toString(),
+      },
+    ],
+    tags: [],
+    audienceActivities: []
+  },
+  {
+    id: randomId(),
+    authorId: 1,
+    title: 'Search Subject 2',
+    body:
+      `Lorem ipsum dolor sit amet,` +
+      `  consectetur adipiscing elit.Duis sit amet vulputate quam.Pellentesque` +
+      `porta sollicitudin dui, in tincidunt metus tempor vitae.Sed pretium,` +
+      `ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque` +
+      `lectus libero in mi.Praesent vulputate justo vel libero rutrum, et euismod` +
+      `sem iaculis.Mauris non erat vitae justo congue faucibus nec et leo.Morbi id` +
+      `porta neque.Vestibulum laoreet volutpat risus non hendrerit.Vestibulum sapien` +
+      `leo, varius quis finibus nec, iaculis eget lorem.In nec ex elit.Maecenas at` +
+      `finibus augue, eget feugiat odio.Ut vel ultricies ipsum.` +
+      `<br/>
+  <br/>
+  <br/>`,
+    createdAt: new Date().toString(),
+    updatedAt: new Date().toString(),
+    published: true,
+    categories: [
+      {
+        id: 2,
+        name: 'tech',
+        updatedAt: new Date().toString(),
+        createdAt: new Date().toString(),
+      },
+    ],
+    tags: [],
+    audienceActivities: []
+  },
+  {
+    id: randomId(),
+    authorId: 1,
+    title: 'Search Subject 3',
+    body:
+      `Lorem ipsum dolor sit amet,` +
+      `  consectetur adipiscing elit.Duis sit amet vulputate quam.Pellentesque` +
+      `porta sollicitudin dui, in tincidunt metus tempor vitae.Sed pretium,` +
+      `ipsum nec gravida consectetur, sapien arcu bibendum orci, ac pellentesque` +
+      `lectus libero in mi.Praesent vulputate justo vel libero rutrum, et euismod` +
+      `sem iaculis.Mauris non erat vitae justo congue faucibus nec et leo.Morbi id` +
+      `porta neque.Vestibulum laoreet volutpat risus non hendrerit.Vestibulum sapien` +
+      `leo, varius quis finibus nec, iaculis eget lorem.In nec ex elit.Maecenas at` +
+      `finibus augue, eget feugiat odio.Ut vel ultricies ipsum.` +
+      `<br/>
+  <br/>
+  <br/>`,
+    createdAt: new Date().toString(),
+    updatedAt: new Date().toString(),
+    published: true,
+    categories: [
+      {
+        id: 2,
+        name: 'tech',
+        updatedAt: new Date().toString(),
+        createdAt: new Date().toString(),
+      },
+    ],
+    tags: [],
+    audienceActivities: []
+  },
+];
+
+
+function randomId() {
+  let randomNumber = Math.floor(Math.random() * 1000);
+
+  while (usedIds.indexOf(randomNumber) > -1) {
+    randomNumber = Math.floor(Math.random() * 10000);
+  }
+
+  usedIds.push(randomNumber);
+
+  return randomNumber;
+}
 
 const generators = {
-  randomId() {
-    let randomNumber = Math.floor(Math.random() * 1000);
-
-    while (usedIds.indexOf(randomNumber) > -1) {
-      randomNumber = Math.floor(Math.random() * 10000);
-    }
-
-    usedIds.push(randomNumber);
-
-    return randomNumber;
-  },
+  randomId,
   generateArticles(length) {
     if (articles.length > 5) {
       return articles;

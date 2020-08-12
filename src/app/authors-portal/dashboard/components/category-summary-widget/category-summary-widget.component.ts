@@ -10,11 +10,9 @@ import { CategorySummary } from '../../../authors-portal-shared/models';
           {{ categorySummary.categoryName }}
         </a>
       </h4>
-
       <div>
         <span class="data-description"
-          >Articles: {{ categorySummary.articlesCount }}</span
-        >
+          >Articles: {{ categorySummary.articlesCount }}</span>
       </div>
     </div>
   `,
@@ -40,8 +38,9 @@ import { CategorySummary } from '../../../authors-portal-shared/models';
         text-wrap: wrap;
       }
       .data-description {
-        font-size: 1rem;
+        font-size: .8rem;
         font-weight: bolder;
+        color: #fff;
       }
     `,
   ],

@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {
   MatProgressSpinnerModule,
-  MatSpinner,
 } from '@angular/material/progress-spinner';
 import { MatInputModule, MatInput } from '@angular/material/input';
 import {
@@ -33,6 +32,9 @@ import {
   MatDrawer,
   MatDrawerContent,
 } from '@angular/material/sidenav';
+
+import { MatExpansionModule, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription } from '@angular/material/expansion'
+
 import { MatDialogModule } from '@angular/material/dialog';
 import { MarkdownModule } from 'ngx-markdown';
 
@@ -65,6 +67,7 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
     RouterModule,
     MatSidenavModule,
     MatListModule,
+    MatExpansionModule,
     MarkdownModule.forChild(),
   ],
   exports: [
@@ -101,7 +104,11 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
     ArticleActionsComponent,
     ArticlesContentWrapperComponent,
     SecondsToJustNowPipe,
-    ContactFormComponent
+    ContactFormComponent,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    MatExpansionPanelDescription,
   ],
   declarations: [
     SpinnerComponent,

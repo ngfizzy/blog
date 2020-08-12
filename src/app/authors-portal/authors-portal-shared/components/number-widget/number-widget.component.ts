@@ -14,7 +14,8 @@ import { Component, OnInit, Input } from '@angular/core';
 
       <div>
         <span class="data-description">{{ statistics.countLabel }}: </span
-        >{{ statistics.count }}
+        >
+        <span class="value">{{ statistics.count }}</span>
       </div>
     </div>
   `,
@@ -36,9 +37,12 @@ import { Component, OnInit, Input } from '@angular/core';
         overflow: hidden;
         text-wrap: wrap;
       }
-      .data-description {
-        font-size: 1rem;
+      .data-description,
+      .value
+       {
+        font-size: .8rem;
         font-weight: bolder;
+        color: #fff;
       }
     `,
   ],

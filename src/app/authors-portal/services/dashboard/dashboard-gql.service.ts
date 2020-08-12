@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import * as queries from './queries';
 import * as mutations from './mutations';

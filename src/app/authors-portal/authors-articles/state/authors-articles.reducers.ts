@@ -30,6 +30,11 @@ const defaultState: AuthorsArticlesState = {
     error: '',
     categories: [],
   },
+  messagesState: {
+    messages: {},
+    isLoading: false,
+    error: ''
+  }
 };
 
 export function authorsArticlesReducers(

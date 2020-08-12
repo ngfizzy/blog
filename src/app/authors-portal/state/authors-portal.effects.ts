@@ -2,15 +2,19 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
-import { map, switchMap, tap, mergeMap, exhaustMap } from 'rxjs/operators';
+import { map, switchMap, exhaustMap } from 'rxjs/operators';
 import { DashboardService } from '../services/dashboard/dashboard.service';
 import * as authorsPortalActions from './authors-portal.actions';
+import { MessagesService } from '../services/messages/messages.service';
+import { NextActionService } from 'src/app/core/services/next-action.service';
 
 @Injectable()
 export class AuthorsPortalEffects {
   constructor(
     private actions$: Actions,
     private dashboardService: DashboardService,
+    private messagesService: MessagesService,
+    private nextActionsService: NextActionService
   ) {}
 
   @Effect()
@@ -116,6 +120,23 @@ export class AuthorsPortalEffects {
         ),
     ),
   );
+
+  @Effect()
+  getMessages$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsPortalActions.AuthorsPortalActionTypes.GetMessages),
+    switchMap(() => this.messagesService.getMessagesAsMap()
+      .pipe(
+        map(res => {
+          const nextActions = {
+            SuccessAction: authorsPortalActions.GetMessagesSuccess,
+            ErrorAction: authorsPortalActions.GetMessagesError
+          };
+
+          return this.nextActionsService.getNextActions(res, nextActions);
+        })
+      )
+    )
+  )
 
   private emitEffectResult(result, { ErrorEffect, SuccessEffect }) {
     if (result.error) {
