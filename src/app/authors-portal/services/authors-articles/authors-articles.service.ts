@@ -126,9 +126,11 @@ export class AuthorsArticlesService {
         }
 
         return response$.pipe(map(response => {
-          articles.unshift(response.article);
+          const art = [...articles];
 
-          return { articles, selectedArticle: response.article, error: response.error };
+          art.unshift(response.article);
+
+          return { articles: art, selectedArticle: response.article, error: response.error };
         }));
 
       }),
@@ -150,8 +152,9 @@ export class AuthorsArticlesService {
   }
 
   private pluckArticle(articleId: number, articles: Article[]): Article {
-    const articleIndex = articles.findIndex(found => found.id === +articleId);
-    const [article] = articles.splice(articleIndex, 1);
+    const art = [...articles];
+    const articleIndex = art.findIndex(found => found.id === +articleId);
+    const [article] = art.splice(articleIndex, 1);
 
     return article;
   }
