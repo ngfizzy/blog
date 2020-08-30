@@ -100,6 +100,10 @@ class Data {
   getMessages() {
     return this.dataStore.getMessages();
   }
+
+  login(username, password) {
+    return this.dataStore.login(username, password);
+  }
 }
 
 module.exports = new Data();

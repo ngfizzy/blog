@@ -8,3 +8,4 @@ export interface GetMessagesResponse {
 export interface GetMessageResponse extends BaseResponse {
   message: MessageResponse;
 }
+

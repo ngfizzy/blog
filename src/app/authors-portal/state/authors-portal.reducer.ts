@@ -8,6 +8,9 @@ import { Message } from 'src/app/shared/models';
 
 const defaultState: AuthorsPortalState = {
   title: '',
+  error: '',
+  isLoggedIn: false,
+  authToken: '',
   dashboardState: {
     isLoading: true,
     articlesStatisticsState: {
@@ -290,6 +293,26 @@ export function authorsPortalReducer(
           error: action.payload
         }
       };
+    case AuthorsPortalActionTypes.Login:
+      return {
+        ...state,
+        isLoading: true,
+        error: ''
+      }
+    case AuthorsPortalActionTypes.LoginSuccess:
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: true,
+        error: '',
+      };
+    case AuthorsPortalActionTypes.LoginError:
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: true,
+        error: action.payload
+      }
     default:
       return state;
   }

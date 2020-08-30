@@ -1,9 +1,8 @@
-import { CategorySummary, ArticleStatisticsCollection } from './../authors-portal-shared/models';
+import { ArticleStatisticsCollection } from './../authors-portal-shared/models';
 import { Action } from '@ngrx/store';
-import { Category, MessagesMap } from 'src/app/shared/models';
 import { ArticlesResponse } from '../../shared/models/graphql-responses/responses/articles-response.interface';
 import { CategoriesSummariesResponse } from '../authors-portal-shared/models/graphql-responses/responses/categories-summaries-response.interface';
-import { CategoryCreationResponse, MessagesResponse } from '../authors-portal-shared/models/graphql-responses/responses';
+import { CategoryCreationResponse, MessagesResponse, LoginResponse } from '../authors-portal-shared/models/graphql-responses/responses';
 
 export const enum AuthorsPortalActionTypes {
   GetAuthorsDashboardArticlesStatistics = '[Authors] Get Dashboard Article Statistics',
@@ -23,7 +22,10 @@ export const enum AuthorsPortalActionTypes {
   CreateCategoryError = '[Authors] Create Category Error',
   GetMessages = '[Authors] Get Messages',
   GetMessagesSuccess = '[Authors] Get Messages Success',
-  GetMessagesError = '[Authors] Get Messages Error'
+  GetMessagesError = '[Authors] Get Messages Error',
+  Login = '[Authors] Login',
+  LoginSuccess =  '[Authors] Login Success',
+  LoginError = '[Authors] Login Error'
 }
 
 export class GetAuthorsDashboardArticlesStatistics implements Action {
@@ -131,6 +133,23 @@ export class GetMessagesError implements Action {
 
   constructor(public payload: string) {}
 }
+export class Login implements Action {
+  readonly type = AuthorsPortalActionTypes.Login;
+
+  constructor(public payload: { username: string; password: string}) {}
+}
+
+export class LoginSuccess implements Action {
+  readonly type = AuthorsPortalActionTypes.LoginSuccess;
+
+  constructor(public payload: LoginResponse) {}
+}
+
+export class LoginError implements Action {
+  readonly type = AuthorsPortalActionTypes.LoginError;
+
+  constructor(public payload: string) {}
+}
 
 export type AuthorsPortalActions =
   | GetAuthorsDashboardArticlesStatistics
@@ -150,4 +169,7 @@ export type AuthorsPortalActions =
   | CreateCategoryError
   | GetMessagesError
   | GetMessagesSuccess
-  | GetMessages;
+  | GetMessages
+  | LoginError
+  | LoginSuccess
+  | Login;

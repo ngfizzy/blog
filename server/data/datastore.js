@@ -1,6 +1,8 @@
 
 const {
   articles,
+  author,
+  authToken,
   audienceActivities,
   audienceComments,
   audienceRecord,
@@ -511,5 +513,14 @@ module.exports = {
       );
 
     return { messages: sorted };
+  },
+  login(username, password) {
+    if(username === author.username && password === author.password) {
+      return {
+        token: authToken
+      };
+    }
+
+    return { error: 'Wrong username or password' };
   }
 };

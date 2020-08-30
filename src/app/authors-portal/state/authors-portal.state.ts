@@ -39,4 +39,7 @@ export interface AuthorsPortalState extends CoreState {
     error: string;
   };
   isLoading: boolean;
+  isLoggedIn: boolean;
+  authToken: string;
+  error: string;
 }

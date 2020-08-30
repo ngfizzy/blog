@@ -7,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { AuthorsPortalRoutingModule } from './authors-portal-routing.module';
 import { AuthGuard } from './auth.guard';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth/auth.service';
 import { authorsPortalReducer } from './state/authors-portal.reducer';
 import { AuthorsArticlesService } from './services/authors-articles/authors-articles.service';
 import { AuthorsPortalEffects } from './state/authors-portal.effects';
@@ -18,6 +18,7 @@ import { MessagePanelComponent } from './dashboard/components/message-panel/mess
 import { DashboardGqlService } from './services/dashboard/dashboard-gql.service';
 import { MessagesService } from './services/messages/messages.service';
 import { MessagesGqlService } from './services/messages/messages-gql.service';
+import { AuthGqlService } from './services/auth/auth-gql.service';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { MessagesGqlService } from './services/messages/messages-gql.service';
   providers: [
     AuthGuard,
     AuthService,
+    AuthGqlService,
     DashboardService,
     DashboardGqlService,
     AuthorsArticlesService,

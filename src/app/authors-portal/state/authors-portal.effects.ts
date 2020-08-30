@@ -7,6 +7,7 @@ import { DashboardService } from '../services/dashboard/dashboard.service';
 import * as authorsPortalActions from './authors-portal.actions';
 import { MessagesService } from '../services/messages/messages.service';
 import { NextActionService } from 'src/app/core/services/next-action.service';
+import { AuthService } from '../services/auth/auth.service';
 
 @Injectable()
 export class AuthorsPortalEffects {
@@ -14,7 +15,8 @@ export class AuthorsPortalEffects {
     private actions$: Actions,
     private dashboardService: DashboardService,
     private messagesService: MessagesService,
-    private nextActionsService: NextActionService
+    private nextActionsService: NextActionService,
+    private authService: AuthService
   ) {}
 
   @Effect()
@@ -135,6 +137,22 @@ export class AuthorsPortalEffects {
           return this.nextActionsService.getNextActions(res, nextActions);
         })
       )
+    )
+  )
+
+  @Effect()
+  login$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsPortalActions.AuthorsPortalActionTypes.Login),
+    map(action => (action as authorsPortalActions.Login).payload),
+    switchMap(({username, password}) => this.authService.login(username, password)
+      .pipe(map( result => {
+        const nextActions = {
+          SuccessAction: authorsPortalActions.LoginSuccess,
+          ErrorAction: authorsPortalActions.LoginError
+        };
+
+        return this.nextActionsService.getNextActions(result, nextActions);
+      }))
     )
   )
 

@@ -8,6 +8,8 @@ import { Article } from 'src/app/shared/models';
 const defaultState: AuthorsArticlesState = {
   title: 'Authors Portal',
   error: '',
+  isLoggedIn: false,
+  authToken: '',
   audienceState: {
     isLoading: false,
     audience: null,

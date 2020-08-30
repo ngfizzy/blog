@@ -10,6 +10,7 @@ const routes: Routes = [
   {
     path: '',
     component: AuthorsPortalComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',

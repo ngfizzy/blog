@@ -117,3 +117,23 @@ export const selectMessagesError = createSelector(
   messagesState,
   state => state.error
 );
+
+export const isLoading = createSelector(
+  getAuthorsPortalState,
+  state => state.isLoading
+);
+
+export const authorsPortalError = createSelector(
+  getAuthorsPortalState,
+  state => state.error
+);
+
+export const isLoggedIn = createSelector(
+  getAuthorsPortalState,
+  state => state.isLoggedIn
+);
+
+export const authToken = createSelector(
+  getAuthorsPortalState,
+  state => state.authToken
+);

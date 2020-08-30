@@ -1,3 +1,4 @@
+
 const audienceActivities = [];
 const audienceComments = [];
 const audienceRecord = [
@@ -9,6 +10,14 @@ const audienceRecord = [
   { id: 5, audienceName: 'Yung', deviceUUID: 'alilqla.oiaoso' },
   { id: 6, audienceName: 'Wanja', deviceUUID: '.aoioqlaoo.aose' },
 ];
+
+const authToken = 'test-token';
+
+const author = {
+  id: 1,
+  username: 'fizzy',
+  password: 'yzzif'
+};
 
 const categories = [
   {
@@ -327,7 +336,8 @@ const generators = {
       createdAt,
       updatedAt: createdAt,
     };
-  }
+  },
+
 };
 
 module.exports = {
@@ -339,4 +349,6 @@ module.exports = {
   tags,
   generators,
   messages,
+  authToken,
+  author
 };

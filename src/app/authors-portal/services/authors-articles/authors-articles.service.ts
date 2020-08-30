@@ -88,7 +88,9 @@ export class AuthorsArticlesService {
   ): Observable<any> {
     return this.pluckArticleFromStore(articleId).pipe(
       switchMap(pluckResult => {
-        const { articles, plucked } = pluckResult;
+        const { plucked } = pluckResult;
+
+        const articles = [...pluckResult.articles];
 
         if (!plucked) {
           return of({ articles, selectedArticle: plucked });
@@ -126,11 +128,10 @@ export class AuthorsArticlesService {
         }
 
         return response$.pipe(map(response => {
-          const art = [...articles];
 
-          art.unshift(response.article);
+          articles.unshift(response.article);
 
-          return { articles: art, selectedArticle: response.article, error: response.error };
+          return { articles, selectedArticle: response.article, error: response.error };
         }));
 
       }),
