@@ -11,7 +11,7 @@ const audienceRecord = [
   { id: 6, audienceName: 'Wanja', deviceUUID: '.aoioqlaoo.aose' },
 ];
 
-const authToken = 'test-token';
+let authToken = 'test-token';
 
 const author = {
   id: 1,
@@ -185,6 +185,9 @@ function randomId() {
 
 const generators = {
   randomId,
+  generateAuthToken(){
+    return Math.random().toString(32).substring(2);
+  },
   generateArticles(length) {
     if (articles.length > 5) {
       return articles;
@@ -336,8 +339,9 @@ const generators = {
       updatedAt: createdAt,
     };
   },
-
 };
+
+
 
 module.exports = {
   articles,
@@ -349,5 +353,10 @@ module.exports = {
   generators,
   messages,
   authToken,
-  author
+  author,
+  setAuthToken(token) {
+    authToken = token;
+
+    return true;
+  },
 };

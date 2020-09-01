@@ -319,6 +319,23 @@ export function authorsPortalReducer(
         isLoggedIn: !!action.payload.authToken,
         authToken: action.payload.authToken
       };
+    case AuthorsPortalActionTypes.Logout:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case AuthorsPortalActionTypes.LogoutSuccess:
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: false,
+      };
+    case AuthorsPortalActionTypes.LogoutError:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
     default:
       return state;
   }

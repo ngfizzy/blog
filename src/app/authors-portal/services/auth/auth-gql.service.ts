@@ -1,10 +1,10 @@
 
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { map, tap, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
-import { LoginGqlResponse } from '../../authors-portal-shared/models'
-import { login } from './mutations';
+import { LoginGqlResponse, LogoutGqlResponse } from '../../authors-portal-shared/models'
+import { login, logout } from './mutations';
 
 @Injectable()
 export class AuthGqlService {
@@ -18,5 +18,14 @@ export class AuthGqlService {
         password
       }
     }).pipe(map(res => res.data.login));
+  }
+
+  logout(authToken?: string) {
+    return this.apollo.mutate<LogoutGqlResponse>({
+      mutation: logout,
+      variables: {
+        authToken
+      }
+    }).pipe(map(res => res.data.logout));
   }
 }

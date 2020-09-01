@@ -2,7 +2,7 @@ import { ArticleStatisticsCollection } from './../authors-portal-shared/models';
 import { Action } from '@ngrx/store';
 import { ArticlesResponse } from '../../shared/models/graphql-responses/responses/articles-response.interface';
 import { CategoriesSummariesResponse } from '../authors-portal-shared/models/graphql-responses/responses/categories-summaries-response.interface';
-import { CategoryCreationResponse, MessagesResponse, LoginResponse } from '../authors-portal-shared/models/graphql-responses/responses';
+import { CategoryCreationResponse, MessagesResponse, LoginResponse, LogoutResponse } from '../authors-portal-shared/models/graphql-responses/responses';
 
 export const enum AuthorsPortalActionTypes {
   GetAuthorsDashboardArticlesStatistics = '[Authors] Get Dashboard Article Statistics',
@@ -27,6 +27,9 @@ export const enum AuthorsPortalActionTypes {
   LoginSuccess =  '[Authors] Login Success',
   LoginError = '[Authors] Login Error',
   AuthorizeUser = '[Authors] Authorize User',
+  Logout = '[Authors] Logout',
+  LogoutSuccess = '[Authors] Logout Success',
+  LogoutError = '[Authors] Logout Error'
 }
 
 export class GetAuthorsDashboardArticlesStatistics implements Action {
@@ -158,6 +161,25 @@ export class AuthorizeUser implements Action {
   constructor(public payload: { authToken: string }) {}
 }
 
+export class Logout implements Action {
+  readonly type = AuthorsPortalActionTypes.Logout;
+
+  constructor(public payload: { token: string }) {}
+}
+
+export class LogoutSuccess implements Action {
+  readonly type = AuthorsPortalActionTypes.LogoutSuccess;
+
+  constructor(public payload: LogoutResponse) {}
+}
+
+export class LogoutError implements Action {
+  readonly type = AuthorsPortalActionTypes.LogoutError;
+
+  constructor(public payload: string) {}
+}
+
+
 export type AuthorsPortalActions =
   | GetAuthorsDashboardArticlesStatistics
   | GetAuthorsDashboardArticlesStatisticsSuccess
@@ -180,4 +202,7 @@ export type AuthorsPortalActions =
   | LoginError
   | LoginSuccess
   | Login
-  | AuthorizeUser;
+  | AuthorizeUser
+  | Logout
+  | LogoutSuccess
+  | LogoutError;

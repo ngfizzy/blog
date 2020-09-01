@@ -26,8 +26,16 @@ export class AuthService {
       .pipe(tap(res => localStorage.setItem(authTokenKey, res.token)));
   }
 
-  logout() {
-    localStorage.removeItem(authTokenKey);
-    this.router.navigate(['/authors', 'login']);
+  logout(authToken?: string) {
+    return this.authGqlService.logout(authToken).pipe(
+      tap((res) => {
+        if (res.success) {
+          localStorage.removeItem(authTokenKey);
+          this.router.navigate(['/authors', 'login']);
+        }
+  
+        return res;
+      })
+    );
   }
 }

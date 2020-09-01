@@ -104,6 +104,10 @@ class Data {
   login(username, password) {
     return this.dataStore.login(username, password);
   }
+
+  logout(authToken) {
+    return this.dataStore.logout(authToken);
+  }
 }
 
 module.exports = new Data();

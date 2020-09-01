@@ -1,3 +1,5 @@
+
+<!-- Top nav -->
 <div class="container-fluid hnavbar-wrapper">
   <div class="d-flex w-100 mat-elevation-z1 p-1 horizontal-navbar">
     <div class="nav-group">
@@ -61,9 +63,14 @@
           </div>
       </div>
     </div>
+
+    <div class="mt-auto mb-auto ml-auto">
+      <ng-content></ng-content>
+    </div>
   </div>
 </div>
 
+<!-- Collapsed Side nav -->
 <div class="collapsed-nav bg-sidenav" *ngIf="!isOpen">
   <div class="collapsed-nav-item">
     <ng-container *ngFor="let item of nav?.items">
@@ -74,6 +81,7 @@
   </div>
 </div>
 
+<!-- Sidenav -->
 <mat-sidenav-container class="bg-sidenav-container sidenav-container">
   <mat-sidenav class="bg-sidenav position-fixed " ngClass="{ collapsed: !isOpen }" #sidenav [mode]="mode" [opened]="isOpen">
     <nav class="main-nav">
@@ -94,7 +102,7 @@
     </nav>
   </mat-sidenav>
 
-    <!-- This is  a quick hack to make few pages stick to the top-->
+    <!-- Remove margin top is a quick hack to make few pages stick to the top-->
   <mat-sidenav-content
     [ngClass]="{ 'no-margin-top': removeTopMargin }"
     class="row"

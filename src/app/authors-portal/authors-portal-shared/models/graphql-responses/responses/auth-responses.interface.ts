@@ -3,3 +3,7 @@ import {BaseResponse} from '../../../../../shared/models/graphql-responses/respo
 export interface LoginResponse extends BaseResponse {
   token: string;
 }
+
+export interface LogoutResponse extends BaseResponse {
+  success: boolean;
+}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { map, switchMap, exhaustMap } from 'rxjs/operators';
@@ -155,6 +155,23 @@ export class AuthorsPortalEffects {
       }))
     )
   )
+
+  logout$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(authorsPortalActions.AuthorsPortalActionTypes.Logout),
+      map((action) =>(action as authorsPortalActions.Logout).payload),
+      switchMap(({token}) => this.authService.logout(token).pipe(
+        map(result => {
+          const nextActions = {
+            SuccessAction: authorsPortalActions.LogoutSuccess,
+            ErrorAction: authorsPortalActions.LogoutError
+          };
+
+          return this.nextActionsService.getNextActions(result, nextActions)
+        })
+      )
+    )
+  ))
 
   private emitEffectResult(result, { ErrorEffect, SuccessEffect }) {
     if (result.error) {

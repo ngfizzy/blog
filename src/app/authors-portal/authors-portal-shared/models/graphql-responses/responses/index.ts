@@ -3,4 +3,4 @@ export * from '../../../../../shared/models/graphql-responses/responses/articles
 export * from './categories-summaries-response.interface';
 export * from './category-creation-response';
 export * from './messages-response.interface';
-export * from './login-response.interface';
+export * from './auth-responses.interface';

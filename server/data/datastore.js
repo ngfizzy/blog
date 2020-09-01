@@ -8,8 +8,10 @@ const {
   audienceRecord,
   categories,
   generators,
-  messages
+  messages,
+  setAuthToken
 } = require('./data-source');
+const { logout } = require('.');
 
 
 generators.generateArticles(200);
@@ -518,5 +520,11 @@ module.exports = {
     }
 
     return { error: 'Wrong username or password' };
+  },
+  logout() {
+      // invalidate authors app supports 1 author for since it's a personal blogging app
+      setAuthToken(generators.generateAuthToken());
+
+      return { success: true };
   }
 };
