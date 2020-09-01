@@ -1,8 +1,12 @@
 const dataApi = require('../../data');
+const { withAuth } = require('../../utils');
 
 const dashboardMutations = {
-  createCategory(_, { categoryName }) {
-    return dataApi.createCategory(categoryName);
+  createCategory(_, { categoryName }, { auth }) {
+    return withAuth(
+      auth,
+      () => dataApi.createCategory(categoryName)
+    );
   }
 };
 

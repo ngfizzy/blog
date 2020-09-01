@@ -1,32 +1,60 @@
 const dataApi = require('../../data');
+const { withAuth } = require('../../utils');
 
 const authorsArticlesMutations = {
-  createArticle(_, { title, body}) {
-    return dataApi.createArticle(title, body);
+  createArticle(_, { title, body}, { auth }) {
+    return withAuth(
+      auth,
+      () => dataApi.createArticle(title, body)
+    );
   },
-  editArticleTitle(_, { articleId, value }) {
-    return dataApi.editArticleTitle(articleId, value);
+  editArticleTitle(_, { articleId, value }, { auth }) {
+    return withAuth(
+      auth,
+      () => dataApi.editArticleTitle(articleId, value)
+    );
   },
-  deleteArticle(_, { articleId }) {
-    return dataApi.deleteArticle(articleId);
+  deleteArticle(_, { articleId }, { auth }) {
+    return withAuth(
+      auth,
+      () => dataApi.deleteArticle(articleId),
+    );
   },
-  editArticleBody(_, { articleId, value}) {
-    return dataApi.editArticleBody(articleId, value);
+  editArticleBody(_, { articleId, value}, { auth }) {
+    return withAuth(
+      auth,
+      () => dataApi.editArticleBody(articleId, value)
+    );
   },
   tagArticle(_, {articleId, tagName}) {
-    return dataApi.tagArticle(articleId, tagName);
+    return withAuth(
+      auth,
+      () => dataApi.tagArticle(articleId, tagName)
+    );
   },
-  untagArticle(_, {articleId, tagId}) {
-    return dataApi.untagArticle(articleId, tagId);
+  untagArticle(_, {articleId, tagId}, { auth }) {
+    return withAuth(
+      auth,
+      () => dataApi.untagArticle(articleId, tagId)
+    );
   },
-  categorizeArticle(_, { articleId, categoryName }) {
-    return dataApi.categorizeArticle(articleId, categoryName);
+  categorizeArticle(_, { articleId, categoryName }, { auth }) {
+    return withAuth(
+      auth,
+      () => dataApi.categorizeArticle(articleId, categoryName)
+    );
   },
-  removeArticleFromCategory(_, { articleId, categoryId}) {
-    return dataApi.removeArticleFromCategory(_, { articleId, categoryId});
+  removeArticleFromCategory(_, { articleId, categoryId}, { auth }) {
+    return withAuth(
+      auth,
+      () => dataApi.removeArticleFromCategory(articleId, categoryId)
+    );
   },
-  toggleArticlePublishedState(_, { articleId }) {
-    return dataApi.toggleArticlePublishedState(articleId);
+  toggleArticlePublishedState(_, { articleId }, { auth }) {
+    return withAuth(
+      auth,
+      () => dataApi.toggleArticlePublishedState(articleId)
+    );
   }
 };
 

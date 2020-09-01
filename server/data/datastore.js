@@ -20,11 +20,7 @@ module.exports = {
       const aDate = new Date(a.updatedAt);
       const bDate = new Date(b.updatedAt);
 
-      if(a.updatedAt > b.updatedAt) {
-        return -1;
-      }
-
-      return 1;
+      return bDate.getTime() - aDate.getTime();
     });
 
     return { articles: sorted };

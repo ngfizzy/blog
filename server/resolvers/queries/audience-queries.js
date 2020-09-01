@@ -1,12 +1,13 @@
 const dataApi = require('../../data');
+const { withAuth } = require('../../utils');
 
 
 const audienceQueries = {
   findAudience(_, { audience }) {
     return dataApi.findAudience(audience);
   },
-  getMessages() {
-    return dataApi.getMessages();
+  getMessages(_, __, { auth }) {
+    return withAuth(auth, () => dataApi.getMessages());
   }
 };
 

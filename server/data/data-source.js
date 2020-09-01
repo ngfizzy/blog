@@ -171,7 +171,6 @@ const articles = [
   },
 ];
 
-
 function randomId() {
   let randomNumber = Math.floor(Math.random() * 1000);
 

@@ -25,7 +25,8 @@ export const enum AuthorsPortalActionTypes {
   GetMessagesError = '[Authors] Get Messages Error',
   Login = '[Authors] Login',
   LoginSuccess =  '[Authors] Login Success',
-  LoginError = '[Authors] Login Error'
+  LoginError = '[Authors] Login Error',
+  AuthorizeUser = '[Authors] Authorize User',
 }
 
 export class GetAuthorsDashboardArticlesStatistics implements Action {
@@ -151,6 +152,12 @@ export class LoginError implements Action {
   constructor(public payload: string) {}
 }
 
+export class AuthorizeUser implements Action {
+  readonly type = AuthorsPortalActionTypes.AuthorizeUser;
+
+  constructor(public payload: { authToken: string }) {}
+}
+
 export type AuthorsPortalActions =
   | GetAuthorsDashboardArticlesStatistics
   | GetAuthorsDashboardArticlesStatisticsSuccess
@@ -172,4 +179,5 @@ export type AuthorsPortalActions =
   | GetMessages
   | LoginError
   | LoginSuccess
-  | Login;
+  | Login
+  | AuthorizeUser;

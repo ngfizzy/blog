@@ -312,7 +312,13 @@ export function authorsPortalReducer(
         isLoading: false,
         isLoggedIn: true,
         error: action.payload
-      }
+      };
+    case AuthorsPortalActionTypes.AuthorizeUser:
+      return {
+        ...state,
+        isLoggedIn: !!action.payload.authToken,
+        authToken: action.payload.authToken
+      };
     default:
       return state;
   }
