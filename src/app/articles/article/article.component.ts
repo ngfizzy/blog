@@ -52,6 +52,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     .asObservable()
     .pipe(debounceTime(800), distinctUntilChanged());
   selectedArticle: Article;
+  isArticleLoading$: Observable<boolean>;
 
   constructor(
     private router: ActivatedRoute,
@@ -62,6 +63,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.isArticleLoading$ = this.store.pipe(select(fromArticle.selectArticleLoadingState))
     this.setArticle();
 
     this.applaudsWatcher$

@@ -2,16 +2,22 @@
 <app-articles-content-wrapper>
   <ng-container *ngIf="(article$ | async) as article">
     <main class="col-sm-12 col-md-12 col-lg-12 col-xl-11">
+      <app-loading-and-empty-state
+      [isLoading]="isArticleLoading$ | async"
+      [content]="article"
+    >
+    </app-loading-and-empty-state>
       <app-article
-      [config]="articleConfig"
-      [article]="article"
-      [currentAudience]="audience$ | async"
-      [currentUserApplauds]="currentAudienceApplauds"
-      [audienceActivities]="(audienceActivities$ | async)"
-      (notify)="showNotification($event)"
-      (applaud)="submitApplauds($event)"
-      (updateUserApplaud)="updateAudienceApplauds($event)"
-      (addComment)="submitComment($event)"
+        *ngIf="(isArticleLoading$ | async) === false"
+        [config]="articleConfig"
+        [article]="article"
+        [currentAudience]="audience$ | async"
+        [currentUserApplauds]="currentAudienceApplauds"
+        [audienceActivities]="(audienceActivities$ | async)"
+        (notify)="showNotification($event)"
+        (applaud)="submitApplauds($event)"
+        (updateUserApplaud)="updateAudienceApplauds($event)"
+        (addComment)="submitComment($event)"
     >
     </app-article>
   </main>
