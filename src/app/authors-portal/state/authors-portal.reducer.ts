@@ -275,6 +275,7 @@ export function authorsPortalReducer(
         }
       };
     case AuthorsPortalActionTypes.GetMessagesSuccess:
+
       return {
         ...state,
         messagesState: {

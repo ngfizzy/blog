@@ -47,7 +47,8 @@ import { NotFoundComponent } from './components/Not Found/not-found.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { CopyToClipboardComponent } from './components/copy-to-clipboard/copy-to-clipboard.component';
 import { SecondsToJustNowPipe } from './pipes/seconds-to-just-now.pipe';
-import { ContactFormComponent } from './components/contact-form/contact-form.component'
+import { ContactFormComponent } from './components/contact-form/contact-form.component';
+import { LoadingAndEmptyStateComponent } from './components/loading-and-empty-state/loading-and-empty-state.component';
 
 @NgModule({
   imports: [
@@ -109,6 +110,7 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
     MatExpansionPanelDescription,
+    LoadingAndEmptyStateComponent,
   ],
   declarations: [
     SpinnerComponent,
@@ -120,6 +122,7 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
     ArticlesContentWrapperComponent,
     SecondsToJustNowPipe,
     ContactFormComponent,
+    LoadingAndEmptyStateComponent
   ],
   providers: [],
 })

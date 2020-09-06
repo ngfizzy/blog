@@ -1,14 +1,15 @@
 <mat-list class="w-100 articles-list list-group">
 
   <div *ngIf="isLoading" class="list-spinner-container">
-    <mat-progress-spinner
-    class="mx-auto"
-    mode="indeterminate"
-    value="90"
-    diameter="50"
+    <app-loading-and-empty-state
+      [isLoading]="isLoading"
+      [content]="articlesList?.length"
     >
-    </mat-progress-spinner>
+
+    </app-loading-and-empty-state>
   </div>
+
+
 
   <a
     *ngFor="let article of articlesList"

@@ -11,14 +11,20 @@ import { Component, OnInit, Input } from '@angular/core';
         <p class="w-50 border-bottom"></p>
       </div>
       <div class="w-100 d-flex flex-wrap">
-      <mat-progress-spinner
+      <!-- <mat-progress-spinner
         *ngIf="isLoading"
         class="p-fixed mt-5 mx-auto"
         mode="indeterminate"
         value="75"
         diameter="100"
         title="'saving'"
-      ></mat-progress-spinner>
+      ></mat-progress-spinner> -->
+
+        <app-loading-and-empty-state
+        [isLoading]="isLoading"
+        [content]="content"
+        >
+        </app-loading-and-empty-state>
         <ng-content></ng-content>
       </div>
     </div>
@@ -27,6 +33,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SectionComponent implements OnInit {
   @Input() sectionTitle: string;
   @Input() isLoading: boolean;
+  @Input() content: any;
 
   constructor() {}
 

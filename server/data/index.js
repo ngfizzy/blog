@@ -1,8 +1,9 @@
 const datastore = require('./datastore');
+const persistentDataStore = require('./persistent-datastore');
 
 class Data {
   constructor() {
-    this.dataStore = datastore;
+    this.dataStore = process.env.APP_ENVIRONMENT === 'PRODUCTION' ? persistentDataStore: datastore;
   }
 
   getAllArticles() {

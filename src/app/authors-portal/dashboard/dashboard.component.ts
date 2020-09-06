@@ -29,7 +29,7 @@ import {
   GetLast10Drafts,
 } from '../state/authors-portal.actions';
 import { SetPageTitle } from 'src/app/core/state/core.actions';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './dashboard.component.html',
