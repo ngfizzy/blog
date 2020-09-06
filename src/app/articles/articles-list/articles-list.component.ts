@@ -1,17 +1,23 @@
-import { SetPageTitle } from 'src/app/core/state/core.actions';
-import { getArticles } from './../../authors-portal/authors-articles/state/index';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  takeUntil,
+  map,
+  tap,
+} from 'rxjs/operators';
 
+
+import { SetPageTitle } from 'src/app/core/state/core.actions';
 import * as fromArticles from '../state';
 import * as fromArticlesActions from '../state/articles.actions';
 import * as fromAppActions from '../../core/state/core.actions';
-import { Title, Meta } from '@angular/platform-browser';
 import * as fromApp from '../../core/state';
-
 import { ArticlesState } from '../state/articles.state';
 import { Article } from '../../shared/models/article.interface';
 import { ArticleComponentConfig } from '../../shared/models/article-component-config.interface';
@@ -21,13 +27,6 @@ import {
   ApplaudPayload,
   CommentPayload,
 } from 'src/app/shared/models';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  takeUntil,
-  map,
-  tap,
-} from 'rxjs/operators';
 
 @Component({
   templateUrl: './articles-list.component.html',
@@ -54,6 +53,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
   private applaudsWatcher$ = this.applaudsWatcherSubject$
     .asObservable()
     .pipe(debounceTime(800), distinctUntilChanged());
+  isArticlesLoading$: Observable<boolean>;
 
   constructor(
     private route: ActivatedRoute,
@@ -66,7 +66,8 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.dispatch(new fromAppActions.GetCurrentAudience());
-    this.articles$ = this.store.pipe(select(fromArticles.getAllArticles),tap(t => console.table(t)));
+    this.articles$ = this.store.pipe(select(fromArticles.getAllArticles));
+    this.isArticlesLoading$ = this.store.pipe(select(fromArticles.isPublicArticlesLoading))
     this.audience$ = this.store.pipe(select(fromApp.getAudience));
     this.audienceActivities$ = this.store.pipe(
       select(fromArticles.getSelectedArticleActivities),
@@ -131,7 +132,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
       const categoryId = +queryParamMap.get('categoryId');
 
       this.articles$ = this.store.pipe(
-        select(getArticles),
+        select(fromArticles.getAllArticles),
         map(articles => {
           if (!categoryId) {
             return articles;

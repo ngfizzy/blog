@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-loading-and-empty-state',
@@ -17,11 +17,12 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoadingAndEmptyStateComponent {
+export class LoadingAndEmptyStateComponent implements OnChanges {
   @Input() emptyStateMessage = 'No Content';
   @Input() isLoading: boolean;
   @Input() content: any;
 
   constructor() {}
 
+  ngOnChanges() {}
 }

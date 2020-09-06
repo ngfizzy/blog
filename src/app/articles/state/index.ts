@@ -40,3 +40,8 @@ export const getAllArticles = createSelector(
   getArticleFeatureState,
   state => state.articles,
 );
+
+export const isPublicArticlesLoading = createSelector(
+  getArticleFeatureState,
+  state => state.isLoading
+)

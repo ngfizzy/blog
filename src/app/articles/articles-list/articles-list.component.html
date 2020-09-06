@@ -3,6 +3,11 @@
     <div
       class="col-sm-12 col-md-12 col-lg-12 col-xl-11 articles-list"
     >
+      <app-loading-and-empty-state
+        [isLoading]="isArticlesLoading$ | async"
+        [content]="articles$ | async"
+      >
+      </app-loading-and-empty-state>
       <app-article
         [config]="articleConfig"
         *ngFor="let article of articles$ | async"

@@ -51,6 +51,7 @@ export function articlesReducer(
     case ArticlesActionTypes.GetAllArticlesFailure:
       return {
         ...state,
+        isLoading: false,
         error: action.payload
       }
     case ArticlesActionTypes.GetOneArticle:
