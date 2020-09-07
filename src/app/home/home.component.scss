@@ -9,6 +9,23 @@ header {
   padding: 2rem 0;
 }
 
+@keyframes typing {
+  from {
+      width: 0%
+  }
+  to {
+      width: 100%
+  }
+}
+
+@keyframes blink {
+  from, to {
+      border-color: transparent
+  }
+  50% {
+      border-color: orange;
+  }
+}
 header h1 {
   font-size: 5rem;
 }

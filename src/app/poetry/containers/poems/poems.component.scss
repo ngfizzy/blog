@@ -1,12 +1,12 @@
 .poem-container {
-  min-height: 30vh;
-  max-height: 50vh;  padding: 0 0.1rem;
+  // min-height: 30vh;
+  // max-height: 50vh;  padding: 0 0.1rem;
   width: 100%;
   margin-bottom: 0.2rem;
   overflow-x: hidden;
   animation: transitionIn 1s;
   margin-left: 0;
-  overflow-y: hidden;
+  height: 24.8rem;
 }
 
 @keyframes transitionIn {
