@@ -1,14 +1,16 @@
 
 
 <app-poetry-children-wrapper>
-  <div class="view-wrapper">
+  <div
+    class="view-wrapper"
+   >
     <div
       class="background"
       [ngStyle]="{
         'background-image': 'url(' + (themeImage$ | async) +')'
        }">
     </div>
-    <div class="mb-3">
+    <div class="pb-3 card-container">
       <router-outlet></router-outlet>
     </div>
     <ng-container *ngIf="(poems$ | async) as poems">

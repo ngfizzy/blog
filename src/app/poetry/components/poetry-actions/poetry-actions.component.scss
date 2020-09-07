@@ -196,12 +196,10 @@
       text-decoration: underline;
       padding-right: 10px;
       text-align: right;
-      // width: 30%;
       font-size: 80%;
     }
 
     .audience-comment {
-      // width: 70%;
       font-size: 80%;
     }
 
@@ -216,7 +214,7 @@
   font-size: 1.2rem;
 }
 .hide-form {
-  width: 4rem;
+  width: 4rem !important;
   background: transparent;
 }
 

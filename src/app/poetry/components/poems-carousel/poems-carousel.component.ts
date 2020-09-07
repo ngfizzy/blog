@@ -78,18 +78,26 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
   nextButtonClicked = false;
   prevButtonClicked = false;
   animationParams = this.generateAnimationParams();
+  firstGroupingDone: boolean;
 
   constructor() {}
 
   ngOnInit() {
-    this.poemsGroupList = this.groupPoems();
-    this.showPreviousButton = this.shouldShowPreviousButton();
-    this.showNextButton = this.shouldShowNextButton();
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     const { selectedPoemId } = changes;
-    if (selectedPoemId && !selectedPoemId.isFirstChange()) {
+
+    if(!selectedPoemId?.isFirstChange() && !this.firstGroupingDone) {
+      this.poemsGroupList = this.groupPoems();
+      this.showPreviousButton = this.shouldShowPreviousButton();
+      this.showNextButton = this.shouldShowNextButton();
+      this.firstGroupingDone = true
+    }
+
+    if (!selectedPoemId?.isFirstChange()) {
+
       this.jumpToGroup(
         selectedPoemId.previousValue,
         selectedPoemId.currentValue
@@ -140,7 +148,7 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
   private findPoemGroup(poemId: number) {
     const index = this.poems.findIndex((poem) => poem.id === poemId);
     const foundGroup = Math.round(
-      index / this.groupSize / this.poemsGroupList.length
+      index / this.groupSize / this.poemsGroupList?.length
     );
 
     return foundGroup;
