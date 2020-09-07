@@ -4,13 +4,14 @@ import {
   SetPageTitle,
 } from 'src/app/core/state/core.actions';
 import { CoreState, getPageTitle } from 'src/app/core/state';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Nav, SideNavContentSizing } from '../shared/models';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './poetry.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PoetryComponent implements OnInit {
   isSideNavOpen = false;
