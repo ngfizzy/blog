@@ -1,14 +1,16 @@
 .poem-container {
+  transition: all .5s ease-in-out;
   &:hover {
     cursor: pointer;
-    background-color: rgba($color: #1E1E24, $alpha: 0.8);
+    box-shadow: 0 6px 12px rgba(209, 207, 207, 0.23), 0 6px 12px rgba(209, 207, 207,0.23);
+    // background-color: rgba($color: #1E1E24, $alpha: 0.8);
   }
 
   .poem  {
     h6 {
       color: rgba($color: #40694e, $alpha: 0.8);
     }
-    background-color: rgba($color:#FFE4E1, $alpha: 0.8)	;
+    background-color: rgba($color:#00FFF5, $alpha: 1);
     position: relative;
     width: 100%;
     transition: all .5s ease-in-out;
