@@ -34,7 +34,7 @@
 <ng-template #published>
   <div class="w-75 ml-auto mr-auto text-center text-light">
     <h2>Article Published Successfully</h2>
-    <a [routerLink]="['/articles/articles', article.id ]" class="btn btn-primary">View Article</a>
+    <a [routerLink]="['/articles/', article.id ]" class="btn btn-primary">View Article</a>
     <a [routerLink]="['/authors/articles', article.id]" class="btn btn-link">Go to Articles List</a>
   </div>
 </ng-template>

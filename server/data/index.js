@@ -1,5 +1,4 @@
 const datastore = require('./datastore');
-const persistentDataStore = require('./persistent-datastore');
 
 class Data {
   constructor() {
