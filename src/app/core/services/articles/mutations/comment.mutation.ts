@@ -1,4 +1,5 @@
-import gql from 'graphql-tag';
+import {gql} from 'apollo-angular';
+
 import { audienceActivityProps } from 'src/app/shared/graphql-fragments';
 
 export const addComment = gql`

@@ -1,4 +1,5 @@
-import gql from 'graphql-tag';
+import {gql} from 'apollo-angular';
+
 
 import { categoryPropsFragment } from 'src/app/shared/graphql-fragments';
 import { categorySummaryPropsFragment } from 'src/app/authors-portal/authors-portal-shared/graphql-fragments';

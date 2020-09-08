@@ -1,3 +1,8 @@
+import {HttpLinkModule, HttpLink} from 'apollo-angular/http';
+import {InMemoryCache, ApolloLink} from '@apollo/client/core';
+import {ApolloModule, Apollo} from 'apollo-angular';
+import {setContext} from '@apollo/client/link/context';
+import {onError} from '@apollo/client/link/error';
 import { TimeagoModule } from 'ngx-timeago';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -8,12 +13,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { HttpLinkModule, HttpLink,  } from 'apollo-angular-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloModule, Apollo } from 'apollo-angular';
-import { ApolloLink } from 'apollo-link';
-import { setContext } from 'apollo-link-context';
-import { onError } from 'apollo-link-error';
+
+
+
+
+
+
 
 import {authTokenKey} from './core/constants'
 

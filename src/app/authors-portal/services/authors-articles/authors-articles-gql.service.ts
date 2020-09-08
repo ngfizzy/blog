@@ -1,5 +1,6 @@
+import {Apollo} from 'apollo-angular';
 import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+
 import { articlesQuery } from './queries';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';

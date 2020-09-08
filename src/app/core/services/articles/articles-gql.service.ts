@@ -1,5 +1,6 @@
+import {Apollo} from 'apollo-angular';
 import { Injectable } from "@angular/core";
-import { Apollo } from 'apollo-angular';
+
 import { map, tap } from 'rxjs/operators';
 
 import * as iGqlResponses from '../../../shared/models/graphql-responses';

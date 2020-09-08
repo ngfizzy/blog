@@ -1,5 +1,6 @@
+import {Apollo} from 'apollo-angular';
 import { Injectable } from "@angular/core";
-import { Apollo } from 'apollo-angular';
+
 
 import * as iGqlResponses from  '../poetry-shared/models/graphql-responses';
 import * as queries from './queries';

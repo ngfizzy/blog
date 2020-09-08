@@ -1,5 +1,6 @@
+import {Apollo, Mutation} from 'apollo-angular';
 import { Injectable } from '@angular/core';
-import { Apollo, Mutation } from 'apollo-angular';
+
 import { map } from 'rxjs/operators';
 import { FindAudienceResponse } from '../../../shared/models/graphql-responses/';
 import * as queries from './queries';
