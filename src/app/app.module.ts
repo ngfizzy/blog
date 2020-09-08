@@ -72,6 +72,8 @@ const authError = onError(({graphQLErrors}) => {
       provide: APOLLO_OPTIONS,
       useFactory(httpLink: HttpLink) {
         return {
+          authContext,
+          authError,
           cache: new InMemoryCache(),
           link: httpLink.create({
             uri: 'http://localhost:4000/graphql',

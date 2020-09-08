@@ -12,9 +12,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class CommentSectionTogglerComponent implements OnInit {
   @Input() isCommentSectionOpened: boolean;
-  @Input() commentsCount: number
+  @Input() commentsCount: number;
 
-  @Output() commentSectionToggled = new EventEmitter<boolean>()
+  @Output() commentSectionToggled = new EventEmitter<boolean>();
 
   constructor() { }
 
