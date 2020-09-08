@@ -20,7 +20,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { MatToolbarModule, MatToolbar } from '@angular/material/toolbar';
-import { MatListModule } from '@angular/material/list';
+import { MatListModule, MatNavList, MatListItem } from '@angular/material/list';
+// import { } from '@angular/material/list/list';
 import { EllipsisModule } from 'ngx-ellipsis';
 
 import {
@@ -33,7 +34,13 @@ import {
   MatDrawerContent,
 } from '@angular/material/sidenav';
 
-import { MatExpansionModule, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription } from '@angular/material/expansion'
+// import {
+//   MatExpansionModule,
+//   MatExpansionPanel,
+//   MatExpansionPanelHeader,
+//   MatExpansionPanelTitle,
+//   MatExpansionPanelDescription
+// } from '@angular/material/expansion'
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MarkdownModule } from 'ngx-markdown';
@@ -50,6 +57,7 @@ import { SecondsToJustNowPipe } from './pipes/seconds-to-just-now.pipe';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { LoadingAndEmptyStateComponent } from './components/loading-and-empty-state/loading-and-empty-state.component';
 import { ApplaudsButtonComponent } from './components/applauds-button/applauds-button.component';
+import {  CommentSectionTogglerComponent } from './components/comment-section-toggler/comment-section-toggler.component';
 
 @NgModule({
   imports: [
@@ -68,8 +76,6 @@ import { ApplaudsButtonComponent } from './components/applauds-button/applauds-b
     MatToolbarModule,
     RouterModule,
     MatSidenavModule,
-    MatListModule,
-    MatExpansionModule,
     MarkdownModule.forChild(),
   ],
   exports: [
@@ -107,12 +113,11 @@ import { ApplaudsButtonComponent } from './components/applauds-button/applauds-b
     ArticlesContentWrapperComponent,
     SecondsToJustNowPipe,
     ContactFormComponent,
-    MatExpansionPanel,
-    MatExpansionPanelHeader,
-    MatExpansionPanelTitle,
-    MatExpansionPanelDescription,
+    MatNavList,
+    MatListItem,
     LoadingAndEmptyStateComponent,
     ApplaudsButtonComponent,
+    CommentSectionTogglerComponent
   ],
   declarations: [
     SpinnerComponent,
@@ -125,7 +130,8 @@ import { ApplaudsButtonComponent } from './components/applauds-button/applauds-b
     ArticlesContentWrapperComponent,
     SecondsToJustNowPipe,
     ContactFormComponent,
-    LoadingAndEmptyStateComponent
+    LoadingAndEmptyStateComponent,
+    CommentSectionTogglerComponent,
   ],
   providers: [],
 })

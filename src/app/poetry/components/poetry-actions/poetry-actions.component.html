@@ -116,11 +116,6 @@
         [articleId]="articleId"
         (applaud)="clap($event)"
       ></app-applauds-button>
-      <!-- <span class=" mat-elevation-z8 icon" (click)="$event.stopPropagation(); clap()">
-        <img src="assets/clap.png" alt="Applaud">
-        <span *ngIf="!isClapping" class="applauds-count">{{ totalApplauds }}</span>
-      <span *ngIf="isClapping" class="applauds-count">{{ currentAudienceApplauds }}</span> -->
-       <!-- </span> -->
        <span class="mat-elevation-z8 icon" (click)="$event.stopPropagation(); toggleCommentSection()">
          <i class="fa fa-comment"></i>
         <span class="comments-count">{{comments?.length}}</span>

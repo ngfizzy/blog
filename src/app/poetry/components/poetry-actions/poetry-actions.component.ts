@@ -61,14 +61,14 @@ export class PoetryActionsComponent implements OnInit, OnDestroy, OnChanges {
   @Output() updateUserApplaud = new EventEmitter<number>();
 
   isCommentSectionOpen = false;
-  isCollectingAudDetails = false;
+  // isCollectingAudDetails = false;
   canContinue = false;
   comment = '';
   email: string;
   name: string;
 
   isClapping = false;
-  isExtraLargeDevice = false;
+  isCollectingAudDetails: boolean;
 
   get comments() {
     const activities =
@@ -119,7 +119,6 @@ export class PoetryActionsComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.activities && changes.activities.currentValue) {
-      this.isClapping = false;
       this.isCollectingAudDetails = false;
       this.comment = '';
     }
@@ -153,10 +152,8 @@ export class PoetryActionsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   toggleCommentSection() {
-    if (!this.isExtraLargeDevice) {
       this.isCommentSectionOpen = !this.isCommentSectionOpen;
       this.commentSectionToggled.emit(this.isCommentSectionOpen);
-    }
   }
 
   ngOnDestroy() {}

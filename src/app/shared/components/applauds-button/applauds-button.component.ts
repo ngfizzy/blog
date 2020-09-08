@@ -38,8 +38,6 @@ export class ApplaudsButtonComponent implements OnChanges {
   clap() {
     this.isClapping = true;
 
-    // let applauds = this.currentAudienceApplauds || 0;
-
     let applauds = this.currentAudienceApplauds || 0 ;
 
     applauds = applauds < 50 ? applauds + 1 : 0;
