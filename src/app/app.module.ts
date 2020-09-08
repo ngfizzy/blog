@@ -1,6 +1,6 @@
-import {HttpLinkModule, HttpLink} from 'apollo-angular/http';
+import {HttpLink} from 'apollo-angular/http';
 import {InMemoryCache, ApolloLink} from '@apollo/client/core';
-import {ApolloModule, Apollo} from 'apollo-angular';
+import {Apollo, APOLLO_OPTIONS } from 'apollo-angular';
 import {setContext} from '@apollo/client/link/context';
 import {onError} from '@apollo/client/link/error';
 import { TimeagoModule } from 'ngx-timeago';
@@ -13,12 +13,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
-
-
-
-
-
 
 import {authTokenKey} from './core/constants'
 
@@ -53,8 +47,6 @@ const authError = onError(({graphQLErrors}) => {
   declarations: [...AppRoutingModule.routeComponents, AppComponent],
   imports: [
     HttpClientModule,
-    HttpLinkModule,
-    ApolloModule,
     BrowserModule,
     AppRoutingModule,
     ToastrModule,
@@ -76,26 +68,27 @@ const authError = onError(({graphQLErrors}) => {
     HttpClientModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
   ],
-  providers: [],
+  providers: [{
+      provide: APOLLO_OPTIONS,
+      useFactory(httpLink: HttpLink) {
+        return {
+          cache: new InMemoryCache(),
+          link: httpLink.create({
+            uri: 'http://localhost:4000/graphql',
+          }),
+        };
+      },
+      deps: [HttpLink],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {
   constructor(
-    apollo: Apollo,
-    httpLink: HttpLink,
     @Optional() @SkipSelf() parentModule: CoreModule
   ) {
     throwIfAlreadyLoaded(parentModule, 'CoreModule');
-    apollo.create({
-      link: ApolloLink.from([
-        authContext,
-        authError,
-        httpLink.create({
-          uri: 'http://localhost:4000/graphql',
-        }),
-      ]),
-      cache: new InMemoryCache(),
-    });
+
   }
 }
 

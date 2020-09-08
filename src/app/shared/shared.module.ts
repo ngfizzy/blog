@@ -34,14 +34,6 @@ import {
   MatDrawerContent,
 } from '@angular/material/sidenav';
 
-// import {
-//   MatExpansionModule,
-//   MatExpansionPanel,
-//   MatExpansionPanelHeader,
-//   MatExpansionPanelTitle,
-//   MatExpansionPanelDescription
-// } from '@angular/material/expansion'
-
 import { MatDialogModule } from '@angular/material/dialog';
 import { MarkdownModule } from 'ngx-markdown';
 
@@ -76,6 +68,7 @@ import {  CommentSectionTogglerComponent } from './components/comment-section-to
     MatToolbarModule,
     RouterModule,
     MatSidenavModule,
+    MatListModule,
     MarkdownModule.forChild(),
   ],
   exports: [
