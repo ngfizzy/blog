@@ -29,7 +29,6 @@ import {
   templateUrl: './poetry-actions.component.html',
   styleUrls: ['./poetry-actions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-
   animations: [
     trigger('transitionInOut', [
       state(
@@ -130,7 +129,6 @@ export class PoetryActionsComponent implements OnInit, OnDestroy, OnChanges {
       this.name =
         (this.currentAudience && this.currentAudience.audienceName) || '';
     }
-
   }
 
 
@@ -149,19 +147,9 @@ export class PoetryActionsComponent implements OnInit, OnDestroy, OnChanges {
     });
   }
 
-  clap() {
-    this.isClapping = true;
-
-    let applauds = this.currentAudienceApplauds || 0;
-
-    applauds = applauds < 50 ? applauds + 1 : 0;
-    this.updateUserApplaud.emit(applauds);
-
-    this.applaud.emit({
-      applauds,
-      articleId: this.articleId,
-      audience: this.currentAudience,
-    });
+  clap(payload: ApplaudPayload) {
+    this.updateUserApplaud.emit(payload.applauds);
+    this.applaud.emit(payload)
   }
 
   toggleCommentSection() {

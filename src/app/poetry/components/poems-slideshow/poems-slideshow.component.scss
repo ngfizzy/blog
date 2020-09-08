@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: inherit;
   padding: 0 1.5rem;
   margin-left: auto;
@@ -15,6 +15,13 @@
   height: 3.2rem;
   background-color: rgba($color: #1E1E24, $alpha: 1);
   animation: transitionIn 1s;
+  border: 1px solid white;
+
+  .slide-controls {
+    width: 86%;
+    height: 100%;
+    border: solid yellow;
+  }
 }
 
 @keyframes transitionIn {

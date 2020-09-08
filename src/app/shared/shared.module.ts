@@ -49,6 +49,7 @@ import { CopyToClipboardComponent } from './components/copy-to-clipboard/copy-to
 import { SecondsToJustNowPipe } from './pipes/seconds-to-just-now.pipe';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { LoadingAndEmptyStateComponent } from './components/loading-and-empty-state/loading-and-empty-state.component';
+import { ApplaudsButtonComponent } from './components/applauds-button/applauds-button.component';
 
 @NgModule({
   imports: [
@@ -111,11 +112,13 @@ import { LoadingAndEmptyStateComponent } from './components/loading-and-empty-st
     MatExpansionPanelTitle,
     MatExpansionPanelDescription,
     LoadingAndEmptyStateComponent,
+    ApplaudsButtonComponent,
   ],
   declarations: [
     SpinnerComponent,
     ArticleComponent,
     NotFoundComponent,
+    ApplaudsButtonComponent,
     SideNavComponent,
     CopyToClipboardComponent,
     ArticleActionsComponent,
