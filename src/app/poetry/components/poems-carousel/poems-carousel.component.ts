@@ -6,6 +6,7 @@ import {
   EventEmitter,
   SimpleChanges,
   OnChanges,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { Poem, Poems, Slides } from 'src/app/shared/models';
 import {
@@ -63,6 +64,7 @@ interface PoemsMetadata {
       ]),
     ]),
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
   @Input() poems: Poems;
@@ -89,8 +91,11 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
   ngOnChanges(changes: SimpleChanges): void {
     const { selectedPoemId } = changes;
 
-    if(!selectedPoemId?.isFirstChange()) {
+    if(!selectedPoemId?.firstChange && !this.poemsGroupList?.length) {
       this.poemsGroupList = this.groupPoems();
+    }
+
+    if(!selectedPoemId?.isFirstChange() && this.poemsGroupList?.length) {
       this.showPreviousButton = this.shouldShowPreviousButton();
       this.showNextButton = this.shouldShowNextButton();
       this.firstGroupingDone = true
