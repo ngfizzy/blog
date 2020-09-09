@@ -7,7 +7,7 @@
 >
 </div>
 
-<div class="wrapper" [ngClass]="{
+<div class="wrapper rounded" [ngClass]="{
   'hide-form': !isCommentSectionOpen
 }"
 (click)="$event.stopPropagation()"
@@ -25,28 +25,28 @@
     <h4 class="text-center text-underline">Comment Section</h4>
     <form
       *ngIf="isCommentSectionOpen"
-      class="mat-elevation-z2 comment-form"
+      class="bprder border-light comment-form"
     >
       <div class="row" *ngIf="isCollectingAudDetails">
-        <span class="col-12 text-info form-info">
+        <span class="col-12 text-warning text-center form-info">
           If you do not provide email or name, your comment would appear as anonymous
         </span>
         <input
-          class="col-10 input"
+          class="input"
           type="text"
           name="name"
           (click)="$event.stopPropagation()"
           [(ngModel)]="name"
           placeholder="name (optional)"/>
         <input
-          class="col-10 input"
+          class="input"
           #emailInput="ngModel"
           email
           type="email"
           (click)="$event.stopPropagation()"
           name="email" [(ngModel)]="email"
           placeholder="email (optional)"/>
-        <span class="col-12 email-error" *ngIf="emailInput.invalid">Wrong email format</span>
+        <span class="email-error" *ngIf="emailInput.invalid">Wrong email format</span>
         <div class="row buttons-wrapper">
           <button
             class="col-sm-12 col-md-6 col-lg-6 back"
@@ -73,7 +73,7 @@
         (focusout)="canContinue=false"
         [(ngModel)]="comment">
       </textarea>
-      <span class="char-counter">
+      <span class="char-counter text-light">
         {{ comment.length }} / 300
       </span>
       <button
@@ -84,12 +84,30 @@
       </button>
       </ng-container>
     </form>
-    <div class="row comments">
+    <div [@transitionInOut] class="actions-container" *ngIf="!isCollectingAudDetails">
+      <div class="actions">
+        <app-applauds-button
+          [totalApplauds]="totalApplauds"
+          [currentAudienceApplauds]="currentAudienceApplauds"
+          [currentAudience]="currentAudience"
+          [articleId]="articleId"
+          (applaud)="clap($event)"
+        ></app-applauds-button>
+         <app-comment-toggler
+          (togglerClicked)="toggleCommentSection($event)"
+          [isCommentSectionOpened]="isCommentSectionOpen"
+          [commentsCount]="comments.length"
+         >
+
+         </app-comment-toggler>
+      </div>
+    </div>
+    <div class="row border-top border-light mat-elevation-top-z2 comments">
       <div
         class="col-sm-12"
         *ngIf="comments"
       >
-      <div class="row comment" *ngFor="let com of comments | orderBy: 'com.date' : true">
+      <div class="row  comment" *ngFor="let com of comments | orderBy: 'com.date' : true">
         <span class="col-sm-12 col-md-3 col-lg-3 text-info audience-name">
           <span *ngIf="com.audience">
             {{ com.audience }} Says
@@ -107,22 +125,5 @@
       </div>
     </div>
   </div>
-  <div [@transitionInOut] class="actions-container" *ngIf="!isCollectingAudDetails">
-    <div class="actions">
-      <app-applauds-button
-        [totalApplauds]="totalApplauds"
-        [currentAudienceApplauds]="currentAudienceApplauds"
-        [currentAudience]="currentAudience"
-        [articleId]="articleId"
-        (applaud)="clap($event)"
-      ></app-applauds-button>
-       <app-comment-toggler
-        (togglerClicked)="toggleCommentSection($event)"
-        [isCommentSectionOpened]="isCommentSectionOpen"
-        [commentsCount]="comments.length"
-       >
 
-       </app-comment-toggler>
-    </div>
-  </div>
 </div>

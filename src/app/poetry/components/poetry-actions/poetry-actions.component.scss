@@ -9,40 +9,39 @@
 
 .wrapper {
   width: 40%;
-  height: 86%;
+  height: 92%;
   display: flex;
   position: fixed;
-  top: 12%;
+  top: 8%;
   right: 0;
   padding: 10px;
-  background-color: rgba($color: #000, $alpha: 0.95);
+  justify-content: center;
+  background-color:#30373ef7;
   z-index: 4000;
   transition: width 0.5s ease-in-out;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
   .comments-container {
-    width: 87%;
+    width: 92%;
     padding-bottom: 5%;
   }
 }
 
 .actions-container {
-  display: flex;
-  flex-direction: row;
-  margin-left: auto;
-  margin-right: 2px;
-  position: relative;
-  top: 1rem;
-  left: -1rem;
 
   .actions {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
-    height: 8rem;
-    background-color: rgba($color: #000, $alpha: 0);
-    width: 2rem;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, 0);
+    width: 6rem;
+    margin-left: auto;
+    margin-right: 5%;
+    margin-top: 1rem;
     padding: 0.3rem;
-    margin-top: 95%;
-    box-sizing: content-box;
   }
 }
 
@@ -94,6 +93,7 @@
     color: rgba($color: #fff, $alpha: 0.8);
     width: 100%;
     padding: 0.5rem;
+
     outline: none;
     border: none;
   }
@@ -101,10 +101,15 @@
   button.back {
     background-color: white;
     color: rgb(30, 30, 50);
+    width: 45%
+  }
+
+  button.submit {
+    width: 50%;
   }
 
   .buttons-wrapper {
-    width: 100%;
+    width: 83%;
     justify-content: space-between;
     margin-top: 0.3rem;
     margin: auto;
@@ -155,41 +160,30 @@
   background: transparent;
 }
 
-@media (min-width: 320px) and (max-width: 767.98px) {
+@media (min-width: 320px) and (max-width: 999.98px) {
   .wrapper {
     width: 88%;
   }
+}
 
-  .actions-container {
-    left: -0.5rem;
+@media (min-width: 1000px) and (max-width: 1490px) {
+  .wrapper {
+    width: 60%;
   }
+}
 
-  .form-info {
-    font-size: 0.1rem;
+@media (min-width: 1500px) and (max-width: 1699px) {
+  .wrapper {
+    width: 50%;
   }
+}
+.input {
+  width: 83.5% !important;
+  margin: auto;
+}
 
-  .comments {
-    width: 116%;
-    height: 50vh;
-
-    .audience-name {
-      margin-right: auto;
-      text-align: left !important;
-    }
-  }
-
-  .submitting {
-    margin: auto;
-    width: 100%;
-
-    form {
-      margin-left: -0.9rem;
-      width: 112%;
-
-      .buttons-wrapper {
-        width: 104%;
-        margin: auto;
-      }
-    }
-  }
+.form-info {
+  font-size: 0.8rem;
+  width: 83%;
+  margin: auto;
 }
