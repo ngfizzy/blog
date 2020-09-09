@@ -91,7 +91,7 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
   ngOnChanges(changes: SimpleChanges): void {
     const { selectedPoemId } = changes;
 
-    if(!selectedPoemId?.firstChange && !this.poemsGroupList?.length) {
+    if(!selectedPoemId?.isFirstChange() && !this.poemsGroupList?.length) {
       this.poemsGroupList = this.groupPoems();
     }
 
@@ -101,11 +101,10 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
       this.firstGroupingDone = true
     }
 
-    if (!selectedPoemId?.isFirstChange()) {
-
+    if (!selectedPoemId?.isFirstChange() && selectedPoemId?.previousValue !== selectedPoemId?.currentValue) {
       this.jumpToGroup(
-        selectedPoemId.previousValue,
-        selectedPoemId.currentValue
+        selectedPoemId?.previousValue,
+        selectedPoemId?.currentValue
       );
     }
   }
