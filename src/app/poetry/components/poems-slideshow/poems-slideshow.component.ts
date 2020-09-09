@@ -17,13 +17,10 @@ import {
   Slides,
   Audience,
   AudienceActivity,
-} from 'src/app/shared/models';
-import { PoetryState, getAllPoems, getPoem } from '../../state';
-import { ApplaudSuccess } from './../../../articles/state/articles.actions';
-import {
   ApplaudPayload,
   CommentPayload,
-} from './../../../shared/models/audience-activity-payloads.interface';
+} from 'src/app/shared/models';
+import { PoetryState, getAllPoems, getPoem } from '../../state';
 import * as fromPoetryActions from '../../state/poetry.actions';
 import { getAudience } from 'src/app/core/state';
 @Component({
@@ -52,6 +49,7 @@ export class PoemsSlideshowComponent implements OnDestroy, Slides {
   audienceActivities$: Observable<AudienceActivity[]>;
   hidden: boolean;
   totalApplauds$: Observable<number>;
+  commentSectionOpened = false;
 
   constructor(
     private store: Store<PoetryState>,
@@ -65,10 +63,15 @@ export class PoemsSlideshowComponent implements OnDestroy, Slides {
       select(getSelectedPoemActivities)
     );
 
-    this.totalApplauds$ = this.selectedPoem$.pipe(map(poem => poem?.audienceActivities?.reduce(
-      (accumulator, activity) => accumulator + activity.applauds,
-      0,
-    )))
+    this.totalApplauds$ = this.selectedPoem$.pipe(
+      map(
+        poem => poem?.audienceActivities?.reduce(
+          (accumulator, activity) => accumulator + activity.applauds,
+        0,
+       )
+      )
+    );
+
     this.applaudsWatcher$
       .pipe(takeUntil(this.destroy$))
       .subscribe((applauds) =>
@@ -140,9 +143,6 @@ export class PoemsSlideshowComponent implements OnDestroy, Slides {
     this.store.dispatch(new fromPoetryActions.AddComment(comment));
   }
 
-  hidePoem(hide: boolean) {
-    this.hidden = hide;
-  }
 
   private initializeCurrentPoemIndex(poemId: number, poems: Poem[]) {
     if (!this.poemIndex) {

@@ -20,8 +20,16 @@
   .slide-controls {
     width: 86%;
     height: 100%;
-    border: solid yellow;
+    justify-content: center;
   }
+}
+
+.audience-action-btns {
+  height: 100%;
+  display: flex;
+  width: 14%;
+  justify-content: space-around;
+  align-items: center;
 }
 
 @keyframes transitionIn {

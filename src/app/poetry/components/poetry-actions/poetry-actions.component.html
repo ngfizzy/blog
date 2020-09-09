@@ -116,10 +116,13 @@
         [articleId]="articleId"
         (applaud)="clap($event)"
       ></app-applauds-button>
-       <span class="mat-elevation-z8 icon" (click)="$event.stopPropagation(); toggleCommentSection()">
-         <i class="fa fa-comment"></i>
-        <span class="comments-count">{{comments?.length}}</span>
-       </span>
+       <app-comment-toggler
+        (togglerClicked)="toggleCommentSection($event)"
+        [isCommentSectionOpened]="isCommentSectionOpen"
+        [commentsCount]="comments.length"
+       >
+
+       </app-comment-toggler>
     </div>
   </div>
 </div>

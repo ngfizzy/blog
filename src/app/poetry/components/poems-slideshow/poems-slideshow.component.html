@@ -20,7 +20,14 @@
       </app-slide-control>
     </div>
 
-      <div *ngIf="(selectedPoem$ | async) as poem">
+      <div class="audience-action-btns" *ngIf="(selectedPoem$ | async) as poem">
+        <app-comment-toggler
+          (togglerClicked)="commentSectionOpened = $event"
+          [commentsCount]="poem.audienceActivities.length"
+          [isCommentSectionOpened]="commentSectionOpened"
+        >
+
+        </app-comment-toggler>
         <app-applauds-button
           [totalApplauds]="totalApplauds$ |  async"
           [currentAudienceApplauds]="currentUserApplauds"
@@ -40,12 +47,13 @@
   <app-poetry-actions
     (applaud)="submitApplauds($event)"
     (updateUserApplaud)="updateAudienceApplauds($event)"
-    (commentSectionToggled)="hidePoem($event)"
+    (commentSectionToggled)="commentSectionOpened = $event"
     (addComment)="submitComment($event)"
     [articleId]="poem.id"
     [currentAudience]="audience$ | async"
     [currentAudienceApplauds]="currentUserApplauds"
     [activities]="poem.audienceActivities"
+    [isCommentSectionOpen]="commentSectionOpened"
   >
 
   </app-poetry-actions>

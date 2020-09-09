@@ -60,7 +60,7 @@ export class PoetryActionsComponent implements OnInit, OnDestroy, OnChanges {
   @Output() addComment = new EventEmitter<CommentPayload>();
   @Output() updateUserApplaud = new EventEmitter<number>();
 
-  isCommentSectionOpen = false;
+  @Input() isCommentSectionOpen = false;
   // isCollectingAudDetails = false;
   canContinue = false;
   comment = '';
