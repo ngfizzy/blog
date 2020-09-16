@@ -133,6 +133,14 @@ export function authorsArticlesReducers(
         },
       };
     case AuthorsArticlesActionTypes.EditArticleTitle:
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          isLoading: true,
+          status: 'saving',
+        },
+      };
     case AuthorsArticlesActionTypes.EditArticleBody:
       return {
         ...state,

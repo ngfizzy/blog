@@ -128,8 +128,8 @@ export class AuthorsArticlesService {
         }
 
         return response$.pipe(map(response => {
-
-          articles.unshift(response.article);
+          const index = articles.findIndex(a => response.article.id === a.id);
+          articles.splice(index, 1, response.article);
 
           return { articles, selectedArticle: response.article, error: response.error };
         }));
