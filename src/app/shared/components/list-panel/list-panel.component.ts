@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'app-authors-list-panel',
+  selector: 'app-list-panel',
   template: `<div class="mat-elevation-z2 content-background-color list-panel">
     <div class="mat-elevation-z2 content-background-color title-wrapper">
       <h6 class="title-case">{{ listTitle }}</h6>

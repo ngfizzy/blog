@@ -34,12 +34,12 @@
   </div>
   <mat-sidenav-container class="mat-elevation-z2 articles-drawer-container" *ngIf="(articlesListLoad$ | async) === false">
     <mat-sidenav mode="side" opened class="articles-drawer">
-      <app-authors-articles-list
-        [articlesList]="articles$ | async"
+      <app-list
+        [items]="articles$ | async"
         [isLoading]="isArticlesListLoading$ | async"
-        (showFullArticle)="showFullArticle($event)"
+        (itemSelected)="showFullArticle($event)"
       >
-      </app-authors-articles-list>
+      </app-list>
     </mat-sidenav>
     <mat-sidenav-content>
       <div class="sidenav-outlet">

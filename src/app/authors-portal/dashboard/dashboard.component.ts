@@ -90,6 +90,10 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  goToArticle(article: Article) {
+    this.router.navigate(['/authors/articles', article.id])
+  }
+
   showCategoryForm() {
     this.isCategoryFormDisplayed = true;
   }

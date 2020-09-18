@@ -69,7 +69,7 @@
     </div>
 
     <div class="col-md-6">
-      <app-authors-list-panel listTitle="Messages">
+      <app-list listTitle="Messages">
         <ng-container *ngIf="messagesWithIndices$ | async as messagesWithIndices">
           <app-loading-and-empty-state
             [isLoading]="isMessagesLoading$ | async"
@@ -82,7 +82,7 @@
             </app-message-panel>
           </ng-container>
         </ng-container>
-      </app-authors-list-panel>
+      </app-list>
     </div>
   </div>
 
@@ -96,23 +96,25 @@
     <!-- Top 10 Drafts  -->
     <div class="w-100 row mt-2">
       <div class="col-sm-12 col-md-6 list-panel">
-        <app-authors-list-panel [listTitle]="'Top 10 Articles'">
-          <app-authors-articles-list
-            [articlesList]="top10Articles$ | async"
+        <app-list-panel [listTitle]="'Top 10 Articles'">
+          <app-list
+            [items]="top10Articles$ | async"
             [isLoading]="isTop10ArticlesLoading$ | async"
+            (itemSelected)="goToArticle($event)"
           >
-          </app-authors-articles-list>
-        </app-authors-list-panel>
+          </app-list>
+        </app-list-panel>
       </div>
 
       <!-- Last 10  Drafts-->
       <div class="col-sm-12 col-md-6 list-panel">
-        <app-authors-list-panel [listTitle]="'Last 10 Drafts'">
-          <app-authors-articles-list
-            [articlesList]="last10Drafts$ | async"
+        <app-list-panel [listTitle]="'Last 10 Drafts'">
+          <app-list
+            [items]="last10Drafts$ | async"
             [isLoading]="isLast10DraftsLoading$ | async"
-          ></app-authors-articles-list>
-        </app-authors-list-panel>
+            (itemSelected)="goToArticle($event)"
+          ></app-list>
+        </app-list-panel>
       </div>
     </div>
   </app-authors-section>

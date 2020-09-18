@@ -51,6 +51,9 @@ import { ApplaudsButtonComponent } from './components/applauds-button/applauds-b
 import {  CommentSectionTogglerComponent } from './components/comment-section-toggler/comment-section-toggler.component';
 import { MatExpansionModule, MatExpansionPanel, MatExpansionPanelDescription, MatExpansionPanelHeader, MatExpansionPanelTitle } from '@angular/material/expansion';
 import { ContactAreaComponent } from './components/contact-area/contact-area.component';
+import { ListComponent } from './components/list/list.component';
+import { ListPanelComponent } from './components/list-panel/list-panel.component';
+import { ListItemComponent } from './components/list-item/list-item.component';
 
 @NgModule({
   imports: [
@@ -119,6 +122,9 @@ import { ContactAreaComponent } from './components/contact-area/contact-area.com
     MatExpansionPanelTitle,
     MatExpansionPanelDescription,
     ContactAreaComponent,
+    ListPanelComponent,
+    ListComponent,
+    ListItemComponent,
   ],
   declarations: [
     SpinnerComponent,
@@ -133,7 +139,10 @@ import { ContactAreaComponent } from './components/contact-area/contact-area.com
     ContactFormComponent,
     LoadingAndEmptyStateComponent,
     CommentSectionTogglerComponent,
-    ContactAreaComponent
+    ContactAreaComponent,
+    ListPanelComponent,
+    ListComponent,
+    ListItemComponent
   ],
   providers: [],
 })

@@ -65,8 +65,8 @@ export class AuthorsArticlesComponent implements OnInit {
     this.store.dispatch(new fromAuthorsArticlesActions.DeleteArticle(articleId));
   }
 
-  showFullArticle(articleId: number) {
-    this.router.navigate(['authors/articles', articleId]);
+  showFullArticle(article: Article) {
+    this.router.navigate(['authors/articles', article.id]);
   }
 
   search() {}
