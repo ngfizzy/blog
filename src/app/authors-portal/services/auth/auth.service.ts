@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import { authTokenKey } from 'src/app/core/constants';
 import { AuthorsPortalState, isLoggedIn } from '../../state';
 import { Store, select } from '@ngrx/store';
+import { AuthorizeUser } from '../../state/authors-portal.actions';
 
 
 @Injectable()
@@ -15,7 +16,9 @@ export class AuthService {
     private router: Router,
     private authGqlService: AuthGqlService,
     private store: Store<AuthorsPortalState>
-  ) {}
+  ) {
+    this.store.dispatch(new AuthorizeUser({authToken: localStorage.getItem(authTokenKey)}))
+  }
 
   isLoggedIn() {
     return this.store.pipe(select(isLoggedIn));
@@ -33,7 +36,7 @@ export class AuthService {
           localStorage.removeItem(authTokenKey);
           this.router.navigate(['/authors', 'login']);
         }
-  
+
         return res;
       })
     );

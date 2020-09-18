@@ -21,7 +21,6 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { MatToolbarModule, MatToolbar } from '@angular/material/toolbar';
 import { MatListModule, MatNavList, MatListItem } from '@angular/material/list';
-// import { } from '@angular/material/list/list';
 import { EllipsisModule } from 'ngx-ellipsis';
 
 import {
@@ -50,6 +49,8 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
 import { LoadingAndEmptyStateComponent } from './components/loading-and-empty-state/loading-and-empty-state.component';
 import { ApplaudsButtonComponent } from './components/applauds-button/applauds-button.component';
 import {  CommentSectionTogglerComponent } from './components/comment-section-toggler/comment-section-toggler.component';
+import { MatExpansionModule, MatExpansionPanel, MatExpansionPanelDescription, MatExpansionPanelHeader, MatExpansionPanelTitle } from '@angular/material/expansion';
+import { ContactAreaComponent } from './components/contact-area/contact-area.component';
 
 @NgModule({
   imports: [
@@ -69,6 +70,7 @@ import {  CommentSectionTogglerComponent } from './components/comment-section-to
     RouterModule,
     MatSidenavModule,
     MatListModule,
+    MatExpansionModule,
     MarkdownModule.forChild(),
   ],
   exports: [
@@ -110,7 +112,13 @@ import {  CommentSectionTogglerComponent } from './components/comment-section-to
     MatListItem,
     LoadingAndEmptyStateComponent,
     ApplaudsButtonComponent,
-    CommentSectionTogglerComponent
+    CommentSectionTogglerComponent,
+    MatExpansionModule,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    MatExpansionPanelDescription,
+    ContactAreaComponent,
   ],
   declarations: [
     SpinnerComponent,
@@ -125,6 +133,7 @@ import {  CommentSectionTogglerComponent } from './components/comment-section-to
     ContactFormComponent,
     LoadingAndEmptyStateComponent,
     CommentSectionTogglerComponent,
+    ContactAreaComponent
   ],
   providers: [],
 })

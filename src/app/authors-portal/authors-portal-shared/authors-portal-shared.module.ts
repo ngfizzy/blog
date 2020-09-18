@@ -6,18 +6,10 @@ import { NgModule } from '@angular/core';
 
 import { NumberWidgetComponent } from './components/number-widget/number-widget.component';
 import { QuickActionButtonComponent } from './components/quick-action-button/quick-action.component';
-import {
-  MatExpansionModule,
-  MatExpansionPanel,
-  MatExpansionPanelHeader,
-  MatExpansionPanelTitle,
-  MatExpansionPanelDescription
-} from '@angular/material/expansion';
 
 @NgModule({
   imports: [
     SharedModule,
-    MatExpansionModule,
   ],
   exports: [
     SharedModule,
@@ -26,10 +18,6 @@ import {
     AuthorsArticlesListComponent,
     QuickActionButtonComponent,
     SectionComponent,
-    MatExpansionPanel,
-    MatExpansionPanelHeader,
-    MatExpansionPanelTitle,
-    MatExpansionPanelDescription
   ],
   declarations: [
     NumberWidgetComponent,

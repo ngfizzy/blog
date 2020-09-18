@@ -20,6 +20,7 @@ const routes: Routes = [
       {
         path: 'articles',
         canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
         loadChildren: () =>
           import('./authors-articles/authors-articles.module').then(
             mod => mod.AuthorsArticlesModule,
@@ -27,6 +28,7 @@ const routes: Routes = [
       },
       {
         path: 'categories',
+        pathMatch: 'full',
         canActivate: [AuthGuard],
         loadChildren: async () => (await import('./categories/categories.module')).CategoriesModule
       }

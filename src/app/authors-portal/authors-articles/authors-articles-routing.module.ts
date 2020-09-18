@@ -12,19 +12,22 @@ import { AuthGuard } from '../auth.guard';
 const routes: Routes = [
   {
     path: '',
+    canActivate: [AuthGuard],
     component: AuthorsArticlesComponent,
-    canLoad: [AuthGuard],
     children: [
       {
+        canActivate: [AuthGuard],
         path: ':id',
         component: AuthorsArticleComponent,
         pathMatch: 'full',
       },
       {
         path: 'edit/:id',
+        canActivate: [AuthGuard],
         component: ArticleEditComponent,
       },
       {
+        canActivate: [AuthGuard],
         path: ':id/publish',
         component: AuthorsPublishComponent,
       }
