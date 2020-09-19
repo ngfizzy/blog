@@ -48,6 +48,7 @@ const dashboardTypeDefs = gql`
   extend type Query {
     getLast10Drafts: ArticlesResponse
     getTop10Articles: ArticlesResponse
+    getFeaturedArticles: ArticlesResponse
     getDashboardStatistics: DashboardStatisticsResponse
     getCategoriesSummaries: CategoriesSummariesResponse
     getMessages: MessagesResponse

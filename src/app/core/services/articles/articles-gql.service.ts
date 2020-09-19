@@ -42,4 +42,10 @@ export class ArticlesGqlService {
       }
     }).pipe(map(response => response.data.addComment));
   }
+
+  getFeaturedArticles() {
+    return this.apollo.watchQuery<iGqlResponses.GetFeaturedArticlesResponse>({
+      query: queries.getFeaturedArticles
+    }).valueChanges.pipe(map(response => response.data.getFeaturedArticles))
+  }
 }

@@ -1,6 +1,7 @@
 <div class="container-fluid dashboard">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-12 col-md-12 col-lg-7">
+      <!--  Quick Action -->
       <app-authors-section
         [sectionTitle]="'Quick Actions'"
         [isLoading]="false"
@@ -29,47 +30,48 @@
         </div>
       </app-authors-section>
 
-    <!-- Quick Statistics -->
-    <app-authors-section
-      [sectionTitle]="'Quick Statistics'"
-      [isLoading]="isArticlesStatisticsLoading$ | async"
-      [content]="articlesStatistics$ | async"
-    >
-      <ng-container *ngIf="articlesStatistics$ | async as stat">
-        <div class="ml-2 mr-2">
-          <app-authors-number-widget
-            [statistics]="stat.articleWithMostComments"
-          ></app-authors-number-widget>
+      <!-- Quick Statistics -->
+      <app-authors-section
+        [sectionTitle]="'Quick Statistics'"
+        [isLoading]="isArticlesStatisticsLoading$ | async"
+        [content]="articlesStatistics$ | async"
+      >
+        <div class="row" *ngIf="articlesStatistics$ | async as stat">
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <app-authors-number-widget
+              [statistics]="stat.articleWithMostComments"
+            ></app-authors-number-widget>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <app-authors-number-widget
+              [statistics]="stat.mostLikedArticle"
+            ></app-authors-number-widget>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <app-authors-number-widget
+              [statistics]="stat.mostPopularArticle"
+            ></app-authors-number-widget>
+          </div>
         </div>
-        <div class="ml-2 mr-2">
-          <app-authors-number-widget
-            [statistics]="stat.mostLikedArticle"
-          ></app-authors-number-widget>
-        </div>
-        <div class="ml-2 mr-2">
-          <app-authors-number-widget
-            [statistics]="stat.mostPopularArticle"
-          ></app-authors-number-widget>
-        </div>
-      </ng-container>
-    </app-authors-section>
+      </app-authors-section>
 
-    <app-authors-section
-      [sectionTitle]="'All Categories'"
-      [isLoading]="isCategoriesSummariesLoading$ | async"
-      [content]="(categoriesSummaries$ | async).length">
-      <ng-container *ngIf="categoriesSummaries$ | async as categoriesSummaries">
-        <div *ngFor="let summary of categoriesSummaries" class="mr-2 ml-2">
-          <app-authors-category-summary-widget
-            [categorySummary]="summary"
-          ></app-authors-category-summary-widget>
-        </div>
-      </ng-container>
-    </app-authors-section>
-    </div>
+      <!-- All Categories -->
+      <app-authors-section
+        [sectionTitle]="'All Categories'"
+        [isLoading]="isCategoriesSummariesLoading$ | async"
+        [content]="(categoriesSummaries$ | async).length">
+        <ng-container *ngIf="categoriesSummaries$ | async as categoriesSummaries">
+          <div  *ngFor="let summary of categoriesSummaries" class="col-sm-12 col-md-6 col-lg-4">
+            <app-authors-category-summary-widget
+              [categorySummary]="summary"
+            ></app-authors-category-summary-widget>
+          </div>
+        </ng-container>
+      </app-authors-section>
+  </div>
 
-    <div class="col-md-6">
-      <app-list listTitle="Messages">
+    <div class="col-md-12 col-lg-5">
+      <app-list-panel listTitle="Messages">
         <ng-container *ngIf="messagesWithIndices$ | async as messagesWithIndices">
           <app-loading-and-empty-state
             [isLoading]="isMessagesLoading$ | async"
@@ -82,7 +84,7 @@
             </app-message-panel>
           </ng-container>
         </ng-container>
-      </app-list>
+      </app-list-panel>
     </div>
   </div>
 
@@ -92,10 +94,9 @@
     [content]="true"
     [isLoading]="false"
   >
-
     <!-- Top 10 Drafts  -->
     <div class="w-100 row mt-2">
-      <div class="col-sm-12 col-md-6 list-panel">
+      <div class="col-sm-12 col-md-6 col-lg-4 list-panel">
         <app-list-panel [listTitle]="'Top 10 Articles'">
           <app-list
             [items]="top10Articles$ | async"
@@ -107,11 +108,22 @@
       </div>
 
       <!-- Last 10  Drafts-->
-      <div class="col-sm-12 col-md-6 list-panel">
+      <div class="col-sm-12 col-md-6 col-lg-4 list-panel">
         <app-list-panel [listTitle]="'Last 10 Drafts'">
           <app-list
             [items]="last10Drafts$ | async"
             [isLoading]="isLast10DraftsLoading$ | async"
+            (itemSelected)="goToArticle($event)"
+          ></app-list>
+        </app-list-panel>
+      </div>
+
+       <!-- Last Featured  Articles-->
+       <div class="col-sm-12 col-md-6 col-lg-4 list-panel">
+        <app-list-panel [listTitle]="'Featured Articles'">
+          <app-list
+            [items]="featuredArticles$ | async"
+            [isLoading]="isFeaturedArticleLoading$ | async"
             (itemSelected)="goToArticle($event)"
           ></app-list>
         </app-list-panel>

@@ -17,6 +17,7 @@ export const enum ArticlesActionTypes {
   GetOneArticleFailure = '[Articles] Get One Article Failure',
   GetCategoryArticles = '[Articles] Get Category Articles',
   GetCategoryArticlesSuccess = '[Articles] Get Category Articles Success',
+  GetFeaturedArticles = '[Articles] Get Featured Articles',
   Applaud = '[Articles] Applaud',
   ApplaudSuccess = '[Articles] Applaud Success',
   ApplaudFailure = '[Article] Applaud Failure',

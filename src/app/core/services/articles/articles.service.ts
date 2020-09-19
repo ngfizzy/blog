@@ -43,6 +43,10 @@ export class ArticlesService {
     )
   }
 
+  getFeaturedArticles() {
+    return this.articlesGqlService.getFeaturedArticles()
+  }
+
   applaud(applaudPayload: ApplaudPayload) {
     return this.articlesGqlService.applaud(applaudPayload);
   }

@@ -25,6 +25,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { CoreEffects } from './core/state/core.effects';
+import { SharedStoreModule } from './shared-store/shared-store.module';
 
 
 const authContext = setContext(() => ({
@@ -54,6 +55,7 @@ const authError = onError(({graphQLErrors}) => {
     CoreModule,
     SharedModule,
     TimeagoModule.forRoot(),
+    SharedStoreModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

@@ -71,6 +71,8 @@ const articleAndRelatedModels = gql`
     updatedAt: String
     title: String
     body: String
+
+    featured: Boolean
     deletedAt: String
     published: Boolean
     publishedAt: String

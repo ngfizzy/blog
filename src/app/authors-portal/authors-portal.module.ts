@@ -25,7 +25,7 @@ import { AuthGqlService } from './services/auth/auth-gql.service';
     AuthorsPortalSharedModule,
     RouterModule,
     AuthorsPortalRoutingModule,
-    StoreModule.forFeature('authorsPortal', authorsPortalReducer),
+    StoreModule.forFeature('authorsPortal',  authorsPortalReducer),
     EffectsModule.forFeature([AuthorsPortalEffects]),
   ],
   providers: [

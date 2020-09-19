@@ -24,7 +24,7 @@ import { Component, OnInit, Input } from '@angular/core';
       .widget {
         border-radius: 2%;
         height: 6.5rem;
-        width: 13.5rem;
+        width: 100%;
         padding: 0.5rem;
         font-weight: bolder;
       }
@@ -34,8 +34,6 @@ import { Component, OnInit, Input } from '@angular/core';
       }
       .article-title {
         width: 15rem;
-        overflow: hidden;
-        text-wrap: wrap;
       }
       .data-description,
       .value
@@ -43,6 +41,18 @@ import { Component, OnInit, Input } from '@angular/core';
         font-size: .8rem;
         font-weight: bolder;
         color: #fff;
+      }
+
+
+      .widget,
+      .title,
+      .article-title
+      .data-description,
+      .value
+      {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     `,
   ],

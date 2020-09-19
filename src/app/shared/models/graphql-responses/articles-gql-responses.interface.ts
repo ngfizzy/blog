@@ -6,3 +6,7 @@ export interface GetPublishedArticlesResponse {
 export interface GetOnePublishedArticleResponse {
   getOnePublishedArticle: ArticleResponse;
 }
+
+export interface GetFeaturedArticlesResponse {
+  getFeaturedArticles: ArticlesResponse;
+}

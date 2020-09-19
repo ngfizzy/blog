@@ -230,6 +230,17 @@ module.exports = {
 
     return { articles: sorted.slice(0, 10)};
   },
+  getFeaturedArticles() {
+    const featured = articles.filter(article => article.featured === true);
+    const sorted = featured.sort((a, b) => {
+      const aDate = (new Date(a.updatedAt)).getTime();
+      const bDate = (new Date(b.updatedAt)).getTime();
+
+      return bDate - aDate;
+    });
+
+    return { articles: sorted };
+  },
   getPopularity(activities) {
     const { commentsCount, likes } = this.getTotalLikesAndComments(activities);
 

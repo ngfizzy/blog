@@ -11,6 +11,7 @@ export interface Article  {
   updatedAt: string;
   publishedAt?: string;
   unpublishedAt?: string;
+  featured?: boolean;
   title: string;
   body: string;
   deletedAt?: string;

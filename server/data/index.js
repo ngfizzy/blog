@@ -53,6 +53,10 @@ class Data {
     return this.dataStore.getLast10Drafts();
   }
 
+  getFeaturedArticles() {
+    return this.dataStore.getFeaturedArticles();
+  }
+
   getTop10Articles() {
     return this.dataStore.getTop10Articles();
   }

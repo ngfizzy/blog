@@ -1,5 +1,6 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { combineReducers, createFeatureSelector, createSelector } from '@ngrx/store';
 import { AuthorsPortalState } from './authors-portal.state';
+
 
 export * from './authors-portal.state';
 
@@ -27,6 +28,7 @@ export const isArticleStatisticsLoading = createSelector(
   getArticleStatisticsState,
   state => state.isLoading
 );
+
 
 export const selectArticleStatisticsError = createSelector(
   getArticleStatisticsState,
