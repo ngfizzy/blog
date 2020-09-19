@@ -1,129 +1,105 @@
-
 <div
-  class="backdrop"
-  [ngClass]="{ 'hide-form': !isCommentSectionOpen }"
-  *ngIf="isCommentSectionOpen"
-  (click)="$event.stopPropagation(); toggleCommentSection()"
+  class="comments-container"
+  [class.submitting]="isCollectingAudDetails"
 >
-</div>
-
-<div class="wrapper rounded" [ngClass]="{
-  'hide-form': !isCommentSectionOpen
-}"
-(click)="$event.stopPropagation()"
->
-  <div
-    class="comments-container"
-    [class.submitting]="isCollectingAudDetails"
-    *ngIf="isCommentSectionOpen"
+  <h4 class="text-center text-underline">Comment Section</h4>
+  <form
+    class="border-light comment-form"
   >
-    <span
-      (click)="toggleCommentSection()"
-      class="text-left text-primary p-2 close-button">
-      <i class="fa fa-times"></i>
-    </span>
-    <h4 class="text-center text-underline">Comment Section</h4>
-    <form
-      *ngIf="isCommentSectionOpen"
-      class="bprder border-light comment-form"
-    >
-      <div class="row" *ngIf="isCollectingAudDetails">
-        <span class="col-12 text-warning text-center form-info">
-          If you do not provide email or name, your comment would appear as anonymous
-        </span>
-        <input
-          class="input"
-          type="text"
-          name="name"
-          (click)="$event.stopPropagation()"
-          [(ngModel)]="name"
-          placeholder="name (optional)"/>
-        <input
-          class="input"
-          #emailInput="ngModel"
-          email
-          type="email"
-          (click)="$event.stopPropagation()"
-          name="email" [(ngModel)]="email"
-          placeholder="email (optional)"/>
-        <span class="email-error" *ngIf="emailInput.invalid">Wrong email format</span>
-        <div class="row buttons-wrapper">
-          <button
-            class="col-sm-12 col-md-6 col-lg-6 back"
-            (click)="$event.stopPropagation(); isCollectingAudDetails=false">
-              Back to comment
-          </button>
-          <button
-            class="col-sm-12 col-md-6 col-lg-6 submit"
-            (click)="$event.stopPropagation(); submitComment()">
-            Submit comment
-          </button>
-        </div>
-      </div>
-      <ng-container *ngIf="!isCollectingAudDetails">
-        <textarea
-        (click)="$event.stopPropagation()"
-        name="comment"
-        placeholder="Please drop a comment"
-        #commentArea="ngModel"
-        minlength="4"
-        maxlength="300"
-        [ngClass]="{ 'focus': comment.length > 4 }"
-        (focus)="$event.stopPropagation(); canContinue=true"
-        (focusout)="canContinue=false"
-        [(ngModel)]="comment">
-      </textarea>
-      <span class="char-counter text-light">
-        {{ comment.length }} / 300
+    <div class="row" *ngIf="isCollectingAudDetails">
+      <span class="col-12 text-warning text-center form-info">
+        If you do not provide email or name, your comment would appear as anonymous
       </span>
-      <button
-        *ngIf="comment.length > 4"
-        type="button"
-        (click)="$event.stopPropagation(); isCollectingAudDetails=true">
-        Next
-      </button>
-      </ng-container>
-    </form>
-    <div [@transitionInOut] class="actions-container" *ngIf="!isCollectingAudDetails">
-      <div class="actions">
-        <app-applauds-button
-          [totalApplauds]="totalApplauds"
-          [currentAudienceApplauds]="currentAudienceApplauds"
-          [currentAudience]="currentAudience"
-          [articleId]="articleId"
-          (applaud)="clap($event)"
-        ></app-applauds-button>
-         <app-comment-toggler
-          (togglerClicked)="toggleCommentSection($event)"
-          [isCommentSectionOpened]="isCommentSectionOpen"
-          [commentsCount]="comments.length"
-         >
-
-         </app-comment-toggler>
+      <input
+        class="input"
+        type="text"
+        name="name"
+        (click)="$event.stopPropagation()"
+        [(ngModel)]="name"
+        placeholder="name (optional)"/>
+      <input
+        class="input"
+        #emailInput="ngModel"
+        email
+        type="email"
+        (click)="$event.stopPropagation()"
+        name="email" [(ngModel)]="email"
+        placeholder="email (optional)"/>
+      <span class="email-error" *ngIf="emailInput.invalid">Wrong email format</span>
+      <div class="row buttons-wrapper">
+        <button
+          class="col-sm-12 col-md-6 col-lg-6 back"
+          (click)="$event.stopPropagation(); isCollectingAudDetails=false">
+            Back to comment
+        </button>
+        <button
+          class="col-sm-12 col-md-6 col-lg-6 submit"
+          (click)="$event.stopPropagation(); submitComment()">
+          Submit comment
+        </button>
       </div>
     </div>
-    <div class="row border-top border-light mat-elevation-top-z2 comments">
-      <div
-        class="col-sm-12"
-        *ngIf="comments"
+    <ng-container *ngIf="!isCollectingAudDetails">
+      <textarea
+      (click)="$event.stopPropagation()"
+      name="comment"
+      placeholder="Please drop a comment"
+      #commentArea="ngModel"
+      minlength="4"
+      maxlength="300"
+      [ngClass]="{ 'focus': comment.length > 4 }"
+      (focus)="$event.stopPropagation(); canContinue=true"
+      (focusout)="canContinue=false"
+      [(ngModel)]="comment">
+    </textarea>
+    <span class="char-counter text-light">
+      {{ comment.length }} / 300
+    </span>
+    <button
+      *ngIf="comment.length > 4"
+      type="button"
+      (click)="$event.stopPropagation(); isCollectingAudDetails=true">
+      Next
+    </button>
+    </ng-container>
+  </form>
+  <div [@transitionInOut] class="actions-container" *ngIf="!isCollectingAudDetails">
+    <div class="actions">
+      <app-applauds-button
+        [totalApplauds]="totalApplauds"
+        [currentAudienceApplauds]="currentAudienceApplauds"
+        [currentAudience]="currentAudience"
+        [articleId]="articleId"
+        (applaud)="clap($event)"
+      ></app-applauds-button>
+      <app-comment-toggler
+        [commentsCount]="comments.length"
       >
-      <div class="row  comment" *ngFor="let com of comments | orderBy: 'com.date' : true">
-        <span class="col-sm-12 col-md-3 col-lg-3 text-info audience-name">
-          <span *ngIf="com.audience">
-            {{ com.audience }} Says
-          </span>
-          <span class="text-info audience-name" *ngIf="!com.audience">
-            Anonymous Says
-          </span>
-        </span>
-        <div class="col-sm-12 col-md-9 col-lg-9 audience-comment">
-         {{ com.comment}}
-         <div class="text-right text-info">{{ com.date | timeago:'live' }}</div>
 
-        </div>
-      </div>
-      </div>
+      </app-comment-toggler>
     </div>
   </div>
+  <div class="row border-top border-light mat-elevation-top-z2 comments">
+    <div
+      class="col-sm-12"
+      *ngIf="comments"
+    >
+    <div class="row  comment" *ngFor="let com of comments | orderBy: 'com.date' : true">
+      <span class="col-sm-12 col-md-3 col-lg-3 text-info audience-name">
+        <span *ngIf="com.audience">
+          {{ com.audience }} Says
+        </span>
+        <span class="text-info audience-name" *ngIf="!com.audience">
+          Anonymous Says
+        </span>
+      </span>
+      <div class="col-sm-12 col-md-9 col-lg-9 audience-comment">
+      {{ com.comment}}
+      <div class="text-right text-info">{{ com.date | timeago:'live' }}</div>
 
+      </div>
+    </div>
+    </div>
+  </div>
 </div>
+

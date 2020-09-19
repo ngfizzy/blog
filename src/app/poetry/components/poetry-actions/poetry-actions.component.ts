@@ -10,58 +10,31 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import {
-  Article,
   Audience,
   ApplaudPayload,
   CommentPayload,
   AudienceActivity
 } from '../../../shared/models';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
 
 @Component({
   selector: 'app-poetry-actions',
   templateUrl: './poetry-actions.component.html',
   styleUrls: ['./poetry-actions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('transitionInOut', [
-      state(
-        'void',
-        style({
-          height: 0,
-          opacity: 0,
-        }),
-      ),
-      state(
-        '*',
-        style({
-          height: 'fit-content',
-          opacity: 1,
-        }),
-      ),
-      transition('void => *, * => void', animate('.5s ease')),
-    ]),
-  ],
 })
-export class PoetryActionsComponent implements OnInit, OnDestroy, OnChanges {
+export class PoetryActionsComponent implements OnInit, OnChanges {
   @Input() articleId: number;
   @Input() activities: AudienceActivity[] = [];
   @Input() currentAudience: Audience;
   @Input() currentAudienceApplauds: number;
+  @Input() isCommentSectionOpen = false;
 
   @Output() applaud = new EventEmitter<ApplaudPayload>();
   @Output() commentSectionToggled = new EventEmitter<boolean>();
   @Output() addComment = new EventEmitter<CommentPayload>();
   @Output() updateUserApplaud = new EventEmitter<number>();
 
-  @Input() isCommentSectionOpen = false;
-  // isCollectingAudDetails = false;
+
   canContinue = false;
   comment = '';
   email: string;
@@ -130,8 +103,6 @@ export class PoetryActionsComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-
-
   submitComment() {
     const audience: Audience = {
       ...this.currentAudience,
@@ -150,11 +121,4 @@ export class PoetryActionsComponent implements OnInit, OnDestroy, OnChanges {
     this.updateUserApplaud.emit(payload.applauds);
     this.applaud.emit(payload)
   }
-
-  toggleCommentSection() {
-      this.isCommentSectionOpen = !this.isCommentSectionOpen;
-      this.commentSectionToggled.emit(this.isCommentSectionOpen);
-  }
-
-  ngOnDestroy() {}
 }

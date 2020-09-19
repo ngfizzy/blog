@@ -54,6 +54,8 @@ import { ContactAreaComponent } from './components/contact-area/contact-area.com
 import { ListComponent } from './components/list/list.component';
 import { ListPanelComponent } from './components/list-panel/list-panel.component';
 import { ListItemComponent } from './components/list-item/list-item.component';
+import { FeaturedArticlesComponent } from './components/featured-articles/featured-articles.component';
+import { RightSlideoutPanelComponent } from './components/right-slideout-panel/right-slideout-panel.component';
 
 @NgModule({
   imports: [
@@ -125,6 +127,7 @@ import { ListItemComponent } from './components/list-item/list-item.component';
     ListPanelComponent,
     ListComponent,
     ListItemComponent,
+    RightSlideoutPanelComponent
   ],
   declarations: [
     SpinnerComponent,
@@ -142,7 +145,9 @@ import { ListItemComponent } from './components/list-item/list-item.component';
     ContactAreaComponent,
     ListPanelComponent,
     ListComponent,
-    ListItemComponent
+    ListItemComponent,
+    FeaturedArticlesComponent,
+    RightSlideoutPanelComponent
   ],
   providers: [],
 })

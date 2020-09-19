@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-comment-toggler',
@@ -11,7 +11,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: [
     '../audience-activities.component.scss',
     './comment-section-toggler.component.scss',
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentSectionTogglerComponent implements OnInit {
   @Input() isCommentSectionOpened: boolean;
