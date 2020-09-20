@@ -25,12 +25,12 @@
       <div class="row card-body">
         <div
           class="theme-image-wrapper col-12"
-          [ngClass]="{'col-lg-5': !isExpandedView}"
+          [ngClass]="{'col-sm-4 col-md-3 col-lg-5': !isExpandedView}"
         >
           <img [src]="themeImage" class="theme-image" alt="Article theme image" mat-card-xl-image />
         </div>
         <div class="col-12 pt-3"
-          [ngClass]="{'col-lg-7 pt-0': !isExpandedView}"
+          [ngClass]="{'col-sm-8 col-md-9 col-lg-7 pt-0': !isExpandedView}"
           [innerHTML]="articleBody | markdown"
        >
       </div>

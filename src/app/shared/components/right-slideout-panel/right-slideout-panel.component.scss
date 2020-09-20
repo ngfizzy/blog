@@ -33,9 +33,15 @@
   height: 100%;
 }
 
-@media (min-width: 0px) and (max-width: 999.98px) {
+@media (min-width: 0px) and (max-width: 769.98px) {
   .wrapper {
     width: 88%;
+  }
+}
+
+@media (min-width: 770px) and (max-width: 999.98px) {
+  .wrapper {
+    width: 69%;
   }
 }
 

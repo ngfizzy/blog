@@ -22,7 +22,7 @@ export class ArticlesComponent implements OnInit, OnChanges {
   nav$: Observable<Nav>;
   articles$: Observable<Article[]> = of([]);
 
-  isSmallDevice = window.innerWidth <= 720;
+  isSmallDevice = window.innerWidth <= 770;
   searchResults = [];
   screenWidth: number;
   isSideNavOpen = true;
@@ -42,8 +42,7 @@ export class ArticlesComponent implements OnInit, OnChanges {
     this.articles$ = this.store.pipe(select(getAllArticles));
   }
 
-  ngOnChanges() {
-  }
+  ngOnChanges() {}
 
   setSidenavMode() {
     this.screenWidth = window.innerWidth;
