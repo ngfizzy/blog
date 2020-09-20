@@ -91,10 +91,10 @@ export function poetryReducers(
 
       return {
         ...state,
-        poems: poems,
+        poems,
         selectedPoem: {
           ...state.selectedPoem,
-          poem: poem,
+          poem,
           activitiesState: {
             ...state.selectedPoem.activitiesState,
             activities: [...activities],
@@ -126,16 +126,16 @@ export function poetryReducers(
         ...state.poems[poemIndex],
         audienceActivities: action.payload.activities
      };
-     const poems = [...state.poems]
+      const poems = [...state.poems];
 
-     poems[poemIndex] = poem;
+      poems[poemIndex] = poem;
 
       return {
         ...state,
-        poems: poems,
+        poems,
         selectedPoem: {
           ...state.selectedPoem,
-          poem: poem,
+          poem,
           isLoading: false,
           error: ''
         },

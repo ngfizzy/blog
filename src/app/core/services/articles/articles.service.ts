@@ -40,11 +40,11 @@ export class ArticlesService {
 
         return this.articlesGqlService.getOneArticle(articleId);
       })
-    )
+    );
   }
 
   getFeaturedArticles() {
-    return this.articlesGqlService.getFeaturedArticles()
+    return this.articlesGqlService.getFeaturedArticles();
   }
 
   applaud(applaudPayload: ApplaudPayload) {

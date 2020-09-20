@@ -18,7 +18,7 @@ export class AudienceGqlService {
       variables: {
         audience
       }
-    }).valueChanges.pipe(map(response => response.data.findAudience))
+    }).valueChanges.pipe(map(response => response.data.findAudience));
   }
 
   sendMessage(audience: Partial<Audience>, message: string) {

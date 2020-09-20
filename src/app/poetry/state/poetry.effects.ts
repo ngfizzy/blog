@@ -24,7 +24,7 @@ export class PoetryEffects {
       this.poetryService
         .getAllPoems()
         .pipe(
-          map((response) =>{
+          map((response) => {
             const nextActions = {
               SuccessAction: poetryActions.GetAllPoemsSuccess,
               ErrorAction: poetryActions.GetAllPoemsError

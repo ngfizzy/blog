@@ -13,17 +13,17 @@ export class AuthGuard implements CanActivate, CanLoad {
 
   canLoad(): Observable<boolean> | Promise<boolean> | boolean  {
      return this.auth.isLoggedIn().pipe(tap(isLoggedIn => {
-       if(!isLoggedIn) {
+       if (!isLoggedIn) {
         this.router.navigate(['/authors', 'login']);
        }
-     }))
+     }));
   }
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     return this.auth.isLoggedIn().pipe(tap(isLoggedIn => {
-      if(!isLoggedIn) {
+      if (!isLoggedIn) {
        this.router.navigate(['/authors', 'login']);
       }
-    }))
+    }));
   }
 }

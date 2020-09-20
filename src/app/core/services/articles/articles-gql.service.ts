@@ -1,5 +1,5 @@
 import {Apollo} from 'apollo-angular';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 import { map, tap } from 'rxjs/operators';
 
@@ -22,7 +22,7 @@ export class ArticlesGqlService {
     return this.apollo.watchQuery<iGqlResponses.GetOnePublishedArticleResponse>({
       query: queries.getOnePublishedArticle,
       variables: { articleId }
-    }).valueChanges.pipe(map(response => response.data.getOnePublishedArticle))
+    }).valueChanges.pipe(map(response => response.data.getOnePublishedArticle));
   }
 
   applaud(applaudPayload: ApplaudPayload) {
@@ -46,6 +46,6 @@ export class ArticlesGqlService {
   getFeaturedArticles() {
     return this.apollo.watchQuery<iGqlResponses.GetFeaturedArticlesResponse>({
       query: queries.getFeaturedArticles
-    }).valueChanges.pipe(map(response => response.data.getFeaturedArticles))
+    }).valueChanges.pipe(map(response => response.data.getFeaturedArticles));
   }
 }

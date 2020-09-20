@@ -87,7 +87,7 @@ export class ArticleEffects {
               SuccessAction: articlesActions.AddCommentSuccess
             };
 
-            return this.nextAction.getNextActions(activities, nextActions)
+            return this.nextAction.getNextActions(activities, nextActions);
           })
         )
     )

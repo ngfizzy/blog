@@ -36,7 +36,7 @@ export class AudienceService {
 
         return this.audienceGqlService.sendMessage(audience, message);
       }),
-    )
+    );
   }
   private loadAudience() {
     const currentUser: Pick<

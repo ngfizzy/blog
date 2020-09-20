@@ -14,7 +14,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import {authTokenKey} from './core/constants'
+import {authTokenKey} from './core/constants';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -38,11 +38,11 @@ const authContext = setContext(() => ({
 const authError = onError(({graphQLErrors}) => {
   const unauthorizedError =  graphQLErrors.find(error => error.message === 'unauthorized');
 
-  if(unauthorizedError) {
+  if (unauthorizedError) {
     localStorage.removeItem(authTokenKey);
-    location.reload()
+    location.reload();
   }
-})
+});
 
 @NgModule({
   declarations: [...AppRoutingModule.routeComponents, AppComponent],
@@ -82,7 +82,7 @@ const authError = onError(({graphQLErrors}) => {
               uri: 'http://localhost:4000/graphql',
             })
           ]),
-        }
+        };
       },
       deps: [HttpLink],
     },

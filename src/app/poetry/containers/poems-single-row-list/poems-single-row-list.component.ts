@@ -50,12 +50,12 @@ export class PoemsSingleRowListComponent implements OnInit {
   getSelectedPoem(poemId: number) {
     const route = [ '/poetry/poems/row'];
 
-    if(poemId) {
+    if (poemId) {
 
       route.push(`${poemId}`);
     }
 
-    this.router.navigate(route)
+    this.router.navigate(route);
   }
 
   /**

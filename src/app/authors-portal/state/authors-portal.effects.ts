@@ -138,7 +138,7 @@ export class AuthorsPortalEffects {
         })
       )
     )
-  )
+  );
 
   @Effect()
   login$: Observable<Action> = this.actions$.pipe(
@@ -154,12 +154,12 @@ export class AuthorsPortalEffects {
         return this.nextActionsService.getNextActions(result, nextActions);
       }))
     )
-  )
+  );
 
   logout$ = createEffect(
     () => this.actions$.pipe(
       ofType(authorsPortalActions.AuthorsPortalActionTypes.Logout),
-      map((action) =>(action as authorsPortalActions.Logout).payload),
+      map((action) => (action as authorsPortalActions.Logout).payload),
       switchMap(({token}) => this.authService.logout(token).pipe(
         map(result => {
           const nextActions = {
@@ -167,11 +167,11 @@ export class AuthorsPortalEffects {
             ErrorAction: authorsPortalActions.LogoutError
           };
 
-          return this.nextActionsService.getNextActions(result, nextActions)
+          return this.nextActionsService.getNextActions(result, nextActions);
         })
       )
     )
-  ))
+  ));
 
   private emitEffectResult(result, { ErrorEffect, SuccessEffect }) {
     if (result.error) {

@@ -119,6 +119,6 @@ export class PoetryActionsComponent implements OnInit, OnChanges {
 
   clap(payload: ApplaudPayload) {
     this.updateUserApplaud.emit(payload.applauds);
-    this.applaud.emit(payload)
+    this.applaud.emit(payload);
   }
 }

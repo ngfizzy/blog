@@ -17,7 +17,7 @@ export class AuthService {
     private authGqlService: AuthGqlService,
     private store: Store<AuthorsPortalState>
   ) {
-    this.store.dispatch(new AuthorizeUser({authToken: localStorage.getItem(authTokenKey)}))
+    this.store.dispatch(new AuthorizeUser({authToken: localStorage.getItem(authTokenKey)}));
   }
 
   isLoggedIn() {

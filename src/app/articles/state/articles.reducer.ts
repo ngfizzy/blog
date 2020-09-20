@@ -53,7 +53,7 @@ export function articlesReducer(
         ...state,
         isLoading: false,
         error: action.payload
-      }
+      };
     case ArticlesActionTypes.GetOneArticle:
       return {
         ...state,
@@ -146,7 +146,7 @@ export function articlesReducer(
         ...state.articles[articleIndex],
         audienceActivities: [...action.payload.activities ],
       };
-      const articles = [...state.articles]
+      const articles = [...state.articles];
 
       articles[articleIndex] = article;
 

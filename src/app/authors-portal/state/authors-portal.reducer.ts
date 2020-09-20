@@ -299,7 +299,7 @@ export function authorsPortalReducer(
         ...state,
         isLoading: true,
         error: ''
-      }
+      };
     case AuthorsPortalActionTypes.LoginSuccess:
       return {
         ...state,

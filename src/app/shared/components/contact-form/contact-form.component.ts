@@ -45,12 +45,12 @@ export class ContactFormComponent implements OnInit {
    }
 
   sendMessage(form: NgForm) {
-    if(form.invalid) {
+    if (form.invalid) {
       this.errorMessage = 'Please correct the invalid field';
     } else {
       this.errorMessage = '';
 
-      const audience = { email: this.email, audienceName: this.name } as Audience
+      const audience = { email: this.email, audienceName: this.name } as Audience;
 
       this.store.dispatch(new SendMessage({
         audience,

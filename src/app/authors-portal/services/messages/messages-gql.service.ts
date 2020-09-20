@@ -2,7 +2,7 @@ import {Apollo} from 'apollo-angular';
 import { Injectable } from '@angular/core';
 
 import { map, tap } from 'rxjs/operators';
-import * as iGqlResponses from '../../authors-portal-shared/models/graphql-responses'
+import * as iGqlResponses from '../../authors-portal-shared/models/graphql-responses';
 import * as queries from './queries';
 
 @Injectable()

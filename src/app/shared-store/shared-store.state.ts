@@ -6,5 +6,5 @@ export interface SharedStoreState extends CoreState {
     isLoading: boolean;
     articles: Article[];
     error: string;
-  }
+  };
 }

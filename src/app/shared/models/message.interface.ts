@@ -8,5 +8,5 @@ export interface Message {
 }
 
 export interface MessagesMap {
-  [key: string]: Message
+  [key: string]: Message;
 }

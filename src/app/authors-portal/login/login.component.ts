@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   isActive: boolean;
 
-  authError$: Observable<string>
+  authError$: Observable<string>;
   destroy$ = new Subject();
 
   ngOnInit(): void {
@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       } else {
         const authToken = localStorage.getItem(authTokenKey);
 
-        if(authToken) {
-          return this.store.dispatch(new AuthorizeUser({ authToken }))
+        if (authToken) {
+          return this.store.dispatch(new AuthorizeUser({ authToken }));
         }
       }
     });

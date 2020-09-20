@@ -10,7 +10,7 @@ import {
 } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { Title, Meta } from '@angular/platform-browser'
+import { Title, Meta } from '@angular/platform-browser';
 
 import { Applaud } from './../state/articles.actions';
 import { getAudience } from './../../core/state/';
@@ -26,7 +26,7 @@ import {
   ApplaudPayload
 } from '../../shared/models';
 import { GetCurrentAudience } from 'src/app/core/state/core.actions';
-;
+
 
 @Component({
   templateUrl: './article.component.html',
@@ -63,7 +63,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.isArticleLoading$ = this.store.pipe(select(fromArticle.selectArticleLoadingState))
+    this.isArticleLoading$ = this.store.pipe(select(fromArticle.selectArticleLoadingState));
     this.setArticle();
 
     this.applaudsWatcher$

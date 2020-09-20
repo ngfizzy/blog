@@ -91,14 +91,14 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
   ngOnChanges(changes: SimpleChanges): void {
     const { selectedPoemId } = changes;
 
-    if(!selectedPoemId?.isFirstChange() && !this.poemsGroupList?.length) {
+    if (!selectedPoemId?.isFirstChange() && !this.poemsGroupList?.length) {
       this.poemsGroupList = this.groupPoems();
     }
 
-    if(!selectedPoemId?.isFirstChange() && this.poemsGroupList?.length) {
+    if (!selectedPoemId?.isFirstChange() && this.poemsGroupList?.length) {
       this.showPreviousButton = this.shouldShowPreviousButton();
       this.showNextButton = this.shouldShowNextButton();
-      this.firstGroupingDone = true
+      this.firstGroupingDone = true;
     }
 
     if (!selectedPoemId?.isFirstChange() && selectedPoemId?.previousValue !== selectedPoemId?.currentValue) {
@@ -137,7 +137,7 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
 
   private jumpToGroup(prevPoemId: number, currentPoemId: number) {
     const curGroup = this.findPoemGroup(currentPoemId);
-    const prevGroup =  prevPoemId ===  null || prevPoemId === undefined ? curGroup - 1: this.findPoemGroup(prevPoemId);
+    const prevGroup =  prevPoemId ===  null || prevPoemId === undefined ? curGroup - 1 : this.findPoemGroup(prevPoemId);
 
     this.prevButtonClicked = prevGroup > curGroup;
     this.nextButtonClicked = prevGroup < curGroup;
@@ -153,21 +153,21 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
     let foundGroupIndex: number;
 
     let foundGroup = false;
-    for(let i = 0; i < this.poemsGroupList.length; ++i) {
-      if(foundGroup) break;
+    for (let i = 0; i < this.poemsGroupList.length; ++i) {
+      if (foundGroup) { break; }
 
-      let group = this.poemsGroupList[i];
+      const group = this.poemsGroupList[i];
 
-      for(let j = 0; j < group.length; j++) {
-        if(group[j].id === poemId) {
+      for (let j = 0; j < group.length; j++) {
+        if (group[j].id === poemId) {
           foundGroup = true;
-          foundGroupIndex = i
+          foundGroupIndex = i;
           break;
         }
       }
     }
 
-    const group = this.poemsGroupList[foundGroupIndex]
+    const group = this.poemsGroupList[foundGroupIndex];
 
     return foundGroupIndex;
   }

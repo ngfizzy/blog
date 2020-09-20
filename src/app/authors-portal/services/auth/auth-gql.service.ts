@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 
 import { map } from 'rxjs/operators';
 
-import { LoginGqlResponse, LogoutGqlResponse } from '../../authors-portal-shared/models'
+import { LoginGqlResponse, LogoutGqlResponse } from '../../authors-portal-shared/models';
 import { login, logout } from './mutations';
 
 @Injectable()

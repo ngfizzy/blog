@@ -35,7 +35,7 @@ import { animations } from './right-slideout-panel.animations';
 export class RightSlideoutPanelComponent {
   @Input() isOpen: boolean;
 
-  @Output() toggled = new EventEmitter<boolean>()
+  @Output() toggled = new EventEmitter<boolean>();
 
   constructor() { }
 

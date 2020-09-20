@@ -40,13 +40,13 @@ export class PoetryService {
       .pipe(
         map(poems => poems.find(p => p.id === poemId)),
       switchMap(poem => {
-        if(poem) {
+        if (poem) {
           return of({ poem });
         }
 
         this.articleGQlService.getOneArticle(poemId);
       })
-    )
+    );
   }
 
   applaud(applaudPayload: ApplaudPayload): Observable<AudienceActivitiesResponse> {

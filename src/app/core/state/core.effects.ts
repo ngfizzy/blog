@@ -32,7 +32,7 @@ export class CoreEffects {
     map(action => action as GetCurrentAudience),
     switchMap(() =>
       this.audienceService.audienceResponse$.pipe(
-        map(res =>{
+        map(res => {
           const nextActions = {
             SuccessAction: GetCurrentAudienceSuccess,
             ErrorAction: GetCurrentAudienceError
@@ -69,5 +69,5 @@ export class CoreEffects {
         })
       );
     })
-  )
+  );
 }

@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit {
     this.initTop10Articles();
     this.initLast10Drafts();
     this.initFeaturedArticles();
-    this.initCategoriesSummaries()
+    this.initCategoriesSummaries();
 
     this.initMessages();
   }
@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(new GetLast10Drafts());
 
     this.last10Drafts$ = this.store.pipe(select(getLast10Drafts));
-    this.isLast10DraftsLoading$ = this.store.pipe(select(isLast10DraftsLoading))
+    this.isLast10DraftsLoading$ = this.store.pipe(select(isLast10DraftsLoading));
   }
 
   private initCategoriesSummaries() {
@@ -126,7 +126,7 @@ export class DashboardComponent implements OnInit {
           (parseInt(b) - parseInt(a))
         );
 
-        return { indices, messages }
+        return { indices, messages };
       })
     );
   }

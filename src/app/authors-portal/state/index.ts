@@ -17,7 +17,7 @@ export const getDashboardState = createSelector(
 export const getArticleStatisticsState = createSelector(
   getDashboardState,
   state => state.articlesStatisticsState,
-)
+);
 
 export const getArticleStatistics = createSelector(
   getArticleStatisticsState,

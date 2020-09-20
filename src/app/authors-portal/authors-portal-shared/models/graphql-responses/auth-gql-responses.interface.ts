@@ -1,7 +1,7 @@
 import { LoginResponse, LogoutResponse  } from './responses';
 
 export interface LoginGqlResponse {
-  login: LoginResponse
+  login: LoginResponse;
 }
 
 export interface  LogoutGqlResponse {

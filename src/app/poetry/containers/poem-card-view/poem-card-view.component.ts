@@ -31,10 +31,10 @@ export class PoemCardViewComponent implements OnInit {
           ),
       )
     ).subscribe(result => {
-      if(result?.poems?.length) {
+      if (result?.poems?.length) {
         this.store.dispatch( new poetryActions.GetPoem(result.poemId));
 
       }
-    })
+    });
   }
 }

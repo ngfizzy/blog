@@ -32,10 +32,10 @@ export class PoemDialogViewComponent implements OnInit {
           ),
       )
     ).subscribe(result => {
-      if(result?.poems?.length) {
-        this.dispatchGetPoemAction(result.poemId)
+      if (result?.poems?.length) {
+        this.dispatchGetPoemAction(result.poemId);
       }
-    })
+    });
   }
 
   backdropClicked() {

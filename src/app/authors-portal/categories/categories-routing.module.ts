@@ -10,12 +10,12 @@ const routes: Routes = [
     pathMatch: 'full',
     component: CategoriesComponent
   }
-]
+];
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [RouterModule],
   providers: [],
 })
 export class CategoriesRoutingModule {
-  public static routeComponents = [CategoriesComponent]
+  public static routeComponents = [CategoriesComponent];
 }

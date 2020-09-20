@@ -4,12 +4,12 @@ import { BaseResponse } from 'src/app/shared/models/graphql-responses/responses'
 
 
 interface NextActions {
-  ErrorAction: any,
-  SuccessAction: any,
+  ErrorAction: any;
+  SuccessAction: any;
 }
 
 interface Response extends BaseResponse {
-  [key:string]: any
+  [key: string]: any;
 }
 
 @Injectable({providedIn: 'root'})

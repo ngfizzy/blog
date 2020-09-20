@@ -44,4 +44,4 @@ export const getAllArticles = createSelector(
 export const isPublicArticlesLoading = createSelector(
   getArticleFeatureState,
   state => state.isLoading
-)
+);

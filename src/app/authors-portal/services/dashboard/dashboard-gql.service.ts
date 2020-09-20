@@ -42,6 +42,6 @@ export class DashboardGqlService {
   getCategoriesSummaries() {
     return this.apollo.watchQuery<iGraphqlResponses.GetCategoriesSummariesResponse>({
       query: queries.getCategoriesSummaries,
-    }).valueChanges.pipe(map(response => response.data.getCategoriesSummaries))
+    }).valueChanges.pipe(map(response => response.data.getCategoriesSummaries));
   }
 }

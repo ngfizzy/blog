@@ -49,6 +49,8 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     isFull: true,
   };
 
+  isArticleOpen = false;
+
   private applaudsWatcherSubject$: Subject<ApplaudPayload> = new Subject();
   private applaudsWatcher$ = this.applaudsWatcherSubject$
     .asObservable()
@@ -67,7 +69,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.store.dispatch(new fromAppActions.GetCurrentAudience());
     this.articles$ = this.store.pipe(select(fromArticles.getAllArticles));
-    this.isArticlesLoading$ = this.store.pipe(select(fromArticles.isPublicArticlesLoading))
+    this.isArticlesLoading$ = this.store.pipe(select(fromArticles.isPublicArticlesLoading));
     this.audience$ = this.store.pipe(select(fromApp.getAudience));
     this.audienceActivities$ = this.store.pipe(
       select(fromArticles.getSelectedArticleActivities),
@@ -108,7 +110,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
       this.store.dispatch(new fromArticlesActions.GetOneArticle(article.id));
       this.currentUserApplauds = 0;
       this.updateTitleAndMeta(article);
-      this.router.navigate(['/articles/', article.id])
+      this.router.navigate(['/articles/', article.id]);
     }
 
   }

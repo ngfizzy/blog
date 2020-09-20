@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { SharedStoreActionTypes } from './shared-store.actions';
-import { SharedStoreState } from "./shared-store.state";
+import { SharedStoreState } from './shared-store.state';
 import * as sharedActions from './shared-store.actions';
 
 const initialState: SharedStoreState = {
