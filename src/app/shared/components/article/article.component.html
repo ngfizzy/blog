@@ -9,12 +9,8 @@
     full: isFull
   }"
   >
-  <mat-card
-  class="rounded card"
-  [class.mat-elevation-z1]="!isActive && !isExpandedView"
-  [class.mat-elevation-z8]="isExpandedView && !shouldHideShadows"
-  >
-    <mat-card-title class="title text-center" tabindex="1">
+  <mat-card class="rounded card">
+    <mat-card-title class="title text-center" tabindex="0">
       <h3 class="d-inline-block"><a [routerLink]="[article.id]">{{article.title}}</a></h3>
       <app-copy-to-clipboard
         [description]="'Copy Sharable Link'"
@@ -23,12 +19,25 @@
       >
       </app-copy-to-clipboard>
     </mat-card-title>
-    <ng-container *ngIf="themeImage">
-      <img class="theme-image" mat-card-lg-image [src]="themeImage"/>
-    </ng-container>
     <div class="text-info article-date">{{ article.createdAt | date }}</div>
-    <mat-card-content *ngIf="!isMini" class="card-body" [innerHtml]="articleBody" markdown>
+
+    <mat-card-content *ngIf="!isMini" >
+      <div class="row card-body">
+        <div
+          class="theme-image-wrapper col-12"
+          [ngClass]="{'col-lg-5': !isExpandedView}"
+        >
+          <img [src]="themeImage" class="theme-image" alt="Article theme image" mat-card-xl-image />
+        </div>
+        <div class="col-12 pt-3"
+          [ngClass]="{'col-lg-7 pt-0': !isExpandedView}"
+          [innerHTML]="articleBody | markdown"
+       >
+      </div>
+      </div>
+
     </mat-card-content>
+
     <mat-card-content class="card-body" *ngIf="isExpandedView">
       <div class="row">
         <div class="col-sm-12 col-lg-11 col-xl-10 mx-auto">

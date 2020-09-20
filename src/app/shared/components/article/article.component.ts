@@ -54,7 +54,7 @@ export class ArticleComponent implements OnInit, OnChanges {
   articleUrl: string;
 
   get themeImage() {
-    return this.article && this.article.themeImage;
+    return this.article && this.article.themeImage || '/assets/code.jpeg';
   }
 
   constructor(private router: ActivatedRoute) {}
