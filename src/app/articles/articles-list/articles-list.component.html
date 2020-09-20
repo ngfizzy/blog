@@ -17,14 +17,31 @@
         [audienceActivities]="article.audienceActivities"
         (notify)="showNotification($event)"
         (opened)="setSelectedArticle($event)"
-        (applaud)="submitApplauds($event)"
-        (updateUserApplaud)="updateAudienceApplauds($event)"
-        (addComment)="submitComment($event)"
       >
       </app-article>
     </div>
   </div>
-  <app-right-slideout-panel
-    [isOpen]="isArticleOpen"
-  ></app-right-slideout-panel>
+  <ng-container *ngIf="selectedArticle$ | async as selectedArticle">
+
+    <app-right-slideout-panel
+      [isOpen]="isArticleOpen && selectedArticle"
+      (toggled)="isArticleOpen = $event"
+    >
+      <div class="h-100 overflow-auto">
+        <app-article
+          [config]="selectedArticleConfig"
+          [article]="selectedArticle"
+          [currentAudience]="audience$ | async"
+          [currentUserApplauds]="currentUserApplauds"
+          [audienceActivities]="selectedArticle.audienceActivities"
+          (notify)="showNotification($event)"
+          (opened)="setSelectedArticle($event)"
+          (applaud)="submitApplauds($event)"
+          (updateUserApplaud)="updateAudienceApplauds($event)"
+          (addComment)="submitComment($event)"
+        ></app-article>
+      </div>
+
+    </app-right-slideout-panel>
+  </ng-container>
 </app-articles-content-wrapper>

@@ -40,10 +40,17 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
   pageTitle$: Observable<string>;
   hideScrollBar: boolean;
   currentUserApplauds = 0;
-  selectedArticle: Article;
   articleConfig: ArticleComponentConfig = {
     isActive: false,
     isExpandedView: false,
+    isTouched: false,
+    canToggle: false,
+    isFull: true,
+  };
+
+  selectedArticleConfig: ArticleComponentConfig = {
+    isActive: false,
+    isExpandedView: true,
     isTouched: false,
     canToggle: false,
     isFull: true,
@@ -56,6 +63,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     .asObservable()
     .pipe(debounceTime(800), distinctUntilChanged());
   isArticlesLoading$: Observable<boolean>;
+  selectedArticle$: Observable<Article>;
 
   constructor(
     private route: ActivatedRoute,
@@ -74,6 +82,8 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     this.audienceActivities$ = this.store.pipe(
       select(fromArticles.getSelectedArticleActivities),
     );
+
+    this.selectedArticle$ = this.store.pipe(select(fromArticles.selectArticle));
 
     this.applaudsWatcher$
       .pipe(takeUntil(this.destroy$))
@@ -104,14 +114,13 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
   }
 
   setSelectedArticle(article: Article) {
-    this.selectedArticle = article;
 
     if (article) {
       this.store.dispatch(new fromArticlesActions.GetOneArticle(article.id));
+      this.isArticleOpen = true;
       this.currentUserApplauds = 0;
       this.updateTitleAndMeta(article);
-      this.router.navigate(['/articles/', article.id]);
-    }
+     }
 
   }
 
