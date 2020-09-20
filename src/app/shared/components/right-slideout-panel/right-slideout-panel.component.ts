@@ -24,7 +24,7 @@ import { animations } from './right-slideout-panel.animations';
         <i class="fa fa-arrow-left"></i>
       </span>
 
-      <div *ngIf="isOpen">
+      <div class="projected-content-wrapper" *ngIf="isOpen">
         <ng-content> </ng-content>
       </div>
     </div>
