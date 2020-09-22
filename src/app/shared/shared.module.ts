@@ -1,17 +1,6 @@
-import { ArticlesContentWrapperComponent } from './components/articles-content-wrapper/articles-content-wrapper.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import {
-  MatProgressSpinnerModule,
-} from '@angular/material/progress-spinner';
-import { MatInputModule, MatInput } from '@angular/material/input';
-import {
-  MatFormFieldModule,
-  MatFormField,
-  MatLabel,
-  MatError,
-} from '@angular/material/form-field';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule, MatButton } from '@angular/material/button';
@@ -20,8 +9,21 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { MatToolbarModule, MatToolbar } from '@angular/material/toolbar';
 import { MatListModule, MatNavList, MatListItem } from '@angular/material/list';
-import { EllipsisModule } from 'ngx-ellipsis';
-
+import { MatInputModule, MatInput } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import {
+  MatExpansionModule,
+  MatExpansionPanel,
+  MatExpansionPanelDescription,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle
+} from '@angular/material/expansion';
+import {
+  MatFormFieldModule,
+  MatFormField,
+  MatLabel,
+  MatError,
+} from '@angular/material/form-field';
 import {
   MatSidenavModule,
   MatSidenavContainer,
@@ -31,10 +33,11 @@ import {
   MatDrawer,
   MatDrawerContent,
 } from '@angular/material/sidenav';
-
-import { MatDialogModule } from '@angular/material/dialog';
+import {
+  MatProgressSpinnerModule,
+} from '@angular/material/progress-spinner';
+import { EllipsisModule } from 'ngx-ellipsis';
 import { MarkdownModule } from 'ngx-markdown';
-
 import { ClipboardModule } from 'ngx-clipboard';
 import { OrderModule } from 'ngx-order-pipe';
 import { TimeagoModule } from 'ngx-timeago';
@@ -48,7 +51,6 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
 import { LoadingAndEmptyStateComponent } from './components/loading-and-empty-state/loading-and-empty-state.component';
 import { ApplaudsButtonComponent } from './components/applauds-button/applauds-button.component';
 import {  CommentSectionTogglerComponent } from './components/comment-section-toggler/comment-section-toggler.component';
-import { MatExpansionModule, MatExpansionPanel, MatExpansionPanelDescription, MatExpansionPanelHeader, MatExpansionPanelTitle } from '@angular/material/expansion';
 import { ContactAreaComponent } from './components/contact-area/contact-area.component';
 import { ListComponent } from './components/list/list.component';
 import { ListPanelComponent } from './components/list-panel/list-panel.component';
@@ -56,6 +58,7 @@ import { ListItemComponent } from './components/list-item/list-item.component';
 import { FeaturedArticlesComponent } from './components/featured-articles/featured-articles.component';
 import { RightSlideoutPanelComponent } from './components/right-slideout-panel/right-slideout-panel.component';
 import { EntityToolbarComponent } from './components/entity-toolbar/entity-toolbar.component';
+import { ArticlesContentWrapperComponent } from './components/articles-content-wrapper/articles-content-wrapper.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { AudienceSectionComponent } from './components/audience-section/audience-section.component';
 
