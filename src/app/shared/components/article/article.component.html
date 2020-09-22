@@ -2,13 +2,13 @@
   (mouseenter)="toggleElevation()"
   (mouseleave)="toggleElevation()"
   (click)="openArticle($event)"
-  [ngClass]="{
-    opened: isExpandedView,
-    closed: !isExpandedView && isTouched,
-    mini: isMini,
-    full: isFull
-  }"
-  >
+    [ngClass]="{
+      opened: isExpandedView,
+      closed: !isExpandedView && isTouched,
+      mini: isMini,
+      full: isFull
+    }"
+>
   <mat-card class="rounded card">
     <mat-card-title class="title text-center" tabindex="0">
       <h3 class="d-inline-block"><a [routerLink]="[article.id]">{{article.title}}</a></h3>
