@@ -1,5 +1,4 @@
 import { ArticlesContentWrapperComponent } from './components/articles-content-wrapper/articles-content-wrapper.component';
-import { ArticleActionsComponent } from 'src/app/shared/components/article-action/article-actions.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -112,7 +111,6 @@ import { AudienceSectionComponent } from './components/audience-section/audience
     OrderModule,
     TimeagoModule,
     MatError,
-    ArticleActionsComponent,
     ArticlesContentWrapperComponent,
     SecondsToJustNowPipe,
     ContactFormComponent,
@@ -141,7 +139,6 @@ import { AudienceSectionComponent } from './components/audience-section/audience
     ApplaudsButtonComponent,
     SideNavComponent,
     CopyToClipboardComponent,
-    ArticleActionsComponent,
     ArticlesContentWrapperComponent,
     SecondsToJustNowPipe,
     ContactFormComponent,
