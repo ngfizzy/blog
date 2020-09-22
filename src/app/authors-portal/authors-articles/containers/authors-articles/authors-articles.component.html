@@ -28,6 +28,7 @@
         (saveTitle)="saveTitle($event, selectedArticle.id)"
         (deleteArticle)="deleteArticle($event)"
         (togglePublished)="togglePublished($event)"
+        (commentsToggled)="toggleCommentsSection($event)"
       >
       </app-authors-articles-toolbar>
     </div>
@@ -49,6 +50,14 @@
 
   </mat-sidenav-container>
 
+  <app-right-slideout-panel
+    [isOpen]="showCommentsSection"
+    (toggled)="toggleCommentsSection($event)"
+  >
+    <ng-container>
+
+    </ng-container>
+  </app-right-slideout-panel>
 </div>
 
 

@@ -14,6 +14,7 @@ import {
   CommentPayload,
   AudienceActivity
 } from '../../models';
+import { BaseAudienceSectionComponent } from '../base-audience-section/base-audience-section.component';
 
 @Component({
   selector: 'app-audience-section',
@@ -21,10 +22,9 @@ import {
   styleUrls: ['./audience-section.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AudienceSectionComponent implements OnInit, OnChanges {
+export class AudienceSectionComponent extends BaseAudienceSectionComponent implements OnInit, OnChanges {
   @Input() articleId: number;
-  @Input() activities: AudienceActivity[] = [];
-  @Input() currentAudience: Audience;
+
   @Input() currentAudienceApplauds: number;
   @Input() isCommentSectionOpen = false;
   @Input() growToFitContent = false;
@@ -42,45 +42,6 @@ export class AudienceSectionComponent implements OnInit, OnChanges {
 
   isClapping = false;
   isCollectingAudDetails: boolean;
-
-  get comments() {
-    const activities =
-      this.activities &&
-      this.activities.filter(activity => !!activity.comments);
-
-    const com = (activities || []).map(activity =>
-      activity.comments.map(comment => ({
-        audience: activity.audience.audienceName,
-        comment: comment.comment,
-        date: comment.createdAt,
-      })),
-    );
-
-    return [].concat(...com);
-  }
-
-  get totalApplauds() {
-    const applauds =
-      this.activities &&
-      this.activities.reduce(
-        (accumulator, activity) => accumulator + activity.applauds,
-        0,
-      );
-
-    return applauds || 0;
-  }
-
-  get currentAudienceActivities() {
-    return (
-      this.activities &&
-      this.activities.find(
-        activity =>
-          activity.audience.deviceUUID === this.currentAudience.deviceUUID,
-      )
-    );
-  }
-
-  constructor() {}
 
   ngOnInit() {
     const currentAudienceApplauds = this.currentAudienceActivities

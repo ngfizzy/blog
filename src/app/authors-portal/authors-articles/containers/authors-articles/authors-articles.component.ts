@@ -26,6 +26,7 @@ export class AuthorsArticlesComponent implements OnInit {
   selectedArticleId: number;
   articlesListLoad$: Observable<boolean>;
   isArticlesListLoading$: Observable<boolean>;
+  showCommentsSection: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -102,5 +103,9 @@ export class AuthorsArticlesComponent implements OnInit {
     } else {
       this.router.navigate(['authors/articles', articleId, 'publish']);
     }
+  }
+
+  toggleCommentsSection(isOpen: boolean, articleId?: number) {
+    this.showCommentsSection = isOpen;
   }
 }

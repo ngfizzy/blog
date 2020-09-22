@@ -1,4 +1,3 @@
-import { TogglePublished } from './../../state/authors-articles.actions';
 import {
   Component,
   OnInit,
@@ -27,6 +26,7 @@ export class AuthorsArticleToolbarComponent implements OnInit {
   @Output() editTitle = new EventEmitter<boolean>();
   @Output() deleteArticle = new EventEmitter<number>();
   @Output() saveTitle = new EventEmitter<string>();
+  @Output() commentsToggled = new EventEmitter<number>();
   @Output() togglePublished = new EventEmitter<{
     articleId: number;
     published: boolean;
@@ -48,6 +48,10 @@ export class AuthorsArticleToolbarComponent implements OnInit {
     this.saveTitle.emit(title);
 
     this.toggleEditingTitleMode();
+  }
+
+  toggleCommentsSection() {
+    this.commentsToggled.emit(this.selectedArticleId);
   }
 
   gotoPublishPage(articleId: number) {
