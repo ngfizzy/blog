@@ -31,6 +31,8 @@ export class ArticleComponent implements OnInit, OnChanges {
   @Input() audienceActivities: AudienceActivity[];
   @Input() currentAudience: Audience;
   @Input() currentUserApplauds: number;
+  @Input() showAudienceSection = true;
+
 
   @Output() notify = new EventEmitter<string>();
   @Output() opened = new EventEmitter<Article>();
