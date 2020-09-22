@@ -5,7 +5,7 @@ import { Comment } from '../../models';
 @Component({
   selector: 'app-comment',
   template: `
-    <div class="mat-elevation-z1 row rounded comment">
+    <div class="mat-elevation-z1 row mt-2 rounded comment">
       <span class="col-12 text-info audience-name">
         <span *ngIf="comment.audience" class="text-capitalize">
           {{ comment.audience }}:

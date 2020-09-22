@@ -72,33 +72,14 @@
         [articleId]="articleId"
         (applaud)="clap($event)"
       ></app-applauds-button>
-      <app-comment-toggler
-        [commentsCount]="comments.length"
-      >
-
-      </app-comment-toggler>
+      <app-comment-toggler [commentsCount]="comments.length"></app-comment-toggler>
     </div>
   </div>
-  <div class="row border-top border-light mat-elevation-top-z2 comments">
-    <div
-      class="col-sm-12"
-      *ngIf="comments"
-    >
-    <div class="row  comment" *ngFor="let com of comments | orderBy: 'com.date' : true">
-      <span class="col-sm-12 col-md-3 col-lg-3 text-info audience-name">
-        <span *ngIf="com.audience">
-          {{ com.audience }} Says
-        </span>
-        <span class="text-info audience-name" *ngIf="!com.audience">
-          Anonymous Says
-        </span>
-      </span>
-      <div class="col-sm-12 col-md-9 col-lg-9 audience-comment">
-      {{ com.comment}}
-      <div class="text-right text-info">{{ com.date | timeago:'live' }}</div>
-
-      </div>
-    </div>
+  <div class="row border-top border-light comments">
+    <div *ngIf="comments" class="col-sm-12" >
+      <ng-container *ngFor="let comment of comments | orderBy: 'com.date' : true">
+          <app-comment [comment]="comment"> </app-comment>
+      </ng-container>
     </div>
   </div>
 </div>

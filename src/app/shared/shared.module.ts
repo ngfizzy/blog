@@ -129,7 +129,8 @@ import { CommentComponent } from './components/comment/comment.component';
     ListPanelComponent,
     ListComponent,
     ListItemComponent,
-    RightSlideoutPanelComponent
+    RightSlideoutPanelComponent,
+    CommentComponent
   ],
   declarations: [
     SpinnerComponent,
