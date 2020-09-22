@@ -27,6 +27,7 @@ export class AudienceSectionComponent implements OnInit, OnChanges {
   @Input() currentAudience: Audience;
   @Input() currentAudienceApplauds: number;
   @Input() isCommentSectionOpen = false;
+  @Input() growToFitContent = false;
 
   @Output() applaud = new EventEmitter<ApplaudPayload>();
   @Output() commentSectionToggled = new EventEmitter<boolean>();

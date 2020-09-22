@@ -75,7 +75,7 @@
       <app-comment-toggler [commentsCount]="comments.length"></app-comment-toggler>
     </div>
   </div>
-  <div class="row border-top border-light comments">
+  <div class="row border-top border-light comments" [class.fit-content]="growToFitContent">
     <div *ngIf="comments" class="col-sm-12" >
       <ng-container *ngFor="let comment of comments | orderBy: 'com.date' : true">
           <app-comment [comment]="comment"> </app-comment>
