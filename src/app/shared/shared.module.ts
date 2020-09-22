@@ -56,6 +56,8 @@ import { ListPanelComponent } from './components/list-panel/list-panel.component
 import { ListItemComponent } from './components/list-item/list-item.component';
 import { FeaturedArticlesComponent } from './components/featured-articles/featured-articles.component';
 import { RightSlideoutPanelComponent } from './components/right-slideout-panel/right-slideout-panel.component';
+import { EntityToolbarComponent } from './components/entity-toolbar/entity-toolbar.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   imports: [
@@ -147,7 +149,9 @@ import { RightSlideoutPanelComponent } from './components/right-slideout-panel/r
     ListComponent,
     ListItemComponent,
     FeaturedArticlesComponent,
-    RightSlideoutPanelComponent
+    RightSlideoutPanelComponent,
+    EntityToolbarComponent,
+    CommentComponent
   ],
   providers: [],
 })

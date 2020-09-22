@@ -74,21 +74,9 @@
         class="col-sm-12"
         *ngIf="comments"
       >
-      <div class="mat-elevation-z1 row comment" *ngFor="let com of comments | orderBy: 'com.date' : true">
-        <span class="col-12 text-info audience-name">
-          <span *ngIf="com.audience" class="text-capitalize">
-            {{ com.audience }}:
-          </span>
-          <span class="text-info audience-name" *ngIf="!com.audience">
-            Anonymous Says
-          </span>
-        </span>
-        <div class="col-sm-12 audience-comment">
-         {{ com.comment}}
-         <div class="text-right text-info">{{ com.date | timeago:'live' | secondsToJustNow }}</div>
-
-        </div>
-      </div>
+      <ng-container *ngFor="let comment of comments | orderBy: 'com.date' : true">
+        <app-comment [comment]="comment"></app-comment>
+      </ng-container>
       </div>
     </div>
   </div>
