@@ -48,20 +48,6 @@
     [isOpen]="commentSectionOpened"
     (toggled)="commentSectionOpened = $event"
   >
-    <!-- <app-poetry-actions
-    (applaud)="submitApplauds($event)"
-    (updateUserApplaud)="updateAudienceApplauds($event)"
-    (commentSectionToggled)="commentSectionOpened = $event"
-    (addComment)="submitComment($event)"
-    [articleId]="poem.id"
-    [currentAudience]="audience$ | async"
-    [currentAudienceApplauds]="currentUserApplauds"
-    [activities]="poem.audienceActivities"
-    [isCommentSectionOpen]="commentSectionOpened"
-  >
-
-  </app-poetry-actions> -->
-
     <app-audience-section
       (applaud)="submitApplauds($event)"
       (updateUserApplaud)="updateAudienceApplauds($event)"

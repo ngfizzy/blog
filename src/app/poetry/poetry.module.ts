@@ -1,4 +1,3 @@
-import { PoetryActionsComponent } from './components/poetry-actions/poetry-actions.component';
 import { NgModule } from '@angular/core';
 
 import { PoetryRoutingModule } from './poetry-routing.module';
@@ -27,7 +26,6 @@ import { PoetryGqlService } from './services/poetry-gql.service';
   declarations: [
     ...PoetryRoutingModule.routeComponents,
     PoemComponent,
-    PoetryActionsComponent,
     PoemFullCardComponent,
     PoemsCarouselComponent,
     PoemsSlideshowComponent,
