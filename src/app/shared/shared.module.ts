@@ -58,6 +58,7 @@ import { FeaturedArticlesComponent } from './components/featured-articles/featur
 import { RightSlideoutPanelComponent } from './components/right-slideout-panel/right-slideout-panel.component';
 import { EntityToolbarComponent } from './components/entity-toolbar/entity-toolbar.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { AudienceSectionComponent } from './components/audience-section/audience-section.component';
 
 @NgModule({
   imports: [
@@ -130,7 +131,8 @@ import { CommentComponent } from './components/comment/comment.component';
     ListComponent,
     ListItemComponent,
     RightSlideoutPanelComponent,
-    CommentComponent
+    CommentComponent,
+    AudienceSectionComponent
   ],
   declarations: [
     SpinnerComponent,
@@ -152,7 +154,8 @@ import { CommentComponent } from './components/comment/comment.component';
     FeaturedArticlesComponent,
     RightSlideoutPanelComponent,
     EntityToolbarComponent,
-    CommentComponent
+    CommentComponent,
+    AudienceSectionComponent
   ],
   providers: [],
 })

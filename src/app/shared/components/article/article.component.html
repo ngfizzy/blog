@@ -42,7 +42,7 @@
     <mat-card-content class="card-body" *ngIf="showAudienceSection && isExpandedView">
       <div class="row actions-wrapper">
         <div class="col-12">
-          <app-article-actions
+          <app-audience-section
             (applaud)="submitApplauds($event)"
             (updateUserApplaud)="updateAudienceApplauds($event)"
             (addComment)="submitComment($event)"
@@ -51,7 +51,7 @@
             [currentAudienceApplauds]="currentUserApplauds"
             [activities]="audienceActivities"
           >
-          </app-article-actions>
+          </app-audience-section>
         </div>
       </div>
     </mat-card-content>
