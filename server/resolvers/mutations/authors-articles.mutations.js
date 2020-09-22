@@ -26,7 +26,7 @@ const authorsArticlesMutations = {
       () => dataApi.editArticleBody(articleId, value)
     );
   },
-  tagArticle(_, {articleId, tagName}) {
+  tagArticle(_, {articleId, tagName}, { auth }) {
     return withAuth(
       auth,
       () => dataApi.tagArticle(articleId, tagName)

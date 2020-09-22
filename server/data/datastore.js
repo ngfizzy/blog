@@ -9,6 +9,7 @@ const {
   categories,
   generators,
   messages,
+  tags,
   setAuthToken
 } = require('./data-source');
 const { logout } = require('.');
