@@ -23,10 +23,11 @@ import { Comment } from '../../models';
   styles: [`
     .comment {
       padding: 1rem;
+      width: 98%;
+      margin: auto;
       display: flex;
       position: relative;
       color: white;
-      width: 100%;
       background-color: #575f675c;
       margin-bottom: 1rem;
     }

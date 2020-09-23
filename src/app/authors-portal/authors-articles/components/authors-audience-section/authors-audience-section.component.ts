@@ -6,16 +6,20 @@ import { BaseAudienceSectionComponent } from '../../../../shared/components/base
   selector: 'app-authors-audience-section',
   template: `
     <div class="wrapper">
-      <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
+      <ng-container *ngFor="let comment of comments">
+        <app-authors-manageable-comment
+          [comment]="comment"
+        ></app-authors-manageable-comment>
+      </ng-container>
     </div>
   `,
   styles: [`
     .wrapper {
-      height: 100%;
+      height: 110%;
       overflow-y: auto;
     }
   `],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class AuthorsAudienceSectionComponent extends BaseAudienceSectionComponent {
