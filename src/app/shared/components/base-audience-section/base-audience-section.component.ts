@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Audience, AudienceActivity } from '../../models';
+import { Audience, AudienceActivity, Comment } from '../../models';
 
 @Component({ template: ''})
 export class BaseAudienceSectionComponent {
   @Input() currentAudience: Audience;
   @Input() activities: AudienceActivity[] = [];
 
-  get comments() {
+  get comments(): Array<Comment & { date: string, audience: string }> {
     const activities =
       this.activities?.filter(activity => !!activity.comments);
 

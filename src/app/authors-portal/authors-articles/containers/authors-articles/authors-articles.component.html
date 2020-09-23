@@ -54,8 +54,10 @@
     [isOpen]="showCommentsSection"
     (toggled)="toggleCommentsSection($event)"
   >
-    <ng-container>
-
+    <ng-container *ngIf="selectedArticle$ | async as selectedArticle">
+      <app-authors-audience-section
+        [activities]="selectedArticle.audienceActivities"
+      ></app-authors-audience-section>
     </ng-container>
   </app-right-slideout-panel>
 </div>
