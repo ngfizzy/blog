@@ -259,6 +259,44 @@ export function authorsArticlesReducers(
           article: { ...action.payload.selectedArticle },
         },
       };
+    case AuthorsArticlesActionTypes.ToggleCommentDelete:
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          status: 'saving',
+        },
+        error: ''
+       };
+    case AuthorsArticlesActionTypes.ToggleCommentDeleteSuccess:
+      const articles = [ ...state.articles ];
+      const index = articles.findIndex((next) => next.id === action.payload.articleId);
+      const article = { ...articles[index] };
+
+      article.audienceActivities = [ ...action.payload.activities ];
+
+      articles.splice(index, 1, article);
+
+      return {
+      ...state,
+        articles,
+        selectedArticle: {
+          ...state.selectedArticle,
+          article,
+          status: 'saved',
+        },
+        error: ''
+      };
+    case AuthorsArticlesActionTypes.ToggleCommentDeleteError:
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          // article: { ...state.selectedArticle.article },
+          status: 'erred'
+        },
+        error: action.payload.error
+      };
     default:
       return state;
   }

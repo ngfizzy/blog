@@ -24,6 +24,7 @@ const articleAndRelatedModels = gql`
     audienceId: Int!
     comment: String
     createdAt: String
+    isDeleted: Boolean
   }
 
 

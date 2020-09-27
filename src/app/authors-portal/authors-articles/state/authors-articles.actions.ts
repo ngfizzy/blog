@@ -1,9 +1,10 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 import { Article } from 'src/app/shared/models/article.interface';
+import { AudienceActivitiesResponse } from 'src/app/shared/models/graphql-responses/responses';
 import {
   EditArticleEffectResponse,
   ArticlesResponse,
-  ArticleResponse
+  ArticleResponse, AuthorAudienceActivitiesResponse
 } from '../../authors-portal-shared/models';
 
 
@@ -42,7 +43,10 @@ export const enum AuthorsArticlesActionTypes {
   RemoveArticleFromCategoryError = '[Authors Articles] Remove Article From Category Error',
   TogglePublished = '[Authors Articles] Toggle Published',
   TogglePublishedSuccess = '[Authors Articles] Toggle Published Success',
-  TogglePublishedError = '[Authors Articles] Toggle Published Error'
+  TogglePublishedError = '[Authors Articles] Toggle Published Error',
+  ToggleCommentDelete = '[Authors Articles] Toggle Comment Delete',
+  ToggleCommentDeleteSuccess = '[Authors Articles] Toggle Comment Delete Success',
+  ToggleCommentDeleteError = '[Authors Articles] Toggle Comment Delete Error'
 }
 
 export class GetArticles implements Action {
@@ -238,6 +242,26 @@ export class TogglePublishedError implements Action {
   constructor(public payload: string) {}
 }
 
+
+export class ToggleCommentDelete implements Action {
+  readonly type = AuthorsArticlesActionTypes.ToggleCommentDelete;
+
+  constructor(public payload: { commentId: number }) {}
+}
+
+export class ToggleCommentDeleteSuccess implements Action {
+  readonly type = AuthorsArticlesActionTypes.ToggleCommentDeleteSuccess;
+
+  constructor(public payload: AudienceActivitiesResponse){}
+}
+
+export class ToggleCommentDeleteError implements Action {
+  readonly type = AuthorsArticlesActionTypes.ToggleCommentDeleteError;
+
+  constructor(public payload: { error: string }) {}
+}
+
+
 export type AuthorsArticlesActions = GetArticles
 | GetArticlesSuccess
 | CreateArticle
@@ -268,4 +292,7 @@ export type AuthorsArticlesActions = GetArticles
 | TogglePublished
 | TogglePublishedSuccess
 | TogglePublishedError
-| GetArticlesError;
+| GetArticlesError
+| ToggleCommentDelete
+| ToggleCommentDeleteError
+| ToggleCommentDeleteSuccess;

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Comment } from 'src/app/shared/models';
 
 @Component({
@@ -7,7 +7,13 @@ import { Comment } from 'src/app/shared/models';
     <div class="row w-100 mb-3 mx-auto rounded authors-manageable-comment">
       <mat-toolbar class="col-12 toolbar">
         <span>{{comment.audience}}</span>
-        <button class="d-inline-block ml-auto btn btn-primary p-2"><i class="fa fa-trash"></i></button>
+        <button class="d-inline-block ml-auto btn btn-primary p-2" (click)="delete()">
+          <i
+            class="fa"
+            [class.fa-trash]="!comment.isDeleted"
+            [class.fa-undo]="comment.isDeleted"
+          ></i>
+        </button>
       </mat-toolbar>
 
       <div class="col-12 pl-sm-2 pr-sm-2 pl-5 pr-5 wrapper">
@@ -22,7 +28,7 @@ import { Comment } from 'src/app/shared/models';
 
     .toolbar {
       width: 100%;
-      background-color: rgba(30, 30, 36, 0.5)
+      background-color: rgb(21 21 25 / 61%);
     }
 
     .wrapper {
@@ -31,10 +37,13 @@ import { Comment } from 'src/app/shared/models';
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthorsManageableCommentComponent implements OnInit {
+export class AuthorsManageableCommentComponent {
   @Input() comment: Comment & { date: string; audience: string };
 
-  constructor() { }
+  @Output() deleted = new EventEmitter<Comment & { date: string; audience: string; }>();
 
-  ngOnInit() { }
+
+  delete() {
+    this.deleted.emit(this.comment);
+  }
 }

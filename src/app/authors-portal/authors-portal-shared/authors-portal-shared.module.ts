@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { NumberWidgetComponent } from './components/number-widget/number-widget.component';
 import { QuickActionButtonComponent } from './components/quick-action-button/quick-action.component';
-import { AuthorsManageableCommentComponent } from './components/authors-manageable-comment/author-manageable-comment.compoenent';
+import { AuthorsManageableCommentComponent } from './components/authors-manageable-comment/author-manageable-comment.component';
 
 @NgModule({
   imports: [

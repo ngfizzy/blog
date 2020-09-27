@@ -12,6 +12,7 @@ const articlesTypeDefs = gql`
     articleId: Int
     comment: String
     audience: AudienceInput
+    isDeleted: Boolean
   }
 
   type AudienceActivitiesResponse {
@@ -28,6 +29,7 @@ const articlesTypeDefs = gql`
   extend type Mutation {
     applaud(applaudPayload: ApplaudPayload): AudienceActivitiesResponse
     addComment(commentPayload: CommentPayload): AudienceActivitiesResponse
+    toggleCommentDelete(commentId: Int!): AudienceActivitiesResponse
     sendMessage(audience: AudienceInput!, message: String!): SendMessageResponse
   }
 `;

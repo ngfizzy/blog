@@ -14,7 +14,7 @@ import { Comment } from '../../models';
           Anonymous Says
         </span>
       </span>
-      <div class="col-sm-12 audience-comment">
+      <div class="col-sm-12 audience-comment" [class.text-muted]="comment.isDeleted">
          {{ comment.comment }}
          <div class="text-right text-info">{{ comment.date | timeago:'live' | secondsToJustNow }}</div>
       </div>

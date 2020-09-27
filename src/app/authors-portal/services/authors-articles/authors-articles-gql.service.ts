@@ -2,7 +2,7 @@ import {Apollo} from 'apollo-angular';
 import { Injectable } from '@angular/core';
 
 import { articlesQuery } from './queries';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import * as mutations from './mutations';
@@ -105,5 +105,12 @@ export class AuthorsArticlesGQLService {
         articleId,
       }
     }).pipe(map(response => response.data.toggleArticlePublishedState));
+  }
+
+  toggleCommentDelete(commentId: number) {
+    return this.apollo.mutate<iGraphqlResponses.AuthorAudienceActivitiesResponse>({
+      mutation: mutations.toggleCommentDelete,
+      variables: { commentId }
+    }).pipe(map(response => response.data.toggleCommentDelete));
   }
 }

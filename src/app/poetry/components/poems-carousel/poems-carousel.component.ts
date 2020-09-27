@@ -167,8 +167,6 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
       }
     }
 
-    const group = this.poemsGroupList[foundGroupIndex];
-
     return foundGroupIndex;
   }
 

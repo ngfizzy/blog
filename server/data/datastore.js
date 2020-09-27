@@ -341,27 +341,69 @@ module.exports = {
     };
   },
   getPublishedArticles() {
-    const publishedArticles = articles.filter(
-      article =>
-        !article.categories.find(category => category.name === 'poetry') &&
-        article.published,
-    );
+    const publishedArticles = [];
+
+
+    articles.forEach(article => {
+        if(
+            !article.categories.some(category => category.name === 'poetry') &&
+            article.published
+        ) {
+          const art = {
+            ...article,
+            audienceActivities: [...article.audienceActivities]
+          };
+
+          art.audienceActivities =
+            this._getUndeletedAudienceActivites(art.audienceActivities);
+
+
+          publishedArticles.push(art);
+        }
+    });
 
     return { articles: publishedArticles };
   },
   getPublishedPoems() {
-    const publishedPoems = articles.filter(
-      article =>
-        article.categories.find(category => category.name === 'poetry') &&
-          article.published,
-    );
+    const publishedPoems = [];
+
+
+    articles.forEach(article => {
+      if(
+          article.categories.some(category => category.name === 'poetry') &&
+          article.published
+      ) {
+        const art = {
+          ...article,
+          audienceActivities: [...article.audienceActivities]
+        };
+
+        art.audienceActivities =
+          this._getUndeletedAudienceActivites(art.audienceActivities);
+
+        publishedPoems.push(art);
+      }
+  });
 
     return { poems: publishedPoems };
   },
   getOnePublishedArticle(articleId) {
-    const publishedArticle = articles.find(
-      found => articleId === found.id && found.published === true,
-    );
+    const article = articles.find(
+        found => articleId === found.id && found.published === true,
+      );
+
+    let publishedArticle;
+
+
+    if(article) {
+      publishedArticle = {
+        ...article,
+        audienceActivities: [...article.audienceActivities]
+      };
+
+      publishedArticle.audienceActivities = this.
+        _getUndeletedAudienceActivites(publishedArticle.audienceActivities);
+    }
 
     return { article: publishedArticle };
   },
@@ -481,6 +523,18 @@ module.exports = {
 
     return { articleId, activities: article.audienceActivities };
   },
+  toggleCommentDelete(commentId) {
+    const comment = audienceComments.find(comment => comment.id === commentId);
+
+    comment.isDeleted = !comment.isDeleted;
+
+    const articleActivities = audienceActivities.filter(activity => activity.articleId === comment.articleId);
+
+    return {
+      activities: articleActivities,
+      articleId: articleActivities[0].articleId
+    };
+  },
   createComment(comment, articleId, audienceId) {
 
     const commentId = !audienceComments.length ? 0
@@ -538,5 +592,19 @@ module.exports = {
       setAuthToken(generators.generateAuthToken());
 
       return { success: true };
+  },
+  _getUndeletedAudienceActivites(audienceActivities) {
+
+      const acts = audienceActivities.map(activity => {
+        const act = { ...activity };
+
+          const comments = [ ...act.comments ];
+
+          act.comments = comments.filter(comment => !comment.isDeleted);
+
+          return act;
+      });
+
+      return acts;
   }
 };

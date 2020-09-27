@@ -9,8 +9,8 @@ import { Article } from 'src/app/shared/models/article.interface';
 import { ArticleComponentConfig } from 'src/app/shared/models/article-component-config.interface';
 import * as fromAuthorsArticles from '../../state';
 import * as fromAuthorsArticlesActions from '../../state/authors-articles.actions';
+import { Comment } from 'src/app/shared/models';
 import { tap } from 'rxjs/operators';
-import { deleteArticle } from '../../../services/authors-articles/mutations/delete-article.mutation';
 
 @Component({
   selector: 'app-authors-articles',
@@ -53,9 +53,7 @@ export class AuthorsArticlesComponent implements OnInit {
     this.articlesListLoad$ = this.store.pipe(select(fromAuthorsArticles.getArticlesLoadingState));
     this.isArticlesListLoading$ = this.store.pipe(select(fromAuthorsArticles.isArticlesListLoading));
     this.selectedArticle$ = this.store.pipe(select(fromAuthorsArticles.viewArticle));
-    this.articleStatus$ = this.store.pipe(
-      select(fromAuthorsArticles.selectArticleStatus),
-    );
+    this.articleStatus$ = this.store.pipe(select(fromAuthorsArticles.selectArticleStatus));
   }
 
   createArticle() {
@@ -107,5 +105,11 @@ export class AuthorsArticlesComponent implements OnInit {
 
   toggleCommentsSection(isOpen: boolean, articleId?: number) {
     this.showCommentsSection = isOpen;
+  }
+
+  deleteComment(comment: Comment) {
+    this.store.dispatch(
+      new fromAuthorsArticlesActions.ToggleCommentDelete({commentId: comment.id })
+    );
   }
 }

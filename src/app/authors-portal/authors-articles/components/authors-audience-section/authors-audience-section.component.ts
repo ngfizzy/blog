@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { BaseAudienceSectionComponent } from '../../../../shared/components/base-audience-section/base-audience-section.component';
 
@@ -9,6 +9,7 @@ import { BaseAudienceSectionComponent } from '../../../../shared/components/base
       <ng-container *ngFor="let comment of comments">
         <app-authors-manageable-comment
           [comment]="comment"
+          (deleted)="deleteComment($event)"
         ></app-authors-manageable-comment>
       </ng-container>
     </div>
@@ -19,8 +20,13 @@ import { BaseAudienceSectionComponent } from '../../../../shared/components/base
       overflow-y: auto;
     }
   `],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class AuthorsAudienceSectionComponent extends BaseAudienceSectionComponent {
+  @Output() commentDeleted = new EventEmitter<Comment & { audience: string; date: string; }>();
+
+  deleteComment(comment: Comment & { audience: string; date: string; }) {
+    this.commentDeleted.emit(comment);
+  }
 }

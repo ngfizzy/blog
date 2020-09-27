@@ -11,12 +11,14 @@ export class BaseAudienceSectionComponent {
       this.activities?.filter(activity => !!activity.comments);
 
     const com = (activities || []).map(activity =>
-      activity.comments.map(comment => ({
+      activity?.comments?.map(comment => ({
         audience: activity.audience.audienceName,
         comment: comment.comment,
         date: comment.createdAt,
-      })),
-    );
+        id: comment.id,
+        isDeleted: comment.isDeleted
+      })
+      ));
 
     return [].concat(...com);
   }

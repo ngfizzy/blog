@@ -37,6 +37,10 @@ export class AuthorsArticlesService {
     return this.articlesGqlService.deleteArticle(articleId);
   }
 
+  toggleCommentDelete(commentId: number) {
+    return this.articlesGqlService.toggleCommentDelete(commentId);
+  }
+
   editArticleTitle(
     title: string,
     articleId: number,

@@ -37,6 +37,7 @@ fragment ArticleProperties on Article {
       audienceId
       createdAt
       comment
+      isDeleted
     }
     createdAt
   }

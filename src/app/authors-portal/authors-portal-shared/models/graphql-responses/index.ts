@@ -4,3 +4,4 @@ export * from '../../../../shared/models/graphql-responses/responses/articles-re
 export * from './dashboard-gql-responses.interface';
 export * from './get-messages-response.interface';
 export * from './auth-gql-responses.interface';
+export * from './authors-audience-activities-gql-response.interface';

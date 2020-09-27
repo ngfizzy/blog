@@ -49,6 +49,10 @@ class Data {
     return this.dataStore.toggleArticlePublishedState(articleId);
   }
 
+  toggleCommentDelete(commentId) {
+    return this.dataStore.toggleCommentDelete(commentId);
+  }
+
   getLast10Drafts() {
     return this.dataStore.getLast10Drafts();
   }

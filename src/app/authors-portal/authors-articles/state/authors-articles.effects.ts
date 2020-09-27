@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable, throwError, of } from 'rxjs';
+import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { mergeMap, map, switchMap, catchError, tap } from 'rxjs/operators';
+import { Observable, throwError, of } from 'rxjs';
+import { mergeMap, map, switchMap } from 'rxjs/operators';
 
 import { AuthorsArticlesService } from '../../services/authors-articles/authors-articles.service';
 import * as authorsArticlesActions from './authors-articles.actions';
 import {
   EditArticleEffectResponse,
 } from '../../authors-portal-shared/models/';
-import { ArticleResponse } from '../../../shared/models/graphql-responses/responses/articles-response.interface';
+import { ArticleResponse } from '../../../shared/models/graphql-responses/responses';
 
 @Injectable()
 export class AuthorsArticlesEffects {
@@ -191,6 +191,23 @@ export class AuthorsArticlesEffects {
         }),
       ),
     ),
+  );
+
+  toggleCommentDelete$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(authorsArticlesActions.AuthorsArticlesActionTypes.ToggleCommentDelete),
+      map(action => (action as authorsArticlesActions.ToggleCommentDelete).payload),
+      switchMap(({ commentId }) => this.articlesService.toggleCommentDelete(commentId).pipe(
+          map(result => {
+            const nextEffects = {
+              ErrorEffect: authorsArticlesActions.ToggleCommentDeleteError,
+              SuccessEffect: authorsArticlesActions.ToggleCommentDeleteSuccess
+            };
+
+            return this.emitNextEffect(result, nextEffects);
+          })
+      ))
+    )
   );
 
   private emitNextEffect(

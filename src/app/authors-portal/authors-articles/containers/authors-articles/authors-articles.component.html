@@ -57,9 +57,8 @@
     <ng-container *ngIf="selectedArticle$ | async as selectedArticle">
       <app-authors-audience-section
         [activities]="selectedArticle.audienceActivities"
+        (commentDeleted)="deleteComment($event)"
       ></app-authors-audience-section>
     </ng-container>
   </app-right-slideout-panel>
 </div>
-
-

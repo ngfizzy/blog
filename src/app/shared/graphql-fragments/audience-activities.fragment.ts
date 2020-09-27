@@ -14,10 +14,12 @@ fragment AudienceActivityProperties on AudienceActivity {
     articleId
     createdAt
     comments {
+      id
       comment
       createdAt
       articleId
       audienceId
+      isDeleted
     }
   }
 `;

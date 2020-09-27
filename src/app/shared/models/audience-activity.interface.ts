@@ -15,4 +15,5 @@ export interface Comment {
   id: number;
   articleId: number;
   audienceId: number;
+  isDeleted?: boolean;
 }
