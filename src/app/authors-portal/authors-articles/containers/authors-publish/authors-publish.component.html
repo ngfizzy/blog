@@ -1,8 +1,8 @@
 <ng-container *ngIf="article$ | async; let article">
-  <div class="ml-auto mt-5 mr-auto mat-elevation-z1 p-2 mb-2 rounded publish-container" *ngIf="!article.published; else published">
+  <div class="ml-auto mt-5 mr-auto mat-elevation-z1 mb-2 rounded publish-container" *ngIf="!article.published; else published">
     <div class="row p-2">
-      <h3 class="text-light col-2 pt-1 ">Tags:</h3>
-      <span class="col-10 rounded publish-section">
+      <h3 class="text-light col-2 col-sm-12 pt-1 ">Tags</h3>
+      <span class="col-10 rounded col-sm-12 publish-section">
         <app-authors-tags-panel
         [tags]="article.tags"
         (add)="addTag($event, article.id)"
@@ -10,10 +10,9 @@
         ></app-authors-tags-panel>
       </span>
    </div>
-
    <div class="row p-2">
-    <h4 class="text-light col-1">Category</h4>
-    <div class="col-10 ml-auto w-75">
+    <h4 class="text-light col-1 col-sm-12">Category</h4>
+    <div class="col-10 col-sm-12 ml-auto w-75 rounded publish-section">
       <form *ngIf="article.categories?.length == 0" (ngSubmit)="addToCategory(category, article.id)" >
         <input type="text" name="category" placeholder="category" [(ngModel)]="category">
         <button type="submit">Add To Category</button>
@@ -22,7 +21,6 @@
       <h5 *ngFor="let categoryName of article.categories" class="text-light text-center">{{ categoryName.name }}</h5>
     </div>
   </div>
-
 </div>
 
 <div title="publish text-center col-10">
