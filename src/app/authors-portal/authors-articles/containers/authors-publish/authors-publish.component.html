@@ -22,14 +22,18 @@
           {{ categoryName.name }}
       </h5>
    </app-authors-publish-section>
+
+   <app-authors-publish-section>
+    <div title="publish text-center col-10">
+      <button class="btn d-inline-block w-100 btn-primary btn-sm text-center ml-auto p-3 d-block mr-auto w-25" (click)="togglePublished(article.id)">
+        Publish
+        <i class="fa fa-arrow-circle-up"></i>
+      </button>
+    </div>
+   </app-authors-publish-section>
 </div>
 
-<div title="publish text-center col-10">
-  <button class="btn btn-primary btn-sm text-center w-50 ml-auto p-3 d-block mr-auto w-25" (click)="togglePublished(article.id)">
-    Publish
-    <i class="fa fa-arrow-circle-up"></i>
-  </button>
-</div>
+
 
 <ng-template #published>
   <div class="w-75 ml-auto mr-auto text-center text-light">
