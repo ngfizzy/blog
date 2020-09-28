@@ -1,8 +1,8 @@
 <ng-container *ngIf="article$ | async; let article">
-  <div class="ml-auto mt-2 mr-auto mat-elevation-z2 p-2 publish-container" *ngIf="!article.published; else published">
+  <div class="ml-auto mt-5 mr-auto mat-elevation-z1 p-2 mb-2 rounded publish-container" *ngIf="!article.published; else published">
     <div class="row p-2">
       <h3 class="text-light col-2 pt-1 ">Tags:</h3>
-      <span class="col-10">
+      <span class="col-10 rounded publish-section">
         <app-authors-tags-panel
         [tags]="article.tags"
         (add)="addTag($event, article.id)"
@@ -23,12 +23,13 @@
     </div>
   </div>
 
-  <div title="publish text-center col-10">
-    <button class="btn btn-primary btn-sm text-center w-50 ml-auto d-block mr-auto w-25" (click)="togglePublished(article.id)">
-      Publish
-      <i class="fa fa-arrow-circle-up"></i>
-    </button>
-  </div>
+</div>
+
+<div title="publish text-center col-10">
+  <button class="btn btn-primary btn-sm text-center w-50 ml-auto p-3 d-block mr-auto w-25" (click)="togglePublished(article.id)">
+    Publish
+    <i class="fa fa-arrow-circle-up"></i>
+  </button>
 </div>
 
 <ng-template #published>

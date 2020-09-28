@@ -3,8 +3,31 @@ import { Tag } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-authors-tag',
-  templateUrl: './authors-tag.component.html',
-  styleUrls: [ './authors-tag.component.scss' ],
+  template: `
+  <span
+    class="
+    d-inline-block
+    mb-2 author-tag
+    rounded-pill
+    p-1
+    font-italic"
+  >
+    <span>#</span>
+    <span>{{tag.name}}</span>
+    <span
+      class="d-inline-block fa fa-remove text-primary btn-remove-tag"
+      (click)="removeTag(tag.id)"
+    ></span>
+  </span>
+  `,
+  styles: [`
+    .author-tag {
+      background-color: #f8f9faa3;
+    }
+    .btn-remove-tag {
+       max-width: 3rem;
+    }
+  `],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthorsTagComponent implements OnInit {
