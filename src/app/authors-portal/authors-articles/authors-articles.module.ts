@@ -13,6 +13,7 @@ import { AuthorsTagComponent } from './components/authors-tag/authors-tag.compon
 import { AuthorsTagsPanelComponent } from './components/authors-tags-panel/authors-tags-panel.component';
 import { AuthorsArticleTitleComponent } from './components/authors-article-title/authors-article-title.component';
 import { AuthorsAudienceSectionComponent } from './components/authors-audience-section/authors-audience-section.component';
+import { AuthorsPublishSectionComponent } from './components/author-pubish-sections/author-publish-sections.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { AuthorsAudienceSectionComponent } from './components/authors-audience-s
     AuthorsTagComponent,
     AuthorsTagsPanelComponent,
     AuthorsAudienceSectionComponent,
+    AuthorsPublishSectionComponent,
     ...AuthorsArticlesRoutingModule.routeComponents,
   ],
 })
