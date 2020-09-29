@@ -210,6 +210,24 @@ export class AuthorsArticlesEffects {
     )
   );
 
+  addCommentDelete$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(authorsArticlesActions.AuthorsArticlesActionTypes.AddThemeImage),
+      map(action => (action as authorsArticlesActions.AddThemeImage).payload),
+      switchMap(({ articleId, themeImageUrl }) =>
+        this.articlesService.addThemeImage(articleId, themeImageUrl).pipe(
+          map((result) => {
+            const nextActions = {
+              ErrorEffect: authorsArticlesActions.AddThemeImageError,
+              SuccessEffect: authorsArticlesActions.AddThemeImageSuccess
+            };
+
+            return this.emitNextEffect(result, nextActions);
+          })
+      )),
+    )
+  );
+
   private emitNextEffect(
     result: Partial<EditArticleEffectResponse> | ArticleResponse,
     effects: { ErrorEffect: any, SuccessEffect: any}

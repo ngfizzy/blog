@@ -8,3 +8,4 @@ export * from './categorize-article.mutation';
 export * from './remove-article-from-category.mutation';
 export * from './toggle-article-published-state.mutation';
 export * from './toggle-comment-delete.mutation';
+export * from './add-theme-image-url.mutation';

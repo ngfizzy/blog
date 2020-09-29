@@ -32,6 +32,12 @@ const authorsArticlesMutations = {
       () => dataApi.tagArticle(articleId, tagName)
     );
   },
+  addThemeImage(_, { articleId, themeImageUrl }, { auth}) {
+    return withAuth(
+      auth,
+      () => dataApi.addThemeImage(articleId, themeImageUrl)
+    );
+  },
   untagArticle(_, {articleId, tagId}, { auth }) {
     return withAuth(
       auth,

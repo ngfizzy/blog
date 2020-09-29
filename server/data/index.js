@@ -33,6 +33,10 @@ class Data {
     return this.dataStore.tagArticle(articleId, tagName);
   }
 
+  addThemeImage(articleId, themeImageUrl) {
+    return this.dataStore.addThemeImage(articleId, themeImageUrl);
+  }
+
   untagArticle(articleId, tagId) {
     return this.dataStore.untagArticle(articleId, tagId);
   }

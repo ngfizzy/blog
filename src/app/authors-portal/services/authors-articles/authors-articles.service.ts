@@ -33,6 +33,10 @@ export class AuthorsArticlesService {
     return this.articlesGqlService.createArticle(title, body);
   }
 
+  addThemeImage(articleId: number, themeImageUrl: string) {
+    return this.articlesGqlService.addThemeImage(articleId, themeImageUrl);
+  }
+
   deleteArticle(articleId: number): Observable<ArticlesResponse> {
     return this.articlesGqlService.deleteArticle(articleId);
   }

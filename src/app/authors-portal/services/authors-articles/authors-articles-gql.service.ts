@@ -113,4 +113,11 @@ export class AuthorsArticlesGQLService {
       variables: { commentId }
     }).pipe(map(response => response.data.toggleCommentDelete));
   }
+
+  addThemeImage(articleId: number, themeImageUrl: string) {
+    return this.apollo.mutate<iGraphqlResponses.AddThemeImage>({
+      mutation: mutations.addThemeImage,
+      variables: { articleId, themeImageUrl }
+    }).pipe(map(response => response.data.addThemeImage ));
+  }
 }

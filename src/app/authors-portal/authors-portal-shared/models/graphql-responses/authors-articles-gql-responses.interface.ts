@@ -39,3 +39,7 @@ export interface ToggleArticlePublishedStateResponse {
 export interface GetAllArticlesResponse {
   getAllArticles: ArticlesResponse;
 }
+
+export interface AddThemeImage {
+  addThemeImage: ArticleResponse;
+}

@@ -46,7 +46,10 @@ export const enum AuthorsArticlesActionTypes {
   TogglePublishedError = '[Authors Articles] Toggle Published Error',
   ToggleCommentDelete = '[Authors Articles] Toggle Comment Delete',
   ToggleCommentDeleteSuccess = '[Authors Articles] Toggle Comment Delete Success',
-  ToggleCommentDeleteError = '[Authors Articles] Toggle Comment Delete Error'
+  ToggleCommentDeleteError = '[Authors Articles] Toggle Comment Delete Error',
+  AddThemeImage = '[Authors Articles] Add Theme Image',
+  AddThemeImageSuccess = '[Authors Articles] Add Theme Image Success',
+  AddThemeImageError = '[Authors Articles] Add Theme Image Error'
 }
 
 export class GetArticles implements Action {
@@ -261,6 +264,23 @@ export class ToggleCommentDeleteError implements Action {
   constructor(public payload: { error: string }) {}
 }
 
+export class AddThemeImage implements Action {
+  readonly type = AuthorsArticlesActionTypes.AddThemeImage;
+
+  constructor(public payload: { articleId: number; themeImageUrl: string; }) {}
+}
+
+export class AddThemeImageSuccess implements Action {
+  readonly type = AuthorsArticlesActionTypes.AddThemeImageSuccess;
+
+  constructor(public payload: ArticleResponse) {}
+}
+
+export class AddThemeImageError implements Action {
+  readonly type = AuthorsArticlesActionTypes.AddThemeImageError;
+
+  constructor(public payload: string) {}
+}
 
 export type AuthorsArticlesActions = GetArticles
 | GetArticlesSuccess
@@ -295,4 +315,7 @@ export type AuthorsArticlesActions = GetArticles
 | GetArticlesError
 | ToggleCommentDelete
 | ToggleCommentDeleteError
-| ToggleCommentDeleteSuccess;
+| ToggleCommentDeleteSuccess
+| AddThemeImage
+| AddThemeImageSuccess
+| AddThemeImageError;

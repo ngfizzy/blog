@@ -435,6 +435,15 @@ module.exports = {
        articleId, activities: article.audienceActivities
     };
   },
+  addThemeImage(articleId, themeImageUrl) {
+    const article = articles.find(article => article.id === articleId);
+
+    if(article) {
+      article.themeImage = themeImageUrl;
+    }
+
+    return { article };
+  },
   createAudienceActivity(activity) {
     const activityId = !audienceActivities.length ? 0 :
       audienceActivities[audienceActivities.length - 1].id + 1;
