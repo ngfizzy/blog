@@ -45,15 +45,18 @@ const authError = onError(({graphQLErrors}) => {
 });
 
 @NgModule({
-  declarations: [...AppRoutingModule.routeComponents, AppComponent],
+  declarations: [
+    ...AppRoutingModule.routeComponents,
+    AppComponent
+  ],
   imports: [
+    SharedModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     ToastrModule,
     BrowserAnimationsModule,
     CoreModule,
-    SharedModule,
     TimeagoModule.forRoot(),
     SharedStoreModule,
     StoreModule.forRoot(reducers, { metaReducers }),

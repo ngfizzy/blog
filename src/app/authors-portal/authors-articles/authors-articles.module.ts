@@ -24,7 +24,6 @@ import { AuthorsPublishSectionComponent } from './components/author-pubish-secti
     EffectsModule.forFeature([AuthorsArticlesEffects]),
   ],
   declarations: [
-    AuthorsArticleTitleComponent,
     AuthorsArticleToolbarComponent,
     AuthorsArticleListToolbarComponent,
     AuthorsArticleTitleComponent,
