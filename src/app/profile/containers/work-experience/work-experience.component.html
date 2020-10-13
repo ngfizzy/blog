@@ -1,0 +1,25 @@
+<div class="row w-100">
+  <div class="col-12">
+    <h2>Work Experience</h2>
+  </div>
+  <div *ngFor="let experience of experiences" class="col-12 mx-auto mb-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-md-9 col-sm-12">
+            <h5 class="text-underline">{{ experience.title }} - {{ experience.company }}</h5>
+          </div>
+          <div class="col-md-3 col-sm-12">
+            <h6 class="text-underline">
+              {{ experience.stateDate | date }} - {{ (experience.endDate | date) || 'Present' }}
+            </h6>
+          </div>
+          <div class="col-12 col-sm-12">
+            {{ experience.description }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { WorkExperienceComponent } from './containers/work-experience/work-experience.component';
 
 @NgModule({
   imports: [
@@ -8,7 +9,8 @@ import { SharedModule } from '../shared/shared.module';
     ProfileRoutingModule
   ],
   declarations: [
-    ...ProfileRoutingModule.routeComponents
+    ...ProfileRoutingModule.routeComponents,
+    WorkExperienceComponent
   ]
 })
 export class ProfileModule { }

@@ -5,7 +5,9 @@
   [nav]="nav"
   [contentUISizing]="navContentSize"
 >
-  <span class="p-2 mat-elevation-z2 rounded bg-secondary pointer" (click)="logout()" *ngIf="isLoggedIn$ | async">
+  <span
+    class="p-2 mat-elevation-z2 rounded bg-secondary pointer"
+    (click)="logout()" *ngIf="isLoggedIn$ | async">
       Logout
       <i class="fa fa-sign-out"></i>
   </span>
