@@ -26,6 +26,7 @@ import {
   AudienceActivity,
   ApplaudPayload,
   CommentPayload,
+  Category,
 } from 'src/app/shared/models';
 
 @Component({
@@ -114,14 +115,12 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
   }
 
   setSelectedArticle(article: Article) {
-
     if (article) {
       this.store.dispatch(new fromArticlesActions.GetOneArticle(article.id));
       this.isArticleOpen = true;
       this.currentUserApplauds = 0;
       this.updateTitleAndMeta(article);
      }
-
   }
 
   showNotification(message: string) {
@@ -144,30 +143,29 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
 
       this.articles$ = this.store.pipe(
         select(fromArticles.getAllArticles),
-        map(articles => {
-          if (!categoryId) {
-            return articles;
-          }
-
-          return articles.filter(article => {
-            const category = article.categories.find(
-              cat => cat.id === categoryId,
-            );
-
-            return !!category;
-          });
-        }),
+        map(articles => this.filterArticlesByCategoryId(articles, categoryId)),
         tap(([article]) => {
-          let pageTitle = 'Articles and Tutorials';
-          if (categoryId) {
-            pageTitle = article.categories.find(cat => cat.id === categoryId)
-              .name;
-          }
+          const  pageTitle =  !categoryId ? 'Articles and Tutorials' : this.findCategoryById(
+            article.categories,
+            categoryId
+          ).name;
 
           this.store.dispatch(new SetPageTitle(pageTitle));
         }),
       );
     });
+  }
+  private filterArticlesByCategoryId(articles: Article[], categoryId?: number) {
+    return !categoryId ?  articles : articles
+      .filter(article =>
+        !!this.findCategoryById(article.categories, categoryId)
+      );
+  }
+
+  private findCategoryById(categories: Category[], categoryId: number) {
+    return categories.find(
+      cat => cat.id === categoryId,
+    );
   }
 
   private updateTitleAndMeta(article: Article) {
