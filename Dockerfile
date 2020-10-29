@@ -1,13 +1,15 @@
 FROM node:12.18.3-alpine
+LABEL author="Olufisayo Bamidele"
 
-WORKDIR '/app'
-COPY package.json .
-RUN npm install
+WORKDIR /var/www
+COPY package.json /var/www
+RUN npm install | true
 
-COPY . .
+COPY . /var/www
 
 RUN  npm run build:prod
 
+
 EXPOSE 4000
 
-CMD npm run start
+ENTRYPOINT [ "npm", "start" ]
