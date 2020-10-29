@@ -1,41 +1,39 @@
 
 <div class="container-md home-wrapper">
-  <div class="row mt-3 nav-container">
-    <nav class="col-12">
-      <h5 class="text-center">Links</h5>
-      <ul class="text-center w-100">
-        <li><a [routerLink]="['/profile']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-link">Bio</a></li>
-        <li><a [routerLink]="['/profile/work-experience']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-link">Work Experience</a></li>
-        <li><a [routerLink]="['/profile/cv']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-link">CV</a></li>
-        <li><a [routerLink]="['/articles']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-link">Articles</a></li>
-        <li><a [routerLink]="['/poetry']" [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active-link">Poetry</a></li>
-        <li><a [routerLink]="['/authors/login']" [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active-link">Login</a></li>
-      </ul>
-    </nav>
-  </div>
-<div class="row mt-3 border"></div>
-<main class="row main align-items-center justify-content-center">
-  <div class="col-12">
-    <header>
+  <section class="row mt-3 nav-container">
+    <header class="col-12">
+      <nav class="">
+        <h5 class="text-center">Links</h5>
+
+        <ul class="text-center w-100">
+          <li><a [routerLink]="['/profile']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-link">Bio</a></li>
+          <li><a [routerLink]="['/profile/work-experience']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-link">Work Experience</a></li>
+          <li><a [routerLink]="['/articles']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-link">Articles</a></li>
+          <li><a [routerLink]="['/poetry']" [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active-link">Poetry</a></li>
+          <li><a [routerLink]="['/authors/login']" [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active-link">Login</a></li>
+        </ul>
+      </nav>
       <h1 class="text-center"><a [routerLink]="['/']">Olufisayo Bamidele</a></h1>
     </header>
-
-
-      <router-outlet></router-outlet>
-    <div class="row mt-3 avatar-container">
-      <div class="col-12">
-        <img src="assets/avatar.png" class="d-block w-25 rounded m-auto"/>
-      </div>
+  </section>
+  <div class="row mt-3 border"></div>
+  <main class="row main align-items-center justify-content-center">
+    <section class="col-12 route-wrapper">
+        <router-outlet></router-outlet>
+    </section>
+  </main>
+  <section class="row mt-3 avatar-container">
+    <div class="col-12">
+      <img src="assets/avatar.png" class="d-block w-25 rounded m-auto"/>
     </div>
-    <div class="row mt-3">
-      <div class="col-12 text-center social">
-        <i class="fa fa-twitter"></i>
-        <i class="fa fa-linkedin"></i>
-        <i class="fa fa-instagram"></i>
-        <i class="fa fa-github"></i>
-        <i class="fa fa-envelope"></i>
-      </div>
+  </section>
+  <section class="row mt-3">
+    <div class="col-12 text-center social">
+      <i class="fa fa-twitter"></i>
+      <i class="fa fa-linkedin"></i>
+      <i class="fa fa-instagram"></i>
+      <i class="fa fa-github"></i>
+      <i class="fa fa-envelope"></i>
     </div>
-  </div>
-</main>
+  </section>
 </div>
