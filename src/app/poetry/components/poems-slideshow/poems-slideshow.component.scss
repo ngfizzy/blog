@@ -27,11 +27,23 @@
 .audience-action-btns {
   height: 100%;
   display: flex;
-  width: 14%;
+  width: 26%;
   justify-content: space-around;
-  align-items: center;
+  align-items: space-around;
 }
 
+
+@media(min-width: 1080px) {
+  .audience-action-btns {
+    width: 20%;
+  }
+}
+
+@media(min-width: 1700px) {
+  .audience-action-btns {
+    width: 7rem;
+  }
+}
 @keyframes transitionIn {
   from {
     opacity: 0;

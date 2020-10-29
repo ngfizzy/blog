@@ -62,12 +62,18 @@
 
 @media (min-width: 360px) and (max-width: 767.98px) {
   .poem-container {
-    max-width: 75vw;
+    max-width: 85vw;
   }
 
   .poem-body {
     p {
       padding: 0 0.4rem;
     }
+  }
+}
+
+@media(min-width:768px) and (max-width: 1080px) {
+  .poem-container {
+    max-width: 71vw;
   }
 }
