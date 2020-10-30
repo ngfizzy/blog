@@ -109,29 +109,9 @@
   }
 }
 
-.main-nav {
-  width: 15rem;
-  margin-top: 1rem;
 
-  img {
-    display: inline-block;
-    width: 90%;
-    margin: auto;
-  }
-}
-
-@media(min-width: 720px) and (max-width: 960px) {
-  .main-nav {
-    width: 15rem;
-  }
-}
 // Large devices for
 @media (min-width: 720px) {
-  .main-nav {
-
-    left: 0;
-  }
-
   .search-panel {
     width: 40%;
     margin: auto;
@@ -157,9 +137,3 @@
   }
 }
 
-@media(min-width: 2001px) {
-  .sidenav-container {
-    width: 2000px;
-    margin: auto;
-  }
-}

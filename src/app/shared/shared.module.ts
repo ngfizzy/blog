@@ -62,6 +62,7 @@ import { ArticlesContentWrapperComponent } from './components/articles-content-w
 import { CommentComponent } from './components/comment/comment.component';
 import { AudienceSectionComponent } from './components/audience-section/audience-section.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { SideNavCollapsedComponent } from './components/side-nav-collapsed/side-nav-collapsed.componet';
 
 @NgModule({
   imports: [
@@ -157,7 +158,8 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
     EntityToolbarComponent,
     CommentComponent,
     AudienceSectionComponent,
-    SideNavComponent
+    SideNavComponent,
+    SideNavCollapsedComponent
   ],
   providers: [],
 })

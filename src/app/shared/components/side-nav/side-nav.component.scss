@@ -1,0 +1,77 @@
+
+    .sidenav-content {
+      width: 75%;
+      min-height: 100vh;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 9%;
+      margin-bottom: 10px;
+    }
+
+    .bg-sidenav-container {
+      background: linear-gradient(
+        45deg,
+        rgba(30, 30, 50, 0.997),
+        rgba(30, 30, 50, 0.887),
+        rgba(30, 30, 50, 0.997)
+      );
+      background-color: rgba(30, 30, 50, 0.887);
+
+      background-repeat: no-repeat;
+    }
+
+  .bg-sidenav {
+    background-color: #28283cf9
+  }
+
+  .mat-list-item {
+    color: hsla(0, 0%, 100%, 0.8);
+  }
+
+  .collapsed {
+    display: none;
+  }
+
+  .sidenav-content-full {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .no-margin-top {
+    margin-top: -3%;
+  }
+
+  ::ng-deep .mat-drawer-inner-container {
+    height: 75% !important;
+    margin-top: 25%;
+  }
+
+  @media(min-width: 2001px) {
+    .sidenav-container {
+      width: 2000px;
+      margin: auto;
+    }
+  }
+
+  @media (min-width: 720px) {
+    .main-nav {
+        left: 0;
+      }
+    }
+
+    .main-nav {
+  width: 15rem;
+  margin-top: 1rem;
+
+  img {
+    display: inline-block;
+    width: 90%;
+    margin: auto;
+  }
+}
+
+  @media(min-width: 720px) and (max-width: 960px) {
+    .main-nav {
+      width: 15rem;
+    }
+  }

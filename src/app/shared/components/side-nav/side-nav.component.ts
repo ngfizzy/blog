@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Nav, SideNavContentSizing, SideNavMode } from '../../models';
+import { BaseNavComponent } from '../base-nav/base-nav.component';
 
 @Component({
   selector: 'app-side-nav',
@@ -41,92 +42,15 @@ import { Nav, SideNavContentSizing, SideNavMode } from '../../models';
 
   </mat-sidenav-container>
   `,
-  styles: [`
-
-    .sidenav-content {
-      width: 75%;
-      min-height: 100vh;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 9%;
-      margin-bottom: 10px;
-    }
-
-    .bg-sidenav-container {
-      background: linear-gradient(
-        45deg,
-        rgba(30, 30, 50, 0.997),
-        rgba(30, 30, 50, 0.887),
-        rgba(30, 30, 50, 0.997)
-      );
-      background-color: rgba(30, 30, 50, 0.887);
-
-      background-repeat: no-repeat;
-    }
-
-  .bg-sidenav {
-    background-color: #28283cf9
-  }
-
-  .mat-list-item {
-    color: hsla(0, 0%, 100%, 0.8);
-  }
-
-  .collapsed {
-    display: none;
-  }
-
-  .collapsed-nav {
-    position: fixed;
-    top: 0;
-    min-height: 100vh;
-    font-weight: bold;
-    width: 2.3rem;
-    z-index: 2000;
-
-    .collapsed-nav-item {
-      margin-top: 8rem;
-    }
-  }
-
-  .sidenav-content-full {
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  .no-margin-top {
-    margin-top: -3%;
-  }
-  ::ng-deep .mat-drawer-inner-container {
-    height: 75% !important;
-    margin-top: 25%;
-  }
-  `]
+  styleUrls: ['./side-nav.component.scss']
 })
 
-export class SideNavComponent implements OnInit {
-  @Input() nav: Nav;
+export class SideNavComponent  extends BaseNavComponent implements OnInit {
   @Input() contentUISizing: SideNavContentSizing;
   @Input() removeTopMargin: boolean;
   @Input() toggleNavbar = false;
   @Input() isOpen: boolean;
   @Input() mode: SideNavMode;
-  @Output() navigate = new EventEmitter<{
-  path: string[];
-    queryParams: { [key: string]: string | number };
-    toggleNavbar: boolean
-  }>();
 
-
-
-  constructor() { }
-
-
-  goToLocation(path: string[], queries: any) {
-    this.navigate.emit({
-      path,
-      toggleNavbar: this.toggleNavbar,
-      queryParams: queries});
-  }
   ngOnInit() { }
 }

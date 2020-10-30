@@ -70,16 +70,11 @@
   </div>
 </div>
 
-<!-- Collapsed Side nav -->
-<div class="collapsed-nav bg-sidenav" *ngIf="!isOpen">
-  <div class="collapsed-nav-item">
-    <ng-container *ngFor="let item of nav?.items">
-      <a (click)="goToLocation(item.path, item.queries, false);" class="p-2">
-        <mat-list-item class="text-capitalize text-center border-bottom">{{ item.name[0] }}</mat-list-item>
-      </a>
-    </ng-container>
-  </div>
-</div>
+<app-side-nav-collapsed
+  [nav]="nav"
+  [isOpen]="isOpen"
+  (navigate)="goToLocation($event.path, $event.queryParams, false)"
+></app-side-nav-collapsed>
 
 <app-side-nav
   [contentUISizing]="contentSizingValues.Fill"
