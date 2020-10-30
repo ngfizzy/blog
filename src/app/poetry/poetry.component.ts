@@ -18,7 +18,10 @@ export class PoetryComponent implements OnInit {
   sideNavContentSizing = SideNavContentSizing.Fill;
   nav: Nav = {
     iconUrl: 'assets/poetry.jpeg',
-    items: [{ name: 'Shakespeare', path: null }],
+    items: [
+      { name: 'GridV iew', path: ['/poetry/poems/grid/'] },
+      { name: 'Carousel View',  path: ['/poetry/poems/row']}
+    ],
   };
   pageTitle$: Observable<string>;
 
