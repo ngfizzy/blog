@@ -19,7 +19,7 @@ export class PoetryComponent implements OnInit {
   nav: Nav = {
     iconUrl: 'assets/poetry.jpeg',
     items: [
-      { name: 'GridV iew', path: ['/poetry/poems/grid/'] },
+      { name: 'GridV iew', path: ['/poetry/poems/grid'] },
       { name: 'Carousel View',  path: ['/poetry/poems/row']}
     ],
   };

@@ -5,7 +5,6 @@ import { articlesReducer } from './state/articles.reducer';
 import { ArticleEffects } from './state/articles.effects';
 import { ArticleRoutingModule } from './articles-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { NavComponent } from './components/nav/nav.component';
 
 @NgModule({
   imports: [
@@ -14,6 +13,6 @@ import { NavComponent } from './components/nav/nav.component';
     EffectsModule.forFeature([ArticleEffects]),
     ArticleRoutingModule,
   ],
-  declarations: [...ArticleRoutingModule.routeComponents, NavComponent],
+  declarations: [...ArticleRoutingModule.routeComponents],
 })
 export class ArticlesModule {}

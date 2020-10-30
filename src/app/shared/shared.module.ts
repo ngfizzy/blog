@@ -44,7 +44,7 @@ import { TimeagoModule } from 'ngx-timeago';
 
 import { ArticleComponent } from './components/article/article.component';
 import { NotFoundComponent } from './components/Not Found/not-found.component';
-import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { NavComponent } from './components/nav/nav.component';
 import { CopyToClipboardComponent } from './components/copy-to-clipboard/copy-to-clipboard.component';
 import { SecondsToJustNowPipe } from './pipes/seconds-to-just-now.pipe';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
@@ -61,6 +61,7 @@ import { EntityToolbarComponent } from './components/entity-toolbar/entity-toolb
 import { ArticlesContentWrapperComponent } from './components/articles-content-wrapper/articles-content-wrapper.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { AudienceSectionComponent } from './components/audience-section/audience-section.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 @NgModule({
   imports: [
@@ -104,7 +105,7 @@ import { AudienceSectionComponent } from './components/audience-section/audience
     MatSidenavContent,
     MatButton,
     MatToolbar,
-    SideNavComponent,
+    NavComponent,
     NotFoundComponent,
     ArticleComponent,
     SpinnerComponent,
@@ -140,7 +141,7 @@ import { AudienceSectionComponent } from './components/audience-section/audience
     ArticleComponent,
     NotFoundComponent,
     ApplaudsButtonComponent,
-    SideNavComponent,
+    NavComponent,
     CopyToClipboardComponent,
     ArticlesContentWrapperComponent,
     SecondsToJustNowPipe,
@@ -155,7 +156,8 @@ import { AudienceSectionComponent } from './components/audience-section/audience
     RightSlideoutPanelComponent,
     EntityToolbarComponent,
     CommentComponent,
-    AudienceSectionComponent
+    AudienceSectionComponent,
+    SideNavComponent
   ],
   providers: [],
 })
