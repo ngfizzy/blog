@@ -17,10 +17,12 @@ export class PoetryComponent implements OnInit {
   isSideNavOpen = false;
   sideNavContentSizing = SideNavContentSizing.Fill;
   nav: Nav = {
-    iconUrl: 'assets/poetry.jpeg',
+    iconUrl: 'assets/avatar.png',
     items: [
-      { name: 'GridV iew', path: ['/poetry/poems/grid'] },
-      { name: 'Carousel View',  path: ['/poetry/poems/row']}
+      { name: 'My Profile', path: ['/profile']},
+      { name: 'Grid View', path: ['/poetry/poems/grid'] },
+      { name: 'Carousel View',  path: ['/poetry/poems/row']},
+      { name: 'Articles', path: ['/articles'] }
     ],
   };
   pageTitle$: Observable<string>;

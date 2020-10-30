@@ -32,7 +32,7 @@ export class CoreService {
           path: ['/articles'],
         };
 
-        navItems.unshift(allArticles);
+        navItems.unshift({ name: 'My Profile', path: ['/profile']}, allArticles);
 
         return {
           iconUrl: 'assets/avatar.png',
