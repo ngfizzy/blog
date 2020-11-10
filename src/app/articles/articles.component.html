@@ -1,5 +1,5 @@
 <div *ngIf="articles$ | async as articles">
-  <app-side-nav
+  <app-nav
   [isOpen]="isSideNavOpen"
   [nav]="nav$ | async"
   [mode]="sideNavMode"
@@ -8,5 +8,5 @@
   (toggle)="isSideNavOpen = $event"
   [isSmallDevice]="isSmallDevice"
   [canToggle]="true && isSmallDevice"
-  [pageTitle]="pageTitle$ | async"></app-side-nav>
+  [pageTitle]="pageTitle$ | async"></app-nav>
 </div>

@@ -3,13 +3,14 @@
   <ng-container *ngIf="(selectedPoem$ | async) as poem">
     <app-poem-full-card
       [poem]="poem"
-      [maxHeight]="'65vh'"
+      [maxHeight]="'52vh'"
     >
     </app-poem-full-card>
     <div
       class="mat-elevation-z4 p-2 actions"
       (click)="$event.stopPropagation()"
     >
+    <div class="slide-controls">
       <app-slide-control
         (previous)="goToPreviousSlide(poem.id, poems)"
         (next)="goToNextSlide(poem.id, poems)"
@@ -18,21 +19,46 @@
         [controlsColor]="'#fff'">
       </app-slide-control>
     </div>
+
+      <div class="audience-action-btns" *ngIf="(selectedPoem$ | async) as poem">
+        <app-comment-toggler
+          (togglerClicked)="commentSectionOpened = $event"
+          [commentsCount]="poem.audienceActivities.length"
+          [isCommentSectionOpened]="commentSectionOpened"
+        >
+
+        </app-comment-toggler>
+        <app-applauds-button
+          [totalApplauds]="totalApplauds$ |  async"
+          [currentAudienceApplauds]="currentUserApplauds"
+          [currentAudience]="audience$ | async"
+          [articleId]="poem.id"
+          (applaud)="submitApplauds($event)"
+          (updateUserApplaud)="updateAudienceApplauds($event)"
+      ></app-applauds-button>
+      </div>
+
+    </div>
   </ng-container>
 </div>
 
 
 <ng-container *ngIf="(selectedPoem$ | async) as poem">
-  <app-poetry-actions
-    (applaud)="submitApplauds($event)"
-    (updateUserApplaud)="updateAudienceApplauds($event)"
-    (commentSectionToggled)="hidePoem($event)"
-    (addComment)="submitComment($event)"
-    [articleId]="poem.id"
-    [currentAudience]="audience$ | async"
-    [currentAudienceApplauds]="currentUserApplauds"
-    [activities]="poem.audienceActivities"
+  <app-right-slideout-panel
+    [isOpen]="commentSectionOpened"
+    (toggled)="commentSectionOpened = $event"
   >
+    <app-audience-section
+      (applaud)="submitApplauds($event)"
+      (updateUserApplaud)="updateAudienceApplauds($event)"
+      (commentSectionToggled)="commentSectionOpened = $event"
+      (addComment)="submitComment($event)"
+      [articleId]="poem.id"
+      [currentAudience]="audience$ | async"
+      [currentAudienceApplauds]="currentUserApplauds"
+      [activities]="poem.audienceActivities"
+      [isCommentSectionOpen]="commentSectionOpened"
+    ></app-audience-section>
+  </app-right-slideout-panel>
 
-  </app-poetry-actions>
 </ng-container>

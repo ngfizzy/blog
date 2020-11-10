@@ -9,5 +9,6 @@ export interface CoreState {
   audienceState: {
     isLoading: boolean;
     audience: Audience;
+    contacted?: boolean;
   };
 }

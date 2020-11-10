@@ -1,6 +1,8 @@
 :host {
   width: 100%;
-  height: 8rem;
+  height: 18rem;
+  border: 3px solid yellow;
+  overflow: hidden;
 
   .poems-list-wrapper {
     position: relative;
@@ -31,7 +33,8 @@
       display: inline-block;
       position: absolute;
       width: 6%;
-      height: 8rem;
+      height: 100%;
+      background-color: rgba(250, 235, 215, 0.644);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -39,6 +42,7 @@
       font-size: 4rem;
       cursor: pointer;
       z-index: 2000;
+      transition: background-color 0.4s ease-in;
 
       transition: background-color .4s ease-in;
 

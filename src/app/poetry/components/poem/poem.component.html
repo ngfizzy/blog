@@ -1,12 +1,13 @@
-<div class="w-100 h-100 poem-container"
-  [ngStyle]="backgroundStyle"
+<div
+  class="w-100 rounded poem-container mat-elevation-z3"
   (click)="view(poem.id)"
+  [ngClass]="{'border border-light': hovering}"
+  (mouseenter)="hovering = true"
+  (mouseleave)="hovering = false"
 >
-<h4 class="text-center read-more"><span class="fa fa-arrow-circle-up"></span></h4>
-<div class="w-100 poem">
-  <div class="body">
-    <h6 class="text-capitalize title">{{poem?.title}}</h6>
-    <p>{{poem?.body}}</p>
-  </div>
+<div class="theme-image" [ngStyle]="backgroundStyle"></div>
+<div class="w-100 rounded-bottom poem">
+    <h6 class="text-capitalize title p-2">{{poem?.title}}</h6>
+    <div class="body">{{poem?.body}}</div>
   </div>
 </div>

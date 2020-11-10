@@ -29,7 +29,9 @@ export class PoemsSingleRowListComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new fromPoetryActions.GetAllPoems());
     this.poems$ = this.store.pipe(select(fromPoetry.getAllPoems));
-    this.themeImage$ = this.store.pipe(select(fromPoetry.selectPoemThemeImage));
+    this.themeImage$ = this.store.pipe(
+      select(fromPoetry.selectPoemThemeImage),
+    );
 
     const poemId$ = this.store.pipe(select(fromPoetry.selectPoemId));
 
@@ -43,12 +45,17 @@ export class PoemsSingleRowListComponent implements OnInit {
     } else {
       this.selectedPoemId$ = poemId$;
     }
-
-
   }
 
   getSelectedPoem(poemId: number) {
-    this.router.navigate([ poemId ],  { relativeTo: this.route });
+    const route = [ '/poetry/poems/row'];
+
+    if (poemId) {
+
+      route.push(`${poemId}`);
+    }
+
+    this.router.navigate(route);
   }
 
   /**
@@ -56,7 +63,7 @@ export class PoemsSingleRowListComponent implements OnInit {
    */
   private preselectPoem() {
     return this.poems$.pipe(
-      map(poems => poems[0].id),
+      map(poems => (poems || [])[0]?.id),
       tap((poemId) => this.getSelectedPoem(poemId))
     );
   }

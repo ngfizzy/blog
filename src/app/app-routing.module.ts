@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { AuthGuard } from './authors-portal/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'home',
+    redirectTo: 'profile'
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then(mod => mod.ProfileModule)
   },
   {
     path: 'articles',
@@ -25,11 +27,7 @@ const routes: Routes = [
       import('./authors-portal/authors-portal.module').then(
         mod => mod.AuthorsPortal,
       ),
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
-  },
+  }
 ];
 
 @NgModule({
@@ -37,5 +35,5 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {
-  static readonly routeComponents = [HomeComponent];
+  public static routeComponents = [];
 }

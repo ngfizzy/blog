@@ -1,13 +1,19 @@
 import { Nav } from './../../shared/models/nav';
 import { Action } from '@ngrx/store';
-import { Audience } from '../../shared/models';
+import { AudienceResponse } from 'src/app/shared/models/graphql-responses/responses/audience-response.interface';
+import { SendMessagePayload } from 'src/app/shared/models';
+import { SendMessageResponse } from 'src/app/shared/models/graphql-responses/responses';
 
 export const enum CoreActionTypes {
   GetCurrentAudience = '[App] Get Current Audience',
   GetCurrentAudienceSuccess = '[App] Get Current Audience Success',
+  GetCurrentAudienceError = '[App] Get Current Audience Error',
   SetPageTitle = '[App] Set Page Title',
   GetNav = '[App] Get Nav',
-  GetNavSuccess = '[Nav] Get Nav Success',
+  GetNavSuccess = '[App] Get Nav Success',
+  SendMessage = '[App] Contact Author',
+  SendMessageSuccess = '[App] Contact Author Success',
+  SendMessageError = '[App] Contact Author Error'
 }
 export class GetCurrentAudience implements Action {
   readonly type = CoreActionTypes.GetCurrentAudience;
@@ -18,7 +24,13 @@ export class GetCurrentAudience implements Action {
 export class GetCurrentAudienceSuccess {
   readonly type = CoreActionTypes.GetCurrentAudienceSuccess;
 
-  constructor(public payload: Audience) {}
+  constructor(public payload: AudienceResponse) {}
+}
+
+export class GetCurrentAudienceError {
+  readonly type = CoreActionTypes.GetCurrentAudienceError;
+
+  constructor(public payload: string) {}
 }
 
 export class SetPageTitle implements Action {
@@ -39,9 +51,31 @@ export class GetNavSuccess implements Action {
   constructor(public payload: Nav) {}
 }
 
+export class SendMessage implements Action {
+  readonly type = CoreActionTypes.SendMessage;
+
+  constructor(public payload: SendMessagePayload) {}
+}
+
+export class SendMessageSuccess implements Action {
+  readonly type = CoreActionTypes.SendMessageSuccess;
+
+  constructor(public payload: SendMessageResponse) {}
+}
+
+export class SendMessageError implements Action {
+  readonly type = CoreActionTypes.SendMessageError;
+
+  constructor(public payload: string) {}
+}
+
 export type CoreActions =
   | GetCurrentAudience
   | GetCurrentAudienceSuccess
+  | GetCurrentAudienceError
   | SetPageTitle
   | GetNav
-  | GetNavSuccess;
+  | GetNavSuccess
+  | SendMessage
+  | SendMessageSuccess
+  | SendMessageError;

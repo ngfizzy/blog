@@ -7,7 +7,11 @@
 }
 
 .add-tag-form {
-  width: 12.8rem;
+  width: fit-content;
+
+  form {
+    width: 12.8rem;
+  }
 
   input {
     width: 100%;

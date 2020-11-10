@@ -6,23 +6,28 @@ import { AuthorsArticlesComponent } from './containers/authors-articles/authors-
 import { AuthorsArticleComponent } from './containers/authors-article/authors-article.component';
 import { ArticleEditComponent } from './containers/authors-article-edit/authors-article-edit.component';
 import { AuthorsPublishComponent } from './containers/authors-publish/authors-publish.component';
+import { AuthGuard } from '../auth.guard';
 
 
 const routes: Routes = [
   {
     path: '',
+    canActivate: [AuthGuard],
     component: AuthorsArticlesComponent,
     children: [
       {
+        canActivate: [AuthGuard],
         path: ':id',
         component: AuthorsArticleComponent,
         pathMatch: 'full',
       },
       {
         path: 'edit/:id',
+        canActivate: [AuthGuard],
         component: ArticleEditComponent,
       },
       {
+        canActivate: [AuthGuard],
         path: ':id/publish',
         component: AuthorsPublishComponent,
       }

@@ -2,11 +2,11 @@ import { Action } from '@ngrx/store';
 
 import {
   ApplaudPayload,
-  AudienceActivityUpdateSuccessPayload,
   CommentPayload,
   Category,
   Article,
 } from 'src/app/shared/models';
+import { ArticlesResponse, AudienceActivitiesResponse, ArticleResponse } from 'src/app/shared/models/graphql-responses/responses';
 
 export const enum ArticlesActionTypes {
   GetAllArticles = '[Articles] Get All Articles',
@@ -17,10 +17,13 @@ export const enum ArticlesActionTypes {
   GetOneArticleFailure = '[Articles] Get One Article Failure',
   GetCategoryArticles = '[Articles] Get Category Articles',
   GetCategoryArticlesSuccess = '[Articles] Get Category Articles Success',
+  GetFeaturedArticles = '[Articles] Get Featured Articles',
   Applaud = '[Articles] Applaud',
   ApplaudSuccess = '[Articles] Applaud Success',
+  ApplaudFailure = '[Article] Applaud Failure',
   AddComment = '[Articles] Add Comment',
   AddCommentSuccess = '[Articles] Add Comment Success',
+  AddCommentFailure = '[Articles] Add Comment Failure',
 }
 
 export class GetAllArticles implements Action {
@@ -30,7 +33,7 @@ export class GetAllArticles implements Action {
 export class GetAllArticlesSuccess implements Action {
   readonly type = ArticlesActionTypes.GetAllArticlesSuccess;
 
-  constructor(public payload: Article[]) {}
+  constructor(public payload: ArticlesResponse) {}
 }
 
 export class GetAllArticlesFailure implements Action {
@@ -60,7 +63,7 @@ export class GetOneArticle implements Action {
 export class GetOneArticleSuccess implements Action {
   readonly type = ArticlesActionTypes.GetOneArticleSuccess;
 
-  constructor(public payload: Article) {}
+  constructor(public payload: ArticleResponse) {}
 }
 
 export class GetOneArticleFailure implements Action {
@@ -78,7 +81,13 @@ export class Applaud implements Action {
 export class ApplaudSuccess implements Action {
   readonly type = ArticlesActionTypes.ApplaudSuccess;
 
-  constructor(public payload: AudienceActivityUpdateSuccessPayload) {}
+  constructor(public payload: AudienceActivitiesResponse) {}
+}
+
+export class ApplaudFailure implements Action {
+  readonly type = ArticlesActionTypes.ApplaudFailure;
+
+  constructor(public payload: string) {}
 }
 
 export class AddComment implements Action {
@@ -90,7 +99,13 @@ export class AddComment implements Action {
 export class AddCommentSuccess implements Action {
   readonly type = ArticlesActionTypes.AddCommentSuccess;
 
-  constructor(public payload: AudienceActivityUpdateSuccessPayload) {}
+  constructor(public payload: AudienceActivitiesResponse) {}
+}
+
+export class AddCommentFailure implements Action {
+  readonly type = ArticlesActionTypes.AddCommentFailure;
+
+  constructor(public payload: string) {}
 }
 
 export type ArticlesActions =
@@ -102,6 +117,7 @@ export type ArticlesActions =
   | GetOneArticleFailure
   | Applaud
   | ApplaudSuccess
+  | ApplaudFailure
   | AddComment
   | AddCommentSuccess
   | GetCategoryArticles

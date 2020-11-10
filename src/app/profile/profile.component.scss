@@ -1,0 +1,94 @@
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  overflow-y: auto;
+}
+
+header {
+  padding: 2rem 0;
+}
+
+header h1 {
+  font-size: 5rem;
+}
+
+main p {
+  font-size: 1.2rem;
+}
+
+.social .fa {
+padding: 0.4rem;
+font-size: 1.5rem;
+}
+header {
+  background: #28283cf9;
+}
+
+nav {
+  margin-left: -1.8%;
+  margin-top: -2rem;
+}
+nav ul,
+nav li {
+  list-style: none;
+}
+
+nav li {
+  text-align: center;
+  border: 1px solid rgb(42, 42, 42);
+  padding: .5rem;
+  background-color: #56a3a629;
+  color: #ffffffcf;
+
+}
+
+header a {
+color: inherit;
+}
+
+nav a {
+padding: 1rem;
+font-size: 1.5rem;
+color: white;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.route-wrapper {
+  height: 26rem;
+  overflow-y: auto;
+}
+
+@media (min-width: 320px) and (max-width: 767.98px) {
+  nav {
+    margin-left: -3.8%;
+    margin-top: 14rem;
+  }
+
+header h1 {
+  font-size: 2rem;
+}
+
+.main {
+
+  p {
+    font-size: 0.8rem;
+  }
+
+  .avatar-container {
+    // margin-top: -1rem;
+  }
+
+  .nav-container {
+    margin-top: 0rem !important;
+  }
+
+
+  nav a {
+    font-size: .8rem;
+  }
+}
+}

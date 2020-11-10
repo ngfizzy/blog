@@ -10,6 +10,7 @@ const routes: Routes = [
   {
     path: '',
     component: AuthorsPortalComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -18,13 +19,19 @@ const routes: Routes = [
       },
       {
         path: 'articles',
-        canLoad: [AuthGuard],
         canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
         loadChildren: () =>
           import('./authors-articles/authors-articles.module').then(
             mod => mod.AuthorsArticlesModule,
           ),
       },
+      {
+        path: 'categories',
+        pathMatch: 'full',
+        canActivate: [AuthGuard],
+        loadChildren: async () => (await import('./categories/categories.module')).CategoriesModule
+      }
     ],
   },
   {

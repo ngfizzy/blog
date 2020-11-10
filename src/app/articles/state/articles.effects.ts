@@ -3,17 +3,19 @@ import * as fromArticle from './';
 import { Store, Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { Actions, ofType, Effect } from '@ngrx/effects';
-import { catchError, mergeMap, map, switchMap } from 'rxjs/operators';
+import { mergeMap, map, switchMap, tap } from 'rxjs/operators';
 
 import * as articlesActions from './articles.actions';
-import { ArticlesService } from '../../core/articles.service';
+import { ArticlesService } from '../../core/services/articles/articles.service';
+import { NextActionService } from 'src/app/core/services/next-action.service';
 
 @Injectable()
 export class ArticleEffects {
   constructor(
     private store: Store<fromArticle.ArticleState>,
     private actions$: Actions,
-    private articlesService: ArticlesService
+    private articlesService: ArticlesService,
+    private nextAction: NextActionService,
   ) {}
 
   @Effect()
@@ -21,10 +23,14 @@ export class ArticleEffects {
     ofType(articlesActions.ArticlesActionTypes.GetAllArticles),
     mergeMap(() =>
       this.articlesService.getAll().pipe(
-        map((articles) => new articlesActions.GetAllArticlesSuccess(articles)),
-        catchError((error) =>
-          of(new articlesActions.GetAllArticlesFailure(error.message))
-        )
+        map((response) => {
+          const nextActions = {
+            ErrorAction: articlesActions.GetAllArticlesFailure,
+            SuccessAction: articlesActions.GetAllArticlesSuccess
+          };
+
+          return this.nextAction.getNextActions(response, nextActions);
+        })
       )
     )
   );
@@ -35,10 +41,14 @@ export class ArticleEffects {
     map((action) => (action as articlesActions.GetOneArticle).payload),
     mergeMap((articleId) =>
       this.articlesService.getOne(articleId).pipe(
-        map((article) => new articlesActions.GetOneArticleSuccess(article)),
-        catchError((error) =>
-          of(new articlesActions.GetOneArticleFailure(error.message))
-        )
+        map((response) => {
+          const nextActions = {
+            SuccessAction: articlesActions.GetOneArticleSuccess,
+            ErrorAction: articlesActions.GetOneArticleFailure,
+          };
+
+          return this.nextAction.getNextActions(response, nextActions);
+        }),
       )
     )
   );
@@ -51,7 +61,14 @@ export class ArticleEffects {
       this.articlesService
         .applaud(payload)
         .pipe(
-          map((activities) => new articlesActions.ApplaudSuccess(activities))
+          map((activities) => {
+            const nextActions = {
+              SuccessAction: articlesActions.ApplaudSuccess,
+              ErrorAction: articlesActions.ApplaudFailure
+            };
+
+            return this.nextAction.getNextActions(activities, nextActions);
+          })
         )
     )
   );
@@ -64,7 +81,14 @@ export class ArticleEffects {
       this.articlesService
         .addComment(payload)
         .pipe(
-          map((activities) => new articlesActions.AddCommentSuccess(activities))
+          map((activities) => {
+            const nextActions = {
+              ErrorAction: articlesActions.AddCommentFailure,
+              SuccessAction: articlesActions.AddCommentSuccess
+            };
+
+            return this.nextAction.getNextActions(activities, nextActions);
+          })
         )
     )
   );

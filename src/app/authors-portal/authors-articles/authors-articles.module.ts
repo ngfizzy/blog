@@ -12,6 +12,8 @@ import { authorsArticlesReducers } from './state/authors-articles.reducers';
 import { AuthorsTagComponent } from './components/authors-tag/authors-tag.component';
 import { AuthorsTagsPanelComponent } from './components/authors-tags-panel/authors-tags-panel.component';
 import { AuthorsArticleTitleComponent } from './components/authors-article-title/authors-article-title.component';
+import { AuthorsAudienceSectionComponent } from './components/authors-audience-section/authors-audience-section.component';
+import { AuthorsPublishSectionComponent } from './components/author-pubish-sections/author-publish-sections.component';
 
 @NgModule({
   imports: [
@@ -22,12 +24,13 @@ import { AuthorsArticleTitleComponent } from './components/authors-article-title
     EffectsModule.forFeature([AuthorsArticlesEffects]),
   ],
   declarations: [
-    AuthorsArticleTitleComponent,
     AuthorsArticleToolbarComponent,
     AuthorsArticleListToolbarComponent,
     AuthorsArticleTitleComponent,
     AuthorsTagComponent,
     AuthorsTagsPanelComponent,
+    AuthorsAudienceSectionComponent,
+    AuthorsPublishSectionComponent,
     ...AuthorsArticlesRoutingModule.routeComponents,
   ],
 })

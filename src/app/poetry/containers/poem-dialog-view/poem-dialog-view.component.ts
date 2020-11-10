@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 
 
 import * as fromPoetry from '../../state/';
 import * as poetryActions from '../../state/poetry.actions';
-import { tap } from 'rxjs/operators';
+import { tap, switchMap, map } from 'rxjs/operators';
 
 
 @Component({
@@ -23,8 +23,19 @@ export class PoemDialogViewComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.pipe(
-      tap(paramMap => this.dispatchGetPoemAction(+paramMap.get('id'))),
-    ).subscribe();
+      switchMap(routePMap => this.store
+          .pipe(
+            select(fromPoetry.getAllPoems),
+            map(
+              poems => ({poems, poemId: +routePMap.get('id')})
+            ),
+          ),
+      )
+    ).subscribe(result => {
+      if (result?.poems?.length) {
+        this.dispatchGetPoemAction(result.poemId);
+      }
+    });
   }
 
   backdropClicked() {

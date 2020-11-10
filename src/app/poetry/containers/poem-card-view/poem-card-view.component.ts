@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import * as poetryState from '../../state';
 import * as poetryActions from '../../state/poetry.actions';
 import { Poem } from 'src/app/shared/models';
+import { switchMap, map } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'poem-card-view.component.html',
@@ -20,10 +21,20 @@ export class PoemCardViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(
-      paramMap => this.store.dispatch(
-        new poetryActions.GetPoem(+paramMap.get('id'))
-      ),
-    );
+    this.route.paramMap.pipe(
+      switchMap(routePMap => this.store
+          .pipe(
+            select(poetryState.getAllPoems),
+            map(
+              poems => ({poems, poemId: +routePMap.get('id')})
+            ),
+          ),
+      )
+    ).subscribe(result => {
+      if (result?.poems?.length) {
+        this.store.dispatch( new poetryActions.GetPoem(result.poemId));
+
+      }
+    });
   }
 }

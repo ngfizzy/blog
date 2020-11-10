@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { AudienceService } from '../audience.service';
+import { AudienceService } from '../services/audience/audience.service';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import {
@@ -8,9 +8,14 @@ import {
   GetCurrentAudience,
   GetCurrentAudienceSuccess,
   GetNavSuccess,
+  GetCurrentAudienceError,
+  SendMessage,
+  SendMessageSuccess,
+  SendMessageError,
 } from './core.actions';
 import { map, switchMap } from 'rxjs/operators';
-import { CoreService } from '../core.service';
+import { CoreService } from '../services/core.service';
+import { NextActionService } from '../services/next-action.service';
 
 @Injectable()
 export class CoreEffects {
@@ -18,6 +23,7 @@ export class CoreEffects {
     private actions$: Actions,
     private audienceService: AudienceService,
     private coreService: CoreService,
+    private nextAction: NextActionService,
   ) {}
 
   @Effect()
@@ -25,8 +31,15 @@ export class CoreEffects {
     ofType(CoreActionTypes.GetCurrentAudience),
     map(action => action as GetCurrentAudience),
     switchMap(() =>
-      this.audienceService.audience$.pipe(
-        map(audience => new GetCurrentAudienceSuccess(audience)),
+      this.audienceService.audienceResponse$.pipe(
+        map(res => {
+          const nextActions = {
+            SuccessAction: GetCurrentAudienceSuccess,
+            ErrorAction: GetCurrentAudienceError
+          };
+
+          return this.nextAction.getNextActions(res, nextActions);
+        }),
       ),
     ),
   );
@@ -37,5 +50,24 @@ export class CoreEffects {
     switchMap(() =>
       this.coreService.getNav().pipe(map(nav => new GetNavSuccess(nav))),
     ),
+  );
+
+  @Effect()
+  sendMessage$: Observable<Action> = this.actions$.pipe(
+    ofType(CoreActionTypes.SendMessage),
+    map((action) => (action as SendMessage).payload),
+    switchMap(({audience, message}) => {
+     return this.audienceService
+      .sendMessage(audience.email, audience.audienceName, message).pipe(
+        map(res => {
+          const nextActions = {
+            SuccessAction: SendMessageSuccess,
+            ErrorAction: SendMessageError
+          };
+
+          return this.nextAction.getNextActions(res, nextActions);
+        })
+      );
+    })
   );
 }

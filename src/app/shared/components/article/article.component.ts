@@ -14,7 +14,6 @@ import { AudienceActivity } from '../../models/audience-activity.interface';
 import { CommentPayload } from '../../models';
 import { Audience } from '../../models/audience.interface';
 import { ApplaudPayload } from '../../models/audience-activity-payloads.interface';
-import { applaud } from '../../../mock-server/index';
 
 enum AnimationState {
   Small = 'small',
@@ -32,10 +31,11 @@ export class ArticleComponent implements OnInit, OnChanges {
   @Input() audienceActivities: AudienceActivity[];
   @Input() currentAudience: Audience;
   @Input() currentUserApplauds: number;
+  @Input() showAudienceSection = true;
+
 
   @Output() notify = new EventEmitter<string>();
   @Output() opened = new EventEmitter<Article>();
-  @Output() commentSectionToggled = new EventEmitter<boolean>();
   @Output() addComment = new EventEmitter<CommentPayload>();
   @Output() applaud = new EventEmitter<ApplaudPayload>();
   @Output() updateUserApplaud = new EventEmitter<number>();
@@ -56,7 +56,7 @@ export class ArticleComponent implements OnInit, OnChanges {
   articleUrl: string;
 
   get themeImage() {
-    return this.article && this.article.themeImage;
+    return this.article && this.article.themeImage || '/assets/code.jpeg';
   }
 
   constructor(private router: ActivatedRoute) {}
@@ -111,10 +111,10 @@ export class ArticleComponent implements OnInit, OnChanges {
       this.isExpandedView = !this.isExpandedView;
       this.articleBody = this.getArticleBody();
 
-      const article = this.isExpandedView ? this.article : null;
-
-      this.opened.emit(article);
     }
+    // const article = this.isExpandedView ? this.article : null;
+
+    this.opened.emit(this.article);
   }
 
   getArticleBody() {

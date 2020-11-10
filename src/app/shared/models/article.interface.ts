@@ -9,6 +9,9 @@ export interface Article  {
   audienceActivities?: AudienceActivity[];
   createdAt: string;
   updatedAt: string;
+  publishedAt?: string;
+  unpublishedAt?: string;
+  featured?: boolean;
   title: string;
   body: string;
   deletedAt?: string;

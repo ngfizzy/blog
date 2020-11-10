@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanLoad, Route, UrlSegment, UrlTree } from '@angular/router';
 import { Observable, Observer, of } from 'rxjs';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth/auth.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanLoad {
@@ -10,26 +11,19 @@ export class AuthGuard implements CanActivate, CanLoad {
 
   }
 
-  canLoad(
-    route: Route,
-    segements: UrlSegment[]
-  ): Observable<boolean> | Promise<boolean> | boolean  {
-      if (this.auth.authState) {
-        return of(true);
-      }
-
-      this.router.navigate(['authors', 'login']);
-      return of(false);
+  canLoad(): Observable<boolean> | Promise<boolean> | boolean  {
+     return this.auth.isLoggedIn().pipe(tap(isLoggedIn => {
+       if (!isLoggedIn) {
+        this.router.navigate(['/authors', 'login']);
+       }
+     }));
   }
 
-  canActivate(
-  ): Observable<boolean> | Promise<boolean> | boolean {
-
-    if (!this.auth.authState) {
-      this.router.navigate(['authors', 'login']);
-      return of(false);
-    }
-
-    return of(true);
+  canActivate(): Observable<boolean> | Promise<boolean> | boolean {
+    return this.auth.isLoggedIn().pipe(tap(isLoggedIn => {
+      if (!isLoggedIn) {
+       this.router.navigate(['/authors', 'login']);
+      }
+    }));
   }
 }

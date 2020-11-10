@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ArticlesComponent } from './articles.component';
+import { AuthGuard } from '../authors-portal/auth.guard';
 
 
 const routes: Routes = [
@@ -12,10 +13,15 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
+        // canLoad: [AuthGuard],
+        // canActivate: [AuthGuard],
         loadChildren:  () => import('./articles-list/articles-list.module').then(mod => mod.ArticlesListModule)
       },
       {
         path: ':articleId',
+        pathMatch: 'full',
+        // canLoad: [AuthGuard],
+        // canActivate: [AuthGuard],
         loadChildren: () => import('./article/article.module')
           .then(mod => mod.ArticleModule),
       },

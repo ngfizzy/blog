@@ -1,7 +1,7 @@
 import { GetAllArticles } from './state/articles.actions';
-import { getAllArticles } from './state/index';
+import { getAllArticles } from './state';
 import { GetNav, SetPageTitle } from './../core/state/core.actions';
-import { getNav } from './../core/state/index';
+import { getNav } from './../core/state';
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { Nav, SideNavMode, Article } from '../shared/models';
 import { ArticlesState } from './state/articles.state';
@@ -22,7 +22,7 @@ export class ArticlesComponent implements OnInit, OnChanges {
   nav$: Observable<Nav>;
   articles$: Observable<Article[]> = of([]);
 
-  isSmallDevice = window.innerWidth <= 720;
+  isSmallDevice = window.innerWidth <= 770;
   searchResults = [];
   screenWidth: number;
   isSideNavOpen = true;
@@ -42,8 +42,7 @@ export class ArticlesComponent implements OnInit, OnChanges {
     this.articles$ = this.store.pipe(select(getAllArticles));
   }
 
-  ngOnChanges() {
-  }
+  ngOnChanges() {}
 
   setSidenavMode() {
     this.screenWidth = window.innerWidth;
@@ -65,6 +64,7 @@ export class ArticlesComponent implements OnInit, OnChanges {
           article.title.toLowerCase(),
           searchTerm.toLowerCase(),
         );
+
         if (similarities > 0.3) {
           return true;
         }

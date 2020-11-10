@@ -6,6 +6,7 @@ import {
   EventEmitter,
   SimpleChanges,
   OnChanges,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { Poem, Poems, Slides } from 'src/app/shared/models';
 import {
@@ -63,6 +64,7 @@ interface PoemsMetadata {
       ]),
     ]),
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
   @Input() poems: Poems;
@@ -78,21 +80,31 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
   nextButtonClicked = false;
   prevButtonClicked = false;
   animationParams = this.generateAnimationParams();
+  firstGroupingDone: boolean;
 
   constructor() {}
 
   ngOnInit() {
-    this.poemsGroupList = this.groupPoems();
-    this.showPreviousButton = this.shouldShowPreviousButton();
-    this.showNextButton = this.shouldShowNextButton();
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     const { selectedPoemId } = changes;
-    if (selectedPoemId && !selectedPoemId.isFirstChange()) {
+
+    if (!selectedPoemId?.isFirstChange() && !this.poemsGroupList?.length) {
+      this.poemsGroupList = this.groupPoems();
+    }
+
+    if (!selectedPoemId?.isFirstChange() && this.poemsGroupList?.length) {
+      this.showPreviousButton = this.shouldShowPreviousButton();
+      this.showNextButton = this.shouldShowNextButton();
+      this.firstGroupingDone = true;
+    }
+
+    if (!selectedPoemId?.isFirstChange() && selectedPoemId?.previousValue !== selectedPoemId?.currentValue) {
       this.jumpToGroup(
-        selectedPoemId.previousValue,
-        selectedPoemId.currentValue
+        selectedPoemId?.previousValue,
+        selectedPoemId?.currentValue
       );
     }
   }
@@ -125,7 +137,7 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
 
   private jumpToGroup(prevPoemId: number, currentPoemId: number) {
     const curGroup = this.findPoemGroup(currentPoemId);
-    const prevGroup = this.findPoemGroup(prevPoemId);
+    const prevGroup =  prevPoemId ===  null || prevPoemId === undefined ? curGroup - 1 : this.findPoemGroup(prevPoemId);
 
     this.prevButtonClicked = prevGroup > curGroup;
     this.nextButtonClicked = prevGroup < curGroup;
@@ -138,12 +150,24 @@ export class PoemsCarouselComponent implements OnInit, OnChanges, Slides {
   }
 
   private findPoemGroup(poemId: number) {
-    const index = this.poems.findIndex((poem) => poem.id === poemId);
-    const foundGroup = Math.round(
-      index / this.groupSize / this.poemsGroupList.length
-    );
+    let foundGroupIndex: number;
 
-    return foundGroup;
+    let foundGroup = false;
+    for (let i = 0; i < this.poemsGroupList.length; ++i) {
+      if (foundGroup) { break; }
+
+      const group = this.poemsGroupList[i];
+
+      for (let j = 0; j < group.length; j++) {
+        if (group[j].id === poemId) {
+          foundGroup = true;
+          foundGroupIndex = i;
+          break;
+        }
+      }
+    }
+
+    return foundGroupIndex;
   }
 
   private generateAnimationParams() {

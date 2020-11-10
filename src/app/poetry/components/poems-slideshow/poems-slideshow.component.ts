@@ -17,13 +17,10 @@ import {
   Slides,
   Audience,
   AudienceActivity,
-} from 'src/app/shared/models';
-import { PoetryState, getAllPoems, getPoem } from '../../state';
-import { ApplaudSuccess } from './../../../articles/state/articles.actions';
-import {
   ApplaudPayload,
   CommentPayload,
-} from './../../../shared/models/audience-activity-payloads.interface';
+} from 'src/app/shared/models';
+import { PoetryState, getAllPoems, getPoem } from '../../state';
 import * as fromPoetryActions from '../../state/poetry.actions';
 import { getAudience } from 'src/app/core/state';
 @Component({
@@ -31,7 +28,7 @@ import { getAudience } from 'src/app/core/state';
   templateUrl: './poems-slideshow.component.html',
   styleUrls: ['./poems-slideshow.component.scss'],
 })
-export class PoemsSlideshowComponent implements OnInit, OnDestroy, Slides {
+export class PoemsSlideshowComponent implements OnDestroy, Slides {
   poems$: Observable<Poem[]>;
   selectedPoem$: Observable<Poem>;
   audience$: Observable<Audience>;
@@ -51,17 +48,29 @@ export class PoemsSlideshowComponent implements OnInit, OnDestroy, Slides {
   hideScrollBar: boolean;
   audienceActivities$: Observable<AudienceActivity[]>;
   hidden: boolean;
+  totalApplauds$: Observable<number>;
+  commentSectionOpened = false;
 
   constructor(
     private store: Store<PoetryState>,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
-
-  ngOnInit() {
+  ) {
     this.poems$ = this.store.pipe(select(getAllPoems));
     this.selectedPoem$ = this.store.pipe(select(getPoem));
     this.audience$ = this.store.pipe(select(getAudience));
+    this.audienceActivities$ = this.store.pipe(
+      select(getSelectedPoemActivities)
+    );
+
+    this.totalApplauds$ = this.selectedPoem$.pipe(
+      map(
+        poem => poem?.audienceActivities?.reduce(
+          (accumulator, activity) => accumulator + activity.applauds,
+        0,
+       )
+      )
+    );
 
     this.applaudsWatcher$
       .pipe(takeUntil(this.destroy$))
@@ -69,6 +78,7 @@ export class PoemsSlideshowComponent implements OnInit, OnDestroy, Slides {
         this.store.dispatch(new fromPoetryActions.Applaud(applauds))
       );
   }
+
 
   goToPreviousSlide(poemId: number, poems: Poems) {
     this.initializeCurrentPoemIndex(poemId, poems);
@@ -80,9 +90,7 @@ export class PoemsSlideshowComponent implements OnInit, OnDestroy, Slides {
     const prevPoemId = poems[prevPoemIndex].id;
 
     this.router.navigate([prevPoemId], { relativeTo: this.route.parent });
-    this.audienceActivities$ = this.store.pipe(
-      select(getSelectedPoemActivities)
-    );
+
   }
 
   /**
@@ -135,9 +143,6 @@ export class PoemsSlideshowComponent implements OnInit, OnDestroy, Slides {
     this.store.dispatch(new fromPoetryActions.AddComment(comment));
   }
 
-  hidePoem(hide: boolean) {
-    this.hidden = hide;
-  }
 
   private initializeCurrentPoemIndex(poemId: number, poems: Poem[]) {
     if (!this.poemIndex) {

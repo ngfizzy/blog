@@ -17,6 +17,8 @@ export class AuthorsPublishComponent implements OnInit {
   isEditingArticleTitle: boolean;
   category: string;
   article$: Observable<Article>;
+  themeImageUrl = 'assets/code.jpeg';
+  customThemeImageUrl = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +36,14 @@ export class AuthorsPublishComponent implements OnInit {
     );
   }
 
+  addThemeImage(articleId: number) {
+    this.themeImageUrl = this.customThemeImageUrl;
+    this.store.dispatch(new fromAuthorsArticlesActions.AddThemeImage({
+      articleId,
+      themeImageUrl: this.themeImageUrl
+    }));
+  }
+
   addTag(tag: string, articleId: number) {
     this.store.dispatch(new fromAuthorsArticlesActions.TagArticle({ tag, articleId}));
   }
@@ -47,7 +57,6 @@ export class AuthorsPublishComponent implements OnInit {
   }
 
   togglePublished(articleId: number) {
-
     this.store.dispatch(new fromAuthorsArticlesActions.TogglePublished({ articleId}));
   }
 }

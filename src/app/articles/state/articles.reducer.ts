@@ -10,17 +10,20 @@ const defaultState: ArticlesState = {
     article: {} as Article,
     activitiesState: {
       isLoading: true,
+      error: '',
       activities: [],
     },
   },
   audienceState: {
     audience: null,
     isLoading: true,
+    contacted: false,
   },
   navState: {
     isLoading: true,
     nav: null,
   },
+  error: '',
   isLoading: true,
 };
 
@@ -33,12 +36,23 @@ export function articlesReducer(
       return {
         ...state,
         isLoading: true,
+        error: ''
       };
     case ArticlesActionTypes.GetAllArticlesSuccess:
       return {
         ...state,
-        articles: [...action.payload],
+        articles: [...action.payload.articles],
+        selectedArticle: {
+          ...state.selectedArticle
+        },
         isLoading: false,
+        error: ''
+      };
+    case ArticlesActionTypes.GetAllArticlesFailure:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
       };
     case ArticlesActionTypes.GetOneArticle:
       return {
@@ -52,13 +66,27 @@ export function articlesReducer(
       return {
         ...state,
         selectedArticle: {
-          article: { ...action.payload },
+          article: { ...action.payload.article },
           activitiesState: {
-            ...state.selectedArticle.activitiesState,
+            activities: [...action.payload.article.audienceActivities ],
             isLoading: false,
+            error: ''
           },
           isLoading: false,
         },
+      };
+    case ArticlesActionTypes.GetOneArticleFailure:
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          activitiesState: {
+            ...state.selectedArticle.activitiesState,
+            activities: [ ...state.selectedArticle.activitiesState.activities ],
+            isLoading: false,
+            error: action.payload
+          }
+        }
       };
     case ArticlesActionTypes.Applaud:
       return {
@@ -75,21 +103,19 @@ export function articlesReducer(
     case ArticlesActionTypes.ApplaudSuccess: {
       const { articleId, activities } = action.payload;
       const index = state.articles.findIndex(a => a.id === articleId);
-      const article = state.articles[index];
-
-      article.audienceActivities = activities;
-      state.articles[index] = article;
+      const article = {
+        ...state.articles[index],
+        audienceActivities: [...activities]
+      };
+      const articles = [ ...state.articles];
+      articles[index] = article;
 
       return {
         ...state,
+        articles: [ ...articles ],
         selectedArticle: {
           ...state.selectedArticle,
-          article: {
-            ...article,
-            audienceActivities: [
-              ...state.selectedArticle.article.audienceActivities,
-            ],
-          },
+          article: { ...article },
           activitiesState: {
             ...state.selectedArticle.activitiesState,
             activities: [...activities],
@@ -105,9 +131,6 @@ export function articlesReducer(
           ...state.selectedArticle,
           article: {
             ...state.selectedArticle.article,
-            audienceActivities: [
-              ...state.selectedArticle.article.audienceActivities,
-            ],
           },
           activitiesState: {
             ...state.selectedArticle.activitiesState,
@@ -119,18 +142,20 @@ export function articlesReducer(
       const articleIndex = state.articles.findIndex(
         art => art.id === action.payload.articleId,
       );
+      const article: Article = {
+        ...state.articles[articleIndex],
+        audienceActivities: [...action.payload.activities ],
+      };
+      const articles = [...state.articles];
 
-      const article = state.articles[articleIndex];
-
-      article.audienceActivities = [...action.payload.activities];
-      state.articles[articleIndex] = article;
+      articles[articleIndex] = article;
 
       return {
         ...state,
-        articles: [...state.articles],
+        articles,
         selectedArticle: {
           ...state.selectedArticle,
-          article: { ...article },
+          article,
           isLoading: false,
         },
       };

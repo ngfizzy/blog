@@ -1,29 +1,34 @@
 .poem-container {
-  overflow-y: hidden;
+  transition: all .5s ease-in-out;
+
   &:hover {
     cursor: pointer;
-    background-color: rgba($color: #1E1E24, $alpha: 0.8);
+    box-shadow: 0 6px 12px rgba(209, 207, 207, 0.23), 0 6px 12px rgba(209, 207, 207,0.23);
   }
 
   .poem  {
-    background-color: rgba($color: (#A37B73), $alpha: 0.6);
-    padding: 1rem;
-    position: absolute;
-    top: 50%;
-    overflow-y: hidden;
-    word-wrap: break-word;
-    text-overflow: ellipsis;
-    height: 50%;
-    width: 100%;
-    transition: all .5s ease-in-out;
-    color: #fff;
-
-    &:hover {
-      background-color: rgba($color: #1E1E24, $alpha: 0.88);
+    h6 {
+      color: rgb(141 228 255);
+      text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+                  0px -5px 35px rgba(255,255,255,0.3);
     }
 
+    background-color: #575f67;;
+    position: relative;
+    width: 100%;
+    transition: all .5s ease-in-out;
+    color: #dbdbe8  !important;
+    padding-bottom: 1rem;
+    height: 12rem;
+    overflow: hidden;
+
     .body {
-      font-size: 80%;
+      padding: 1rem;
+      padding: 1rem;
+      font-size: 83%;
+      height: 100%;
+      overflow: hidden;
+      margin-bottom: .5rem;
     }
   }
 
@@ -35,20 +40,20 @@
   }
 }
 
-@media(min-width: 360px) and (max-width: 767.98px) {
-  .poem-container {
-    margin-bottom: 0.5rem;
-  }
+.theme-image {
+  height: 10rem;
 }
 
-// min-height: 30vh;
-// max-height: 50vh;
-// padding: 0 0.1rem;
-// width: 100%;
-// margin-bottom: 0.2rem;
-// overflow-x: hidden;
-// -webkit-animation: transitionIn 1s;
-// animation: transitionIn 1s;
-// margin-left: 0px;
-// overflow-y: auto;
-// margin-bottom: 0.5rem;
+
+.poem-cta {
+  display: block;
+  position: relative;
+  margin-right: 1rem;
+  margin-left: auto;
+  bottom: 38%;
+  background-color: rgba(252, 213, 129, 9.8);
+  font-size: 0.9rem;
+  padding: 0.4rem;
+  border: none;
+  color: white;
+}

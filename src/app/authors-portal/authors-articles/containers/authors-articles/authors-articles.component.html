@@ -1,42 +1,64 @@
 
-<div class="row toolbar">
-  <div class="col-3 pr-1 pl-2 ">
-        <app-authors-article-list-toolbar
-      (createArticle)="createArticle()"
-    >        <app-authors-article-list-toolbar
-    (createArticle)="createArticle()"
+<div class="w-100 authors-route-content">
+  <mat-progress-spinner
+    *ngIf="(articlesListLoad$ | async) === true"
+    class="p-fixed mt-5 mx-auto"
+    mode="indeterminate"
+    value="75"
+    diameter="100"
+    title="'saving'"
   >
-  </app-authors-article-list-toolbar>
-    </app-authors-article-list-toolbar>
-  </div>
-  <div class="col-9 pl-0">
-    <app-authors-articles-toolbar
-    *ngIf="selectedArticle$ | async; let selectedArticle"
-    [selectedArticleTitle]="selectedArticle.title"
-    [isEditingTitle]="isEditingTitle"
-    [articleStatus]="articleStatus$ | async"
-    [selectedArticleId]="selectedArticle.id"
-    [published]="selectedArticle.published"
-    (editTitle)="isEditingTitle = $event"
-    (saveTitle)="saveTitle($event, selectedArticle.id)"
-    (togglePublished)="togglePublished($event)"
-    >
-    </app-authors-articles-toolbar>
-  </div>
-</div>
-
-
-<mat-sidenav-container class="articles-drawer-container">
-  <mat-sidenav mode="side" opened class="articles-drawer">
-    <app-authors-articles-list
-      [articlesList]="articles$ | async"
-      (showFullArticle)="showFullArticle($event)"
-    >
-    </app-authors-articles-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div class="sidenav-outlet">
-      <router-outlet ></router-outlet>
+  </mat-progress-spinner>
+  <div class="row toolbar" *ngIf="(articlesListLoad$ | async) === false">
+    <div class="col-3 pr-1 pl-2 ">
+      <app-authors-article-list-toolbar
+        (createArticle)="createArticle()"
+      >
+      </app-authors-article-list-toolbar>
     </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    <div class="col-9 pl-0">
+      <app-authors-articles-toolbar
+        *ngIf="selectedArticle$ | async; let selectedArticle"
+        [selectedArticleTitle]="selectedArticle.title"
+        [isEditingTitle]="isEditingTitle"
+        [articleStatus]="articleStatus$ | async"
+        [selectedArticleId]="selectedArticle.id"
+        [published]="selectedArticle.published"
+        (editTitle)="isEditingTitle = $event"
+        (saveTitle)="saveTitle($event, selectedArticle.id)"
+        (deleteArticle)="deleteArticle($event)"
+        (togglePublished)="togglePublished($event)"
+        (commentsToggled)="toggleCommentsSection($event)"
+      >
+      </app-authors-articles-toolbar>
+    </div>
+  </div>
+  <mat-sidenav-container class="mat-elevation-z2 articles-drawer-container" *ngIf="(articlesListLoad$ | async) === false">
+    <mat-sidenav mode="side" opened class="articles-drawer">
+      <app-list
+        [items]="articles$ | async"
+        [isLoading]="isArticlesListLoading$ | async"
+        (itemSelected)="showFullArticle($event)"
+      >
+      </app-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="sidenav-outlet">
+        <router-outlet ></router-outlet>
+      </div>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+  <app-right-slideout-panel
+    [isOpen]="showCommentsSection"
+    (toggled)="toggleCommentsSection($event)"
+  >
+    <ng-container *ngIf="selectedArticle$ | async as selectedArticle">
+      <app-authors-audience-section
+        [activities]="selectedArticle.audienceActivities"
+        (commentDeleted)="deleteComment($event)"
+      ></app-authors-audience-section>
+    </ng-container>
+  </app-right-slideout-panel>
+</div>

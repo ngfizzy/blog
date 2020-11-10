@@ -17,12 +17,18 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/blog",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
+              {
+                "glob": "**/*",
+                "input": "node_modules/ace-builds/src-min",
+                "output": "./assets/ace-builds/"
+              },
               "src/favicon.ico",
               "src/assets",
               "src/_redirects"
@@ -30,13 +36,14 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.min.css",
-              "node_modules/prismjs/themes/prism-okaidia.css",
               "node_modules/ngx-markdown-editor/assets/highlight.js/agate.min.css",
+              "node_modules/prismjs/themes/prism-okaidia.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss",
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
+
               "node_modules/ngx-markdown-editor/assets/highlight.js/highlight.min.js",
               "node_modules/ngx-markdown-editor/assets/marked.min.js",
               "node_modules/marked/lib/marked.js",
@@ -45,7 +52,14 @@
               "node_modules/prismjs/components/prism-css.min.js",
               "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js"
             ],
-            "es5BrowserSupport": true
+            "allowedCommonJsDependencies": [
+              "device-uuid",
+              "ngx-ellipsis",
+              "graphql-tag",
+              "element-resize-detector",
+              "zen-observable",
+              "batch-processor"
+            ]
           },
           "configurations": {
             "production": {
@@ -59,7 +73,7 @@
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
-              "namedChunks": false,
+              "namedChunks": true,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -67,8 +81,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "1.6mb",
+                  "maximumError": "3mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
@@ -154,6 +172,7 @@
   },
   "defaultProject": "blog",
   "cli": {
-    "defaultCollection": "@ngrx/schematics"
+    "defaultCollection": "@ngrx/schematics",
+    "analytics": "394a7f9f-3dec-4efd-93d8-9991f63a79c7"
   }
 }

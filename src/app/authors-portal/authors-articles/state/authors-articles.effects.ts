@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
+import { Observable, throwError, of } from 'rxjs';
 import { mergeMap, map, switchMap } from 'rxjs/operators';
 
-import { AuthorsArticlesService } from '../../services/authors-articles.service';
+import { AuthorsArticlesService } from '../../services/authors-articles/authors-articles.service';
 import * as authorsArticlesActions from './authors-articles.actions';
-import { Article } from 'src/app/shared/models';
+import {
+  EditArticleEffectResponse,
+} from '../../authors-portal-shared/models/';
+import { ArticleResponse } from '../../../shared/models/graphql-responses/responses';
 
 @Injectable()
 export class AuthorsArticlesEffects {
@@ -19,20 +22,23 @@ export class AuthorsArticlesEffects {
   @Effect()
   getArticles$: Observable<Action> = this.actions$.pipe(
     ofType(authorsArticlesActions.AuthorsArticlesActionTypes.GetArticles),
-    mergeMap(() => this.articlesService.getAllArticles().pipe(
-      map(articles => new authorsArticlesActions.GetArticlesSuccess(articles))
-    ))
+    mergeMap(() => this.performGetAllArticles()),
   );
 
   @Effect()
   createArticles$: Observable<Action> = this.actions$.pipe(
     ofType(authorsArticlesActions.AuthorsArticlesActionTypes.CreateArticle),
     map(action => (action as authorsArticlesActions.CreateArticle).payload),
-    mergeMap((article) => this.articlesService.createArticle(article).pipe(
-      map(createdArticle =>
-        new  authorsArticlesActions.CreateArticleSuccess(createdArticle),
-      )
-    )),
+    switchMap(({title, body}) => this.articlesService
+      .createArticle(title, body).pipe(
+        map(result => {
+          if (!result.error) {
+            return new authorsArticlesActions.CreateArticleSuccess(result);
+          }
+
+          return new authorsArticlesActions.CreateArticleError(result.error);
+        })
+      )),
   );
 
   @Effect()
@@ -52,9 +58,15 @@ export class AuthorsArticlesEffects {
     map(action => (action as authorsArticlesActions.TagArticle).payload),
     mergeMap(({articleId, tag}) => this.articlesService
       .tagArticle(tag, articleId).pipe(
-        map((articleTaggingResult: { articles: Article[], selectedArticle: Article }) =>
-          new authorsArticlesActions.TagArticleSuccess(articleTaggingResult)
-        ),
+        map((articleTaggingResults: EditArticleEffectResponse) => {
+          const { error } = articleTaggingResults;
+
+          if (!error) {
+            return new authorsArticlesActions.TagArticleSuccess(articleTaggingResults);
+          } else {
+            return new authorsArticlesActions.TagArticleError(error);
+          }
+        }),
       ),
     ),
   );
@@ -65,9 +77,15 @@ export class AuthorsArticlesEffects {
     map(action => (action as authorsArticlesActions.UntagArticle).payload),
     mergeMap(({ articleId, tagId }) => this.articlesService
       .untagArticle(tagId, articleId).pipe(
-        map(untaggingResult =>
-          new authorsArticlesActions.UntagArticleSuccess(untaggingResult)
-        ),
+        map(untaggingResult => {
+          const { error } = untaggingResult;
+
+          if (!error) {
+            return new authorsArticlesActions.UntagArticleSuccess(untaggingResult);
+          }
+
+          return new authorsArticlesActions.UntagArticleError(error);
+        }),
       ),
     ),
   );
@@ -76,11 +94,15 @@ export class AuthorsArticlesEffects {
   editArticleTitle$: Observable<Action> = this.actions$.pipe(
     ofType(authorsArticlesActions.AuthorsArticlesActionTypes.EditArticleTitle),
     map(action => (action as authorsArticlesActions.EditArticleTitle).payload),
-    mergeMap(({ title, articleId}) => this.articlesService
+    switchMap(({ title, articleId}) => this.articlesService
       .editArticleTitle(title, articleId).pipe(
-        map((editingResult) =>
-          new authorsArticlesActions.EditArticleTitleSuccess(editingResult)
-        ),
+        map((editingResult) => {
+          if (editingResult.error) {
+            return new authorsArticlesActions.EditArticleTitleError(editingResult.error);
+         }
+          return new authorsArticlesActions.
+          EditArticleTitleSuccess(editingResult);
+        }),
       )
     )
   );
@@ -89,13 +111,32 @@ export class AuthorsArticlesEffects {
   editArticleBody$: Observable<Action> = this.actions$.pipe(
     ofType(authorsArticlesActions.AuthorsArticlesActionTypes.EditArticleBody),
     map(action => (action as authorsArticlesActions.EditArticleBody).payload),
-    mergeMap(({ body, articleId }) => this.articlesService
+    switchMap(({ body, articleId }) => this.articlesService
       .editArticleBody(body, articleId).pipe(
-        map((articleEdit) => (
-          new authorsArticlesActions.EditArticleBodySuccess(articleEdit)
-        )),
+        map((articleEdit) => {
+          if (articleEdit.error) {
+            return new authorsArticlesActions.EditArticleBodyError(articleEdit.error);
+          }
+
+          return new authorsArticlesActions.EditArticleBodySuccess(articleEdit);
+        }),
       ),
     ),
+  );
+
+  @Effect()
+  deleteArticle$: Observable<Action> = this.actions$.pipe(
+    ofType(authorsArticlesActions.AuthorsArticlesActionTypes.DeleteArticle),
+    map(action => (action as authorsArticlesActions.DeleteArticle).payload),
+    mergeMap(articleId => this.articlesService.deleteArticle(articleId).pipe(
+      map(result => {
+        if (result.error) {
+          return new authorsArticlesActions.DeleteArticleError(result.error);
+        }
+
+        return new authorsArticlesActions.DeleteArticleSuccess(result);
+      })
+    ))
   );
 
   @Effect()
@@ -104,22 +145,32 @@ export class AuthorsArticlesEffects {
     map(action => (action as authorsArticlesActions.CategorizeArticle).payload),
     mergeMap(({articleId, category}) => this.articlesService
       .categorizeArticle(articleId, category).pipe(
-        map((categorizationResult) =>
-          new authorsArticlesActions.CategorizeArticleSuccess(categorizationResult)
-        )
+        map((result) => {
+          const resultEffects = {
+            SuccessEffect: authorsArticlesActions.CategorizeArticleSuccess,
+            ErrorEffect: authorsArticlesActions.CategorizeArticleError
+          };
+
+          return this.emitNextEffect(result, resultEffects);
+        })
       ),
     ),
   );
 
   @Effect()
   removeArticleFromCategory$: Observable<Action> = this.actions$.pipe(
-    ofType(authorsArticlesActions.AuthorsArticlesActionTypes.CategorizeArticle),
+    ofType(authorsArticlesActions.AuthorsArticlesActionTypes.RemoveArticleFromCategory),
     map(action => (action as authorsArticlesActions.RemoveArticleFromCategory).payload),
     mergeMap(({ articleId, categoryId }) => this.articlesService
       .removeArticleFromCategory(articleId, categoryId).pipe(
-        map((articleEdit) => (
-          new authorsArticlesActions.RemoveArticleFromCategorySuccess(articleEdit)
-        )),
+        map((result) => {
+          const resultEffects = {
+            SuccessEffect: authorsArticlesActions.RemoveArticleFromCategorySuccess,
+            ErrorEffect: authorsArticlesActions.RemoveArticleFromCategoryError
+          };
+
+          return this.emitNextEffect(result, resultEffects);
+        })
       ),
     ),
   );
@@ -130,10 +181,76 @@ export class AuthorsArticlesEffects {
     map(action => (action as authorsArticlesActions.TogglePublished).payload),
     switchMap(({ articleId }) => this.articlesService
       .toggleArticlePublishedState(articleId).pipe(
-        map((articleEdit) => (
-          new authorsArticlesActions.TogglePublishedSuccess(articleEdit)
-        )),
+        map((result) => {
+          const nextEffect = {
+            ErrorEffect: authorsArticlesActions.TogglePublishedError,
+            SuccessEffect: authorsArticlesActions.TogglePublishedSuccess,
+          };
+
+          return this.emitNextEffect(result, nextEffect);
+        }),
       ),
     ),
   );
+
+  toggleCommentDelete$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(authorsArticlesActions.AuthorsArticlesActionTypes.ToggleCommentDelete),
+      map(action => (action as authorsArticlesActions.ToggleCommentDelete).payload),
+      switchMap(({ commentId }) => this.articlesService.toggleCommentDelete(commentId).pipe(
+          map(result => {
+            const nextEffects = {
+              ErrorEffect: authorsArticlesActions.ToggleCommentDeleteError,
+              SuccessEffect: authorsArticlesActions.ToggleCommentDeleteSuccess
+            };
+
+            return this.emitNextEffect(result, nextEffects);
+          })
+      ))
+    )
+  );
+
+  addCommentDelete$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(authorsArticlesActions.AuthorsArticlesActionTypes.AddThemeImage),
+      map(action => (action as authorsArticlesActions.AddThemeImage).payload),
+      switchMap(({ articleId, themeImageUrl }) =>
+        this.articlesService.addThemeImage(articleId, themeImageUrl).pipe(
+          map((result) => {
+            const nextActions = {
+              ErrorEffect: authorsArticlesActions.AddThemeImageError,
+              SuccessEffect: authorsArticlesActions.AddThemeImageSuccess
+            };
+
+            return this.emitNextEffect(result, nextActions);
+          })
+      )),
+    )
+  );
+
+  private emitNextEffect(
+    result: Partial<EditArticleEffectResponse> | ArticleResponse,
+    effects: { ErrorEffect: any, SuccessEffect: any}
+  ) {
+
+    if (result.error) {
+      return new effects.ErrorEffect(result.error);
+    }
+
+    return new effects.SuccessEffect(result);
+  }
+
+  private performGetAllArticles() {
+    return this.articlesService.getAllArticles().pipe(
+      map(response => {
+        const nextEffect = {
+          ErrorEffect: authorsArticlesActions.GetArticlesError,
+          SuccessEffect: authorsArticlesActions.GetArticlesSuccess
+        };
+
+        return this.emitNextEffect(response, nextEffect);
+      }),
+    );
+  }
+
 }

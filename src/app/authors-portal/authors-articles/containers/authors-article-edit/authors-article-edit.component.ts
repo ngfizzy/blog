@@ -50,22 +50,27 @@ export class ArticleEditComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
       const paramId = paramMap.get('id');
+
       if (paramId === 'new') {
+        const body = `# New Article
+        `;
+
         this.store.dispatch(
           new fromAuthorsArticlesActions.CreateArticle({
-            title: 'New Article',
-            body: '# New Article',
+            body,
+            title: 'New Article'
           }),
         );
+        this.articleBody = body;
       }
     });
+
     this.setArticleState();
-    this.articleBody = this.article.body;
   }
 
   ngAfterViewInit(): void {
     this.saveAfter(3000);
-    this.changeArticleStatutsAfter(1000);
+    this.changeArticleStatusAfter(1000);
   }
 
   tagArticle(tag: string) {
@@ -127,7 +132,7 @@ export class ArticleEditComponent implements OnInit, OnDestroy, AfterViewInit {
    *
    * @param time Time in ms to wait before changing save status
    */
-  private changeArticleStatutsAfter(time: number) {
+  private changeArticleStatusAfter(time: number) {
     fromEvent(this.editor.nativeElement, 'keyup')
       .pipe(throttleTime(time), takeUntil(this.unsubscribe$))
       .subscribe(() => {
@@ -148,6 +153,10 @@ export class ArticleEditComponent implements OnInit, OnDestroy, AfterViewInit {
         this.article = articleState.article;
         this.articleId = articleState.article.id;
         this.articleTags = articleState.article.tags;
+
+        if (!this.articleBody) {
+          this.articleBody = this.article.body;
+        }
       });
   }
 

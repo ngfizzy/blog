@@ -2,15 +2,18 @@ import { CommentPayload } from './../../shared/models/audience-activity-payloads
 import { Action } from '@ngrx/store';
 import {
   Poem,
-  AudienceActivityUpdateSuccessPayload,
   ApplaudPayload,
 } from 'src/app/shared/models';
+import { AudienceActivitiesResponse } from 'src/app/shared/models/graphql-responses/responses';
+import { PoemsResponse, PoemResponse } from '../poetry-shared/models/graphql-responses/responses';
 
 export const enum PoetryActionTypes {
   GetAllPoems = '[Poetry] Get All',
   GetAllPoemsSuccess = '[Poetry] Get All Poems Success',
+  GetAllPoemsError = '[Poetry] Get All Poems Error',
   GetPoem = '[Poetry] Get Poem',
   GetPoemSuccess = '[Poetry] Get Poem Success',
+  GetPoemError = '[Poetry] Get Poem Error',
   Applaud = '[Poetry] Applaud',
   ApplaudSuccess = '[Poetry] Applaud Success',
   AddComment = '[Poetry] Add Comment',
@@ -24,7 +27,13 @@ export class GetAllPoems implements Action {
 export class GetAllPoemsSuccess implements Action {
   readonly type = PoetryActionTypes.GetAllPoemsSuccess;
 
-  constructor(public payload: Poem[]) {}
+  constructor(public payload: PoemsResponse) {}
+}
+
+export class GetAllPoemsError {
+  readonly type = PoetryActionTypes.GetAllPoemsError;
+
+  constructor(public payload: string) {}
 }
 
 export class GetPoem implements Action {
@@ -36,7 +45,13 @@ export class GetPoem implements Action {
 export class GetPoemSuccess implements Action {
   readonly type = PoetryActionTypes.GetPoemSuccess;
 
-  constructor(public payload: Poem) {}
+  constructor(public payload: PoemResponse) {}
+}
+
+export class GetPoemError implements Action {
+  readonly type = PoetryActionTypes.GetPoemError;
+
+  constructor(public payload: string) {}
 }
 
 export class Applaud implements Action {
@@ -47,7 +62,7 @@ export class Applaud implements Action {
 export class ApplaudSuccess implements Action {
   readonly type = PoetryActionTypes.ApplaudSuccess;
 
-  constructor(public payload: AudienceActivityUpdateSuccessPayload) {}
+  constructor(public payload) {}
 }
 
 export class AddComment implements Action {
@@ -59,13 +74,15 @@ export class AddComment implements Action {
 export class AddCommentSuccess implements Action {
   readonly type = PoetryActionTypes.AddCommentSuccess;
 
-  constructor(public payload: AudienceActivityUpdateSuccessPayload) {}
+  constructor(public payload: AudienceActivitiesResponse) {}
 }
 
 export type PoetryActions =
   | GetAllPoems
   | GetAllPoemsSuccess
+  | GetAllPoemsError
   | GetPoem
+  | GetPoemError
   | GetPoemSuccess
   | Applaud
   | ApplaudSuccess

@@ -1,10 +1,4 @@
-import { getSelectedArticleActivities } from './../state/index';
-import { Applaud } from './../state/articles.actions';
-import { getAudience } from './../../core/state/index';
-import {
-  ApplaudPayload,
-  CommentPayload,
-} from './../../shared/models/audience-activity-payloads.interface';
+import { Store, select } from '@ngrx/store';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -15,14 +9,24 @@ import {
   distinctUntilChanged,
 } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
+import { Title, Meta } from '@angular/platform-browser';
+
+import { Applaud } from './../state/articles.actions';
+import { getAudience } from './../../core/state/';
 import * as fromArticle from '../state';
 import * as fromArticleActions from '../state/articles.actions';
 
-import { ArticleComponentConfig } from '../../shared/models/article-component-config.interface';
-import { Article } from '../../shared/models/article.interface';
-import { Audience, AudienceActivity } from 'src/app/shared/models';
+import {
+  ArticleComponentConfig,
+  Article,
+  Audience,
+  AudienceActivity,
+  CommentPayload,
+  ApplaudPayload
+} from '../../shared/models';
 import { GetCurrentAudience } from 'src/app/core/state/core.actions';
+
 
 @Component({
   templateUrl: './article.component.html',
@@ -41,18 +45,25 @@ export class ArticleComponent implements OnInit, OnDestroy {
   audience$: Observable<Audience>;
   audienceActivities$: Observable<AudienceActivity[]>;
   hideScrollBar: boolean;
+  currentUserApplauds = 0;
 
   private applaudsWatcherSubject$: Subject<ApplaudPayload> = new Subject();
   private applaudsWatcher$ = this.applaudsWatcherSubject$
     .asObservable()
     .pipe(debounceTime(800), distinctUntilChanged());
+  selectedArticle: Article;
+  isArticleLoading$: Observable<boolean>;
 
   constructor(
     private router: ActivatedRoute,
+    private toastr: ToastrService,
     private store: Store<fromArticle.ArticleState>,
+    private title: Title,
+    private meta: Meta,
   ) {}
 
   ngOnInit() {
+    this.isArticleLoading$ = this.store.pipe(select(fromArticle.selectArticleLoadingState));
     this.setArticle();
 
     this.applaudsWatcher$
@@ -60,12 +71,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
       .subscribe(applauds => this.store.dispatch(new Applaud(applauds)));
 
     this.store.dispatch(new GetCurrentAudience());
-    this.audience$ = this.store.select(getAudience);
-    this.audienceActivities$ = this.store.select(
-      fromArticle.getSelectedArticleActivities,
-    );
+    this.audience$ = this.store.pipe(select(getAudience));
+
     this.audienceActivities$ = this.store.pipe(
-      select(getSelectedArticleActivities),
+      select(fromArticle.getSelectedArticleActivities),
     );
 
     this.applaudsWatcher$
@@ -84,7 +93,12 @@ export class ArticleComponent implements OnInit, OnDestroy {
         ),
       ),
       switchMap(() => this.store.pipe(select(fromArticle.selectArticle))),
+      tap(article => this.updateTitleAndMeta(article))
     );
+  }
+
+  showNotification(message: string) {
+    this.toastr.info(message);
   }
 
   ngOnDestroy() {
@@ -104,9 +118,13 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.currentAudienceApplauds = applauds;
   }
 
-  toggleScrollBar(hide: boolean) {
-    document.body.style.overflowY = hide ? 'hidden' : 'auto';
-
-    this.hideScrollBar = hide;
+  private updateTitleAndMeta(article: Article) {
+    if (article) {
+      this.title.setTitle(`NgFizzy Blog - Tech: ${article.title}`);
+      this.meta.updateTag({
+        name: `NgFizzy Blog - Full Article`,
+        content: article.title,
+      });
+    }
   }
 }

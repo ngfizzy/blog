@@ -7,11 +7,14 @@ export interface PoetryState extends CoreState {
   selectedPoem: {
     isLoading: boolean;
     poem: Poem;
+    error: string;
     activitiesState: {
+      error: string;
       isLoading: boolean;
       activities: AudienceActivity[];
     };
   };
+  error: string;
   isLoading: boolean;
 }
 

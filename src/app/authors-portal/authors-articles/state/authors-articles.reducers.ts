@@ -7,12 +7,16 @@ import { Article } from 'src/app/shared/models';
 
 const defaultState: AuthorsArticlesState = {
   title: 'Authors Portal',
+  error: '',
+  isLoggedIn: false,
+  authToken: '',
   audienceState: {
     isLoading: false,
     audience: null,
   },
   dashboardState: {} as any,
   isLoading: false,
+  isArticlesListLoading: false,
   articles: [],
   selectedArticle: {
     isLoading: false,
@@ -25,8 +29,14 @@ const defaultState: AuthorsArticlesState = {
   },
   categoriesState: {
     isLoading: true,
+    error: '',
     categories: [],
   },
+  messagesState: {
+    messages: {},
+    isLoading: false,
+    error: ''
+  }
 };
 
 export function authorsArticlesReducers(
@@ -42,21 +52,67 @@ export function authorsArticlesReducers(
     case AuthorsArticlesActionTypes.GetArticlesSuccess:
       return {
         ...state,
-        articles: [...action.payload],
+        articles: [...action.payload.articles ],
+        isLoading: false,
+        error: ''
+      };
+    case AuthorsArticlesActionTypes.GetArticlesError:
+      return {
+        ...state,
         isLoading: false,
       };
     case AuthorsArticlesActionTypes.CreateArticle:
-      return { ...state, isLoading: true };
+      return { ...state, isArticlesListLoading: true };
     case AuthorsArticlesActionTypes.CreateArticleSuccess:
       return {
         ...state,
-        articles: [{ ...action.payload }, ...state.articles],
+        articles: [{ ...action.payload.article }, ...state.articles],
+        isArticlesListLoading: false,
         selectedArticle: {
-          article: { ...action.payload },
+          article: { ...action.payload.article },
           isLoading: false,
           status: 'saved',
         },
         isLoading: false,
+      };
+    case AuthorsArticlesActionTypes.DeleteArticle:
+      return {
+        ...state,
+        isArticlesListLoading: true,
+        selectedArticle: {
+          ...state.selectedArticle,
+          isLoading: true,
+        },
+        error: null,
+      };
+    case AuthorsArticlesActionTypes.DeleteArticleSuccess:
+      return {
+        ...state,
+        isArticlesListLoading: false,
+        articles: [ ...action.payload.articles ],
+        selectedArticle: {
+          ...state.selectedArticle,
+          article: { ...action.payload.articles[0] },
+          isLoading: false,
+        },
+        error: null,
+      };
+    case AuthorsArticlesActionTypes.DeleteArticleError:
+      return {
+        ...state,
+        isArticlesListLoading: false,
+        selectedArticle: {
+          ...state.selectedArticle,
+          isLoading: false,
+        },
+        error: action.payload,
+      };
+    case AuthorsArticlesActionTypes.CreateArticleError:
+      return {
+        ...state,
+        isArticlesListLoading: false,
+        isLoading: false,
+        error: action.payload,
       };
     case AuthorsArticlesActionTypes.ViewArticle:
       return {
@@ -77,6 +133,14 @@ export function authorsArticlesReducers(
         },
       };
     case AuthorsArticlesActionTypes.EditArticleTitle:
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          isLoading: true,
+          status: 'saving',
+        },
+      };
     case AuthorsArticlesActionTypes.EditArticleBody:
       return {
         ...state,
@@ -97,6 +161,11 @@ export function authorsArticlesReducers(
           status: 'saved',
         },
       };
+    case AuthorsArticlesActionTypes.EditArticleTitleError:
+      return {
+        ...state,
+        error: action.payload
+      };
     case AuthorsArticlesActionTypes.EditArticleBodySuccess:
       return {
         ...state,
@@ -107,6 +176,12 @@ export function authorsArticlesReducers(
           isLoading: false,
           status: 'saved',
         },
+      };
+    case AuthorsArticlesActionTypes.EditArticleBodyError:
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false
       };
     case AuthorsArticlesActionTypes.ChangeArticleStatus:
       return {
@@ -134,9 +209,22 @@ export function authorsArticlesReducers(
         },
       };
     case AuthorsArticlesActionTypes.CategorizeArticle:
-      return state;
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          isLoading: true,
+        },
+      };
     case AuthorsArticlesActionTypes.RemoveArticleFromCategory:
-      return state;
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          isLoading: true,
+        },
+        error: '',
+      };
     case AuthorsArticlesActionTypes.CategorizeArticleSuccess:
       return {
         ...state,
@@ -147,7 +235,18 @@ export function authorsArticlesReducers(
             ...action.payload.selectedArticle,
             categories: [...action.payload.selectedArticle.categories],
           },
+          isLoading: false,
         },
+        error: ''
+      };
+    case AuthorsArticlesActionTypes.CategorizeArticleError:
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          isLoading: true,
+        },
+        error: action.payload,
       };
     case AuthorsArticlesActionTypes.TogglePublished:
       return state;
@@ -159,6 +258,44 @@ export function authorsArticlesReducers(
           ...state.selectedArticle,
           article: { ...action.payload.selectedArticle },
         },
+      };
+    case AuthorsArticlesActionTypes.ToggleCommentDelete:
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          status: 'saving',
+        },
+        error: ''
+       };
+    case AuthorsArticlesActionTypes.ToggleCommentDeleteSuccess:
+      const articles = [ ...state.articles ];
+      const index = articles.findIndex((next) => next.id === action.payload.articleId);
+      const article = { ...articles[index] };
+
+      article.audienceActivities = [ ...action.payload.activities ];
+
+      articles.splice(index, 1, article);
+
+      return {
+      ...state,
+        articles,
+        selectedArticle: {
+          ...state.selectedArticle,
+          article,
+          status: 'saved',
+        },
+        error: ''
+      };
+    case AuthorsArticlesActionTypes.ToggleCommentDeleteError:
+      return {
+        ...state,
+        selectedArticle: {
+          ...state.selectedArticle,
+          // article: { ...state.selectedArticle.article },
+          status: 'erred'
+        },
+        error: action.payload.error
       };
     default:
       return state;

@@ -13,6 +13,7 @@ export class PoemComponent implements OnInit {
 
   backgroundPlaceholder: string;
   backgroundStyle: any;
+  hovering = false;
 
   constructor() { }
 

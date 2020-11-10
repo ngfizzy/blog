@@ -10,20 +10,21 @@ import { CategorySummary } from '../../../authors-portal-shared/models';
           {{ categorySummary.categoryName }}
         </a>
       </h4>
-
       <div>
         <span class="data-description"
-          >Articles: {{ categorySummary.articlesCount }}</span
-        >
+          >Articles: {{ categorySummary.articlesCount }}</span>
       </div>
     </div>
   `,
   styles: [
     `
       .widget {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         border-radius: 2%;
         height: 4.77rem;
-        width: 13.5rem;
+        width: 100%;
         padding: 0.5rem;
         font-weight: bolder;
       }
@@ -36,12 +37,21 @@ import { CategorySummary } from '../../../authors-portal-shared/models';
       }
       .article-title {
         width: 15rem;
-        overflow: hidden;
-        text-wrap: wrap;
       }
       .data-description {
-        font-size: 1rem;
+        font-size: .8rem;
         font-weight: bolder;
+        color: #fff;/
+      }
+
+      .widget,
+      .title,
+      .article-title
+      .data-description
+      {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     `,
   ],

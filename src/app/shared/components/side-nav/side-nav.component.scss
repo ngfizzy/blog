@@ -1,181 +1,67 @@
-.hnavbar-wrapper {
-  padding-left: 0;
-  padding-right: 0;
-}
 
-.horizontal-navbar {
-  height: 4.5rem;
-  position: fixed;
-  z-index: 3000;
-  background-color: rgba(30, 30, 47, 0.977);
-}
+    .sidenav-content {
+      width: 75%;
+      min-height: 100vh;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 9%;
+      margin-bottom: 10px;
+    }
 
-.sidenav-content {
-  width: 75%;
-  min-height: 100vh;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 9%;
-  margin-bottom: 10px;
-}
+    .bg-sidenav-container {
+      background: linear-gradient(
+        45deg,
+        rgba(30, 30, 50, 0.997),
+        rgba(30, 30, 50, 0.887),
+        rgba(30, 30, 50, 0.997)
+      );
+      background-color: rgba(30, 30, 50, 0.887);
 
-.bg-sidenav-container {
-  background: linear-gradient(
-    45deg,
-    rgba(30, 30, 50, 0.997),
-    rgba(30, 30, 50, 0.887),
-    rgba(30, 30, 50, 0.997)
-  );
-  background-repeat: no-repeat;
-}
+      background-repeat: no-repeat;
+    }
 
-.bg-sidenav {
-  background-color: rgba(30, 30, 47, 0.977);
-}
-
-.mat-list-item {
-  color: hsla(0, 0%, 100%, 0.8);
-}
-
-.collapsed {
-  display: none;
-}
-
-.collapsed-nav {
-  position: fixed;
-  top: 0;
-  min-height: 100vh;
-  font-weight: bold;
-  width: 2.3rem;
-  z-index: 2000;
-
-  .collapsed-nav-item {
-    margin-top: 8rem;
-  }
-}
-
-.sidenav-content-full {
-  width: 100%;
-  overflow-x: hidden;
-}
-
-.no-margin-top {
-  margin-top: -3%;
-}
-::ng-deep .mat-drawer-inner-container {
-  height: 75% !important;
-  margin-top: 25%;
-}
-
-.hnav-item {
-  margin-right: 0.2rem;
-}
-
-.nav-group {
-  display: inline-block;
-  padding: 0.8rem;
-  color: #fcd581;
-
-  &:hover {
-    text-decoration: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
+  .bg-sidenav {
+    background-color: #28283cf9
   }
 
-  transition: all 0.3s ease-in-out;
-}
-
-.brand {
-  background-color: rgba(30, 30, 36, 0.8);
-  width: 2rem;
-  a {
-    color: inherit;
+  .mat-list-item {
+    color: hsla(0, 0%, 100%, 0.8);
   }
 
-  &:hover {
-    text-decoration: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
-  }
-}
-
-.nav-toggle-icon {
-  font-size: 1.2rem;
-  border: solid white;
-  margin-left: -1rem;
-}
-
-.search-panel {
-  position: fixed;
-  background-color: rgba($color: #7e7f9a, $alpha: 0.96);
-
-  margin-top: 2rem;
-  height: 95%;
-  overflow-y: auto;
-  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.16),
-    0 2px 4px rgba(255, 255, 255, 0.23);
-  right: 0;
-  overflow-x: hidden;
-
-  a {
-    background-color: transparent;
+  .collapsed {
+    display: none;
   }
 
-  a:hover {
-    box-shadow: none;
-    text-decoration: underline;
-  }
-  input {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2rem;
-
-    transition: all 0.8s ease-in-out;
-  }
-
-  .search-results {
+  .sidenav-content-full {
     width: 100%;
-    margin-top: 1rem;
+    overflow-x: hidden;
   }
 
-  .result-body-wrapper {
-    background-color: rgba(30, 30, 47, 0.877);
-    padding: 1rem;
-
-    &:hover {
-      background-color: rgba(30, 30, 47, .977);
-      cursor: pointer;
-    }
+  .no-margin-top {
+    margin-top: -3%;
   }
 
-  transition: all 0.5s ease-in-out;
-}
+  ::ng-deep .mat-drawer-inner-container {
+    height: 75% !important;
+    margin-top: 25%;
+  }
 
-// Large Devices
-@media (min-width: 360px) and (max-width: 767.98px) {
-  .search-panel {
-    margin: auto;
-    width: 90%;
-    input {
-      display: inline-block;
+  @media(min-width: 2001px) {
+    .sidenav-container {
+      width: 2000px;
       margin: auto;
-      width: 90%;
-    }
-
-    left: 0;
-  }
-
-  .search-panel-close {
-    width: 70%;
-    input {
-      display: inline-block;
-      width: 100%;
     }
   }
-}
 
-.main-nav {
-  width: 20rem;
-  margin-top: 1rem;
+  @media (min-width: 720px) {
+    .main-nav {
+        left: 0;
+      }
+    }
+
+  .main-nav {
+    width: 15rem;
+    margin-top: 1rem;
 
   img {
     display: inline-block;
@@ -184,45 +70,10 @@
   }
 }
 
-@media(min-width: 720px) and (max-width: 960px) {
-  .main-nav {
-    width: 15rem;
-  }
-}
-// Large devices for
-@media (min-width: 720px) {
-  .main-nav {
-
-    left: 0;
-  }
-
-  .search-panel {
-    width: 40%;
-    margin: auto;
-
-    input {
-      display: block !important;
-      margin-left: auto;
-      margin-right: auto;
-      width: 40%;
+  @media(min-width: 720px) and (max-width: 960px) {
+    .main-nav {
+      width: 15rem;
     }
   }
 
-
-  .search-panel-close {
-    width: 30%;
-    margin-left: auto;
-    margin-right: 2rem;
-    input {
-      display: inline-block;
-      width: 100%;
-    }
-  }
-}
-
-@media(min-width: 2001px) {
-  .sidenav-container {
-    width: 2000px;
-    margin: auto;
-  }
-}
+  

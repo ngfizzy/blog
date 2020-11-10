@@ -7,7 +7,6 @@ import {
   ApplaudPayload,
   Comment,
   CommentPayload,
-  AudienceActivityUpdateSuccessPayload,
 } from '../shared/models';
 import { CategorySummary } from '../authors-portal/authors-portal-shared/models';
 
@@ -449,7 +448,6 @@ function generateRandomAudienceActivities(
     };
 
     audienceActivities.push(activity);
-    articleActivities.push(activity);
   }
 
   return articleActivities;
@@ -535,7 +533,7 @@ export function addComment(payload: CommentPayload) {
 
 export function applaud(
   payload: ApplaudPayload,
-): AudienceActivityUpdateSuccessPayload {
+) {
   const { applauds, articleId, audience: currentAudience } = payload;
 
   const audience = findOrCreateAudience(currentAudience);
@@ -759,6 +757,7 @@ export function getCategoriesSummaries() {
 export function getAllArticles() {
   return articles;
 }
+
 export function getAllPublishedArticles() {
   return articles.filter(
     article =>

@@ -9,6 +9,8 @@ import { Article } from 'src/app/shared/models/article.interface';
 import { ArticleComponentConfig } from 'src/app/shared/models/article-component-config.interface';
 import * as fromAuthorsArticles from '../../state';
 import * as fromAuthorsArticlesActions from '../../state/authors-articles.actions';
+import { Comment } from 'src/app/shared/models';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-authors-articles',
@@ -22,6 +24,9 @@ export class AuthorsArticlesComponent implements OnInit {
   articleListItemConfig: ArticleComponentConfig;
   articleStatus$: Observable<'saved' | 'erred' | 'saving'>;
   selectedArticleId: number;
+  articlesListLoad$: Observable<boolean>;
+  isArticlesListLoading$: Observable<boolean>;
+  showCommentsSection: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,21 +50,22 @@ export class AuthorsArticlesComponent implements OnInit {
     this.articleListItemConfig = this.getArticlesConfig();
 
     this.articles$ = this.store.pipe(select(fromAuthorsArticles.getArticles));
-
-    this.selectedArticle$ = this.store.pipe(
-      select(fromAuthorsArticles.viewArticle),
-    );
-    this.articleStatus$ = this.store.pipe(
-      select(fromAuthorsArticles.selectArticleStatus),
-    );
+    this.articlesListLoad$ = this.store.pipe(select(fromAuthorsArticles.getArticlesLoadingState));
+    this.isArticlesListLoading$ = this.store.pipe(select(fromAuthorsArticles.isArticlesListLoading));
+    this.selectedArticle$ = this.store.pipe(select(fromAuthorsArticles.viewArticle));
+    this.articleStatus$ = this.store.pipe(select(fromAuthorsArticles.selectArticleStatus));
   }
 
   createArticle() {
     this.router.navigate(['authors/articles/edit/new']);
   }
 
-  showFullArticle(articleId: number) {
-    this.router.navigate(['authors/articles', articleId]);
+  deleteArticle(articleId: number) {
+    this.store.dispatch(new fromAuthorsArticlesActions.DeleteArticle(articleId));
+  }
+
+  showFullArticle(article: Article) {
+    this.router.navigate(['authors/articles', article.id]);
   }
 
   search() {}
@@ -95,5 +101,15 @@ export class AuthorsArticlesComponent implements OnInit {
     } else {
       this.router.navigate(['authors/articles', articleId, 'publish']);
     }
+  }
+
+  toggleCommentsSection(isOpen: boolean, articleId?: number) {
+    this.showCommentsSection = isOpen;
+  }
+
+  deleteComment(comment: Comment) {
+    this.store.dispatch(
+      new fromAuthorsArticlesActions.ToggleCommentDelete({commentId: comment.id })
+    );
   }
 }
