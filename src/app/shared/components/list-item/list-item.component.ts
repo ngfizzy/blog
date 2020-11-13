@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-list-item',
@@ -18,11 +18,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       border-color: rgba(30, 30, 47, 0.977);
       color: rgba(255, 255, 255, 1);
     }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListItemComponent {
   @Input() item: unknown & { title: string};
-
   @Output() clicked = new EventEmitter<unknown & { title: string }>();
 
 

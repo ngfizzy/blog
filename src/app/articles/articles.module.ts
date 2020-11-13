@@ -13,6 +13,8 @@ import { SharedModule } from '../shared/shared.module';
     EffectsModule.forFeature([ArticleEffects]),
     ArticleRoutingModule,
   ],
-  declarations: [...ArticleRoutingModule.routeComponents],
+  declarations: [
+    ...ArticleRoutingModule.routeComponents,
+  ],
 })
 export class ArticlesModule {}

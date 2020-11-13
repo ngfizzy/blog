@@ -17,6 +17,6 @@ export const animations = [
         opacity: 1,
       }),
     ),
-    transition('void => *, * => void', animate('.5s ease')),
+    transition('void => *, * => void', animate('.2s ease-in-out')),
   ]),
 ];

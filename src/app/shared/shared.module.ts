@@ -63,6 +63,9 @@ import { CommentComponent } from './components/comment/comment.component';
 import { AudienceSectionComponent } from './components/audience-section/audience-section.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { SideNavCollapsedComponent } from './components/side-nav-collapsed/side-nav-collapsed.componet';
+import { FeaturedArticlesListItemComponent } from './components/featured-articles-list-item/featured-articles-list-item.component';
+import { FeaturedArticlesListComponent } from './components/featured-articles-list/featured-articles-list.component';
+
 
 @NgModule({
   imports: [
@@ -159,7 +162,9 @@ import { SideNavCollapsedComponent } from './components/side-nav-collapsed/side-
     CommentComponent,
     AudienceSectionComponent,
     SideNavComponent,
-    SideNavCollapsedComponent
+    SideNavCollapsedComponent,
+    FeaturedArticlesListComponent,
+    FeaturedArticlesListItemComponent
   ],
   providers: [],
 })
