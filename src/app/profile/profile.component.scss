@@ -1,9 +1,16 @@
 header {
-  background: #28283cf9;
   margin-top: 2.7%;
+  font-size: 1.4rem;
+  z-index: 1000;
 
-  h1 {
-    font-size: 5rem;
+  h2 {
+    a {
+      font-size: 3rem !important;
+    }
+  }
+
+  h3 {
+    font-size: rem;
   }
 
 
@@ -28,7 +35,7 @@ header {
     li {
       text-align: center;
       border: 1px solid #2a2a2a;
-      background-color: #56a3a629;
+      background-color: rgba(30, 30, 50, 0.887);
       color: #ffffffcf;
       padding: .5rem 0;
     }
@@ -127,7 +134,6 @@ main {
 
   header {
     margin-top: 8.7%;
-    background: #28283cf9;
 
     h1 {
       font-size: 2rem;
