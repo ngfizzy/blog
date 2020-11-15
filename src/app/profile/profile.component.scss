@@ -1,94 +1,143 @@
-.home-wrapper {
+header {
+  background: #28283cf9;
+  margin-top: 2.7%;
+
+  h1 {
+    font-size: 5rem;
+  }
+
+
+  a {
+    color: inherit;
+  }
+
+
+  nav {
+    margin-left: -1.8%;
+    margin-top: -2rem;
+
+    ul,
+    li {
+      list-style: none;
+    }
+
+    ul {
+      margin-bottom: .2rem
+    }
+
+    li {
+      text-align: center;
+      border: 1px solid #2a2a2a;
+      background-color: #56a3a629;
+      color: #ffffffcf;
+      padding: .5rem 0;
+    }
+
+    a {
+      font-size: 1.2rem;
+      color: white;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+  }
+
+  &.mobile {
+    height: 2rem;
+    overflow: hidden;
+    margin-top: 0;
+
+    .toggle-nav {
+      margin-left: .8rem;
+      font-size: 1rem;
+      height: 2rem;
+      background: #ffffffcf;
+      z-index: 100;
+
+      transition: all .2s ease-in-out;
+    }
+
+    transition: all .2s ease-in-out;
+  }
+
+  &.open {
+    height: fit-content;
+  }
+
+  transition: all .2s ease-in-out;
+}
+
+
+main {
+  padding: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
+  margin-top: 0%;
   overflow-y: auto;
-}
 
-header {
-  padding: 2rem 0;
-}
+  .content {
+    height: 68%;
+    margin-top: 9%;
+  }
 
-header h1 {
-  font-size: 5rem;
-}
+  p {
+    font-size: 1.2rem;
+  }
 
-main p {
-  font-size: 1.2rem;
-}
+  .avatar-container {
+    img {
+      width: 16%;
+    }
+  }
 
-.social .fa {
-padding: 0.4rem;
-font-size: 1.5rem;
-}
-header {
-  background: #28283cf9;
-}
-
-nav {
-  margin-left: -1.8%;
-  margin-top: -2rem;
-}
-nav ul,
-nav li {
-  list-style: none;
-}
-
-nav li {
-  text-align: center;
-  border: 1px solid rgb(42, 42, 42);
-  padding: .5rem;
-  background-color: #56a3a629;
-  color: #ffffffcf;
-
-}
-
-header a {
-color: inherit;
-}
-
-nav a {
-padding: 1rem;
-font-size: 1.5rem;
-color: white;
-  &:hover {
-    text-decoration: none;
+  .social .fa {
+    padding: 0.4rem;
+    font-size: 1.5rem;
   }
 }
 
+
 .route-wrapper {
-  height: 26rem;
+  height: 100%;
   overflow-y: auto;
 }
 
 @media (min-width: 320px) and (max-width: 767.98px) {
-  nav {
-    margin-left: -3.8%;
-    margin-top: 14rem;
+  main {
+    .route-wrapper {
+      height: 100%;
+    }
+    height: 100%;
+
+    .content {
+      height: 72%;
+    }
+
+    .avatar-container {
+      img {
+        width: 29%;
+      }
+    }
+    p {
+      font-size: 0.8rem;
+    }
   }
 
-header h1 {
-  font-size: 2rem;
-}
+  header {
+    margin-top: 8.7%;
+    background: #28283cf9;
 
-.main {
+    h1 {
+      font-size: 2rem;
+    }
 
-  p {
-    font-size: 0.8rem;
+
+      nav {
+        a {
+          font-size: .8rem;
+        }
+      }
   }
-
-  .avatar-container {
-    // margin-top: -1rem;
-  }
-
-  .nav-container {
-    margin-top: 0rem !important;
-  }
-
-
-  nav a {
-    font-size: .8rem;
-  }
-}
 }

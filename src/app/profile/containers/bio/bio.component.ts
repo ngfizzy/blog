@@ -4,21 +4,16 @@ import { Component, OnInit } from '@angular/core';
   template: `
   <div class="row author-info">
     <p class="col-sm-12 col-md-8 text-center m-auto">
-      Hello! M name is John Doe, a Software Developer and a writer based in Nigeria.
-      When I'm not doing an of those things, netflix and chill.
-    </p>
-
-    <p class="col-sm-12 col-md-8 text-center m-auto">
-      I am more experienced in Web Development with skills in Javascript/Node.js, PHP and frameworks
-      within these language domain. Although those are m current area of knowledge, I'm always excited
-      when there is an opportunity to explore something new.
+      I am a Software Engineer who is passionate about adding value to businesses,
+      myself, and those around me. With 4+ years of continuous work, growth, learning, unlearning,
+      and relearning, I am looking forward to taking on the next big challenge in my journey.
     </p>
   </div>
 `,
 styles: [`
     .author-info {
       margin-top: 5rem;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       height: 62%;
     }
   `],

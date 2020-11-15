@@ -138,7 +138,8 @@ import { FeaturedArticlesListComponent } from './components/featured-articles-li
     ListItemComponent,
     RightSlideoutPanelComponent,
     CommentComponent,
-    AudienceSectionComponent
+    AudienceSectionComponent,
+    MarkdownModule,
   ],
   declarations: [
     SpinnerComponent,

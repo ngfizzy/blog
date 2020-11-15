@@ -1,27 +1,45 @@
-<div class="container-md home-wrapper">
-  <section class="row mt-3 nav-container">
-    <header class="col-12 rounded">
-      <nav class="w-100" [ngClass]="{expanded: expandedNav}">
-        <ul class="text-center row nav-list">
-          <li class="col-sm-12 col-md-12 col-lg-2"><a [routerLink]="['/profile']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-link">Bio</a></li>
-          <li class="col-sm-12 col-md-12 col-lg-3"><a [routerLink]="['/profile/work-experience']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-link">Experience</a></li>
-          <li class="col-sm-12 col-md-12 col-lg-3"><a [routerLink]="['/articles']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-link">Articles</a></li>
-          <li class="col-sm-12 col-md-12 col-lg-2"><a [routerLink]="['/poetry']" [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active-link">Poetry</a></li>
-          <li class="col-sm-12 col-md-12 col-lg-2"><a [routerLink]="['/authors/login']" [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active-link">Login</a></li>
-        </ul>
-      </nav>
-      <h2 class="text-center"><a [routerLink]="['/']">Olufisayo Bamidele</a></h2>
-    </header>
-  </section>
-  <div class="row mt-3 border"></div>
-  <main class="row main align-items-center justify-content-center">
-    <section class="col-12 route-wrapper">
+<header
+  (window:resize)="setIsMobile()"
+  class="row position-fixed fixed-top rounded  w-100  nav-container"
+  [class.mobile]="isMobile"
+  [class.open]="isMobile && isNavOpen"
+>
+  <button class="col-1 text-center toggle-nav" [hidden]="!isMobile" (click)="toggleNavBar()">
+    <i  class="fa" [ngClass]="{'fa-bars': !isNavOpen, 'fa-times': isNavOpen}" ></i>
+  </button>
+
+  <nav
+    [hidden]="isMobile && !isNavOpen"
+    class="col-12 mx-auto"
+    [ngClass]="{'col-11': isMobile && isNavOpen}"
+  >
+    <ul class="text-center row nav-list">
+      <li class="col-sm-12 col-md-12 col-lg-2">
+        <a
+          [routerLink]="['/profile']"
+          [routerLinkActiveOptions]="{exact: true}"
+          routerLinkActive="active-link"
+          class="d-inline-block h-100 w-100"
+        >Bio</a>
+    </li>
+      <li class="col-sm-12 col-md-12 col-lg-3"><a [routerLink]="['/profile/work-experience']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-link" class="d-inline-block h-100 w-100">Experience</a></li>
+      <li class="col-sm-12 col-md-12 col-lg-3"><a [routerLink]="['/articles']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-link" class="d-inline-block h-100 w-100">Articles</a></li>
+      <li class="col-sm-12 col-md-12 col-lg-2"><a [routerLink]="['/poetry']" [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active-link" class="d-inline-block h-100 w-100">Art Gallery</a></li>
+      <li class="col-sm-12 col-md-12 col-lg-2"><a [routerLink]="['/authors/login']" [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active-link" class="d-inline-block h-100 w-100">Login</a></li>
+    </ul>
+    <h2 class="text-center"><a class="text-center" [routerLink]="['/']">Olufisayo Bamidele</a></h2>
+  </nav>
+</header>
+
+<main class="container-md home-wrapper p-fixed" [class.open]="isMobile && !isNavOpen">
+  <section class="row content align-items-center justify-content-center mat-elevation-z5 rounded">
+    <div class="col-12 route-wrapper">
         <router-outlet></router-outlet>
-    </section>
-  </main>
+    </div>
+  </section>
   <section class="row mt-3 avatar-container">
     <div class="col-12">
-      <img src="assets/avatar.png" class="d-block w-25 rounded m-auto"/>
+      <img src="assets/avatar.png" class="d-block rounded m-auto"/>
     </div>
   </section>
   <section class="row mt-3">
@@ -33,4 +51,4 @@
       <i class="fa fa-envelope"></i>
     </div>
   </section>
-</div>
+</main>
