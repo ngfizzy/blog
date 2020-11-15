@@ -53,4 +53,8 @@ export class ProfileComponent implements OnInit {
   toggleNavBar() {
     this.isNavOpen = !this.isNavOpen;
   }
+
+  toggleNavBarOnNav() {
+    this.isNavOpen = this.isNavOpen && this.isMobile ?  false : true;
+  }
 }

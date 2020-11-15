@@ -13,14 +13,18 @@
     [ngClass]="{'col-11': isMobile && isNavOpen}"
   >
     <ul class="text-center row nav-list">
-      <li class="col-sm-12 col-md-{{link.size.md}} col-lg-{{link.size.lg}}" *ngFor="let link of links">
+      <li
+        class="col-sm-12 col-md-{{link.size.md}} col-lg-{{link.size.lg}}"
+        *ngFor="let link of links"
+        (click)="toggleNavBarOnNav()"
+      >
         <a
           [routerLink]="[link.path]"
           [routerLinkActiveOptions]="{exact: true}"
           routerLinkActive="active-link"
           class="d-inline-block h-100 w-100"
         >{{link.name}}
-      </a>
+        </a>
     </li>
     </ul>
   </nav>
