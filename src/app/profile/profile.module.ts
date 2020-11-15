@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { ProfileLinkComponent } from './component/profile-link/profile-link.component';
 import { WorkExperienceComponent } from './containers/work-experience/work-experience.component';
 
 @NgModule({
@@ -10,6 +11,7 @@ import { WorkExperienceComponent } from './containers/work-experience/work-exper
   ],
   declarations: [
     ...ProfileRoutingModule.routeComponents,
+    ProfileLinkComponent,
     WorkExperienceComponent
   ]
 })

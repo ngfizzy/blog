@@ -11,7 +11,6 @@ import {
 import { Poem, Poems, Slides } from 'src/app/shared/models';
 import {
   trigger,
-  state,
   style,
   transition,
   animate,

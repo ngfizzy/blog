@@ -5,7 +5,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './articles-content-wrapper.component.html',
   styleUrls: [ './articles-content-wrapper.component.scss' ]
 })
-
 export class ArticlesContentWrapperComponent implements OnInit {
   constructor() { }
 

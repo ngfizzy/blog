@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { tap } from 'rxjs/operators';
 import { featuredArticles, isFeaturedArticlesLoading } from 'src/app/shared-store';
 import { getFeaturedArticles } from 'src/app/shared-store/shared-store.actions';
 import { Article } from '../../models';
@@ -9,13 +10,13 @@ import { Article } from '../../models';
   selector: 'app-featured-articles',
   template: `
         <app-list-panel [listTitle]="'Featured Articles'">
-          <app-list
-            [items]="featuredArticles$ | async"
+          <app-featured-articles-list
+            [articles]="featuredArticles$ | async"
             [isLoading]="isFeaturedArticleLoading$ | async"
             (itemSelected)="goToArticle($event)"
-          ></app-list>
+          ></app-featured-articles-list>
         </app-list-panel>
-  `
+  `,
 })
 export class FeaturedArticlesComponent implements OnInit {
   featuredArticles$: any;

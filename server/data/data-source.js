@@ -22,7 +22,7 @@ const author = {
 const categories = [
   {
     id: 1,
-    name: 'poetry',
+    name: 'Art Gallery',
     updatedAt: new Date().toString(),
     createdAt: new Date().toString(),
   },
