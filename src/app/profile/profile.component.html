@@ -13,18 +13,15 @@
     [ngClass]="{'col-11': isMobile && isNavOpen}"
   >
     <ul class="text-center row nav-list">
-      <li class="col-sm-12 col-md-1 col-lg-2">
+      <li class="col-sm-12 col-md-{{link.size.md}} col-lg-{{link.size.lg}}" *ngFor="let link of links">
         <a
-          [routerLink]="['/profile']"
+          [routerLink]="[link.path]"
           [routerLinkActiveOptions]="{exact: true}"
           routerLinkActive="active-link"
           class="d-inline-block h-100 w-100"
-        >Bio</a>
+        >{{link.name}}
+      </a>
     </li>
-      <li class="col-sm-12 col-md-3 col-lg-3"><a [routerLink]="['/profile/work-experience']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-link" class="d-inline-block h-100 w-100">Experience</a></li>
-      <li class="col-sm-12 col-md-3 col-lg-3"><a [routerLink]="['/articles']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-link" class="d-inline-block h-100 w-100">Articles</a></li>
-      <li class="col-sm-12 col-md-3 col-lg-2"><a [routerLink]="['/poetry']" [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active-link" class="d-inline-block h-100 w-100">Art Gallery</a></li>
-      <li class="col-sm-12 col-md-2 col-lg-2"><a [routerLink]="['/authors/login']" [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active-link" class="d-inline-block h-100 w-100">Login</a></li>
     </ul>
   </nav>
 </header>
@@ -45,7 +42,10 @@
       <a href="https://twitter.com/ngfizzy" target="_blank">
         <i class="fa fa-twitter"></i>
       </a>
+      <a href="https://twitter.com/ngfizzy" target="_blank">
+
       <i class="fa fa-linkedin"></i>
+      </a>
       <i class="fa fa-instagram"></i>
       <i class="fa fa-github"></i>
       <i class="fa fa-envelope"></i>

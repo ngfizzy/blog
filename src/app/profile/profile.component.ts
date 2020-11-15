@@ -14,11 +14,29 @@ export class ProfileComponent implements OnInit {
 
 
   links = [
-    { name: 'Bio', path: '/profile'},
-    { name: 'Work Experience', path: '/profile/work-experience'},
-    { name: 'Articles', path: '/articles'},
-    { name: 'Art Gallery', path: '/poetry'},
-    { name: 'Login', path: '/authors/login'},
+    { name: 'Bio', path: '/profile', size: {
+      md: 1,
+      lg: 2,
+    },
+  },
+    { name: 'Work Experience', path: '/profile/work-experience',
+    size: {
+      md: 3,
+      lg: 3
+    }
+  },
+    { name: 'Articles', path: '/articles', size: {
+      md: 3,
+      lg: 3
+    }},
+    { name: 'Art Gallery', path: '/poetry', size: {
+      md: 3,
+      lg: 2
+    }},
+    { name: 'Login', path: '/authors/login', size: {
+      md: 2,
+      lg: 2
+    }},
   ];
 
   constructor() {
