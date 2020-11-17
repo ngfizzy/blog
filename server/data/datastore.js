@@ -370,7 +370,7 @@ module.exports = {
 
     articles.forEach(article => {
       if(
-          article.categories.some(category => category.name === 'poetry') &&
+          article.categories.some(category => category.name.toLowerCase() === 'art gallery') &&
           article.published
       ) {
         const art = {

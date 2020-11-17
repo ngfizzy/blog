@@ -8,6 +8,7 @@ import { Store, select } from '@ngrx/store';
 import { Poem } from 'src/app/shared/models';
 import * as fromPoetry from '../../state';
 import * as poetryActions from '../../state/poetry.actions';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-poems',
