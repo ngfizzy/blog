@@ -56,7 +56,7 @@ export class ArticleComponent implements OnInit, OnChanges {
   articleUrl: string;
 
   get themeImage() {
-    return this.article && this.article.themeImage || '/assets/code.jpeg';
+    return this.article && this.article.themeImage || '/assets/idea-icon.png';
   }
 
   constructor(private router: ActivatedRoute) {}
@@ -112,7 +112,6 @@ export class ArticleComponent implements OnInit, OnChanges {
       this.articleBody = this.getArticleBody();
 
     }
-    // const article = this.isExpandedView ? this.article : null;
 
     this.opened.emit(this.article);
   }

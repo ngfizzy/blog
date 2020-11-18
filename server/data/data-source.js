@@ -1,4 +1,8 @@
 
+const { randomId } = require('./generators');
+const { categories, categoryIds } = require('./categories');
+const realArticles  = require('./aritcles');
+
 const audienceActivities = [];
 const audienceComments = [];
 const audienceRecord = [
@@ -19,30 +23,11 @@ const author = {
   password: 'yzzif'
 };
 
-const categories = [
-  {
-    id: 1,
-    name: 'Art Gallery',
-    updatedAt: new Date().toString(),
-    createdAt: new Date().toString(),
-  },
-  {
-    id: 2,
-    name: 'tech',
-    updatedAt: new Date().toString(),
-    createdAt: new Date().toString(),
-  },
-  {
-    id: 3,
-    name: 'self help',
-    updatedAt: new Date().toString(),
-    createdAt: new Date().toString(),
-  },
-];
-const usedIds = [];
+
 const tags = [];
 const messages = [];
 const articles = [
+  ...realArticles,
   {
     id: randomId(),
     authorId: 1,
@@ -65,12 +50,7 @@ const articles = [
     updatedAt: new Date().toString(),
     published: true,
     categories: [
-      {
-        id: 2,
-        name: 'tech',
-        updatedAt: new Date().toString(),
-        createdAt: new Date().toString(),
-      },
+      categories.find(category => category.id === categoryIds.tech)
     ],
     tags: [],
     audienceActivities: []
@@ -97,12 +77,7 @@ const articles = [
     updatedAt: new Date().toString(),
     published: true,
     categories: [
-      {
-        id: 2,
-        name: 'tech',
-        updatedAt: new Date().toString(),
-        createdAt: new Date().toString(),
-      },
+      categories.find(category => category.id === categoryIds.tech)
     ],
     tags: [],
     audienceActivities: []
@@ -129,12 +104,7 @@ const articles = [
     updatedAt: new Date().toString(),
     published: true,
     categories: [
-      {
-        id: 2,
-        name: 'tech',
-        updatedAt: new Date().toString(),
-        createdAt: new Date().toString(),
-      },
+      categories.find(category => category.id === categoryIds.tech)
     ],
     tags: [],
     audienceActivities: []
@@ -161,12 +131,7 @@ const articles = [
     updatedAt: new Date().toString(),
     published: true,
     categories: [
-      {
-        id: 2,
-        name: 'tech',
-        updatedAt: new Date().toString(),
-        createdAt: new Date().toString(),
-      },
+      categories.find(category => category.id === categoryIds.tech)
     ],
     tags: [],
     audienceActivities: []
@@ -192,12 +157,7 @@ const articles = [
     updatedAt: new Date().toString(),
     published: true,
     categories: [
-      {
-        id: 2,
-        name: 'tech',
-        updatedAt: new Date().toString(),
-        createdAt: new Date().toString(),
-      },
+      categories.find(category => category.id === categoryIds.tech)
     ],
     tags: [],
     audienceActivities: []
@@ -255,12 +215,7 @@ const articles = [
     updatedAt: new Date().toString(),
     published: true,
     categories: [
-      {
-        id: 2,
-        name: 'tech',
-        updatedAt: new Date().toString(),
-        createdAt: new Date().toString(),
-      },
+      categories.find(category => category.id === categoryIds.tech)
     ],
     tags: [],
     audienceActivities: []
@@ -288,30 +243,13 @@ const articles = [
     updatedAt: new Date().toString(),
     published: true,
     categories: [
-      {
-        id: 2,
-        name: 'tech',
-        updatedAt: new Date().toString(),
-        createdAt: new Date().toString(),
-      },
+      categories.find(category => category.id === categoryIds.tech)
     ],
     tags: [],
     audienceActivities: []
   },
 ];
 const initialArticlesLength = articles.length;
-
-function randomId() {
-  let randomNumber = Math.floor(Math.random() * 1000);
-
-  while (usedIds.indexOf(randomNumber) > -1) {
-    randomNumber = Math.floor(Math.random() * 10000);
-  }
-
-  usedIds.push(randomNumber);
-
-  return randomNumber;
-}
 
 const generators = {
   randomId,

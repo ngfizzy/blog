@@ -12,10 +12,10 @@ const {
   tags,
   setAuthToken
 } = require('./data-source');
-const { logout } = require('.');
+const { createCategory } = require('./categories');
 
 
-generators.generateArticles(200);
+generators.generateArticles(50);
 
 module.exports = {
   getAllArticles() {
@@ -132,16 +132,7 @@ module.exports = {
     return {article};
   },
   createCategory(name) {
-    const createdAt = new Date().toString();
-    const category = {
-      name,
-      createdAt,
-      id: generators.randomId(),
-      updatedAt: createdAt,
-    };
-
-    categories.push(category);
-
+    const category = createCategory(name);
     const { categoriesSummaries } = this.getCategoriesSummaries();
 
     return {
