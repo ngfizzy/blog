@@ -210,6 +210,7 @@ module.exports = [
     updatedAt: new Date('11-18-2020').toString(),
   },
   {
+    featured: true,
     audienceActivities: [],
     tags: [],
     published: true,
@@ -325,6 +326,7 @@ And that is it, using either one of these methods will ensure that the CSRF toke
     updatedAt: new Date('10-09-2020').toString(),
   },
   {
+    featured: true,
     audienceActivities: [],
     tags: [],
     published: true,

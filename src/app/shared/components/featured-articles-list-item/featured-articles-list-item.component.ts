@@ -3,14 +3,20 @@ import { Article } from '../../models';
 
 @Component({
   selector: 'app-featured-articles-list-item',
-  template: `<mat-list-item
+  template: `
+    <a [routerLink]="['/articles', article.id]">
+<mat-list-item
     (click)="emitPayload()"
-    class="item w-100"
+    class="item mb-1 w-100"
   >
 
-      <img matListAvatar [src]="article?.themeImage || defaultImage">
-      <h3 matLine>{{ article.title}}</h3>
+
+    <img matListAvatar [src]="article?.themeImage || defaultImage">
+        <h3 matLine>{{ article.title}}</h3>
+
     </mat-list-item>
+    </a>
+
   `,
   styles: [`
     .item {

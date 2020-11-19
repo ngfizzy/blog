@@ -3,6 +3,7 @@ const { randomId } = require('../generators');
 
 module.exports = [
   {
+    featured: true,
     audienceActivities: [],
     tags: [],
     id: randomId(),
