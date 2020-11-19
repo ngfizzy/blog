@@ -13,6 +13,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   `,
   styles: [`
     .item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       cursor: pointer;
       background-color: rgba(210, 210, 255, .2);
       border-color: rgba(30, 30, 47, 0.977);

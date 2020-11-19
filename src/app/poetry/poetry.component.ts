@@ -8,6 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Nav, SideNavContentSizing } from '../shared/models';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { GetAllPoems } from './state/poetry.actions';
 
 @Component({
   templateUrl: './poetry.component.html',
@@ -31,6 +32,7 @@ export class PoetryComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new GetCurrentAudience());
+    this.store.dispatch(new GetAllPoems());
     this.store.dispatch(new SetPageTitle('Poetry'));
     this.pageTitle$ = this.store.pipe(select(getPageTitle), delay(0));
   }

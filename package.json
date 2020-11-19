@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start:frontend": "ng serve",
-    "start": "node server/server.js",
+    "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --prod",
     "start:prod": "export NODE_PORT=4000;npm run build:prod; node server/server.js",
@@ -38,6 +38,7 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.3",
     "brace": "^0.11.1",
+    "camelcase": "^6.2.0",
     "core-js": "^3.7.0",
     "cors": "^2.8.5",
     "device-uuid": "^1.0.4",

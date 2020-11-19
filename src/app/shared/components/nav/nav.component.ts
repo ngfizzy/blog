@@ -28,6 +28,7 @@ export class NavComponent {
   @Input() searchResults: Article[] = [];
   @Input() isSmallDevice: boolean;
   @Input() canToggle: boolean;
+  @Input() showSearch = true;
   // hack to make few routes stick to the top
   @Input() removeTopMargin = false;
   @Output() search = new EventEmitter<string>();

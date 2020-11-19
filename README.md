@@ -1,27 +1,48 @@
 # Blog
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
+A single user blog written in Angular 11 and apollo graphql
+## How to run
+- clone the repository
+- run `npm install`
+- run `npm start` to start the frontend
+- run `npm run start-server:local` to start the backend
+- go to  `localhost:4200` in your browser
+## Features
 
-## Development server
+* Author profile page
+* Articles page
+* Search article
+* Filter article by category
+* Single article page
+* Art gallery with slideshow
+* Comment on content
+* Applaud content
+* contact me form
+* Authors Portal
+  - Authors dashboard: quick actions, contact messages, leatherboard
+  - Create Article(with full markdown editor and syntax highting)
+  - Edit article
+  - Publish and unpublish article
+  - Add theme image to article
+  - add tags to article
+  - add article to category
+  - moderate user engagments
+  
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Future
 
-## Code scaffolding
+* The current version stores data in memory.  We would be creating a persistent storage soon.
+* Write a comprehensive unit and end to end test
+* Migrate backend to typescript
+* Set up CI/CD Pipelines
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Further Into The Future
+* Support multiple authors (strictly by invite)
+* Real time collaboration between authors
+* Support different personals(Admins, authors, editors, etc)
+* Support theming
 
-## Build
+## Have a request?
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Want to use this as a base for a project? Have a feature request/bug report? Please submit an issue
