@@ -10,4 +10,4 @@ COPY . /var/www
 
 EXPOSE 4000
 
-ENTRYPOINT [ "npm", "start" ]
+ENTRYPOINT [ "npm", "start:prod" ]
