@@ -26,6 +26,7 @@ import { SharedModule } from './shared/shared.module';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { CoreEffects } from './core/state/core.effects';
 import { SharedStoreModule } from './shared-store/shared-store.module';
+import { environment } from 'src/environments/environment';
 
 
 const authContext = setContext(() => ({
@@ -82,7 +83,7 @@ const authError = onError(({graphQLErrors}) => {
             authContext,
             authError,
             httpLink.create({
-              uri: 'http://localhost:4000/graphql',
+              uri: environment.apiBaseUrl,
             })
           ]),
         };
