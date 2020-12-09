@@ -5,9 +5,9 @@ WORKDIR /var/www
 COPY package*.json /var/www/
 RUN npm install | true
 
-COPY . /var/www
+COPY . /var/www/
 
 
 EXPOSE 4000
 
-ENTRYPOINT [ "npm", "start:prod" ]
+ENTRYPOINT [ "npm", "run", "start:prod" ]
