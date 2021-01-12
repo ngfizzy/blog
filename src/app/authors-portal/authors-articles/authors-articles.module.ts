@@ -2,7 +2,8 @@ import { AuthorsPortalSharedModule } from './../authors-portal-shared/authors-po
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { LMarkdownEditorModule } from 'ngx-markdown-editor';
+import { LMarkdownEditorModule } from 'ngx-markdown-editor/dist';
+
 
 import { AuthorsArticlesEffects } from './state/authors-articles.effects';
 import { AuthorsArticlesRoutingModule } from './authors-articles-routing.module';
