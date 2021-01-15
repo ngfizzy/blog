@@ -1,0 +1,13 @@
+
+<app-nav
+  [pageTitle]="pageTitle$ | async"
+  [contentUISizing]="sideNavContentSizing"
+  [isOpen]="isSideNavOpen"
+  [nav]="nav"
+  [mode]="'over'"
+  [showSearch]="false"
+  [removeTopMargin]="true"
+  (toggle)="toggleSideNav($event)"
+  [canToggle]="true"
+>
+</app-nav>

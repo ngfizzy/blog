@@ -1,0 +1,38 @@
+
+@media (min-width: 320px) and (max-width: 767.98px) {
+  .articles-list-row {
+    margin-left: 1.5%;
+  }
+}
+
+.articles-list-row{
+  margin-left: auto;
+  margin-right: auto;
+
+  .articles-list,
+  .comment-section {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    transition: all .3s ease-in-out;
+  }
+
+  .comment-section {
+    height: 100%
+  }
+
+  transition: all .3s ease-in-out;
+}
+
+
+@media(min-width: 1140px) {
+  .articles-list-row {
+
+    .articles-list {
+      &.article-unselected {
+        overflow: visible;
+      }
+    }
+  }
+}

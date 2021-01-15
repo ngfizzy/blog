@@ -1,0 +1,64 @@
+.hide {
+  width: 0 !important;
+  background: transparent;
+  display: none;
+}
+
+.backdrop {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  top: 0;
+  left: 0;
+}
+
+.wrapper {
+  width: 40%;
+  height: 92%;
+  display: flex;
+  position: fixed;
+  top: 8%;
+  right: 0;
+  padding: 10px;
+  justify-content: center;
+  background-color:#30373ef7;
+  z-index: 4000;
+  transition: width 0.1s ease-out;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+.projected-content-wrapper {
+  height: 100%;
+}
+
+@media (min-width: 0px) and (max-width: 769.98px) {
+  .wrapper {
+    width: 88%;
+  }
+}
+
+@media (min-width: 770px) and (max-width: 999.98px) {
+  .wrapper {
+    width: 69%;
+  }
+}
+
+@media (min-width: 1000px) and (max-width: 1490px) {
+  .wrapper {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1500px) and (max-width: 1699px) {
+  .wrapper {
+    width: 50%;
+  }
+}
+
+.close-button,
+.open-button {
+  cursor: pointer;
+  font-size: 1.2rem;
+}

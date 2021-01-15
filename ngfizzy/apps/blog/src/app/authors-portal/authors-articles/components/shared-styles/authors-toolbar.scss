@@ -1,0 +1,22 @@
+.authors-toolbar {
+  display: flex;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: .3rem;
+  background-color: rgba(30, 30, 36, 0.5);
+  height: 4rem;
+
+  span {
+    display: inline-flex;
+    margin-right: 1rem;
+  }
+}
+
+.font-xxs {
+  font-size: 4px;
+}
+
+.font-sm {
+  font-size: 8px;
+}

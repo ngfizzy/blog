@@ -1,0 +1,14 @@
+
+<div *ngIf="article$ | async; let article">
+  <ng-container *ngIf="!article?.title && !article?.body">
+    <app-not-found [message]="'Article Not Found'"></app-not-found>
+  </ng-container>
+  <ng-container *ngIf="article?.title && article?.body">
+    <app-article
+      [article]="article"
+      [config]="config"
+      [showAudienceSection]="false"
+    >
+    </app-article>
+  </ng-container>
+</div>

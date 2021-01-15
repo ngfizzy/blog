@@ -1,0 +1,37 @@
+{
+  "npmScope": "ngfizzy",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "accessToken": "NmZjN2E0ZjEtNjVkMC00NTI3LTk5MzAtYjEzNmNmMmQxMzY0fHJlYWQtd3JpdGU=",
+        "cacheableOperations": ["build", "test", "lint", "e2e"],
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
+    }
+  },
+  "projects": {
+    "blog": {
+      "tags": []
+    },
+    "blog-e2e": {
+      "tags": [],
+      "implicitDependencies": ["blog"]
+    }
+  }
+}

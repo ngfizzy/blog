@@ -1,0 +1,28 @@
+<div class="row w-100">
+  <div class="col-12">
+    <a class="btn btn-primary mb-2 position-sticky"
+    href="https://drive.google.com/file/d/1Zn6e8oCsoJ29OarrUUz3oM9Jz4NPYst8/view?usp=sharing"
+    target="_blank">Download as PDF</a>
+    <h2 class="">Work Experience</h2>
+    <br>
+  </div>
+  <div *ngFor="let experience of experiences" class="col-12 mx-auto mb-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-md-9 col-sm-12">
+            <h5 class="text-underline">{{ experience.title }} - {{ experience.company }}</h5>
+          </div>
+          <div class="col-md-3 col-sm-12">
+            <h6 class="text-underline">
+              {{ experience.stateDate | date }} - {{ (experience.endDate | date) || 'Present' }}
+            </h6>
+          </div>
+          <div class="col-12 col-sm-12 author-info" [innerHtml]="experience.description | markdown">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

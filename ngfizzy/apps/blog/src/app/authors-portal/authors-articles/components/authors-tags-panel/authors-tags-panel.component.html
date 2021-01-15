@@ -1,0 +1,33 @@
+<div class="w-100 d-flex flex-row p-1 rounded">
+  <div class="tags-list mr-2">
+    <i class="text-muted text-light"
+      *ngIf="tags?.length < 1">This article has no tag yet. click on plus button to add</i>
+
+    <ng-container *ngFor="let tag of tags">
+      <app-authors-tag [tag]="tag" (remove)="removeTag($event)">
+      </app-authors-tag>
+    </ng-container>
+  </div>
+  <div class="add-tag d-inline-flex algin-self-end">
+    <div
+      class="add-tag-form d-inline-flex mt-2 mb-2"
+    >
+      <form class="mt-2 mb-2" (ngSubmit)="addTag()" *ngIf="showTagForm"
+      >
+        <input
+        name="tag"
+        type="text"
+        [(ngModel)]="tag"
+        placeholder="add a tag and press enter"
+        autofocus>
+      </form>
+      <div
+      title="Add Tag"
+      class="tag-form-control-container mb-2 mt-2
+      d-flex bg-light flex-row rounded-circle justify-content-around align-items-center">
+      <span *ngIf="showTagForm === false" class="fa fa-plus" (click)="showTagForm = true"></span>
+      <span *ngIf="showTagForm === true" class="fa fa-times" (click)="showTagForm = false"></span>
+    </div>
+    </div>
+  </div>
+</div>

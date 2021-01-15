@@ -1,0 +1,83 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.5s linear 0s;
+  line-height: 1.5;
+  letter-spacing: 0.052rem;
+  background-color: rgba(30, 30, 50, 0.887);
+  background: linear-gradient(
+    45deg,
+    rgba(30, 30, 50, 0.997),
+    rgba(30, 30, 50, 0.887),
+    rgba(30, 30, 50, 0.997)
+  );
+  background-repeat: no-repeat;
+
+  color: #ece8ef;
+}
+
+body,
+p {
+  color: #ece8ef;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #fcd581;
+}
+
+.authors-route-content {
+  position: relative;
+  height: 89vh;
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.active {
+  border: 1px solid #c0b7b1;
+}
+
+.content-background-color {
+  background-color: rgba(30, 30, 36, 0.5);
+}
+
+// Small devices
+@media (min-width: 320px) and (max-width: 767.98px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 85%;
+  }
+}
+
+// Medium devices
+@media (min-width: 768px) and (max-width: 991.98px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 95%;
+  }
+}
+
+.active-link   {
+  color: #8f4f4f !important;
+}
