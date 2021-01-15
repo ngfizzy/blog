@@ -23,6 +23,7 @@
   "projects": {
     "blog": { "tags": [] },
     "blog-e2e": { "tags": [], "implicitDependencies": ["blog"] },
-    "bff": { "tags": [] }
+    "bff": { "tags": [] },
+    "entities": { "tags": [] }
   }
 }

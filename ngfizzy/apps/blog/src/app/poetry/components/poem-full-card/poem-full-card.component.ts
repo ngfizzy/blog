@@ -7,7 +7,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { Poem } from '../../../shared/models';
+import { Poem } from '@ngfizzy/entities';
 import { ToastrService } from 'ngx-toastr';
 import { timer, Subject, Observable } from 'rxjs';
 import { takeWhile, repeatWhen, map, tap } from 'rxjs/operators';

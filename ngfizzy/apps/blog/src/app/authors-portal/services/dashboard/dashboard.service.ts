@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ArticleStatisticsCollection } from '../../authors-portal-shared/models';
 import { DashboardGqlService } from './dashboard-gql.service';
-import { ArticlesResponse } from '../../../shared/models/graphql-responses/responses/';
+import { ArticlesResponse } from '@ngfizzy/entities/graphql-responses';
 import {
   CategoryCreationResponse,
   CategoriesSummariesResponse

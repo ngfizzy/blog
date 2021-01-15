@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Message } from '../../../../shared/models/message.interface';
+import { Message } from '@ngfizzy/entities';
 
 @Component({
   selector: 'app-message-panel',

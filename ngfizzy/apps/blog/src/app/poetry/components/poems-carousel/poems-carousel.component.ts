@@ -8,7 +8,7 @@ import {
   OnChanges,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { Poem, Poems, Slides } from '../../../shared/models';
+import { Poem, Poems, Slides } from '@ngfizzy/entities';
 import {
   trigger,
   style,

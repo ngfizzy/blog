@@ -3,9 +3,9 @@ import { DeviceUUID } from 'device-uuid';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import { Audience } from '../../../shared/models';
+import { Audience } from '@ngfizzy/entities';
 import { AudienceGqlService } from './audience-gql.service';
-import { AudienceResponse } from '../../../shared/models/graphql-responses/responses/audience-response.interface';
+import { AudienceResponse } from '@ngfizzy/entities/graphql-responses';
 
 @Injectable({ providedIn: 'root' })
 export class AudienceService {

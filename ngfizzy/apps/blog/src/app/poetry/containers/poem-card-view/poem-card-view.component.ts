@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import * as poetryState from '../../state';
 import * as poetryActions from '../../state/poetry.actions';
-import { Poem } from '../../../shared/models';
+import { Poem } from '@ngfizzy/entities';
 import { switchMap, map } from 'rxjs/operators';
 
 @Component({

@@ -1,5 +1,5 @@
-// import { Audience, Nav } from '../../shared/models';
-import { Audience, Nav } from '../../shared/models';
+// import { Audience, Nav } from '@ngfizzy/entities';
+import { Audience, Nav } from '@ngfizzy/entities';
 
 export interface CoreState {
   title: string;

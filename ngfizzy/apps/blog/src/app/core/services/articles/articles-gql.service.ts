@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 
 import { map, tap } from 'rxjs/operators';
 
-import * as iGqlResponses from '../../../shared/models/graphql-responses';
+import * as iGqlResponses from '@ngfizzy/entities/graphql-responses';
 import * as queries from './queries';
 import * as mutations from './mutations';
-import { ApplaudPayload, CommentPayload } from '../../../shared/models';
+import { ApplaudPayload, CommentPayload } from '@ngfizzy/entities';
 
 @Injectable({ providedIn: 'root' })
 export class ArticlesGqlService {

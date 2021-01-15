@@ -24,7 +24,7 @@ import {
   AudienceActivity,
   CommentPayload,
   ApplaudPayload
-} from '../../shared/models';
+} from '@ngfizzy/entities';
 import { GetCurrentAudience } from '../../core/state/core.actions';
 
 

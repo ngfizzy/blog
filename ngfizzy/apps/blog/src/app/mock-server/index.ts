@@ -7,7 +7,7 @@ import {
   ApplaudPayload,
   Comment,
   CommentPayload,
-} from '../shared/models';
+} from '@ngfizzy/entities';
 import { CategorySummary } from '../authors-portal/authors-portal-shared/models';
 
 const audienceActivities: AudienceActivity[] = [];

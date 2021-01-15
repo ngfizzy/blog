@@ -1,4 +1,4 @@
-import { Poem, AudienceActivity } from '../../shared/models';
+import { Poem, AudienceActivity } from '@ngfizzy/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CoreState } from '../../core/state';
 

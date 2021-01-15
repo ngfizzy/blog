@@ -1,5 +1,5 @@
-import { BaseResponse } from '../../../../../shared/models/graphql-responses/responses/base-response.interface';
-import { Category } from '../../../../../shared/models';
+import { BaseResponse } from '@ngfizzy/entities/graphql-responses';
+import { Category } from '@ngfizzy/entities';
 import { CategorySummary } from '../../category-summary.interface';
 
 export interface CategoryCreationResponse extends BaseResponse {

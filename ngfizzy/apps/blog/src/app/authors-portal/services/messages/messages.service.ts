@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { MessagesGqlService } from './messages-gql.service';
 import { arrayToMap } from '../../../shared/utils';
-import { Message } from '../../../shared/models';
+import { Message } from '@ngfizzy/entities';
 
 @Injectable()
 export class  MessagesService {

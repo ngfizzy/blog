@@ -6,7 +6,7 @@ import { Store, select } from '@ngrx/store';
 import * as fromAuthorsArticles from '../../state';
 import * as fromAuthorsArticlesActions from '../../state/authors-articles.actions';
 import { Observable } from 'rxjs';
-import { Article } from '../../../../shared/models';
+import { Article } from '@ngfizzy/entities';
 
 @Component({
   selector: 'app-authors-publish',

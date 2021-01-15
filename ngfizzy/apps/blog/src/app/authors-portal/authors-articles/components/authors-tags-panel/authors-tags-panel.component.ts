@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { Tag } from '../../../../shared/models';
+import { Tag } from '@ngfizzy/entities';
 
 @Component({
   selector: 'app-authors-tags-panel',

@@ -11,7 +11,7 @@ import {
   SideNavMode,
   SideNavContentSizing,
   Article,
-} from '../../../shared/models';
+} from '@ngfizzy/entities';
 
 @Component({
   selector: 'app-nav',

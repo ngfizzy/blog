@@ -20,8 +20,8 @@ import {
 
 import * as fromAuthorsArticlesState from '../../state';
 import * as fromAuthorsArticlesActions from '../../state/authors-articles.actions';
-import { Article } from '../../../../shared/models/article.interface';
-import { Tag } from '../../../../shared/models';
+import { Article } from '@ngfizzy/entities';
+import { Tag } from '@ngfizzy/entities';
 
 @Component({
   templateUrl: './authors-article-edit.component.html',

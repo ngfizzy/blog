@@ -1,4 +1,4 @@
-import { BaseResponse } from '../../../../shared/models/graphql-responses/responses';
+import { BaseResponse } from '@ngfizzy/entities/graphql-responses';
 import { MessagesResponse, MessageResponse } from './responses';
 
 export interface GetMessagesResponse {

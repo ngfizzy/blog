@@ -1,7 +1,7 @@
 import { CategorySummary } from './../authors-portal-shared/models/category-summary.interface';
 
 import { CoreState } from '../../core/state/core.state';
-import { Article, Category, Message } from '../../shared/models';
+import { Article, Category, Message } from '@ngfizzy/entities';
 import { ArticleStatisticsCollection } from '../authors-portal-shared/models';
 
 export interface AuthorsPortalState extends CoreState {

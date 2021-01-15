@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Nav, SideNavContentSizing, SideNavMode } from '../../models';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { SideNavContentSizing, SideNavMode } from '@ngfizzy/entities';
 import { BaseNavComponent } from '../base-nav/base-nav.component';
 
 @Component({
@@ -42,7 +42,8 @@ import { BaseNavComponent } from '../base-nav/base-nav.component';
 
   </mat-sidenav-container>
   `,
-  styleUrls: ['./side-nav.component.scss']
+  styleUrls: ['./side-nav.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class SideNavComponent  extends BaseNavComponent implements OnInit {

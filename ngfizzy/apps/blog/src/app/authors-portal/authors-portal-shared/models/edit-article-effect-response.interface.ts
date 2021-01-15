@@ -1,4 +1,4 @@
-import { Article } from '../../../shared/models';
+import { Article } from '@ngfizzy/entities';
 
 export interface  EditArticleEffectResponse {
   articles: Article[];

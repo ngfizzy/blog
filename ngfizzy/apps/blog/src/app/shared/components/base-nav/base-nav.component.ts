@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Nav } from '../../models';
+import { Nav } from '@ngfizzy/entities';
 
 @Component({
   selector: 'app-base-nav',

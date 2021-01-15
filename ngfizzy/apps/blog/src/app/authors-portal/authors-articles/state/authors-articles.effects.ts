@@ -9,7 +9,7 @@ import * as authorsArticlesActions from './authors-articles.actions';
 import {
   EditArticleEffectResponse,
 } from '../../authors-portal-shared/models/';
-import { ArticleResponse } from '../../../shared/models/graphql-responses/responses';
+import { ArticleResponse } from '@ngfizzy/entities/graphql-responses';
 
 @Injectable()
 export class AuthorsArticlesEffects {

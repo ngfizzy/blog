@@ -1,4 +1,4 @@
-import {BaseResponse} from '../../../../../shared/models/graphql-responses/responses';
+import {BaseResponse} from '@ngfizzy/entities/graphql-responses';
 
 export interface LoginResponse extends BaseResponse {
   token: string;

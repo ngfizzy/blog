@@ -3,7 +3,7 @@ import { getAllArticles } from './state';
 import { GetNav, SetPageTitle } from './../core/state/core.actions';
 import { getNav } from './../core/state';
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { Nav, SideNavMode, Article } from '../shared/models';
+import { Nav, SideNavMode, Article } from '@ngfizzy/entities';
 import { ArticlesState } from './state/articles.state';
 import { Store, select } from '@ngrx/store';
 import { getPageTitle } from '../core/state';

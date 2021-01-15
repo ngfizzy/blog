@@ -1,10 +1,10 @@
-import { Audience } from './../../shared/models/audience.interface';
+import { Audience } from '@ngfizzy/entities';
 import { AuthorsPortalState } from './authors-portal.state';
 import {
   AuthorsPortalActionTypes,
   AuthorsPortalActions,
 } from './authors-portal.actions';
-import { Message } from '../../shared/models';
+import { Message } from '@ngfizzy/entities';
 
 const defaultState: AuthorsPortalState = {
   title: '',

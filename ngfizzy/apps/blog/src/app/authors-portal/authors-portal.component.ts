@@ -1,7 +1,6 @@
 import { getPageTitle } from './../core/state/index';
-import { SideNavContentSizing, Nav } from './../shared/models/nav';
+import { SideNavContentSizing, Nav, SideNavMode } from '@ngfizzy/entities';
 import { Component, OnInit } from '@angular/core';
-import { SideNavMode } from '../shared/models';
 import { AuthorsPortalState, isLoggedIn } from './state';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';

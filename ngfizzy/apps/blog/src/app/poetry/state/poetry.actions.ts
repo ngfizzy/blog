@@ -1,10 +1,10 @@
-import { CommentPayload } from './../../shared/models/audience-activity-payloads.interface';
+import { CommentPayload } from '@ngfizzy/entities';
 import { Action } from '@ngrx/store';
 import {
   Poem,
   ApplaudPayload,
-} from '../../shared/models';
-import { AudienceActivitiesResponse } from '../../shared/models/graphql-responses/responses';
+} from '@ngfizzy/entities';
+import { AudienceActivitiesResponse } from '@ngfizzy/entities/graphql-responses';
 import { PoemsResponse, PoemResponse } from '../poetry-shared/models/graphql-responses/responses';
 
 export const enum PoetryActionTypes {

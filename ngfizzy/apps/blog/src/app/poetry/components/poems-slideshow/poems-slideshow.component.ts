@@ -19,7 +19,7 @@ import {
   AudienceActivity,
   ApplaudPayload,
   CommentPayload,
-} from '../../../shared/models';
+} from '@ngfizzy/entities';
 import { PoetryState, getAllPoems, getPoem } from '../../state';
 import * as fromPoetryActions from '../../state/poetry.actions';
 import { getAudience } from '../../../core/state';

@@ -19,15 +19,15 @@ import * as fromArticlesActions from '../state/articles.actions';
 import * as fromAppActions from '../../core/state/core.actions';
 import * as fromApp from '../../core/state';
 import { ArticlesState } from '../state/articles.state';
-import { Article } from '../../shared/models/article.interface';
-import { ArticleComponentConfig } from '../../shared/models/article-component-config.interface';
+import { Article } from '@ngfizzy/entities';
+import { ArticleComponentConfig } from '@ngfizzy/entities';
 import {
   Audience,
   AudienceActivity,
   ApplaudPayload,
   CommentPayload,
   Category,
-} from '../../shared/models';
+} from '@ngfizzy/entities';
 
 @Component({
   templateUrl: './articles-list.component.html',

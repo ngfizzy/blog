@@ -8,7 +8,7 @@ import {
   CreateCategory,
   GetMessages,
 } from './../state/authors-portal.actions';
-import { Article, Message } from '../../shared/models';
+import { Article, Message } from '@ngfizzy/entities';
 import {
   AuthorsPortalState,
   getArticleStatistics,

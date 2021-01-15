@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Audience, AudienceActivity, Comment } from '../../models';
+import { Audience, AudienceActivity, Comment } from '@ngfizzy/entities';
 
 @Component({ template: ''})
 export class BaseAudienceSectionComponent {

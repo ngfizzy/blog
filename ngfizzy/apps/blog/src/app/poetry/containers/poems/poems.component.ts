@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
-import { Poem } from '../../../shared/models';
+import { Poem } from '@ngfizzy/entities';
 import * as fromPoetry from '../../state';
 import * as poetryActions from '../../state/poetry.actions';
 import { tap } from 'rxjs/operators';

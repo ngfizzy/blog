@@ -1,4 +1,4 @@
-import { SlideShowActionsTypes } from '../../core/constants';
+import { SlideShowActionsTypes } from '@ngfizzy/entities/constants';
 
 export class PoemDialogOutput {
 

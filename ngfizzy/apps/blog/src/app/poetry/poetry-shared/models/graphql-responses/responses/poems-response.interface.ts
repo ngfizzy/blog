@@ -1,5 +1,5 @@
-import { BaseResponse } from '../../../../../shared/models/graphql-responses/responses';
-import { Article } from '../../../../../shared/models';
+import { BaseResponse } from '@ngfizzy/entities/graphql-responses';
+import { Article } from '@ngfizzy/entities';
 
 type Poem = Article;
 export interface PoemsResponse extends BaseResponse {

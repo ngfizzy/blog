@@ -1,4 +1,4 @@
-import { Article } from '../../../shared/models/article.interface';
+import { Article } from '@ngfizzy/entities';
 import { AuthorsPortalState } from '../../state';
 
 export interface AuthorsArticlesState extends AuthorsPortalState {

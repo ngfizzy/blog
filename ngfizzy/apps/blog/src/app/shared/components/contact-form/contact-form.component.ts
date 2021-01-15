@@ -3,7 +3,7 @@ import { CoreState, audienceContacted } from '../../../core/state';
 import { Store, select } from '@ngrx/store';
 import { NgForm } from '@angular/forms';
 import { SendMessage } from '../../../core/state/core.actions';
-import { Audience } from '../../models';
+import { Audience } from '@ngfizzy/entities';
 import { Observable } from 'rxjs';
 
 

@@ -8,12 +8,14 @@ import {
   Output,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArticleComponentConfig } from '../../models/article-component-config.interface';
-import { Article } from '../../models/article.interface';
-import { AudienceActivity } from '../../models/audience-activity.interface';
-import { CommentPayload } from '../../models';
-import { Audience } from '../../models/audience.interface';
-import { ApplaudPayload } from '../../models/audience-activity-payloads.interface';
+import { Audience } from '@ngfizzy/entities';
+import {
+  ArticleComponentConfig,
+  Article,
+  AudienceActivity,
+  CommentPayload,
+  ApplaudPayload
+} from '@ngfizzy/entities';
 
 enum AnimationState {
   Small = 'small',

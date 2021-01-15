@@ -1,10 +1,8 @@
 import { Action, createAction, props } from '@ngrx/store';
-import { Article } from '../../../shared/models/article.interface';
-import { AudienceActivitiesResponse } from '../../../shared/models/graphql-responses/responses';
+import { Article } from '@ngfizzy/entities';
+import { ArticleResponse, ArticlesResponse, AudienceActivitiesResponse } from '@ngfizzy/entities/graphql-responses';
 import {
-  EditArticleEffectResponse,
-  ArticlesResponse,
-  ArticleResponse, AuthorAudienceActivitiesResponse
+  EditArticleEffectResponse
 } from '../../authors-portal-shared/models';
 
 

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { Comment } from '../../models';
+import { Comment } from '@ngfizzy/entities';
 
 @Component({
   selector: 'app-comment',

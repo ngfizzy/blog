@@ -2,7 +2,7 @@ import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { getCategories } from '../../mock-server';
-import { NavItem, Nav } from '../../shared/models';
+import { NavItem, Nav } from '@ngfizzy/entities';
 
 @Injectable({ providedIn: 'root' })
 export class CoreService {

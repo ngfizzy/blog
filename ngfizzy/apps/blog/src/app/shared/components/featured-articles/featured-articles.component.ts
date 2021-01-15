@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { featuredArticles, isFeaturedArticlesLoading } from '../../../shared-store';
 import { getFeaturedArticles } from '../../../shared-store/shared-store.actions';
-import { Article } from '../../models';
+import { Article } from '@ngfizzy/entities';
 
 @Component({
   selector: 'app-featured-articles',

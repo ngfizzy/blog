@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, OnChanges, ChangeDetectionStrategy, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { ApplaudPayload, Audience, AudienceActivity } from '../../models';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { ApplaudPayload, Audience } from '@ngfizzy/entities';
 
 @Component({
   selector: 'app-applauds-button',

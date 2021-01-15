@@ -1,5 +1,5 @@
-import { ArticleStatistics } from '../../models/article-statistics.interface';
 import { Component, OnInit, Input } from '@angular/core';
+import { ArticleStatistics } from '../../models';
 
 @Component({
   selector: 'app-authors-number-widget',

@@ -3,7 +3,7 @@ import {
   AuthorsArticlesActionTypes,
   AuthorsArticlesActions,
 } from './authors-articles.actions';
-import { Article } from '../../../shared/models';
+import { Article } from '@ngfizzy/entities';
 
 const defaultState: AuthorsArticlesState = {
   title: 'Authors Portal',

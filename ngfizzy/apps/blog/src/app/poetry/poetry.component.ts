@@ -5,7 +5,7 @@ import {
 } from '../core/state/core.actions';
 import { CoreState, getPageTitle } from '../core/state';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Nav, SideNavContentSizing } from '../shared/models';
+import { Nav, SideNavContentSizing } from '@ngfizzy/entities';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { GetAllPoems } from './state/poetry.actions';

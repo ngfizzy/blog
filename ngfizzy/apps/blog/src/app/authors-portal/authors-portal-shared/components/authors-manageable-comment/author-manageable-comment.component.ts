@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Comment } from '../../../../shared/models';
+import { Comment } from '@ngfizzy/entities';
 
 @Component({
   selector: 'app-authors-manageable-comment',

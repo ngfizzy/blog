@@ -12,8 +12,7 @@ import {
   Audience,
   ApplaudPayload,
   CommentPayload,
-  AudienceActivity
-} from '../../models';
+} from '@ngfizzy/entities';
 import { BaseAudienceSectionComponent } from '../base-audience-section/base-audience-section.component';
 
 @Component({

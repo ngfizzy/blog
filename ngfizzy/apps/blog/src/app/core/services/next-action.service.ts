@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, ActionCreator } from '@ngrx/store';
-import { BaseResponse } from '../../shared/models/graphql-responses/responses';
+import { BaseResponse } from '@ngfizzy/entities/graphql-responses';
 
 
 interface NextActions {

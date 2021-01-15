@@ -1,4 +1,4 @@
-import { Article } from '../../../../shared/models';
+import { Article } from '@ngfizzy/entities';
 import { BaseResponse } from './base-response.interface';
 
 export interface ArticlesResponse extends BaseResponse {

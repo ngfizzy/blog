@@ -1,6 +1,6 @@
 import { ArticleStatisticsCollection } from './../authors-portal-shared/models';
 import { Action } from '@ngrx/store';
-import { ArticlesResponse } from '../../shared/models/graphql-responses/responses/articles-response.interface';
+import { ArticlesResponse } from '@ngfizzy/entities/graphql-responses';
 import { CategoriesSummariesResponse } from '../authors-portal-shared/models/graphql-responses/responses/categories-summaries-response.interface';
 import { CategoryCreationResponse, MessagesResponse, LoginResponse, LogoutResponse } from '../authors-portal-shared/models/graphql-responses/responses';
 

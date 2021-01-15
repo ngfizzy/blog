@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Article } from '../../models';
+import { Article } from '@ngfizzy/entities';
 
 @Component({
   selector: 'app-featured-articles-list-item',

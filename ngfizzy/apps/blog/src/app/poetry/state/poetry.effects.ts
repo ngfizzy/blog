@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import * as poetryActions from './poetry.actions';
 import { mergeMap, map, switchMap } from 'rxjs/operators';
-import { Poem } from '../../shared/models';
+import { Poem } from '@ngfizzy/entities';
 import { NextActionService } from '../../core/services/next-action.service';
 import { PoemResponse } from '../poetry-shared/models/graphql-responses/responses';
 

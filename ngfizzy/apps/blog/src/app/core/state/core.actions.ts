@@ -1,8 +1,6 @@
-import { Nav } from './../../shared/models/nav';
 import { Action } from '@ngrx/store';
-import { AudienceResponse } from '../../shared/models/graphql-responses/responses/audience-response.interface';
-import { SendMessagePayload } from '../../shared/models';
-import { SendMessageResponse } from '../../shared/models/graphql-responses/responses';
+import { AudienceResponse, SendMessageResponse } from '@ngfizzy/entities/graphql-responses';
+import { SendMessagePayload, Nav } from '@ngfizzy/entities';
 
 export const enum CoreActionTypes {
   GetCurrentAudience = '[App] Get Current Audience',

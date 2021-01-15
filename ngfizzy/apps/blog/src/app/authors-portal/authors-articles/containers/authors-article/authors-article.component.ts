@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import * as fromAuthorsArticlesActions from '../../state/authors-articles.actions';
 import * as fromAuthorsArticlesState from '../../state';
-import { Article } from '../../../../shared/models/article.interface';
-import { ArticleComponentConfig } from '../../../../shared/models/article-component-config.interface';
+import { Article } from '@ngfizzy/entities';
+import { ArticleComponentConfig } from '@ngfizzy/entities';
 
 @Component({
   selector: 'app-authors-article',

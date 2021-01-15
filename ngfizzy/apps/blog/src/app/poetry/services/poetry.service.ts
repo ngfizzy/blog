@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ArticlesService } from '../../core/services/articles/articles.service';
 import { map, tap, switchMap } from 'rxjs/operators';
-import { Poem, Poems, CommentPayload, ApplaudPayload } from '../../shared/models';
+import { Poem, Poems, CommentPayload, ApplaudPayload } from '@ngfizzy/entities';
 import { Observable, of } from 'rxjs';
 import { poemThemeImagePlaceholders } from '../../core/constants';
 import { getAllPublishedPoems } from '../../mock-server';
@@ -10,7 +10,7 @@ import { PoemsResponse, PoemResponse } from '../poetry-shared/models/graphql-res
 import { Store, select } from '@ngrx/store';
 import { getAllPoems } from '../state/poetry.state';
 import { ArticlesGqlService } from '../../core/services/articles/articles-gql.service';
-import { AudienceActivitiesResponse } from '../../shared/models/graphql-responses/responses';
+import { AudienceActivitiesResponse } from '@ngfizzy/entities/graphql-responses';
 
 @Injectable()
 export class PoetryService {

@@ -1,6 +1,6 @@
 import { ArticlesState } from './articles.state';
 import { ArticlesActions, ArticlesActionTypes } from './articles.actions';
-import { Article } from '../../shared/models';
+import { Article } from '@ngfizzy/entities';
 
 const defaultState: ArticlesState = {
   title: '',

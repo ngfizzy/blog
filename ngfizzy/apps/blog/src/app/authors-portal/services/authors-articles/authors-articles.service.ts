@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { map, mergeMap, take, tap, switchMap } from 'rxjs/operators';
-import { Article } from '../../../shared/models/article.interface';
+import { Article } from '@ngfizzy/entities';
 
 import * as fromAuthorsArticlesState from '../../authors-articles/state';
 import { UnknownObjectPath } from '../../../shared/Exceptions';

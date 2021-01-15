@@ -2,10 +2,11 @@
 import { randomId } from './generators';
 import { categories, categoryIds } from './categories';
 import {art, selfHelp, tech} from './aritcles';
+import { Article, AudienceActivity, Comment } from '@ngfizzy/entities';
 
 export {categories, categoryIds } from './categories';
-export const audienceActivities = [];
-export const audienceComments = [];
+export const audienceActivities: AudienceActivity[] = [];
+export const audienceComments: Comment[] = [];
 export const audienceRecord = [
   { id: 0, audienceName: 'Morgan', deviceUUID: 'aowk' },
   { id: 1, audienceName: 'Jordan', deviceUUID: 'akwox' },
@@ -27,7 +28,7 @@ export const author = {
 
 export const tags = [];
 export const messages = [];
-export const articles = [
+export const articles: Article[] = [
   ...art,
   ...selfHelp,
   ...tech,
@@ -251,7 +252,7 @@ export const articles = [
     tags: [],
     audienceActivities: []
   },
-];
+] as Article[];
 const initialArticlesLength = articles.length;
 
 export const generators = {
@@ -332,9 +333,9 @@ export const generators = {
   },
 
   generateRandomAudienceActivities(
-    articleId,
+    articleId: number,
     max = 10
-  ) {
+  ): AudienceActivity[] {
     const noOfComments = Math.round(Math.random() * max);
 
     function fetchRandomAudience() {
@@ -343,13 +344,13 @@ export const generators = {
       return audienceRecord[index];
     }
 
-    const articleActivities = [];
+    const articleActivities: AudienceActivity[] = [];
 
     for (let i = 0; i < noOfComments; i++) {
       const audience = fetchRandomAudience();
       const applauds = Math.round(Math.random() * 50);
 
-      const activityId = !audienceActivities.length ? 0
+      const activityId: number = !audienceActivities.length ? 0
         : audienceActivities[audienceActivities.length - 1].id + 1;
 
       const activity = {
@@ -367,7 +368,7 @@ export const generators = {
 
     return articleActivities;
   },
-  generateComment(articleId, audienceId) {
+  generateComment(articleId: number, audienceId: number) {
     const comment =
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
       ' Duis sit amet vulputate quam. Pellentesque porta sollicitudin dui, ' +
@@ -381,14 +382,14 @@ export const generators = {
   },
 
   createComment(
-    comment,
-    articleId,
-    audienceId,
+    comment: string,
+    articleId: number,
+    audienceId: number,
   ) {
-    const commentId = !audienceComments.length ? 0
+    const commentId: number = !audienceComments.length ? 0
       : audienceComments[audienceComments.length - 1].id + 1;
 
-    const comm = {
+    const comm: Comment = {
       articleId,
       audienceId,
       comment,
@@ -400,12 +401,12 @@ export const generators = {
 
     return comm;
   },
-  createTag(tagName) {
+  createTag(tagName: string) {
     const createdAt = new Date().toString();
 
     return {
       name: tagName,
-      id: this.randomId(),
+      id: randomId(),
       createdAt,
       updatedAt: createdAt,
     };

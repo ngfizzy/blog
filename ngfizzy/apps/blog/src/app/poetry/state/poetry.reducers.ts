@@ -1,6 +1,6 @@
 import { PoetryState } from './poetry.state';
 import { PoetryActions, PoetryActionTypes } from './poetry.actions';
-import { Poem } from '../../shared/models';
+import { Poem } from '@ngfizzy/entities';
 import { PoemsCarouselComponent } from '../components/poems-carousel/poems-carousel.component';
 import { strictEqual } from 'assert';
 

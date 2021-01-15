@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Poem } from '../../../shared/models';
+import { Poem } from '@ngfizzy/entities';
 
 @Component({
   selector: 'app-poem',

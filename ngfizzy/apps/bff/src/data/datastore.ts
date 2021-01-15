@@ -13,6 +13,7 @@ import {
   setAuthToken
 } from './data-source';
 import { createCategory } from './categories'
+import { Article, AudienceActivity } from '@ngfizzy/entities';
 
 
 generators.generateArticles(50);
@@ -176,7 +177,7 @@ export default {
     return {article};
   },
   toggleArticlePublishedState(articleId) {
-    const article: {[key: string]: unknown} = articles.find(p => p.id === articleId);
+    const article: Article = articles.find(p => p.id === articleId);
 
     if (article) {
       article.published = !article.published;
@@ -223,7 +224,7 @@ export default {
     return { articles: sorted.slice(0, 10)};
   },
   getFeaturedArticles() {
-    const featured = articles.filter((article: {[key: string]: unknown}) => article.featured === true);
+    const featured = articles.filter((article: Article) => article.featured === true);
     const sorted = featured.sort((a, b) => {
       const aDate = (new Date(a.updatedAt)).getTime();
       const bDate = (new Date(b.updatedAt)).getTime();
@@ -408,7 +409,7 @@ export default {
       return activity.audience.id === audience.id;
     });
 
-    let act: { applauds: unknown; };
+    let act: AudienceActivity
 
     if (actIndex < 0) {
       act = this.createAudienceActivity(payload);
@@ -427,7 +428,7 @@ export default {
     };
   },
   addThemeImage(articleId, themeImageUrl) {
-    const article: {[key: string]: unknown} = articles.find((article: {[key: string]: unknown}) => article.id === articleId);
+    const article = articles.find((article: Article) => article.id === articleId);
 
     if(article) {
       article.themeImage = themeImageUrl;

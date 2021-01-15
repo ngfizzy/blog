@@ -14,7 +14,13 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@ngfizzy/entities": ["libs/entities/src/index.ts"],
+      "@ngfizzy/entities/graphql-responses": ["libs/entities/src/lib/graphql-responses/index.ts"],
+      "@ngfizzy/entities/constants": ["libs/entities/src/lib/constants/index.ts"]
+
+
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

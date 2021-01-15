@@ -5,11 +5,11 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
-import { Article } from '../../../../shared/models/article.interface';
-import { ArticleComponentConfig } from '../../../../shared/models/article-component-config.interface';
+import { Article } from '@ngfizzy/entities';
+import { ArticleComponentConfig } from '@ngfizzy/entities';
 import * as fromAuthorsArticles from '../../state';
 import * as fromAuthorsArticlesActions from '../../state/authors-articles.actions';
-import { Comment } from '../../../../shared/models';
+import { Comment } from '@ngfizzy/entities';
 import { tap } from 'rxjs/operators';
 
 @Component({

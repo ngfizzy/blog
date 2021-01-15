@@ -3,10 +3,13 @@ import { Action } from '@ngrx/store';
 import {
   ApplaudPayload,
   CommentPayload,
-  Category,
   Article,
-} from '../../shared/models';
-import { ArticlesResponse, AudienceActivitiesResponse, ArticleResponse } from '../../shared/models/graphql-responses/responses';
+} from '@ngfizzy/entities';
+import {
+  ArticlesResponse,
+  AudienceActivitiesResponse,
+  ArticleResponse
+} from '@ngfizzy/entities/graphql-responses';
 
 export const enum ArticlesActionTypes {
   GetAllArticles = '[Articles] Get All Articles',

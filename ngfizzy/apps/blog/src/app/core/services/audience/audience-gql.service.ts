@@ -2,11 +2,11 @@ import {Apollo, Mutation} from 'apollo-angular';
 import { Injectable } from '@angular/core';
 
 import { map } from 'rxjs/operators';
-import { FindAudienceResponse } from '../../../shared/models/graphql-responses/';
+import { FindAudienceResponse } from '@ngfizzy/entities/graphql-responses';
 import * as queries from './queries';
 import * as mutations from './mutations';
-import { Audience } from '../../../shared/models/';
-import { SendMessageResponse } from '../../../shared/models/graphql-responses/responses';
+import { Audience } from '@ngfizzy/entities';
+import { SendMessageResponse } from '@ngfizzy/entities/graphql-responses';
 
 @Injectable({providedIn: 'root'})
 export class AudienceGqlService {

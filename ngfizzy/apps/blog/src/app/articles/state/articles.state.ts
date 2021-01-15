@@ -1,6 +1,6 @@
-import { Article } from '../../shared/models/article.interface';
+import { Article } from '@ngfizzy/entities';
 import { CoreState } from '../../core/state';
-import { AudienceActivity } from '../../shared/models';
+import { AudienceActivity } from '@ngfizzy/entities';
 
 export interface ArticlesState extends CoreState {
   articles: Article[];

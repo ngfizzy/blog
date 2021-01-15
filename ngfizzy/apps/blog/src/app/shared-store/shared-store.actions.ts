@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ArticlesResponse } from '../shared/models/graphql-responses/responses';
+import { ArticlesResponse } from '@ngfizzy/entities/graphql-responses';
 
 export const enum SharedStoreActionTypes {
   GetFeaturedArticles = '[Shared] Get Featured Articles',

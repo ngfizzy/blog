@@ -3,14 +3,14 @@ import { Store, select } from '@ngrx/store';
 import { of, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { Article } from '../../../shared/models';
-import { ApplaudPayload, CommentPayload } from '../../../shared/models';
+import { Article } from '@ngfizzy/entities';
+import { ApplaudPayload, CommentPayload } from '@ngfizzy/entities';
 import { ArticlesGqlService } from './articles-gql.service';
 import {
   ArticlesResponse,
   AudienceActivitiesResponse,
   ArticleResponse
-} from '../../../shared/models/graphql-responses/responses';
+} from '@ngfizzy/entities/graphql-responses';
 import { ArticlesState } from '../../../articles/state/articles.state';
 import { getAllArticles } from '../../../articles/state';
 
