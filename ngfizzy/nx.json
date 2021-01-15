@@ -1,14 +1,9 @@
 {
   "npmScope": "ngfizzy",
-  "affected": {
-    "defaultBase": "master"
-  },
+  "affected": { "defaultBase": "master" },
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
@@ -26,12 +21,8 @@
     }
   },
   "projects": {
-    "blog": {
-      "tags": []
-    },
-    "blog-e2e": {
-      "tags": [],
-      "implicitDependencies": ["blog"]
-    }
+    "blog": { "tags": [] },
+    "blog-e2e": { "tags": [], "implicitDependencies": ["blog"] },
+    "bff": { "tags": [] }
   }
 }
