@@ -176,7 +176,7 @@ export default {
     return {article};
   },
   toggleArticlePublishedState(articleId) {
-    const article = articles.find(p => p.id === articleId);
+    const article: {[key: string]: unknown} = articles.find(p => p.id === articleId);
 
     if (article) {
       article.published = !article.published;
@@ -223,7 +223,7 @@ export default {
     return { articles: sorted.slice(0, 10)};
   },
   getFeaturedArticles() {
-    const featured = articles.filter(article => article.featured === true);
+    const featured = articles.filter((article: {[key: string]: unknown}) => article.featured === true);
     const sorted = featured.sort((a, b) => {
       const aDate = (new Date(a.updatedAt)).getTime();
       const bDate = (new Date(b.updatedAt)).getTime();
@@ -427,7 +427,7 @@ export default {
     };
   },
   addThemeImage(articleId, themeImageUrl) {
-    const article = articles.find((article: {[key: string]: unknown}) => article.id === articleId);
+    const article: {[key: string]: unknown} = articles.find((article: {[key: string]: unknown}) => article.id === articleId);
 
     if(article) {
       article.themeImage = themeImageUrl;
