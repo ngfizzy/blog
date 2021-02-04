@@ -12,6 +12,15 @@ import {
   tap,
 } from 'rxjs/operators';
 
+import {
+  Audience,
+  AudienceActivity,
+  ApplaudPayload,
+  CommentPayload,
+  Category,
+  Article,
+  ArticleComponentConfig
+} from '@ngfizzy/entities';
 
 import { SetPageTitle } from '../../core/state/core.actions';
 import * as fromArticles from '../state';
@@ -19,15 +28,7 @@ import * as fromArticlesActions from '../state/articles.actions';
 import * as fromAppActions from '../../core/state/core.actions';
 import * as fromApp from '../../core/state';
 import { ArticlesState } from '../state/articles.state';
-import { Article } from '@ngfizzy/entities';
-import { ArticleComponentConfig } from '@ngfizzy/entities';
-import {
-  Audience,
-  AudienceActivity,
-  ApplaudPayload,
-  CommentPayload,
-  Category,
-} from '@ngfizzy/entities';
+import {  } from '@ngfizzy/entities';
 
 @Component({
   templateUrl: './articles-list.component.html',
@@ -99,6 +100,10 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     });
 
     this.getArticlesByCategory();
+  }
+
+  trackBy(_:number, article: Article) {
+    return article.id
   }
 
   ngOnDestroy() {

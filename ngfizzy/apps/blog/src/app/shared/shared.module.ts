@@ -36,6 +36,9 @@ import {
 import {
   MatProgressSpinnerModule,
 } from '@angular/material/progress-spinner';
+
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
 import { EllipsisModule } from 'ngx-ellipsis';
 import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
@@ -140,6 +143,7 @@ import { FeaturedArticlesListComponent } from './components/featured-articles-li
     CommentComponent,
     AudienceSectionComponent,
     MarkdownModule,
+    ScrollingModule,
   ],
   declarations: [
     SpinnerComponent,

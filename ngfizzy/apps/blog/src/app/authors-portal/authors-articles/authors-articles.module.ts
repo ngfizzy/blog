@@ -1,10 +1,10 @@
-import { AuthorsPortalSharedModule } from './../authors-portal-shared/authors-portal-shared.module';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { LMarkdownEditorModule } from 'ngx-markdown-editor/dist';
+import { LMarkdownEditorModule } from 'ngx-markdown-editor';
 
 
+import { AuthorsPortalSharedModule } from './../authors-portal-shared/authors-portal-shared.module';
 import { AuthorsArticlesEffects } from './state/authors-articles.effects';
 import { AuthorsArticlesRoutingModule } from './authors-articles-routing.module';
 import { AuthorsArticleToolbarComponent } from './components/authors-article-toolbar/authors-article-toolbar.component';

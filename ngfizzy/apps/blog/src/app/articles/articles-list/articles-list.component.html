@@ -8,21 +8,23 @@
         [content]="articles$ | async"
       >
       </app-loading-and-empty-state>
-      <app-article
-        [config]="articleConfig"
-        *ngFor="let article of articles$ | async"
-        [article]="article"
-        [currentAudience]="audience$ | async"
-        [currentUserApplauds]="currentUserApplauds"
-        [audienceActivities]="article.audienceActivities"
-        (notify)="showNotification($event)"
-        (opened)="setSelectedArticle($event)"
-      >
-      </app-article>
+      <cdk-virtual-scroll-viewport itemSize="240" class="virtual-scroll-viewport">
+        <app-article
+          [config]="articleConfig"
+          *cdkVirtualFor="let article of articles$ | async"
+          [cdkVirtualForOfTrackBy]="trackById"
+          [article]="article"
+          [currentAudience]="audience$ | async"
+          [currentUserApplauds]="currentUserApplauds"
+          [audienceActivities]="article.audienceActivities"
+          (notify)="showNotification($event)"
+          (opened)="setSelectedArticle($event)"
+        >
+        </app-article>
+      </cdk-virtual-scroll-viewport>
     </div>
   </div>
   <ng-container *ngIf="selectedArticle$ | async as selectedArticle">
-
     <app-right-slideout-panel
       [isOpen]="isArticleOpen && selectedArticle"
       (toggled)="isArticleOpen = $event"
@@ -41,7 +43,6 @@
           (addComment)="submitComment($event)"
         ></app-article>
       </div>
-
     </app-right-slideout-panel>
   </ng-container>
 </app-articles-content-wrapper>

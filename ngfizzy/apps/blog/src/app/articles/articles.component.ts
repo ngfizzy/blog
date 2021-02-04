@@ -1,16 +1,17 @@
-import { GetAllArticles } from './state/articles.actions';
-import { getAllArticles } from './state';
-import { GetNav, SetPageTitle } from './../core/state/core.actions';
-import { getNav } from './../core/state';
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { Nav, SideNavMode, Article } from '@ngfizzy/entities';
-import { ArticlesState } from './state/articles.state';
 import { Store, select } from '@ngrx/store';
-import { getPageTitle } from '../core/state';
-import { Observable, of } from 'rxjs';
-
-import stringSimilarity from 'string-similarity';
 import { delay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import stringSimilarity from 'string-similarity';
+
+import { getPageTitle } from '../core/state';
+import { ArticlesState } from './state/articles.state';
+import { getNav } from './../core/state';
+import { GetAllArticles } from './state/articles.actions';
+import { GetNav, SetPageTitle } from './../core/state/core.actions';
+import { getAllArticles } from './state';
+
 @Component({
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss'],

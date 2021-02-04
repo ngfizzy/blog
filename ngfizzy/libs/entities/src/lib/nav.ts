@@ -1,5 +1,3 @@
-import { RouterLink, RouterLinkWithHref } from '@angular/router';
-
 export interface NavItem {
   name: string;
   path: string[];
